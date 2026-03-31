@@ -93,7 +93,9 @@
             min-height: 100dvh;
         }
     </style>
-<script src='../config.js'></script></head>
+<script src='../config.js'></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+</head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 scrollbar-hide">
 <!-- TopAppBar -->
 <header class="bg-[#0e0e0f] border-b border-[#1a191b] flex justify-between items-center w-full px-4 md:px-6 h-16 sticky top-0 z-[60]">
@@ -356,6 +358,52 @@
 <span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Ajustes</span>
 </a>
 </nav>
+
+<script>
+    async function fetchPerformance() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        const role = urlParams.get('role') || 'vendedor'; // vendedor ou gerente
+        
+        if (!empresaId || !window.kiraxSupabase) return;
+
+        try {
+            let query = window.kiraxSupabase
+                .from('transacoes')
+                .select('*, usuarios(nome)')
+                .eq('empresa_id', empresaId);
+
+            // Se for vendedor, vê só o dele. Se for gerente, vê tudo.
+            if (role === 'vendedor') {
+                const userId = urlParams.get('usuario_id');
+                if (userId) query = query.eq('usuario_id', userId);
+            }
+
+            const { data: transacoes } = await query;
+            renderManagerDashboard(transacoes, role);
+        } catch (err) {
+            console.error("Erro no Dashboard:", err);
+        }
+    }
+
+    function renderManagerDashboard(transacoes, role) {
+        const titleEl = document.querySelector('h1');
+        if (titleEl) titleEl.textContent = role === 'gerente' ? 'DASHBOARD GERENCIAL' : 'DASHBOARD DE VENDAS';
+        
+        // Lógica de agregação por vendedor se for gerente...
+        if (role === 'gerente') {
+            const sellers = {};
+            transacoes.forEach(t => {
+                const name = t.usuarios?.nome || 'Inominado';
+                sellers[name] = (sellers[name] || 0) + parseFloat(t.valor);
+            });
+            console.log("Vendas por Vendedor:", sellers);
+            // Aqui poderíamos injetar um gráfico de ranking de vendedores
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchPerformance);
+</script>
 </body></html>
 
 
