@@ -133,7 +133,7 @@
 <button class="flex-1 md:flex-none bg-surface-container-highest px-6 py-3 md:py-2 text-[10px] font-bold uppercase tracking-widest border border-outline-variant hover:bg-surface-bright transition-all">
                     Filtrar
                 </button>
-<button class="flex-1 md:flex-none bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-6 py-3 md:py-2 text-[10px] uppercase tracking-widest rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.2)] hover:scale-105 transition-transform">
+<button id="btn-novo-lead" class="flex-1 md:flex-none bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-6 py-3 md:py-2 text-[10px] uppercase tracking-widest rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.2)] hover:scale-105 transition-transform">
                     Novo Lead
                 </button>
 </div>
@@ -361,8 +361,71 @@
 </a>
 </nav>
 
+<!-- Modal Novo Lead -->
+<div id="modal-lead" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+    <div class="bg-surface-container-high p-6 border border-primary/20 rounded-sm max-w-md w-full">
+        <h4 class="font-headline font-bold text-primary mb-4 uppercase tracking-widest">Novo Lead / Negócio</h4>
+        <div class="space-y-4">
+            <input id="new-lead-empresa" type="text" placeholder="Nome da Empresa" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+            <input id="new-lead-contato" type="text" placeholder="Nome do Contato" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+            <input id="new-lead-valor" type="number" placeholder="Valor Estimado (R$)" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+            <select id="new-lead-estagio" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                <option value="lead">Prospecção</option>
+                <option value="qualificacao">Qualificação</option>
+                <option value="proposta">Proposta</option>
+                <option value="negociacao">Negociação</option>
+                <option value="fechamento">Fechamento</option>
+            </select>
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button onclick="document.getElementById('modal-lead').classList.add('hidden')" class="flex-1 py-3 border border-outline-variant text-[10px] font-bold uppercase tracking-widest">Cancelar</button>
+            <button id="save-lead" class="flex-1 py-3 bg-primary text-black text-[10px] font-bold uppercase tracking-widest">Salvar</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Lead Creation Logic
+    document.getElementById('btn-novo-lead').onclick = () => document.getElementById('modal-lead').classList.remove('hidden');
+    
+    document.getElementById('save-lead').onclick = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        const empresa = document.getElementById('new-lead-empresa').value;
+        const contato = document.getElementById('new-lead-contato').value;
+        const valor = document.getElementById('new-lead-valor').value;
+        const estagio = document.getElementById('new-lead-estagio').value;
+
+        if (!empresa || !window.kiraxSupabase) return;
+
+        try {
+            // 1. Criar Lead
+            const { data: lead } = await window.kiraxSupabase
+                .from('leads')
+                .insert([{ nome: contato, empresa: empresa, empresa_id: empresaId }])
+                .select()
+                .single();
+
+            // 2. Criar Deal
+            await window.kiraxSupabase
+                .from('deals')
+                .insert([{ 
+                    lead_id: lead.id, 
+                    titulo: `Negócio: ${empresa}`, 
+                    valor: valor, 
+                    estagio: estagio,
+                    empresa_id: empresaId 
+                }]);
+
+            document.getElementById('modal-lead').classList.add('hidden');
+            fetchPipeline(); // Refresh
+        } catch (err) {
+            console.error("Erro ao salvar lead:", err);
+        }
+    };
+
     async function fetchPipeline() {
+        // ...
         const urlParams = new URLSearchParams(window.location.search);
         const empresaId = urlParams.get('empresa_id');
         if (!empresaId || !window.kiraxSupabase) return;

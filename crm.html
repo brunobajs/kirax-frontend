@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>KIRAX | Neural CRM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(26, 25, 27, 0.6); backdrop-filter: blur(12px); }
+        .neon-glow-primary { box-shadow: 0 0 20px rgba(161, 250, 255, 0.15); }
+        .neon-glow-secondary { box-shadow: 0 0 20px rgba(214, 116, 255, 0.15); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .active-tab { border-color: #a1faff; color: #a1faff; background: rgba(161, 250, 255, 0.05); }
+    </style>
+</head>
+<body class="bg-[#0e0e0f] text-on-surface font-body selection:bg-primary/20">
+
+    <!-- Top AppBar -->
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-[#0e0e0f]/80 backdrop-blur-xl border-b border-[#a1faff]/10">
+        <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-black tracking-tighter text-[#a1faff] drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-headline">KIRAX NEURAL</h1>
+            <span class="bg-primary/10 text-primary text-[8px] px-2 py-0.5 rounded-sm font-bold tracking-[0.2em]">CRM_CONSOLIDATED</span>
+        </div>
+        <div id="neural-sync-indicator" class="flex items-center gap-2 text-[10px] text-tertiary font-bold uppercase tracking-widest animate-pulse">
+            <span class="w-2 h-2 bg-tertiary rounded-full"></span>
+            Sincronização Ativa
+        </div>
+        <button onclick="window.location.href='index.html'+window.location.search" class="material-symbols-outlined text-[#a1faff] hover:scale-110 transition-transform">grid_view</button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside class="hidden md:flex fixed left-0 top-0 w-64 h-full z-40 flex-col pt-24 bg-[#131314] border-r border-outline-variant/10">
+        <nav class="flex flex-col gap-1 px-4">
+            <button onclick="switchTab('kanban')" class="tab-btn active-tab group flex items-center gap-4 py-3 px-4 rounded-sm transition-all text-xs font-bold uppercase tracking-tight">
+                <span class="material-symbols-outlined text-xl">view_kanban</span>
+                Funil de Vendas
+            </button>
+            <button onclick="switchTab('clientes')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+                <span class="material-symbols-outlined text-xl">group</span>
+                Relacionamento
+            </button>
+            <button onclick="switchTab('logistica')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+                <span class="material-symbols-outlined text-xl">local_shipping</span>
+                Gestão de Cargas
+            </button>
+            <button onclick="switchTab('campanhas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+                <span class="material-symbols-outlined text-xl">campaign</span>
+                Campanhas IA
+            </button>
+            <button onclick="switchTab('despesas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline border-t border-outline-variant/10 mt-4">
+                <span class="material-symbols-outlined text-xl">receipt_long</span>
+                Despesas Vendedor
+            </button>
+        </nav>
+        
+        <div class="mt-auto p-6 bg-[#000000]/20">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 rounded-full bg-tertiary/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-tertiary text-sm">psychology</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-bold text-on-surface uppercase leading-none">Status IA</p>
+                    <p class="text-[9px] text-tertiary uppercase tracking-widest mt-1">Modo Automático</p>
+                </div>
+            </div>
+            <button id="btn-novo-universal" class="w-full bg-primary text-black font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-sm neon-glow-primary">
+                NOVA AÇÃO
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="md:ml-64 pt-24 pb-20 px-6 min-h-screen">
+        
+        <!-- Tabs Views -->
+        <div id="tab-kanban" class="tab-content transition-all duration-300">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Funil de Vendas</h2>
+                <div class="flex gap-4">
+                    <div class="bg-[#1a191b] px-4 py-2 border-l-2 border-primary">
+                        <p class="text-[8px] text-outline uppercase font-bold">Volume Total</p>
+                        <p id="kanban-total-value" class="text-lg font-headline font-bold text-primary">R$ 0,00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-6 overflow-x-auto scrollbar-hide pb-8">
+                <!-- Columns dynamically rendered -->
+                <div id="kanban-cols" class="flex gap-6 min-w-full"></div>
+            </div>
+        </div>
+
+        <div id="tab-clientes" class="tab-content hidden transition-all duration-300">
+             <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Relacionamento</h2>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold uppercase border border-outline-variant">Exportar Clientes</button>
+                </div>
+            </div>
+            <div id="client-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <div id="tab-logistica" class="tab-content hidden transition-all duration-300">
+             <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Gestão de Cargas</h2>
+            </div>
+            <div id="cargo-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+
+        <div id="tab-campanhas" class="tab-content hidden transition-all duration-300">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Campanhas IA</h2>
+                <button onclick="openCampanhaModal()" class="bg-secondary text-black font-bold px-6 py-2 text-[10px] uppercase tracking-widest">Nova Campanha</button>
+            </div>
+            <div id="campaigns-list" class="grid grid-cols-1 gap-6"></div>
+        </div>
+
+        <div id="tab-despesas" class="tab-content hidden transition-all duration-300">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <h2 class="text-3xl font-black font-headline uppercase tracking-tighter mb-8">Relatório de Despesas</h2>
+                    <div class="bg-surface-container border border-outline-variant/10 p-6 rounded-sm">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-[10px] uppercase text-outline font-bold border-b border-outline-variant/20">
+                                <tr>
+                                    <th class="py-3">Vendedor</th>
+                                    <th class="py-3">Valor</th>
+                                    <th class="py-3">Categoria</th>
+                                    <th class="py-3">Status</th>
+                                    <th class="py-3 text-right">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expense-list-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg-surface-container-high p-6 border border-tertiary/20 rounded-sm">
+                    <h4 class="font-headline font-bold text-tertiary uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined">support_agent</span> Suporte IA Vendedor
+                    </h4>
+                    <div id="seller-ai-chat" class="h-96 overflow-y-auto mb-4 border-b border-outline-variant/10 p-2 space-y-4">
+                        <div class="p-3 bg-surface-container-highest/50 border border-tertiary/20 rounded-sm text-[11px]">
+                            Olá! Sou seu assistente de suporte. Mande fotos de cupons ou áudios com despesas que eu lanço para você! 🚀
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <input id="seller-ai-input" type="text" placeholder="Mensagem / Audio / Imagem..." class="flex-1 bg-surface-container border-none text-xs p-3">
+                        <button onclick="simulateExpenseProcess()" class="bg-tertiary text-black px-4"><span class="material-symbols-outlined">mic</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-universal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-surface-container-high p-8 border border-primary/20 rounded-sm max-w-lg w-full">
+            <h4 id="modal-title" class="font-headline font-bold text-primary mb-6 uppercase tracking-widest text-xl">Nova Ação Digital</h4>
+            
+            <!-- Type Selector -->
+            <div class="flex gap-2 mb-8">
+                <button onclick="setModalMode('pedido')" class="modal-type-btn flex-1 py-3 border border-primary text-[10px] font-bold uppercase bg-primary/10 text-primary">Novo Pedido</button>
+                <button onclick="setModalMode('cliente')" class="modal-type-btn flex-1 py-3 border border-outline-variant text-[10px] font-bold uppercase">Novo Cliente</button>
+            </div>
+
+            <div id="modal-fields" class="space-y-4">
+                <!-- Fields injected via JS -->
+            </div>
+
+            <div class="flex gap-3 mt-8">
+                <button onclick="closeModal()" class="flex-1 py-3 border border-outline-variant text-[10px] font-bold uppercase tracking-widest text-outline">Cancelar</button>
+                <button id="save-universal" class="flex-1 py-3 bg-primary text-black text-[10px] font-bold uppercase tracking-widest neon-glow-primary">Salvar no CRM</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        let currentModalMode = 'pedido';
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById('tab-'+tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active-tab');
+                b.classList.add('text-outline');
+            });
+            event.currentTarget.classList.add('active-tab');
+            event.currentTarget.classList.remove('text-outline');
+
+            if(tabId === 'kanban') fetchPipeline();
+            if(tabId === 'clientes') fetchClientes();
+            if(tabId === 'logistica') fetchCargas();
+            if(tabId === 'despesas') fetchDespesas();
+        }
+
+        function setModalMode(mode) {
+            currentModalMode = mode;
+            document.querySelectorAll('.modal-type-btn').forEach(b => {
+                b.classList.remove('border-primary', 'bg-primary/10', 'text-primary');
+                b.classList.add('border-outline-variant');
+            });
+            event.currentTarget.classList.add('border-primary', 'bg-primary/10', 'text-primary');
+            event.currentTarget.classList.remove('border-outline-variant');
+            renderModalFields();
+        }
+
+        function renderModalFields() {
+            const container = document.getElementById('modal-fields');
+            if(currentModalMode === 'pedido') {
+                container.innerHTML = `
+                    <input id="field-titulo" type="text" placeholder="Nome do Pedido / Título" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                    <div class="grid grid-cols-2 gap-4">
+                         <input id="field-valor" type="number" placeholder="Valor (R$)" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                         <select id="field-estagio" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                            <option value="lead">Prospecção</option>
+                            <option value="qualificacao">Qualificação</option>
+                            <option value="proposta">Proposta</option>
+                            <option value="negociacao">Negociação</option>
+                         </select>
+                    </div>
+                    <select id="field-cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                       <option value="">Selecione o Cliente</option>
+                    </select>
+                `;
+                loadClientSelect();
+            } else {
+                container.innerHTML = `
+                    <input id="field-nome" type="text" placeholder="Empresa Cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                    <input id="field-contato" type="text" placeholder="Nome do Contato" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input id="field-email" type="email" placeholder="E-mail" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                        <input id="field-telefone" type="text" placeholder="WhatsApp" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                    </div>
+                `;
+            }
+        }
+
+        async function loadClientSelect() {
+            const { data } = await window.kiraxSupabase.from('leads').select('id, empresa').eq('empresa_id', empresaId);
+            const select = document.getElementById('field-cliente');
+            if(data) select.innerHTML += data.map(c => `<option value="${c.id}">${c.empresa}</option>`).join('');
+        }
+
+        async function saveUniversal() {
+             if(currentModalMode === 'cliente') {
+                const empresa = document.getElementById('field-nome').value;
+                const nome = document.getElementById('field-contato').value;
+                const email = document.getElementById('field-email').value;
+                const telefone = document.getElementById('field-telefone').value;
+                await window.kiraxSupabase.from('leads').insert([{ empresa, nome, email, telefone, empresa_id: empresaId }]);
+            } else {
+                 const titulo = document.getElementById('field-titulo').value;
+                 const valor = document.getElementById('field-valor').value;
+                 const estagio = document.getElementById('field-estagio').value;
+                 const lead_id = document.getElementById('field-cliente').value;
+                 if(!lead_id) return alert("Selecione um cliente");
+                 await window.kiraxSupabase.from('deals').insert([{ titulo, valor, estagio, lead_id, empresa_id: empresaId }]);
+            }
+            closeModal();
+            fetchPipeline();
+            fetchClientes();
+        }
+
+        document.getElementById('btn-novo-universal').onclick = () => {
+            document.getElementById('modal-universal').classList.remove('hidden');
+            renderModalFields();
+        };
+
+        document.getElementById('save-universal').onclick = saveUniversal;
+        function closeModal() { document.getElementById('modal-universal').classList.add('hidden'); }
+
+        // --- FETCH LOGIC ---
+
+        async function fetchPipeline() {
+            const { data: deals } = await window.kiraxSupabase.from('deals').select('*, leads(empresa, nome)').eq('empresa_id', empresaId);
+            const colsContainer = document.getElementById('kanban-cols');
+            const estagios = ['lead', 'qualificacao', 'proposta', 'negociacao', 'fechamento'];
+            const names = ['Prospecção', 'Qualificação', 'Proposta', 'Negociação', 'Fechamento'];
+            
+            let total = 0;
+            colsContainer.innerHTML = estagios.map((e, idx) => {
+                const count = deals?.filter(d => d.estagio === e).length || 0;
+                const val = deals?.filter(d => d.estagio === e).reduce((acc, d) => acc + parseFloat(d.valor), 0) || 0;
+                total += val;
+                return `
+                    <div class="flex-shrink-0 w-80 flex flex-col gap-4">
+                        <div class="flex items-center justify-between px-2 border-l-2 border-primary/40 py-1">
+                            <span class="font-headline font-bold text-on-surface uppercase tracking-tighter text-xs">${names[idx]}</span>
+                            <span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-outline">${count}</span>
+                        </div>
+                        <div class="space-y-4">
+                            ${deals?.filter(d => d.estagio === e).map(d => `
+                                <div class="bg-surface-container p-4 border border-outline-variant/10 rounded-sm hover:border-primary/40 transition-all cursor-pointer group">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-sm font-bold text-primary">${d.leads?.empresa || 'Venda Direta'}</h4>
+                                        <span class="text-on-surface font-mono text-[10px]">R$ ${parseFloat(d.valor).toLocaleString('pt-BR')}</span>
+                                    </div>
+                                    <p class="text-[10px] text-on-surface-variant italic mb-3">${d.titulo}</p>
+                                    <div class="flex justify-between items-center bg-black/20 p-2 rounded-sm border border-outline-variant/10">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="material-symbols-outlined text-[14px] text-tertiary">psychology</span>
+                                            <span class="text-[8px] text-tertiary font-bold uppercase tracking-widest">IA Inteligente</span>
+                                        </div>
+                                        <span class="text-[8px] text-outline font-bold uppercase">Status Ok</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('kanban-total-value').textContent = "R$ " + total.toLocaleString('pt-BR');
+        }
+
+        async function fetchClientes() {
+            const { data } = await window.kiraxSupabase.from('leads').select('*').eq('empresa_id', empresaId);
+            const container = document.getElementById('client-list');
+            container.innerHTML = data?.map(c => `
+                <div class="bg-surface-container p-6 border border-outline-variant/10 group hover:border-secondary transition-all cursor-pointer">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold font-headline">${c.empresa[0]}</div>
+                        <div>
+                            <h4 class="text-base font-bold text-on-surface">${c.empresa}</h4>
+                            <p class="text-xs text-on-surface-variant">${c.nome || 'Responsável'}</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1 mb-4">
+                        <p class="text-[9px] text-blue-400 font-mono">${c.email || 'N/A'}</p>
+                        <p class="text-[9px] text-tertiary font-mono">${c.telefone || 'N/A'}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="flex-1 py-1 text-[8px] uppercase font-bold border border-outline-variant">Perfil</button>
+                        <button class="flex-1 py-1 text-[8px] uppercase font-bold bg-secondary/10 text-secondary">Chat</button>
+                    </div>
+                </div>
+            `).join('') || '';
+        }
+
+        async function fetchDespesas() {
+             const { data } = await window.kiraxSupabase.from('despesas').select('*, usuarios(nome)').eq('empresa_id', empresaId);
+             const body = document.getElementById('expense-list-body');
+             body.innerHTML = data?.map(d => {
+                 const statusCol = d.status === 'pendente' ? 'text-tertiary' : (d.status === 'aprovado' ? 'text-green-400' : 'text-error');
+                 return `
+                    <tr class="border-b border-outline-variant/10">
+                        <td class="py-4 text-xs font-bold font-headline uppercase">${d.usuarios?.nome || 'Vendedor'}</td>
+                        <td class="py-4 text-xs font-mono">R$ ${parseFloat(d.valor).toFixed(2)}</td>
+                        <td class="py-4 text-xs text-on-surface-variant">${d.categoria}</td>
+                        <td class="py-4 text-[10px] font-bold uppercase tracking-widest ${statusCol}">${d.status}</td>
+                        <td class="py-4 text-right">
+                             <span class="material-symbols-outlined text-outline cursor-pointer hover:text-white">visibility</span>
+                        </td>
+                    </tr>
+                 `;
+             }).join('') || '';
+        }
+
+        async function simulateExpenseProcess() {
+            const input = document.getElementById('seller-ai-input');
+            const chat = document.getElementById('seller-ai-chat');
+            const text = input.value || "Áudio: Abasteci R$ 50 de Gasolina agora pouco.";
+            
+            chat.innerHTML += `<div class="p-2 bg-on-surface text-black text-[10px] ml-4 rounded-sm">${text}</div>`;
+            input.value = '';
+            
+            setTimeout(async () => {
+                chat.innerHTML += `<div class="p-2 bg-tertiary/10 text-tertiary text-[10px] mr-4 rounded-sm italic">
+                    AI: Interpretando dados... Identificado R$ 50,00 na categoria GASOLINA. Lançamento realizado com sucesso! ✅
+                </div>`;
+                
+                // Real DB Insertion
+                const { data: user } = await window.kiraxSupabase.from('usuarios').select('id').eq('empresa_id', empresaId).limit(1).single();
+                await window.kiraxSupabase.from('despesas').insert([{
+                    empresa_id: empresaId,
+                    usuario_id: user.id,
+                    valor: 50,
+                    categoria: 'Gasolina',
+                    descricao: 'Lançamento via Assistente IA'
+                }]);
+                fetchDespesas();
+            }, 1500);
+        }
+
+        // Init
+        window.addEventListener('DOMContentLoaded', () => {
+            if(window.kiraxSupabase) fetchPipeline();
+        });
+    </script>
+</body>
+</html>

@@ -112,9 +112,10 @@
 <span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="monitoring">monitoring</span>
 <span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Analytics</span>
 </button>
-<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors group">
+<button id="neural-toggle-btn" onclick="toggleNeuralMode()" class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-tertiary transition-colors group relative">
 <span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
-<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Intelligence</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Neural</span>
+<div id="neural-status-dot" class="absolute top-2 right-4 w-1.5 h-1.5 rounded-full bg-gray-500"></div>
 </button>
 </nav>
 <div class="flex flex-col gap-4 mt-auto">
@@ -132,7 +133,7 @@
 <h1 class="font-['Space_Grotesk'] font-bold text-[#a1faff] italic tracking-tight text-xl">KINETIC_OBSIDIAN</h1>
 <div class="h-4 w-px bg-white/10"></div>
 <div class="flex gap-4">
-<span class="text-[#f3ffca] border-b border-[#f3ffca] font-['Inter'] text-xs font-medium tracking-tight px-1 cursor-pointer">Network_Status</span>
+<span id="qr-trigger" class="text-[#f3ffca] border-b border-[#f3ffca] font-['Inter'] text-xs font-medium tracking-tight px-1 cursor-pointer hover:bg-[#f3ffca]/10 transition-colors">CONECTAR_WHATSAPP</span>
 <span class="text-[#a1faff]/60 hover:text-[#a1faff] transition-colors font-['Inter'] text-xs font-medium tracking-tight cursor-pointer">AI_Engine_Active</span>
 </div>
 </div>
@@ -422,8 +423,26 @@
 <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
 </button>
 
+<!-- QR Code Modal (WhatsApp Sync) -->
+<div id="qr-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+    <div class="bg-surface-container-high p-8 border border-primary/20 rounded-sm max-w-sm w-full text-center">
+        <h4 class="font-headline font-bold text-primary mb-6 uppercase tracking-widest">Sincronizar WhatsApp</h4>
+        <div class="bg-white p-4 rounded-sm inline-block mb-6 shadow-[0_0_40px_rgba(161,250,255,0.2)]">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=KIRAX-CRM-DEMO-SYNC" alt="QR Code" class="w-full h-full">
+        </div>
+        <p class="text-xs text-on-surface-variant leading-relaxed mb-8">Abra o WhatsApp no seu celular > Configurações > Aparelhos Conectados > Escanear QR Code.</p>
+        <button onclick="document.getElementById('qr-modal').classList.add('hidden')" class="w-full py-3 border border-outline-variant text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-colors">Fechar</button>
+    </div>
+</div>
+
 <script>
+    // QR Modal logic
+    document.getElementById('qr-trigger').onclick = () => {
+        document.getElementById('qr-modal').classList.remove('hidden');
+    }
+
     async function fetchChats() {
+        // ... (rest of the script)
         const urlParams = new URLSearchParams(window.location.search);
         const empresaId = urlParams.get('empresa_id');
         if (!empresaId || !window.kiraxSupabase) return;
@@ -512,6 +531,107 @@
         }).join('');
         
         chatContainer.scrollTop = chatContainer.scrollHeight;
+        
+        // --- NEURAL HEART: INTENT DETECTION ---
+        if (window.isNeuralActive) {
+             processNeuralIntents(messages[messages.length - 1], phone);
+        }
+    }
+
+    window.isNeuralActive = false;
+    function toggleNeuralMode() {
+        window.isNeuralActive = !window.isNeuralActive;
+        const btn = document.getElementById('neural-toggle-btn');
+        const dot = document.getElementById('neural-status-dot');
+        if (window.isNeuralActive) {
+            btn.classList.add('text-tertiary');
+            dot.classList.remove('bg-gray-500');
+            dot.classList.add('bg-tertiary', 'animate-pulse');
+            triggerNeuralAlert("CORAÇÃO NEURAL ATIVADO: Monitorando intenções de venda.");
+        } else {
+            btn.classList.remove('text-tertiary');
+            dot.classList.remove('bg-tertiary', 'animate-pulse');
+            dot.classList.add('bg-gray-500');
+        }
+    }
+
+    async function processNeuralIntents(lastMsg, phone) {
+        if (!lastMsg || lastMsg.direction === 'outbound') return;
+        
+        const message = lastMsg.message.toLowerCase();
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+
+        // Simple intent patterns
+        const intents = [
+            { keywords: ['proposta', 'orçamento', 'quanto custa', 'valor'], stage: 'proposta', label: 'Interesse em Proposta' },
+            { keywords: ['fechar', 'comprar', 'quero', 'pagamento', 'boleto', 'pix'], stage: 'negociacao', label: 'Intenção de Compra' },
+            { keywords: ['ajuda', 'dúvida', 'como funciona'], stage: 'qualificacao', label: 'Desejo de Qualificação' }
+        ];
+
+        for (const intent of intents) {
+            if (intent.keywords.some(k => message.includes(k))) {
+                triggerNeuralAlert(`IA DETECTOU: "${intent.label}". Atualizando Pipeline...`);
+                
+                // 1. Procurar lead correspondente
+                const { data: lead } = await window.kiraxSupabase
+                    .from('leads')
+                    .select('id')
+                    .eq('telefone', phone)
+                    .eq('empresa_id', empresaId)
+                    .single();
+
+                if (lead) {
+                    // 2. Atualizar ou Criar Deal
+                    const { data: deal } = await window.kiraxSupabase
+                        .from('deals')
+                        .select('id')
+                        .eq('lead_id', lead.id)
+                        .eq('empresa_id', empresaId)
+                        .limit(1);
+
+                    if (deal && deal.length > 0) {
+                        await window.kiraxSupabase
+                            .from('deals')
+                            .update({ estagio: intent.stage })
+                            .eq('id', deal[0].id);
+                    } else {
+                         // Criar novo deal se não existir
+                         await window.kiraxSupabase
+                            .from('deals')
+                            .insert([{ 
+                                titulo: `Interesse via WhatsApp (${intent.label})`,
+                                valor: 0,
+                                estagio: intent.stage,
+                                lead_id: lead.id,
+                                empresa_id: empresaId
+                            }]);
+                    }
+                    
+                    // 3. Log de Auditoria
+                    await window.kiraxSupabase
+                        .from('automacao_ia_logs')
+                        .insert([{
+                            empresa_id: empresaId,
+                            modulo: 'whatsapp_kanban',
+                            acao: `Transição automática para ${intent.stage}`,
+                            contexto: `Detectada intenção "${intent.label}" na mensagem: ${message.slice(0, 50)}...`
+                        }]);
+                }
+                break;
+            }
+        }
+    }
+
+    function triggerNeuralAlert(msg) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = "fixed top-20 right-6 z-[60] bg-background border-2 border-tertiary text-tertiary p-4 rounded-sm shadow-[0_0_30px_rgba(190,238,0,0.3)] animate-bounce font-bold uppercase text-[10px] flex items-center gap-3";
+        alertDiv.innerHTML = `
+            <span class="material-symbols-outlined">psychology</span>
+            <div>NEURAL_IA: ${msg}</div>
+        `;
+        document.body.appendChild(alertDiv);
+        setTimeout(() => alertDiv.remove(), 5000);
     }
 
     window.addEventListener('DOMContentLoaded', fetchChats);

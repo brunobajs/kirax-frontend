@@ -399,7 +399,100 @@
 </button>
 </div>
 
+<!-- Modal Novo Cliente -->
+<div id="modal-cliente" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+    <div class="bg-surface-container-high p-6 border border-secondary/20 rounded-sm max-w-md w-full">
+        <h4 class="font-headline font-bold text-secondary mb-4 uppercase tracking-widest">Novo Cliente</h4>
+        <div class="space-y-4">
+            <input id="new-client-empresa" type="text" placeholder="Nome da Empresa" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+            <input id="new-client-email" type="email" placeholder="E-mail" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+            <input id="new-client-telefone" type="text" placeholder="Telefone" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button onclick="document.getElementById('modal-cliente').classList.add('hidden')" class="flex-1 py-3 border border-outline-variant text-[10px] font-bold uppercase tracking-widest">Cancelar</button>
+            <button id="save-client" class="flex-1 py-3 bg-secondary text-black text-[10px] font-bold uppercase tracking-widest">Salvar</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Cliente Creation Logic
+    const fabButton = document.querySelector('button.w-14.h-14');
+    if (fabButton) fabButton.onclick = () => document.getElementById('modal-cliente').classList.remove('hidden');
+
+    document.getElementById('save-client').onclick = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        const empresa = document.getElementById('new-client-empresa').value;
+        const email = document.getElementById('new-client-email').value;
+        const telefone = document.getElementById('new-client-telefone').value;
+
+        if (!empresa || !window.kiraxSupabase) return;
+
+        try {
+            await window.kiraxSupabase
+                .from('leads')
+                .insert([{ 
+                    empresa: empresa, 
+                    email: email, 
+                    telefone: telefone,
+                    empresa_id: empresaId 
+                }]);
+
+            document.getElementById('modal-cliente').classList.add('hidden');
+            fetchClientes(); // Refresh
+        } catch (err) {
+            console.error("Erro ao salvar cliente:", err);
+        }
+    };
+
+    async function fetchClientes() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        if (!empresaId || !window.kiraxSupabase) return;
+
+        try {
+            const { data: clientes } = await window.kiraxSupabase
+                .from('leads')
+                .select('*')
+                .eq('empresa_id', empresaId);
+
+            renderClientes(clientes);
+        } catch (err) {
+            console.error("Erro ao buscar clientes:", err);
+        }
+    }
+
+    function renderClientes(clientes) {
+        const healthyCol = document.querySelector('section.space-y-4:nth-of-type(1)');
+        if (!healthyCol || clientes.length === 0) return;
+
+        // Limpar apenas se houver clientes reais
+        const listContainer = healthyCol;
+        // Preservar o cabeçalho
+        const header = listContainer.firstElementChild;
+        listContainer.innerHTML = '';
+        listContainer.appendChild(header);
+
+        clientes.forEach(c => {
+            const card = document.createElement('article');
+            card.className = "glass-card p-4 rounded-sm border-l-2 border-tertiary group hover:bg-surface-container transition-all cursor-pointer mb-4";
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center">
+                        <span class="material-symbols-outlined text-tertiary text-lg">verified</span>
+                    </div>
+                </div>
+                <h4 class="text-sm font-bold text-on-surface mb-1">${c.empresa}</h4>
+                <p class="text-[10px] text-on-surface-variant mb-2">${c.nome || 'Sem Contato'}</p>
+                <p class="text-[10px] text-primary truncate">${c.email || ''}</p>
+            `;
+            listContainer.appendChild(card);
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchClientes);
+
     async function fetchCargas() {
         console.log("KIRAX LOGISTICS: Buscando status de cargas...");
         const urlParams = new URLSearchParams(window.location.search);
