@@ -242,16 +242,24 @@
                 calendario: document.querySelector('a[href*="calend_rio"]')
             };
 
-            // Aplicar visibilidade
+            // Aplicar visibilidade e contar ativos
+            let activeCount = 0;
             Object.keys(cards).forEach(key => {
                 if (cards[key]) {
                     if (config[key] === true) {
                         cards[key].classList.remove('hidden');
+                        activeCount++;
                     } else {
                         cards[key].classList.add('hidden');
                     }
                 }
             });
+
+            // Se nenhum módulo ativo, redirecionar para onboarding
+            if (activeCount === 0) {
+                console.log("⚠️ Nenhum módulo configurado. Redirecionando para Onboarding...");
+                window.location.href = `onboarding.html?empresa_id=${empresaId}`;
+            }
 
         } catch (err) {
             console.error("❌ Erro ao carregar módulos:", err.message);
