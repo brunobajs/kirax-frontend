@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Painel Master Admin Kirax - Hub Central</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(26, 25, 27, 0.6); backdrop-filter: blur(12px); }
+        .neon-glow-primary { box-shadow: 0 0 15px rgba(161, 250, 255, 0.15); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body">
+    <aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-[#131314] flex flex-col py-6 z-50">
+        <div class="px-6 mb-10">
+            <h1 class="text-xl font-bold tracking-tighter text-[#a1faff] font-headline">KIRAX MASTER</h1>
+        </div>
+        <nav class="flex-1 px-3 space-y-1">
+            <a class="flex items-center gap-3 px-3 py-3 text-[#a1faff] font-bold bg-[#262627] border-l-2 border-[#a1faff] text-sm" href="#">
+                <span class="material-symbols-outlined">dashboard</span> Dashboard Clients
+            </a>
+        </nav>
+        <div class="px-6">
+            <button onclick="openModal()" class="w-full bg-primary text-on-primary-container font-bold py-2 rounded-sm text-xs uppercase tracking-widest neon-glow-primary">
+                NOVO CLIENTE
+            </button>
+        </div>
+    </aside>
+
+    <main class="ml-64 pt-12 px-8 min-h-screen">
+        <h2 class="text-2xl font-headline font-bold mb-6">Contratos Ativos</h2>
+        <div class="bg-surface-container-lowest rounded-sm border border-outline-variant/10 overflow-hidden">
+            <div class="grid grid-cols-12 bg-surface-container-high px-6 py-3 border-b border-outline-variant/20 text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">
+                <div class="col-span-4">Cliente</div>
+                <div class="col-span-4">Configuração</div>
+                <div class="col-span-4 text-right">Ações / Link</div>
+            </div>
+            <div id="company-list" class="divide-y divide-outline-variant/10">
+                <!-- Empresas virão aqui via JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Novo Cliente -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center">
+        <div class="bg-surface-container p-8 rounded-sm border border-outline-variant/20 w-full max-w-md">
+            <h3 class="text-xl font-headline font-bold mb-4">Adicionar Novo Cliente</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-outline">Nome da Empresa</label>
+                    <input id="new-company-name" type="text" class="w-full bg-surface-container-highest border-none rounded-sm mt-1 text-sm"/>
+                </div>
+                <div>
+                    <label class="text-[10px] uppercase font-bold text-outline">Link de Onboarding Gerado</label>
+                    <div id="generated-link" class="p-2 bg-black/50 text-[10px] font-mono break-all mt-1 hidden"></div>
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button onclick="closeModal()" class="flex-1 py-2 text-xs uppercase font-bold border border-outline-variant/30">Cancelar</button>
+                    <button onclick="createCompany()" class="flex-1 py-2 text-xs uppercase font-bold bg-primary text-on-primary">Criar e Gerar Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const companyList = document.getElementById('company-list');
+        const modal = document.getElementById('modal');
+        const linkBox = document.getElementById('generated-link');
+
+        async function fetchCompanies() {
+            if (!window.kiraxSupabase) return;
+            const { data, error } = await window.kiraxSupabase.from('empresas').select('*').order('created_at', { ascending: false });
+            if (error) return console.error(error);
+            
+            companyList.innerHTML = data.map(c => `
+                <div class="grid grid-cols-12 px-6 py-4 items-center hover:bg-white/5 transition-colors">
+                    <div class="col-span-4">
+                        <div class="text-sm font-bold uppercase">${c.nome}</div>
+                        <div class="text-[9px] font-mono text-outline">${c.id}</div>
+                    </div>
+                    <div class="col-span-4 text-[10px] font-mono">
+                        ${JSON.stringify(c.modulos_config)}
+                    </div>
+                    <div class="col-span-4 text-right">
+                        <button onclick="copyLink('${c.id}')" class="px-3 py-1 bg-primary/10 text-primary uppercase text-[9px] font-bold border border-primary/20 rounded-sm">Copiar Link</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+        function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); linkBox.classList.add('hidden'); }
+
+        async function createCompany() {
+            const nome = document.getElementById('new-company-name').value;
+            if (!nome) return;
+
+            const { data, error } = await window.kiraxSupabase.from('empresas').insert([{ nome, modulos_config: {} }]).select().single();
+            if (error) return alert(error.message);
+
+            const link = window.location.origin + "/onboarding.html?empresa_id=" + data.id;
+            linkBox.textContent = link;
+            linkBox.classList.remove('hidden');
+            fetchCompanies();
+        }
+
+        function copyLink(id) {
+            const link = window.location.origin + "/onboarding.html?empresa_id=" + id;
+            navigator.clipboard.writeText(link);
+            alert("Link copiado!");
+        }
+
+        window.addEventListener('DOMContentLoaded', fetchCompanies);
+    </script>
+</body>
+</html>
