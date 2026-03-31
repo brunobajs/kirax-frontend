@@ -95,7 +95,9 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  <script src='../config.js'></script></head>
+  <script src='../config.js'></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+</head>
 <body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen">
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] border-b border-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(161,250,255,0.05)]">
@@ -286,6 +288,44 @@
 <span class="font-['Inter'] text-[10px] uppercase tracking-widest">Support</span>
 </a>
 </nav>
+
+<script>
+    async function fetchCheckoutDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        const productId = urlParams.get('product_id');
+        
+        if (!empresaId || !window.kiraxSupabase) return;
+
+        try {
+            // Se houver produto, buscar detalhes
+            if (productId) {
+                const { data: product } = await window.kiraxSupabase
+                    .from('produtos')
+                    .select('*')
+                    .eq('id', productId)
+                    .single();
+
+                if (product) updateCheckoutUI(product);
+            }
+        } catch (err) {
+            console.error("Erro no Checkout:", err);
+        }
+    }
+
+    function updateCheckoutUI(product) {
+        const titleEl = document.querySelector('h4.font-bold.text-on-surface');
+        const priceEl = document.querySelector('span.text-primary.font-headline');
+        const totalEl = document.querySelector('span.text-primary.font-black');
+        
+        if (titleEl) titleEl.textContent = product.nome;
+        const priceStr = 'R$ ' + (parseFloat(product.preco_venda) || 0).toLocaleString('pt-BR');
+        if (priceEl) priceEl.textContent = priceStr;
+        if (totalEl) totalEl.textContent = priceStr;
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchCheckoutDetails);
+</script>
 </body></html>
 
 
