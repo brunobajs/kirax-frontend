@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>KIRAX | Onboarding IA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e0f; }
+        .glass-panel { background: rgba(26, 25, 27, 0.6); backdrop-filter: blur(12px); }
+        .neon-glow { box-shadow: 0 0 15px rgba(161, 250, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen">
+    <header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-[#0e0e0f]/80 backdrop-blur-xl z-50 border-b border-white/5">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">psychology</span>
+            <h1 class="text-xl font-bold tracking-tighter text-primary font-headline uppercase">ONBOARDING IA</h1>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-6 pt-24 pb-32 max-w-4xl mx-auto w-full">
+        <div id="chat-container" class="w-full space-y-6 overflow-y-auto max-h-[60vh] scrollbar-hide mb-8">
+            <!-- Boas-vindas -->
+            <div class="flex gap-4">
+                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-sm">robot</span>
+                </div>
+                <div class="bg-surface-container-high p-4 rounded-sm border border-outline-variant/10 max-w-[80%]">
+                    <p class="text-sm leading-relaxed">Olá! Sou a Inteligência Artificial da Kirax. Estou aqui para entender o seu negócio e configurar os melhores módulos para você. Me conte: **O que a sua empresa faz e como você vende seus produtos ou serviços?**</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background via-background to-transparent">
+            <div class="max-w-4xl mx-auto flex gap-3 bg-surface-container p-2 rounded-sm border border-outline-variant/20 neon-glow">
+                <input id="user-input" type="text" placeholder="Ex: Sou uma loja de roupas e vendo pelo Instagram..." class="flex-grow bg-transparent border-none text-on-surface text-sm focus:ring-0 px-4" onkeypress="if(event.key === 'Enter') sendMessage()"/>
+                <button onclick="sendMessage()" class="bg-primary text-on-primary px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+
+        function appendMessage(role, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex gap-4 ${role === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const icon = role === 'user' ? 'person' : 'robot';
+            const bgColor = role === 'user' ? 'bg-secondary/20' : 'bg-primary/20';
+            const textColor = role === 'user' ? 'text-secondary' : 'text-primary';
+
+            msgDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full ${bgColor} flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined ${textColor} text-sm">${icon}</span>
+                </div>
+                <div class="${role === 'user' ? 'bg-surface-container-highest' : 'bg-surface-container-high'} p-4 rounded-sm border border-outline-variant/10 max-w-[80%]">
+                    <p class="text-sm leading-relaxed">${text}</p>
+                </div>
+            `;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendMessage('user', text);
+            userInput.value = '';
+
+            try {
+                const response = await fetch(KIRAX_CONFIG.API_URL + '/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        prompt: `Você é um consultor de implantação do Kirax CRM. O usuário disse: "${text}". 
+                        Seu objetivo é identificar se ele precisa de:
+                        - vendas (leads, funil)
+                        - relacionamento (fidelização, pós-venda)
+                        - varejo (estoque, PDV)
+                        - calendario (agendamentos)
+
+                        Responda de forma curta e amigável. Caso já tenha identificado, diga: "Entendido! Pelo que você me disse, vou configurar os módulos de [MÓDULOS] para você. Podemos prosseguir?"`
+                    })
+                });
+
+                const data = await response.json();
+                appendMessage('ai', data.response);
+
+                // Lógica de auto-ativação (Simulação por enquanto)
+                if (data.response.toLowerCase().includes('podemos prosseguir')) {
+                    setupModules(text);
+                }
+
+            } catch (err) {
+                console.error("Erro na IA:", err);
+                appendMessage('ai', "Desculpe, tive um problema de conexão. Tente novamente.");
+            }
+        }
+
+        async function setupModules(text) {
+            // Lógica para detectar palavras chave e atualizar o banco
+            const config = {
+                vendas: text.includes('venda') || text.includes('lead'),
+                relacionamento: text.includes('cliente') || text.includes('fidel'),
+                varejo: text.includes('loja') || text.includes('estoque'),
+                calendario: text.includes('agenda') || text.includes('horário')
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const empresaId = urlParams.get('empresa_id');
+
+            if (empresaId && window.kiraxSupabase) {
+                const { error } = await window.kiraxSupabase
+                    .from('empresas')
+                    .update({ modulos_config: config })
+                    .eq('id', empresaId);
+
+                if (!error) {
+                    appendMessage('ai', "✨ Configuração concluída! Redirecionando você para o seu novo painel...");
+                    setTimeout(() => { window.location.href = `index.html?empresa_id=${empresaId}`; }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

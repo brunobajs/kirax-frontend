@@ -110,6 +110,7 @@
             min-height: max(884px, 100dvh);
         }
     </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 </head>
 <body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary min-h-screen flex flex-col">
@@ -207,6 +208,64 @@
 </div>
 </a>
 </div>
+
+<script>
+    async function loadUserModules() {
+        console.log("KIRAX HUB: Carregando módulos dinâmicos...");
+        
+        // Simulação de ID de empresa para teste (depois virá do Login)
+        const urlParams = new URLSearchParams(window.location.search);
+        let empresaId = urlParams.get('empresa_id');
+        
+        if (!empresaId) {
+            console.log("Aviso: Nenhum empresa_id fornecido. Usando configuração padrão.");
+            return;
+        }
+
+        try {
+            const { data, error } = await window.kiraxSupabase
+                .from('empresas')
+                .select('modulos_config')
+                .eq('id', empresaId)
+                .single();
+
+            if (error) throw error;
+
+            const config = data.modulos_config;
+            console.log("✅ Configuração recebida:", config);
+
+            // Seletores dos cards
+            const cards = {
+                vendas: document.querySelector('a[href*="pipeline_de_vendas"]'),
+                relacionamento: document.querySelector('a[href*="pipeline_de_relacionamento"]'),
+                varejo: document.querySelector('a[href*="m_dulo_varejo"]'),
+                calendario: document.querySelector('a[href*="calend_rio"]')
+            };
+
+            // Aplicar visibilidade
+            Object.keys(cards).forEach(key => {
+                if (cards[key]) {
+                    if (config[key] === true) {
+                        cards[key].classList.remove('hidden');
+                    } else {
+                        cards[key].classList.add('hidden');
+                    }
+                }
+            });
+
+        } catch (err) {
+            console.error("❌ Erro ao carregar módulos:", err.message);
+        }
+    }
+
+    // Executar após carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.kiraxSupabase) {
+            loadUserModules();
+        }
+    });
+</script>
+
 <!-- Master Admin Link -->
 <div class="mt-20 flex flex-col items-center">
 <div class="w-full h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent mb-12"></div>

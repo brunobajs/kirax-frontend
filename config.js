@@ -19,5 +19,10 @@ const KIRAX_CONFIG = {
 
 if (typeof window !== 'undefined') {
     window.KIRAX_CONFIG = KIRAX_CONFIG;
+    
+    // Inicializar Supabase se a lib estiver carregada
+    if (typeof supabase !== 'undefined') {
+        window.kiraxSupabase = supabase.createClient(KIRAX_CONFIG.SUPABASE_URL, KIRAX_CONFIG.SUPABASE_ANON_KEY);
+    }
 }
 
