@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEURAL_OS_v4.2 - FONTES_ATIVAS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#767576",
+              "surface-container-lowest": "#000000",
+              "surface-container": "#1a191b",
+              "primary-container": "#00f4fe",
+              "primary-fixed": "#00f4fe",
+              "inverse-primary": "#006a6e",
+              "tertiary-fixed": "#cafd00",
+              "background": "#0e0e0f",
+              "secondary-fixed": "#f1c1ff",
+              "on-primary-fixed-variant": "#006266",
+              "on-secondary": "#390050",
+              "outline-variant": "#484849",
+              "on-primary-container": "#00575b",
+              "surface-container-highest": "#262627",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface": "#0e0e0f",
+              "on-surface": "#ffffff",
+              "tertiary-dim": "#beee00",
+              "on-primary-fixed": "#004346",
+              "on-tertiary-fixed": "#3a4a00",
+              "error": "#ff716c",
+              "on-surface-variant": "#adaaab",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-variant": "#262627",
+              "on-tertiary": "#516700",
+              "error-dim": "#d7383b",
+              "on-background": "#ffffff",
+              "tertiary-fixed-dim": "#beee00",
+              "on-error": "#490006",
+              "on-error-container": "#ffa8a3",
+              "primary-dim": "#00e5ee",
+              "secondary-dim": "#bb00fc",
+              "on-tertiary-container": "#4a5e00",
+              "secondary-container": "#9900cf",
+              "surface-tint": "#a1faff",
+              "primary-fixed-dim": "#00e5ee",
+              "tertiary": "#f3ffca",
+              "tertiary-container": "#cafd00",
+              "on-secondary-fixed": "#580079",
+              "secondary": "#d674ff",
+              "surface-dim": "#0e0e0f",
+              "surface-container-high": "#201f21",
+              "on-tertiary-fixed-variant": "#526900",
+              "error-container": "#9f0519",
+              "primary": "#a1faff",
+              "inverse-surface": "#fcf8f9",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "surface-container-low": "#131314",
+              "on-secondary-container": "#fff5fc",
+              "surface-bright": "#2c2c2d"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0f; }
+        ::-webkit-scrollbar-thumb { background: #00f4fe33; border-radius: 2px; }
+        .neon-glow { text-shadow: 0 0 8px rgba(161, 250, 255, 0.4); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container/30">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0f]/80 backdrop-blur-xl border-b border-cyan-500/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)] docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400" data-icon="memory">memory</span>
+<h1 class="font-['Space_Grotesk'] tracking-tighter uppercase text-2xl font-black text-cyan-400 drop-shadow-[0_0_8px_rgba(161,250,255,0.4)]">NEURAL_OS_v4.2</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] text-sm tracking-widest uppercase">
+<a class="text-slate-500 hover:text-cyan-200 transition-colors" href="#">Neural Monitor</a>
+<a class="text-cyan-400 shadow-[0_2px_0_0_rgba(161,250,255,1)]" href="#">Live Sources</a>
+<a class="text-slate-500 hover:text-cyan-200 transition-colors" href="#">Behavior Sim</a>
+</nav>
+<div class="h-10 w-10 rounded-sm bg-surface-container-highest border border-cyan-500/20 flex items-center justify-center overflow-hidden">
+<img alt="System Operator" class="w-full h-full object-cover" data-alt="High-tech minimalist avatar of a system operator with cyan circuit patterns on a dark profile silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADZW3_pyRRDqsmyU4kUzDQWWSdVUD6GqChyh3dFHIa4ldU0mSi_AmXCYKjgiXxvhD_s9yWxg0ouyJlCm2SbqNhRSLZJ62SuPqxhgJ7Ch70yyarhjDRnaJND6aqLqkBghCPWlNl7aSq5KeZddVlurNJEXJmqDz0Mvj_g8zfhfpkbSyN9MhgLB3U0CPNTA5QAIOuNGFGVYWeoZlcufZdB250kSSU5N_elg6s7jH36bP5r7SC5sXySTnxzeWtk7A9jeeuNpn0BFuYD9Tw"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-72px)]">
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-72px)] w-72 bg-[#131314]/90 backdrop-blur-2xl border-r border-cyan-500/5 shadow-[10px_0_30px_rgba(0,0,0,0.8)] sticky top-[72px]">
+<div class="p-6 border-b border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+</div>
+<div>
+<div class="font-['Inter'] text-xs font-bold tracking-widest uppercase text-cyan-400">CORE_ADMIN</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Level 7 Access</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 py-4">
+<div class="bg-gradient-to-r from-cyan-500/20 to-transparent text-cyan-400 border-l-2 border-cyan-400 py-4 px-6 flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="rss_feed">rss_feed</span>
+<span class="font-['Inter'] text-xs font-bold tracking-widest uppercase">FONTES_ATIVAS</span>
+</div>
+<div class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 cursor-pointer transition-all duration-200 group">
+<span class="material-symbols-outlined group-hover:text-cyan-200" data-icon="analytics">analytics</span>
+<span class="font-['Inter'] text-xs font-bold tracking-widest uppercase group-hover:text-cyan-200">Neural Monitor</span>
+</div>
+<div class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 cursor-pointer transition-all duration-200 group">
+<span class="material-symbols-outlined group-hover:text-cyan-200" data-icon="database">database</span>
+<span class="font-['Inter'] text-xs font-bold tracking-widest uppercase group-hover:text-cyan-200">Knowledge Core</span>
+</div>
+<div class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 cursor-pointer transition-all duration-200 group">
+<span class="material-symbols-outlined group-hover:text-cyan-200" data-icon="psychology">psychology</span>
+<span class="font-['Inter'] text-xs font-bold tracking-widest uppercase group-hover:text-cyan-200">Behavior Sim</span>
+</div>
+</nav>
+<div class="p-6 mt-auto border-t border-white/5">
+<div class="flex items-center justify-between text-[10px] text-cyan-400/50 uppercase tracking-widest">
+<span>SYSTEM_STABLE</span>
+<span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_cyan]"></span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-6 md:p-10 lg:p-12 overflow-x-hidden">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline text-4xl font-bold tracking-tight text-on-surface mb-2">FONTES_ATIVAS</h2>
+<p class="text-on-surface-variant max-w-xl text-sm leading-relaxed">Gerenciamento de hubs de inteligência e monitoramento de domínios em tempo real. Configure a frequência de ingestão e sensibilidade heurística.</p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="text-right">
+<span class="block text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Total monitorado</span>
+<span class="text-2xl font-headline font-bold text-primary">14.8k</span>
+</div>
+<div class="w-[2px] h-10 bg-outline-variant/30"></div>
+<div class="text-right">
+<span class="block text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Taxa de Sinc</span>
+<span class="text-2xl font-headline font-bold text-tertiary">99.8%</span>
+</div>
+</div>
+</div>
+<!-- Action Area: Proeminent Input & Controls -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+<div class="lg:col-span-2 glass-panel p-6 rounded-sm border-l-2 border-primary shadow-xl">
+<label class="block text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-4">Novo link para monitoramento</label>
+<div class="flex flex-col md:flex-row gap-3">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary/40" data-icon="add_link">add_link</span>
+<input class="w-full bg-surface-container-highest/50 border-none rounded-sm py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary/40 transition-all font-body text-sm" placeholder="https://dominio-alvo.ia/v1/feed" type="text"/>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary-container px-8 py-4 rounded-sm font-headline font-bold uppercase tracking-widest text-xs hover:brightness-110 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,244,254,0.3)]">
+                            Adicionar Fonte
+                        </button>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-sm border border-outline-variant/20">
+<label class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em] mb-4">Sensibilidade Heurística</label>
+<div class="space-y-4">
+<input class="w-full h-1 bg-surface-container-highest rounded-full appearance-none accent-primary cursor-pointer" max="100" min="0" type="range" value="75"/>
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-tighter">
+<span class="text-outline">Estrutural</span>
+<span class="text-primary font-mono">0.75_PRECISION</span>
+<span class="text-outline">Semântico</span>
+</div>
+<p class="text-[10px] text-on-surface-variant leading-tight">Detecta mudanças mínimas no DOM e variações de tokens de linguagem natural.</p>
+</div>
+</div>
+</section>
+<!-- Monitoring Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+<!-- Source Card 1 -->
+<div class="group surface-container-low p-5 flex items-center justify-between border-l-2 border-tertiary shadow-sm hover:bg-surface-container transition-all">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="w-12 h-12 bg-surface-container-highest rounded-sm flex items-center justify-center border border-white/5 overflow-hidden">
+<img alt="Reuters" class="w-8 h-8 opacity-70 grayscale group-hover:grayscale-0 transition-all" data-alt="Logotipo minimalista da Reuters em preto e branco com fundo transparente e iluminação suave" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-1kmh41EKAvHgXo3gQRkHq2MGibQKx6cVq6Q6e0bA4Izu9zl57CD4nF2T7x7X31qVXI3WBRAGg8v1Ne2J88-jAbzMBwgpzYQkN1TKXUyjyW9ZYXvcQStZUDy5QSoMGFxr9l4--60MTGq75cDZgY5Pw955DoIiG4KWiEr3ZBkVdE7xd0fu2xFyofM3vCvPWcnfckNruCKFinLZS7gxzWEzcZT5wCgyixyZI8IHK5BKrcfi4GYHu_QZI3xgvH7ww3_H51ElqyvhVotZ"/>
+</div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-tertiary rounded-full border-2 border-background animate-pulse"></div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight group-hover:text-primary transition-colors">reuters.com/technology</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[10px] bg-tertiary/10 text-tertiary px-2 py-0.5 font-bold uppercase tracking-tighter rounded-sm">Ativo</span>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="update">update</span> 5m frequency
+                                </span>
+</div>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Última Alteração</div>
+<div class="text-xs font-mono text-tertiary-dim">HA_22_SEC_AGO</div>
+</div>
+</div>
+<!-- Source Card 2 -->
+<div class="group surface-container-low p-5 flex items-center justify-between border-l-2 border-primary shadow-sm hover:bg-surface-container transition-all">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="w-12 h-12 bg-surface-container-highest rounded-sm flex items-center justify-center border border-white/5 overflow-hidden">
+<img alt="ArXiv" class="w-8 h-8 opacity-70 grayscale group-hover:grayscale-0 transition-all" data-alt="Simbolo acadêmico do ArXiv em tons de cinza sobre fundo escuro tecnológico" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhXew7pO6l--GCg0ifJIOKfiJDGPA0C7n6b94nDBVyyM-QXV9z46uOqYB1aRbpEiRB87m9DsDHSQyrlsbka7AU7Szbtrs8L-7Vv26h_azTf-alfMhmkXhdu6HXUNwkdIGARZtK50eRFnp_tTbM-k9z4nd3qw5m_KMhyDSY-5eOet300Fy9QsYLobBOGKE4f6m-ftQDINkGz39OkvN1BN3UXpcYl_F5eZCcLLgVAwlHalzAEoXksLz2UcCDDBTEZDK2VVpGi_ezNKgp"/>
+</div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background animate-bounce"></div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight group-hover:text-primary transition-colors">arxiv.org/list/cs.AI/recent</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 font-bold uppercase tracking-tighter rounded-sm">Sincronizando</span>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="update">update</span> Real-time
+                                </span>
+</div>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Última Alteração</div>
+<div class="text-xs font-mono text-primary-dim">SY_PROCESS_78%</div>
+</div>
+</div>
+<!-- Source Card 3 -->
+<div class="group bg-surface-container p-5 flex items-center justify-between border-l-2 border-outline-variant shadow-sm hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 bg-surface-container-highest rounded-sm flex items-center justify-center border border-white/5 overflow-hidden">
+<img alt="Bloomberg" class="w-8 h-8 opacity-30 grayscale" data-alt="Logotipo icônico da Bloomberg em escala de cinza com contraste reduzido para estado inativo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClJBcowlfWAC8-ZvUxuvByctcozzvgVnGOEe3cbfGp4xNZEBUe9--lKEpP5oVhtGLFA2JyrR3rayiq0cN0QZptV3EWV4dDkqRyVT4tJpOkOvYrh-Kw07E6Yz0-4JRudk_a5eIG6K6gwZyCdPIRusZ63Onj0s7wBEvohfTr0MJb-PnC53O9uObwp_uUaAJU3hF6Gv7VRMdMKLr72jZNxcSOHFRrAKrecfynj7tfAJVq0GFLsUb0fE2bRJ9I0h7U3Dn8oeYqmL0D91Jw"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight text-on-surface-variant">bloomberg.com/markets</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[10px] bg-outline-variant/10 text-outline-variant px-2 py-0.5 font-bold uppercase tracking-tighter rounded-sm">Inativo</span>
+<span class="text-[10px] text-outline-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="update">update</span> Manually
+                                </span>
+</div>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Última Alteração</div>
+<div class="text-xs font-mono text-outline-variant">IDLE_04_DAYS</div>
+</div>
+</div>
+<!-- Source Card 4 -->
+<div class="group surface-container-low p-5 flex items-center justify-between border-l-2 border-tertiary shadow-sm hover:bg-surface-container transition-all">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="w-12 h-12 bg-surface-container-highest rounded-sm flex items-center justify-center border border-white/5 overflow-hidden">
+<img alt="GitHub" class="w-8 h-8 opacity-70 grayscale group-hover:grayscale-0 transition-all" data-alt="Logotipo do GitHub octocat em silhueta minimalista ciano e cinza" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-Hqz-dZzBxeTlvyJ4-vWVAcNB-0_9ZWwG8mjefduPgufY53pgMJ0ODwHpYnhd8JVLUfeGhWTPhBL8YwEDWF2pcex2-oqDF6_7RO2QMgBzH8bncLwLdypuo6g95qVvXojPvauTa7y07i2XHv8G1TdDa77DUAFtdxOlIQNoCR7Hd0hqWZIROA_oXZrEqdXmiYahLanmxJcXxMjOcBzoNlVTs8WuxJbdtyK5WglUw1hyacv_zDlVpxGxM9jo1TDSOyQySByGL6-ex6KX"/>
+</div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-tertiary rounded-full border-2 border-background"></div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight group-hover:text-primary transition-colors">github.com/openai/repos</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="text-[10px] bg-tertiary/10 text-tertiary px-2 py-0.5 font-bold uppercase tracking-tighter rounded-sm">Ativo</span>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="update">update</span> 1h frequency
+                                </span>
+</div>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Última Alteração</div>
+<div class="text-xs font-mono text-tertiary-dim">HA_02_HOR_AGO</div>
+</div>
+</div>
+</div>
+<!-- Visual Flare: Background Pattern -->
+<div class="fixed bottom-0 right-0 p-12 opacity-5 pointer-events-none select-none -z-10">
+<span class="material-symbols-outlined text-[300px] text-cyan-400" data-icon="lan">lan</span>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-2 pt-1 bg-[#0e0e0f]/90 backdrop-blur-md border-t border-cyan-900/30 shadow-[0_-4px_20px_rgba(0,245,255,0.05)] z-50 rounded-t-sm">
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Monitor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-500/10 py-2 rounded-sm px-4" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Curation</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="lan">lan</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sources</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="model_training">model_training</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sim</span>
+</a>
+</nav>
+</body></html>

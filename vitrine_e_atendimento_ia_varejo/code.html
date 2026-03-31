@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_POS | Vitrine Digital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#a1faff",
+              "tertiary-container": "#cafd00",
+              "error-container": "#9f0519",
+              "inverse-on-surface": "#565556",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-primary-fixed-variant": "#006266",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed": "#580079",
+              "on-error": "#490006",
+              "secondary-dim": "#bb00fc",
+              "background": "#0e0e0f",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed": "#f1c1ff",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline-variant": "#484849",
+              "on-tertiary-container": "#4a5e00",
+              "surface-container": "#1a191b",
+              "primary-fixed": "#00f4fe",
+              "tertiary-fixed-dim": "#beee00",
+              "tertiary-dim": "#beee00",
+              "inverse-primary": "#006a6e",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-background": "#ffffff",
+              "surface-tint": "#a1faff",
+              "on-error-container": "#ffa8a3",
+              "on-surface-variant": "#adaaab",
+              "surface-container-lowest": "#000000",
+              "surface-container-high": "#201f21",
+              "on-tertiary": "#516700",
+              "tertiary-fixed": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary-fixed": "#3a4a00",
+              "on-primary-fixed": "#004346",
+              "on-primary": "#006165",
+              "error": "#ff716c",
+              "on-secondary-container": "#fff5fc",
+              "surface-variant": "#262627",
+              "primary-fixed-dim": "#00e5ee",
+              "secondary-container": "#9900cf",
+              "outline": "#767576",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-container-highest": "#262627",
+              "tertiary": "#f3ffca",
+              "primary-container": "#00f4fe",
+              "surface-bright": "#2c2c2d",
+              "on-secondary": "#390050",
+              "inverse-surface": "#fcf8f9",
+              "error-dim": "#d7383b",
+              "on-surface": "#ffffff",
+              "surface-container-low": "#131314"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 25, 27, 0.6);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        .asymmetric-grid > :nth-child(3n+1) {
+            grid-column: span 2;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-background font-body select-none">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] dark:bg-[#0e0e0f] border-b border-[#a1faff]/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#a1faff]">menu</span>
+<h1 class="text-2xl font-bold tracking-tighter text-[#a1faff] drop-shadow-[0_0_8px_rgba(161,250,255,0.3)] font-headline uppercase">KINETIC_POS</h1>
+</div>
+<div class="w-8 h-8 rounded-full border border-primary/30 flex items-center justify-center overflow-hidden bg-surface-container-highest">
+<img alt="Merchant Profile" class="w-full h-full object-cover" data-alt="minimalist stylized digital avatar of a futuristic merchant with cybernetic features and sleek dark attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-NZ-M03ofY4WE4APpTLB9a48mIPxwwQcpFl0mY4Qyg-u57yNTqJnx95pZzx2mrOxtVsaLDdjJLywy2wC58DCCTsr9o1inXqnwTWT3L1H2fU1KIaeN5_DkAqq84SCamGexcmby8ijTOwu6xbeR_iEdC2zX1RLuyIfIZ1JhM2aUJ2wICCLCOQmVYD06sf3yWzBuY0cvdrWbWoblnRbU9_pk37eiK6hJSaqme5jpAi3zgu-_4XX9Z2cT9uFCrbrkE9wI8t6HvB3JhH_t"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-4 max-w-md mx-auto">
+<!-- Hero Section / Brand Identity -->
+<section class="mb-8">
+<div class="relative h-48 w-full rounded-sm overflow-hidden mb-4 group">
+<img alt="Header Image" class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700" data-alt="top-down artistic shot of a gourmet neapolitan pizza with glowing neon cyan highlights on the crust, set against a dark obsidian background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSF1l9L-pz7lNGRnTwtCcvD_Y8uTaTAMig3_ruPympxrgtoH3QZ2HpOgjrrRc0lEIMMuQ_EJExNeJyc0bC1xUfI-nr8-HkBiSxiPgi1Z_b68ege20sKj9b2Fg5G9TPdpOAmNefDh_SvwDML-ncevFUxupgcJ1cBUGTr_wL_F7OEqwqaanbEPhLiuwD2SpSrSr_f---T6k45_st53o_O2W-s8E6_37eXQbqqvtArZ6ZpkINR0dP1EMozJ8jyueBwOead77z3IDSXPEu"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="inline-block px-2 py-0.5 bg-primary text-on-primary-fixed font-headline text-[10px] font-bold uppercase tracking-widest mb-2">Retail Mode Active</span>
+<h2 class="text-3xl font-headline font-bold text-on-surface leading-tight">Artisan Bakery<br/><span class="text-primary-dim">Neo-Pizzeria</span></h2>
+</div>
+</div>
+<!-- Quick Categories -->
+<div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+<button class="flex-shrink-0 px-4 py-2 bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest rounded-sm">Pizzas</button>
+<button class="flex-shrink-0 px-4 py-2 bg-surface-container text-on-surface-variant text-xs font-bold uppercase tracking-widest rounded-sm">Drinks</button>
+<button class="flex-shrink-0 px-4 py-2 bg-surface-container text-on-surface-variant text-xs font-bold uppercase tracking-widest rounded-sm">Sides</button>
+<button class="flex-shrink-0 px-4 py-2 bg-surface-container text-on-surface-variant text-xs font-bold uppercase tracking-widest rounded-sm">Desserts</button>
+</div>
+</section>
+<!-- Product Bento Grid -->
+<section class="asymmetric-grid">
+<!-- Item 1: Featured -->
+<div class="bg-surface-container-low border-l-2 border-primary p-4 flex flex-col justify-between min-h-[160px] relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="font-headline text-lg font-bold text-primary tracking-tight">KINETIC MARGHERITA</span>
+<span class="text-xs font-mono text-tertiary-fixed">R$ 68.00</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">San Marzano tomatoes, fresh buffalo mozzarella, kinetic basil oil, and 48h cold-fermented dough.</p>
+</div>
+<button class="w-full py-2 bg-gradient-to-r from-primary to-on-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-tighter rounded-sm hover:opacity-90 active:scale-95 transition-all">Add to Cart</button>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container p-3 flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div class="aspect-square mb-2 bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<img alt="Pepperoni" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="close-up of spicy pepperoni slices with glistening oil highlights, artistic high-contrast dark-noir food photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv9-hXCYM1s6Xhvx-_cXvp8UTgDSs8AALvhY7YfP_jiVf0nQ3N4k-_BzjLt5c9MyGIH8uJz6qc6KO1ROKSxEyAQjyZkUHMHBlwWPYRgMl1zQaONM98H3dcMKSGRintG8SrXpi7QtrPeM9jm2zBXomTyjKr0wnyYwaUQeO-oyagzjgvir9bGUDlaLDCNLPewWVToUry9AGGUKY361lDirVuKGy5AqxFJ83aD9WLv6VLYtFq2JkMVhpz006LlJpt2vnm9aL5ic-rWMWi"/>
+</div>
+<div>
+<h3 class="font-headline text-xs font-bold text-on-surface uppercase mb-1">Cyber Pepperoni</h3>
+<p class="text-[10px] text-on-surface-variant mb-3">Spicy salami &amp; honey glow.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-mono text-xs text-primary">R$ 72.00</span>
+<span class="material-symbols-outlined text-primary text-lg">add_circle</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container p-3 flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div class="aspect-square mb-2 bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<img alt="Truffle" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500" data-alt="luxurious pizza slice topped with black truffle shavings and melted white cheese, moody dramatic lighting with deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu1w9BmrOZUoJSqoMQSKE5pD6wwyfLVT7J3jJM4b68WLYLjhptcwWZqKS1PaUrD7uzlz5cGU2e0sjROMMfm39AcnjE0Qr0XEUoFrvSph1Izwuz4fqG7399dF1Iz_ep_mwdpQEimSOBtE7Me0FMrc33yJySCe1XfILSLFueQ-zXrjIsFWdYbu3b9KlqvyHQvXk9EvPYWByjwnbKsFf1I8LaLtd38v62eGUk764CKHBYE5lRslCmfQwt1tPEF_EbaNMWRr1OtZsv0ur3"/>
+</div>
+<div>
+<h3 class="font-headline text-xs font-bold text-on-surface uppercase mb-1">Truffle Obsidian</h3>
+<p class="text-[10px] text-on-surface-variant mb-3">Black truffle &amp; cream.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-mono text-xs text-primary">R$ 94.00</span>
+<span class="material-symbols-outlined text-primary text-lg">add_circle</span>
+</div>
+</div>
+<!-- Item 4: Wide Card -->
+<div class="bg-surface-container-low p-4 border-l-2 border-secondary flex flex-row gap-4 items-center">
+<div class="w-20 h-20 bg-surface-container-lowest rounded-sm overflow-hidden flex-shrink-0">
+<img alt="Dessert" class="w-full h-full object-cover" data-alt="glowing chocolate lava cake with a magenta raspberry drizzle, neon secondary color accents on the plate edge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDclLEYinoHeGZCbmQsGvQa0x0cCZXAbD7_6BFLhcWRyJkIHB5kY-onmnolfdsGVL157DEEz7A63Ur3q9O541DdwTAJq3s2iqn95KDUWnhjNEXL14n3GSvnz8j9zjEDMX-561UxI6sef2E9vw2OzDek4v0l8bpiS9waMGMCG55fIaf5JUzUHUzM0urmQVX3YjjfLi7g9zYhsSwhHxuA58kX7BeKvRGEsXcZfpPYtiu-afBtGJyzZmogAk7GiwT9nnAwsKBvANqUSIGT"/>
+</div>
+<div class="flex-grow">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest block mb-1">Sweet Endings</span>
+<h3 class="font-headline text-sm font-bold text-on-surface uppercase mb-1">Neon Tiramisu</h3>
+<p class="text-[10px] text-on-surface-variant mb-2">Espresso soaked ladyfingers with violet mascarpone.</p>
+<div class="flex justify-between items-center">
+<span class="font-mono text-xs text-secondary-dim">R$ 32.00</span>
+<button class="px-3 py-1 border border-secondary/30 text-secondary text-[10px] font-bold uppercase rounded-sm">Add</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats / System Pulse Section -->
+<section class="mt-8 grid grid-cols-2 gap-2">
+<div class="bg-surface-container-low p-3 rounded-sm border-t border-primary/10">
+<span class="text-[8px] text-on-surface-variant uppercase tracking-[0.2em] block mb-1">Kitchen Load</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-primary tracking-tighter">12m</span>
+<span class="text-[10px] text-primary-dim/60 pb-1">Wait Time</span>
+</div>
+<div class="mt-2 w-full bg-surface-container h-0.5 relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary w-[35%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-sm border-t border-secondary/10">
+<span class="text-[8px] text-on-surface-variant uppercase tracking-[0.2em] block mb-1">AI Agent</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-secondary tracking-tighter">Active</span>
+<span class="text-[10px] text-secondary-dim/60 pb-1">Latency 24ms</span>
+</div>
+<div class="mt-2 flex gap-0.5">
+<div class="h-1 w-2 bg-secondary/80"></div>
+<div class="h-1 w-2 bg-secondary/40"></div>
+<div class="h-1 w-2 bg-secondary/90"></div>
+<div class="h-1 w-2 bg-secondary/20"></div>
+<div class="h-1 w-2 bg-secondary/60"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- AI Chat Overlay (Floating Interface) -->
+<div class="fixed bottom-20 right-4 left-4 z-40">
+<!-- Floating Chat Bubble UI -->
+<div class="glass-panel border border-primary/20 p-4 rounded-xl neon-glow-primary flex items-start gap-4">
+<div class="w-10 h-10 bg-primary/10 border border-primary/30 flex items-center justify-center rounded-sm shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">IA Concierge</span>
+<span class="text-[8px] text-on-surface-variant">ONLINE</span>
+</div>
+<p class="text-xs text-on-surface leading-tight italic">"Olá! Vi que você está olhando a Margherita. Ela é nossa especialidade. Deseja adicionar uma ao seu pedido ou prefere ver algo mais picante?"</p>
+<div class="mt-3 flex gap-2 overflow-x-auto scrollbar-hide">
+<button class="bg-surface-container-highest px-3 py-1.5 rounded-sm text-[10px] border border-outline-variant/30 text-on-surface-variant whitespace-nowrap">Sim, adicionar!</button>
+<button class="bg-surface-container-highest px-3 py-1.5 rounded-sm text-[10px] border border-outline-variant/30 text-on-surface-variant whitespace-nowrap">Quais são as picantes?</button>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 h-16 bg-[#131314]/90 backdrop-blur-md border-t border-[#a1faff]/20 rounded-t-sm shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-[#a1faff] bg-[#a1faff]/5 rounded-sm py-1 font-['Inter'] text-[10px] font-bold uppercase transition-all active:scale-95">
+<span class="material-symbols-outlined mb-1">point_of_sale</span>
+<span>POS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 font-['Inter'] text-[10px] font-bold uppercase hover:opacity-100">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span>CRM</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 font-['Inter'] text-[10px] font-bold uppercase hover:opacity-100">
+<span class="material-symbols-outlined mb-1">edit_note</span>
+<span>Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 font-['Inter'] text-[10px] font-bold uppercase hover:opacity-100">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span>Settings</span>
+</div>
+</nav>
+<!-- Visual Polish: Edge Glows -->
+<div class="fixed top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent z-[60]"></div>
+<div class="fixed top-0 left-0 h-full w-[1px] bg-gradient-to-b from-transparent via-primary/10 to-transparent z-[60]"></div>
+</body></html>

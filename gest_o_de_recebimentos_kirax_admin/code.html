@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kirax Master Admin - Dashboard Financeiro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-primary": "#006165",
+              "surface-variant": "#262627",
+              "secondary": "#d674ff",
+              "primary-container": "#00f4fe",
+              "on-surface": "#ffffff",
+              "on-error": "#490006",
+              "tertiary-fixed": "#cafd00",
+              "on-tertiary": "#516700",
+              "on-surface-variant": "#adaaab",
+              "surface-container-highest": "#262627",
+              "on-secondary-fixed": "#580079",
+              "surface-tint": "#a1faff",
+              "on-secondary-container": "#fff5fc",
+              "error-dim": "#d7383b",
+              "inverse-on-surface": "#565556",
+              "error-container": "#9f0519",
+              "surface-bright": "#2c2c2d",
+              "surface-container-high": "#201f21",
+              "error": "#ff716c",
+              "on-background": "#ffffff",
+              "on-tertiary-container": "#4a5e00",
+              "on-primary-container": "#00575b",
+              "primary-fixed-dim": "#00e5ee",
+              "background": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "on-tertiary-fixed": "#3a4a00",
+              "inverse-primary": "#006a6e",
+              "surface": "#0e0e0f",
+              "inverse-surface": "#fcf8f9",
+              "secondary-fixed": "#f1c1ff",
+              "primary": "#a1faff",
+              "primary-fixed": "#00f4fe",
+              "secondary-dim": "#bb00fc",
+              "surface-container": "#1a191b",
+              "secondary-container": "#9900cf",
+              "on-error-container": "#ffa8a3",
+              "outline-variant": "#484849",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-low": "#131314",
+              "secondary-fixed-dim": "#eaaeff",
+              "primary-dim": "#00e5ee",
+              "tertiary-container": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "on-secondary": "#390050",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-dim": "#0e0e0f",
+              "tertiary-fixed-dim": "#beee00",
+              "tertiary-dim": "#beee00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(26, 25, 27, 0.6);
+        backdrop-filter: blur(12px);
+      }
+      .neon-glow {
+        box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #0e0e0f;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #262627;
+      }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body overflow-hidden">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-[#131314] backdrop-blur-xl opacity-80 shadow-[40px_0_40px_rgba(161,250,255,0.05)] flex flex-col h-full py-6 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-xl font-bold tracking-tighter text-[#a1faff] drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-headline">NEURAL CRM</h1>
+<p class="text-[10px] text-on-surface-variant tracking-widest uppercase mt-1">v4.0.2-STABLE</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] transition-colors font-space-grotesk tracking-tight text-sm hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] transition-colors font-space-grotesk tracking-tight text-sm hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Users</span>
+</a>
+<!-- Active State: Financials -->
+<a class="flex items-center gap-3 px-3 py-3 text-[#a1faff] font-bold bg-[#262627] border-l-2 border-[#a1faff] font-space-grotesk tracking-tight text-sm hover:translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Financials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] transition-colors font-space-grotesk tracking-tight text-sm hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] transition-colors font-space-grotesk tracking-tight text-sm hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span>AI Config</span>
+</a>
+</nav>
+<div class="px-3 mt-auto space-y-1 pt-6 border-t border-outline-variant/10">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-primary to-on-primary-container text-surface font-bold text-xs uppercase tracking-tighter rounded-sm mb-6 active:scale-95 duration-100">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                New Pipeline
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-[#8e8e8f] hover:text-[#a1faff] transition-colors text-sm" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#8e8e8f] hover:text-error transition-colors text-sm" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0e0e0f]/90 backdrop-blur-lg border-b border-[#a1faff]/10 flex items-center justify-between px-8">
+<div class="flex items-center gap-4">
+<span class="text-[#a1faff] font-headline font-bold text-lg tracking-tight">FINANCEIRO_CENTRAL</span>
+</div>
+<div class="flex items-center gap-8">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-sm pl-10 pr-4 py-1.5 text-[10px] w-64 font-inter uppercase tracking-widest focus:ring-1 focus:ring-primary/40 transition-all" placeholder="BUSCAR TRANSAÇÃO..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-[#8e8e8f] hover:text-[#a1faff] cursor-pointer transition-colors">notifications_active</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-[#8e8e8f] hover:text-[#a1faff] cursor-pointer transition-colors">terminal</span>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="text-[10px] font-bold text-on-surface leading-none">ADMIN_MASTER</p>
+<p class="text-[9px] text-primary leading-none mt-1">SESSÃO ATIVA</p>
+</div>
+<img alt="Master Admin Profile" class="w-8 h-8 rounded-sm bg-surface-container-highest border border-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG6X0oIHmuG_4mGXKfoCrgi_f2AdAB3xaxMqB8XOqIi-2Tw8v--IQsMrgnTIb-oxQ0E-ZaXjUIvHqugo1smQRZm9fqDvq6O9pwZ1k5saxfBI0n1_QojQmtze1OQ7t6QI62c1xsEVIOwBCY3tDD8SVbUi9XPYzQHpLPfyEFjyidpJLCGkgmIgpKRG2YNdK4cK-cWduTwtGaILMbz5SRY5Ip7sLMonMJbFOnlAL1hW_vebUDJ8qeQDYjjOkArYOMWDxePxxmEvOTvzAn"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 h-screen overflow-y-auto custom-scrollbar bg-surface text-on-surface">
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Revenue Header Summary -->
+<section class="grid grid-cols-12 gap-6">
+<div class="col-span-12 md:col-span-8 flex flex-col justify-end pb-4">
+<h2 class="font-headline text-4xl font-extrabold tracking-tighter text-on-surface">RECERITA CONSOLIDADA</h2>
+<p class="text-on-surface-variant font-body text-sm mt-1 uppercase tracking-widest">Relatório em tempo real de todas as verticais Kirax</p>
+</div>
+<div class="col-span-12 md:col-span-4 flex items-center justify-end gap-3">
+<div class="px-4 py-2 bg-surface-container border border-outline-variant/20 rounded-sm">
+<p class="text-[9px] text-on-surface-variant uppercase tracking-widest">Status da Rede</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></span>
+<span class="text-xs font-bold text-tertiary-fixed font-headline uppercase">Operacional</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Macro Stats Bento Grid -->
+<section class="grid grid-cols-4 gap-0.5 bg-surface-container-lowest border border-outline-variant/10 overflow-hidden rounded-sm">
+<div class="p-6 bg-surface-container flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Total Transacionado (Mês)</p>
+<h3 class="text-3xl font-headline font-bold text-on-surface tabular-nums">R$ 1.248.490,00</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-tertiary text-xs font-bold font-headline">+12.4%</span>
+<div class="h-1 flex-1 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4"></div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Kirax Cloud Revenue</p>
+<h3 class="text-3xl font-headline font-bold text-primary tabular-nums">R$ 442.100,00</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-primary text-xs font-bold font-headline">Target: 92%</span>
+<div class="h-1 flex-1 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[92%]"></div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Vertical SaaS (K-CRM)</p>
+<h3 class="text-3xl font-headline font-bold text-secondary tabular-nums">R$ 512.940,00</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-secondary text-xs font-bold font-headline">Active Subs</span>
+<div class="h-1 flex-1 bg-surface-container-lowest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-surface-container flex flex-col justify-between group hover:bg-surface-container-highest transition-colors">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Outros Verticais</p>
+<h3 class="text-3xl font-headline font-bold text-on-surface tabular-nums">R$ 293.450,00</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">trending_up</span>
+<span class="text-[10px] text-on-surface-variant font-body">Estável em relação ao último período</span>
+</div>
+</div>
+</section>
+<!-- Middle Section: Mercado Pago & High Priority List -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Mercado Pago Integration Section -->
+<div class="col-span-12 lg:col-span-5 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xs font-bold font-headline uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">account_balance_wallet</span>
+                            Configuração de Recebimento Mercado Pago
+                        </h3>
+<span class="px-2 py-0.5 bg-tertiary/10 text-tertiary text-[9px] font-bold border border-tertiary/20 rounded-sm">CONECTADO</span>
+</div>
+<div class="glass-card border border-outline-variant/20 p-6 rounded-sm space-y-6">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-[#009EE3] rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<p class="text-on-surface text-sm font-bold">KIRAX_HOLDING_SA</p>
+<p class="text-on-surface-variant text-[10px] uppercase">ID: MP_98234720938</p>
+</div>
+</div>
+<button class="text-[10px] font-bold text-primary hover:underline uppercase tracking-tighter">Gerenciar Conta</button>
+</div>
+<div class="bg-surface-container-lowest p-4 border-l-2 border-primary">
+<p class="text-[9px] text-on-surface-variant uppercase tracking-widest mb-1">Saldo Disponível para Saque</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-headline font-extrabold text-on-surface">R$ 152.093,42</span>
+<span class="material-symbols-outlined text-tertiary text-sm">lock_open</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-surface-container-high rounded-sm">
+<p class="text-[9px] text-on-surface-variant uppercase mb-1">Próximo Repasse</p>
+<p class="text-sm font-bold font-headline">24 JAN, 2024</p>
+</div>
+<div class="p-3 bg-surface-container-high rounded-sm">
+<p class="text-[9px] text-on-surface-variant uppercase mb-1">Valor Previsto</p>
+<p class="text-sm font-bold font-headline text-primary">R$ 48.210,00</p>
+</div>
+</div>
+<button class="w-full py-3 bg-surface-container-highest border border-primary/30 text-primary text-[11px] font-bold uppercase tracking-widest hover:bg-primary/10 transition-colors">
+                            SOLICITAR SAQUE ANTECIPADO
+                        </button>
+</div>
+<!-- Pulse Monitor - Custom CRM Component -->
+<div class="bg-surface-container-lowest border border-outline-variant/10 p-4 rounded-sm">
+<div class="flex justify-between items-center mb-4">
+<p class="text-[9px] font-bold uppercase tracking-widest">Health Monitor (Conversion vs Activity)</p>
+<span class="text-[9px] text-on-surface-variant">Live Update</span>
+</div>
+<div class="h-16 flex items-end gap-1">
+<div class="w-full bg-secondary/20 h-8 rounded-t-[1px]"></div>
+<div class="w-full bg-tertiary/20 h-12 rounded-t-[1px]"></div>
+<div class="w-full bg-secondary/20 h-10 rounded-t-[1px]"></div>
+<div class="w-full bg-tertiary/20 h-14 rounded-t-[1px]"></div>
+<div class="w-full bg-secondary/40 h-11 rounded-t-[1px]"></div>
+<div class="w-full bg-tertiary/40 h-16 rounded-t-[1px]"></div>
+<div class="w-full bg-primary/60 h-14 rounded-t-[1px]"></div>
+</div>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+<span class="text-[9px] text-on-surface-variant uppercase">Atividade</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 bg-tertiary rounded-full"></span>
+<span class="text-[9px] text-on-surface-variant uppercase">Conversão</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Subscriptions Table -->
+<div class="col-span-12 lg:col-span-7 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xs font-bold font-headline uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">subscriptions</span>
+                            Assinaturas Recentes de Clientes
+                        </h3>
+<button class="text-[9px] text-on-surface-variant hover:text-on-surface uppercase font-bold tracking-widest">Ver Tudo</button>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest border-b border-outline-variant/20">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Cliente</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Vertical</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Valor</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm font-body">
+<!-- Row 1 -->
+<tr class="bg-surface-container border-b border-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-2 h-full bg-primary-dim absolute left-0 top-0 bottom-0 opacity-0 group-hover:opacity-100"></div>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center font-bold text-[10px] text-primary">AQ</div>
+<div>
+<p class="font-bold text-xs">Aquila Dynamics</p>
+<p class="text-[9px] text-on-surface-variant">ID_92810</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold rounded-sm border border-primary/20">K-CLOUD</span>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-xs">R$ 1.250,00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Pago</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low border-b border-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3 relative">
+<div class="absolute -left-6 top-0 bottom-0 w-[2px] bg-primary"></div>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center font-bold text-[10px] text-secondary">SN</div>
+<div>
+<p class="font-bold text-xs">Solaris Networks</p>
+<p class="text-[9px] text-on-surface-variant">ID_92811</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[9px] font-bold rounded-sm border border-secondary/20">CRM_PRO</span>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-xs">R$ 840,00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">sync</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Processando</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-surface-container border-b border-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center font-bold text-[10px] text-on-surface">VO</div>
+<div>
+<p class="font-bold text-xs">Void Org.</p>
+<p class="text-[9px] text-on-surface-variant">ID_92812</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-outline-variant/20 text-on-surface-variant text-[9px] font-bold rounded-sm border border-outline-variant/30 uppercase">Enterprise</span>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-xs">R$ 4.200,00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 text-error">
+<span class="material-symbols-outlined text-sm">error</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Falha</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low border-b border-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3 relative">
+<div class="absolute -left-6 top-0 bottom-0 w-[2px] bg-primary"></div>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center font-bold text-[10px] text-primary">HE</div>
+<div>
+<p class="font-bold text-xs">Helix Energy</p>
+<p class="text-[9px] text-on-surface-variant">ID_92813</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold rounded-sm border border-primary/20">K-CLOUD</span>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-xs">R$ 2.100,00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Pago</span>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="bg-surface-container border-b border-surface-container-lowest hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center font-bold text-[10px] text-secondary">BT</div>
+<div>
+<p class="font-bold text-xs">BioTech Lab</p>
+<p class="text-[9px] text-on-surface-variant">ID_92814</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[9px] font-bold rounded-sm border border-secondary/20">CRM_BASIC</span>
+</td>
+<td class="px-6 py-4 font-headline font-bold text-xs">R$ 290,00</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter">Pago</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-surface-container-lowest flex justify-between items-center border-t border-outline-variant/10">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest">Mostrando 5 de 1,248 transações</span>
+<div class="flex gap-2">
+<button class="p-1 border border-outline-variant/30 rounded-sm hover:bg-surface-container-highest"><span class="material-symbols-outlined text-xs">chevron_left</span></button>
+<button class="p-1 border border-outline-variant/30 rounded-sm hover:bg-surface-container-highest"><span class="material-symbols-outlined text-xs">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Activity Visualization (Placeholder for Interactive feeling) -->
+<section class="mt-8">
+<div class="bg-surface-container-lowest border border-outline-variant/10 p-1 rounded-sm">
+<div class="grid grid-cols-12 gap-1 h-32">
+<!-- Simulated heat map for global volume -->
+<div class="col-span-1 bg-surface-variant/20 hover:bg-primary/20 transition-colors"></div>
+<div class="col-span-1 bg-primary/30 hover:bg-primary/50 transition-colors"></div>
+<div class="col-span-1 bg-primary/10 hover:bg-primary/40 transition-colors"></div>
+<div class="col-span-1 bg-surface-variant/20 hover:bg-primary/20 transition-colors"></div>
+<div class="col-span-1 bg-secondary/20 hover:bg-secondary/40 transition-colors"></div>
+<div class="col-span-1 bg-secondary/50 hover:bg-secondary/70 transition-colors"></div>
+<div class="col-span-1 bg-surface-variant/20 hover:bg-primary/20 transition-colors"></div>
+<div class="col-span-1 bg-tertiary/20 hover:bg-tertiary/40 transition-colors"></div>
+<div class="col-span-1 bg-tertiary/50 hover:bg-tertiary/70 transition-colors"></div>
+<div class="col-span-1 bg-primary/40 hover:bg-primary/60 transition-colors"></div>
+<div class="col-span-1 bg-surface-variant/20 hover:bg-primary/20 transition-colors"></div>
+<div class="col-span-1 bg-surface-variant/10 hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="flex justify-between items-center px-4 py-2">
+<p class="text-[9px] text-on-surface-variant uppercase tracking-widest font-bold">Mapa Térmico de Atividade Financeira Kirax - Últimas 24h</p>
+<div class="flex items-center gap-4">
+<span class="text-[9px] text-primary uppercase font-bold">São Paulo: 42% vol</span>
+<span class="text-[9px] text-secondary uppercase font-bold">Lisboa: 18% vol</span>
+<span class="text-[9px] text-on-surface-variant uppercase">Global Sync: Active</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

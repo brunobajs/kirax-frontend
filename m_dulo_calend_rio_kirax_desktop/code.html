@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRAX | Agenda Inteligente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "error": "#ff716c",
+              "surface-variant": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "outline-variant": "#484849",
+              "primary-container": "#00f4fe",
+              "outline": "#767576",
+              "on-secondary": "#390050",
+              "tertiary-fixed": "#cafd00",
+              "primary-fixed-dim": "#00e5ee",
+              "surface-container-low": "#131314",
+              "on-secondary-fixed": "#580079",
+              "tertiary": "#f3ffca",
+              "primary-fixed": "#00f4fe",
+              "tertiary-container": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary": "#516700",
+              "on-tertiary-fixed-variant": "#526900",
+              "primary": "#a1faff",
+              "surface-container-highest": "#262627",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "on-tertiary-container": "#4a5e00",
+              "on-error": "#490006",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-primary-fixed": "#004346",
+              "tertiary-fixed-dim": "#beee00",
+              "secondary-fixed": "#f1c1ff",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-tertiary-fixed": "#3a4a00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-background": "#ffffff",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-high": "#201f21",
+              "tertiary-dim": "#beee00",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "on-surface-variant": "#adaaab",
+              "secondary-container": "#9900cf",
+              "error-dim": "#d7383b",
+              "error-container": "#9f0519"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #0e0e0f; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass-panel { backdrop-filter: blur(12px); background: rgba(26, 25, 27, 0.6); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glow-primary { box-shadow: 0 0 15px rgba(161, 250, 255, 0.1); }
+        .neon-gradient { background: linear-gradient(135deg, #a1faff 0%, #00f4fe 100%); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between px-6 bg-opacity-80 backdrop-blur-xl bg-[#131314] border-b border-[#262627] shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-8">
+<h1 class="text-2xl font-black tracking-widest text-[#a1faff] uppercase font-['Space_Grotesk']">KIRAX</h1>
+<div class="hidden md:flex items-center bg-surface-container-highest px-3 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-outline mr-2 text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 text-on-surface w-64" placeholder="Buscar agendamento..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-1.5 neon-gradient text-on-primary-container font-bold text-xs uppercase tracking-wider rounded-sm hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Add Lead
+            </button>
+<div class="flex gap-3 text-outline px-4 border-l border-outline-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="settings">settings</span>
+</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-primary/20" data-alt="Close-up portrait of a stylish man with a well-groomed beard in a dark studio setting with dramatic cyan lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVIIIgJFoYJkA8DvXMVQD-rjHSwyKEJw9B9zFyY69KqPue_4RNGIyyHhHkkOWz5AS5Q7czMs_KrWUCeDFEXt1lJvNbPLbKV6ijvbRDZl6oA-cLpLu6qPJ9qJ9dxtokmlzk3OD1pG7J4W0fNsn2W_1Z0UUYQzmEw1phItJuq_t06tHCLxl90JIyPqkUhjrZhFACDu4nxtXgzHWHS2W5RuOLfFUxmPwBQDdSW6W3hQHIF3uzGzdear74MkXSizPnLRy8PJZgDtf8bTMQ"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen z-40 flex flex-col pt-20 pb-6 bg-opacity-90 backdrop-blur-2xl bg-[#0e0e0f] border-r border-[#262627] w-20 hover:w-64 transition-all duration-300 group overflow-hidden">
+<div class="flex flex-col gap-1 px-3 grow">
+<!-- Navigation Items -->
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Dashboard</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="filter_alt">filter_alt</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Sales</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Relations</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Retail</span>
+</div>
+<!-- Active Tab: Calendar -->
+<div class="flex items-center gap-4 p-3 rounded-sm bg-[#1a191b] text-[#a1faff] border-l-2 border-[#a1faff] transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Calendar</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Inventory</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Marketing</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Finance</span>
+</div>
+</div>
+<div class="mt-auto px-3 border-t border-[#262627] pt-4 space-y-1">
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Support</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer overflow-hidden whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Logs</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-20 pt-20 p-6 min-h-screen bg-surface">
+<div class="max-w-[1600px] mx-auto grid grid-cols-12 gap-6">
+<!-- Header Section -->
+<div class="col-span-12 flex justify-between items-end mb-4">
+<div>
+<h2 class="font-headline text-4xl font-bold tracking-tight text-on-surface">Agenda Inteligente</h2>
+<p class="font-body text-on-surface-variant text-sm mt-1">Otimização IA ativa • 14 agendamentos hoje</p>
+</div>
+<div class="flex gap-3">
+<div class="flex bg-surface-container-high p-1 rounded-sm">
+<button class="px-4 py-1 text-xs font-bold uppercase tracking-widest bg-surface-container-highest text-primary">Semana</button>
+<button class="px-4 py-1 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors">Dia</button>
+<button class="px-4 py-1 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors">Mês</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest border border-outline-variant/30 text-on-surface font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_month">calendar_month</span>
+                        Abril, 2024
+                    </button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="col-span-12 xl:col-span-9 bg-surface-container-low border border-outline-variant/10 rounded-sm overflow-hidden flex flex-col">
+<!-- Day Labels -->
+<div class="grid grid-cols-7 bg-surface-container-high/50 border-b border-outline-variant/20">
+<div class="p-4 text-center border-r border-outline-variant/10">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Seg</span>
+<span class="text-xl font-headline font-bold text-on-surface">15</span>
+</div>
+<div class="p-4 text-center border-r border-outline-variant/10 bg-primary/5">
+<span class="block text-[10px] uppercase tracking-widest text-primary font-bold">Ter</span>
+<span class="text-xl font-headline font-bold text-primary">16</span>
+</div>
+<div class="p-4 text-center border-r border-outline-variant/10">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Qua</span>
+<span class="text-xl font-headline font-bold text-on-surface">17</span>
+</div>
+<div class="p-4 text-center border-r border-outline-variant/10">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Qui</span>
+<span class="text-xl font-headline font-bold text-on-surface">18</span>
+</div>
+<div class="p-4 text-center border-r border-outline-variant/10">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Sex</span>
+<span class="text-xl font-headline font-bold text-on-surface">19</span>
+</div>
+<div class="p-4 text-center border-r border-outline-variant/10">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Sáb</span>
+<span class="text-xl font-headline font-bold text-on-surface">20</span>
+</div>
+<div class="p-4 text-center">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Dom</span>
+<span class="text-xl font-headline font-bold text-on-surface">21</span>
+</div>
+</div>
+<!-- Time Grid -->
+<div class="grid grid-cols-7 h-[600px] overflow-y-auto no-scrollbar relative">
+<!-- Column Dividers -->
+<div class="absolute inset-0 grid grid-cols-7 pointer-events-none">
+<div class="border-r border-outline-variant/5"></div>
+<div class="border-r border-outline-variant/5"></div>
+<div class="border-r border-outline-variant/5"></div>
+<div class="border-r border-outline-variant/5"></div>
+<div class="border-r border-outline-variant/5"></div>
+<div class="border-r border-outline-variant/5"></div>
+</div>
+<!-- Row Dividers (Hourly) -->
+<div class="absolute inset-0 flex flex-col pointer-events-none">
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+<div class="h-20 border-b border-outline-variant/5"></div>
+</div>
+<!-- Sample Appointments -->
+<!-- Tuesday 09:00 -->
+<div class="col-start-2 relative">
+<div class="absolute top-[80px] left-1 right-1 h-[150px] bg-primary/20 border-l-2 border-primary p-3 rounded-sm group cursor-pointer hover:bg-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-primary uppercase">Corte &amp; Barba</span>
+<span class="material-symbols-outlined text-xs text-tertiary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface mt-1">Ricardo S.</h4>
+<p class="text-[10px] text-on-surface-variant">09:00 - 10:30</p>
+<div class="mt-2 flex -space-x-2">
+<img class="w-5 h-5 rounded-full border border-surface" data-alt="Portrait of a professional male barber with focused expression in a dimly lit barbershop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfaCdOwLfUAVecFH5UXf7RE-CcivJRC5PxXyokX3Ngwu1NCYuC9Y2ZybFLsK5LhnUoSAQDIMGYqe_VZjOAK02C1he8Wh0WIangNqp6cpvCcOuQ56P3ffOvJSQYKGBzpJAzbu7I3juVrjJ8jRpnxtNuXKqMI6A3c3kWNGBB3XxZr6XEmp3ykdukDYDP9-4ILH3pSygmyq3hZzIZo-geySPQnVWLzgB6UkBGfzOb3VfAF1v7WR2HEmiI5GagHh4b1ptYb8B5WL_sbl9h"/>
+</div>
+</div>
+</div>
+<!-- Wednesday 14:00 -->
+<div class="col-start-3 relative">
+<div class="absolute top-[320px] left-1 right-1 h-[100px] bg-secondary/20 border-l-2 border-secondary p-3 rounded-sm group cursor-pointer hover:bg-secondary/30 transition-all">
+<span class="text-[10px] font-bold text-secondary uppercase">Coloração Premium</span>
+<h4 class="text-sm font-bold text-on-surface mt-1">Ana Paula</h4>
+<p class="text-[10px] text-on-surface-variant">14:00 - 15:30</p>
+</div>
+</div>
+<!-- Friday 11:00 -->
+<div class="col-start-5 relative">
+<div class="absolute top-[160px] left-1 right-1 h-[80px] bg-surface-container-highest border-l-2 border-outline-variant p-3 rounded-sm group cursor-pointer hover:bg-surface-variant transition-all">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Manutenção</span>
+<span class="material-symbols-outlined text-xs text-error" data-icon="pending">pending</span>
+</div>
+<h4 class="text-sm font-bold text-on-surface mt-0.5">Lucas M.</h4>
+<p class="text-[10px] text-on-surface-variant">11:00 - 12:00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Sidebar / Insights -->
+<div class="col-span-12 xl:col-span-3 space-y-6">
+<!-- AI Smart List -->
+<div class="bg-surface-container-high border border-primary/10 p-5 rounded-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="psychology">psychology</span>
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface">Insight da IA</h3>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-surface-container-lowest border-l-2 border-tertiary">
+<p class="text-[11px] text-tertiary font-bold mb-1 italic">Sugestão de Otimização</p>
+<p class="text-xs text-on-surface-variant">3 clientes não confirmaram via WhatsApp. Deseja disparar lembretes inteligentes agora?</p>
+<button class="mt-3 text-[10px] font-black uppercase tracking-widest text-primary hover:underline">Executar Fluxo</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity / Confirmation Status -->
+<div class="bg-surface-container rounded-sm p-5 border border-outline-variant/5">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Status WhatsApp</h3>
+<div class="space-y-4">
+<!-- Activity Item -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-1 h-8 bg-tertiary rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">Gustavo Lima</p>
+<p class="text-[10px] text-on-surface-variant">Confirmado via Bot</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-1 h-8 bg-error rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">Beatriz Alves</p>
+<p class="text-[10px] text-on-surface-variant">Aguardando resposta</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-lg" data-icon="schedule">schedule</span>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-1 h-8 bg-primary rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-on-surface">Tiago Nunes</p>
+<p class="text-[10px] text-on-surface-variant">Remarcado p/ amanhã</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="event_repeat">event_repeat</span>
+</div>
+</div>
+</div>
+<!-- Revenue Forecast (Pulse Monitor) -->
+<div class="bg-surface-container-lowest border border-outline-variant/10 p-5 rounded-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Projeção Semanal</h3>
+<span class="text-tertiary font-headline font-bold text-sm">+12%</span>
+</div>
+<div class="h-16 flex items-end gap-1 px-1">
+<div class="flex-1 bg-surface-container-highest h-[40%]" title="Seg"></div>
+<div class="flex-1 bg-primary/40 h-[65%]" title="Ter"></div>
+<div class="flex-1 bg-surface-container-highest h-[55%]" title="Qua"></div>
+<div class="flex-1 bg-surface-container-highest h-[80%]" title="Qui"></div>
+<div class="flex-1 bg-primary h-full" title="Sex"></div>
+<div class="flex-1 bg-secondary/60 h-[90%]" title="Sáb"></div>
+<div class="flex-1 bg-surface-container-highest h-[20%]" title="Dom"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/10">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Faturamento Estimado</p>
+<p class="text-xl font-headline font-bold text-primary tracking-tighter">R$ 14.850,00</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Suppressed based on context: Details screens, etc., but shown here for Dashboard intent) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 neon-gradient rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-on-primary-container text-2xl font-bold" data-icon="bolt">bolt</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kirax | Planos e Assinaturas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-primary": "#006165",
+              "surface-variant": "#262627",
+              "secondary": "#d674ff",
+              "primary-container": "#00f4fe",
+              "on-surface": "#ffffff",
+              "on-error": "#490006",
+              "tertiary-fixed": "#cafd00",
+              "on-tertiary": "#516700",
+              "on-surface-variant": "#adaaab",
+              "surface-container-highest": "#262627",
+              "on-secondary-fixed": "#580079",
+              "surface-tint": "#a1faff",
+              "on-secondary-container": "#fff5fc",
+              "error-dim": "#d7383b",
+              "inverse-on-surface": "#565556",
+              "error-container": "#9f0519",
+              "surface-bright": "#2c2c2d",
+              "surface-container-high": "#201f21",
+              "error": "#ff716c",
+              "on-background": "#ffffff",
+              "on-tertiary-container": "#4a5e00",
+              "on-primary-container": "#00575b",
+              "primary-fixed-dim": "#00e5ee",
+              "background": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "on-tertiary-fixed": "#3a4a00",
+              "inverse-primary": "#006a6e",
+              "surface": "#0e0e0f",
+              "inverse-surface": "#fcf8f9",
+              "secondary-fixed": "#f1c1ff",
+              "primary": "#a1faff",
+              "primary-fixed": "#00f4fe",
+              "secondary-dim": "#bb00fc",
+              "surface-container": "#1a191b",
+              "secondary-container": "#9900cf",
+              "on-error-container": "#ffa8a3",
+              "outline-variant": "#484849",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-low": "#131314",
+              "secondary-fixed-dim": "#eaaeff",
+              "primary-dim": "#00e5ee",
+              "tertiary-container": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "on-secondary": "#390050",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-dim": "#0e0e0f",
+              "tertiary-fixed-dim": "#beee00",
+              "tertiary-dim": "#beee00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(19, 19, 20, 0.8);
+        backdrop-filter: blur(12px);
+      }
+      .glow-primary {
+        box-shadow: 0 0 20px rgba(161, 250, 255, 0.1);
+      }
+      .kinetic-border {
+        position: relative;
+      }
+      .kinetic-border::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #a1faff, transparent);
+        opacity: 0.3;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] border-b border-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400" data-icon="terminal">terminal</span>
+<h1 class="font-headline font-black tracking-widest text-cyan-400 uppercase text-xl">KIRAX</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-cyan-400 font-bold font-headline tracking-tighter hover:text-cyan-300 transition-colors duration-200" href="#">Preços</a>
+<a class="text-slate-500 font-headline tracking-tighter hover:text-cyan-300 transition-colors duration-200" href="#">Módulos</a>
+<a class="text-slate-500 font-headline tracking-tighter hover:text-cyan-300 transition-colors duration-200" href="#">Suporte</a>
+</nav>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20 bg-surface-container">
+<img alt="User Profile" data-alt="high-contrast headshot of a professional business operator with cool blue rim lighting against a dark tech background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSMy3qk7K8uKBtakyVWAEMDYfVw8oo_D0gwUQV4ET57Y86YTmmlxhXcfljJWmPJXYKSTxvAzu1gXhM7ojaI4zKxgSu7rMWp_uT-6zhPvJMOQr7dwwub51D-zMiaHJ5vW5dYswKyntIxgsMlumsOEMezHSK2cHjVKbQ86rQ2F3EU_aYEfCJ0Gg6UAjxg9MQ1rOtbkCTDCGLf9ogmqcTLAi60Pt4QuHps3x401POzgUZkV_j6_4PUGsJwZUu0bzd3ormrRADj0zLagOB"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-16 text-center">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-primary">Infraestrutura Enterprise</span>
+</div>
+<h2 class="text-5xl md:text-7xl font-headline font-black tracking-tighter mb-6 leading-[0.9]">
+                TRANSFORME SEU <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-secondary">FLUXO OPERACIONAL</span>
+</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto text-lg leading-relaxed">
+                Selecione a vertical ideal para sua operação. O Kirax entrega alta densidade de dados e performance militar para sua gestão.
+            </p>
+</section>
+<!-- Pricing Grid: Asymmetric Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-6">
+<!-- CRM Vendas - High Priority Card -->
+<div class="md:col-span-6 lg:col-span-4 group relative bg-surface-container border-l-2 border-primary overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="p-8 relative z-10">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="point_of_sale">point_of_sale</span>
+<span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-1 tracking-widest uppercase">Popular</span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight mb-2">CRM Vendas</h3>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">Automação de funil, leads quentes e monitoramento de conversão em tempo real.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-sm font-bold text-on-surface-variant">R$</span>
+<span class="text-5xl font-black font-headline text-primary">197</span>
+<span class="text-on-surface-variant text-xs font-medium">/mês</span>
+</div>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Funil Infinito Personalizado
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Scoring de Leads por IA
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="check_circle">check_circle</span>
+                            Relatórios Exportáveis
+                        </li>
+</ul>
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-black text-sm uppercase tracking-widest rounded-sm flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(0,244,254,0.3)] transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                        Assinar via Mercado Pago
+                    </button>
+</div>
+</div>
+<!-- CRM Relacionamento -->
+<div class="md:col-span-6 lg:col-span-4 group relative bg-surface-container-low border-l-2 border-secondary overflow-hidden">
+<div class="p-8">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="diversity_3">diversity_3</span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight mb-2">CRM Relacionamento</h3>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">Gestão de pós-venda, fidelização e métricas de satisfação (NPS).</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-sm font-bold text-on-surface-variant">R$</span>
+<span class="text-5xl font-black font-headline text-secondary">147</span>
+<span class="text-on-surface-variant text-xs font-medium">/mês</span>
+</div>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="check_circle">check_circle</span>
+                            Histórico de Interação 360º
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="check_circle">check_circle</span>
+                            Automação de WhatsApp/Email
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="check_circle">check_circle</span>
+                            Gestão de Tickets Suporte
+                        </li>
+</ul>
+<button class="w-full py-4 bg-surface-container-highest text-secondary outline outline-1 outline-secondary/20 font-black text-sm uppercase tracking-widest rounded-sm flex items-center justify-center gap-3 hover:bg-secondary/10 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                        Assinar via Mercado Pago
+                    </button>
+</div>
+</div>
+<!-- CRM Varejo -->
+<div class="md:col-span-6 lg:col-span-4 group relative bg-surface-container-low border-l-2 border-tertiary overflow-hidden">
+<div class="p-8">
+<div class="flex justify-between items-start mb-12">
+<span class="material-symbols-outlined text-4xl text-tertiary" data-icon="storefront">storefront</span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight mb-2">CRM Varejo</h3>
+<p class="text-on-surface-variant text-sm mb-8 leading-relaxed">Controle de estoque, frente de caixa e inteligência de PDV.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-sm font-bold text-on-surface-variant">R$</span>
+<span class="text-5xl font-black font-headline text-tertiary">97</span>
+<span class="text-on-surface-variant text-xs font-medium">/mês</span>
+</div>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+                            Gestão de SKU Ilimitada
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+                            Integração com Maquininhas
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+                            Alerta de Estoque Crítico
+                        </li>
+</ul>
+<button class="w-full py-4 bg-surface-container-highest text-tertiary outline outline-1 outline-tertiary/20 font-black text-sm uppercase tracking-widest rounded-sm flex items-center justify-center gap-3 hover:bg-tertiary/10 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                        Assinar via Mercado Pago
+                    </button>
+</div>
+</div>
+<!-- CRM Calendário - Full Width Feature Card -->
+<div class="md:col-span-12 group relative bg-surface-container-low border-t border-white/5 p-1">
+<div class="bg-background/40 backdrop-blur-xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-12">
+<div class="w-full md:w-1/3">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-primary/10 rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<h3 class="font-headline text-3xl font-black uppercase tracking-tighter">CRM Calendário</h3>
+<p class="text-primary text-xs font-bold tracking-widest">AGENDAMENTO PROFISSIONAL</p>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-8">Ideal para prestadores de serviço que buscam uma agenda blindada e automação de agendamentos online.</p>
+<div class="flex items-baseline gap-2 mb-8">
+<span class="text-3xl font-black font-headline text-on-surface">R$ 127</span>
+<span class="text-on-surface-variant text-xs">faturamento mensal</span>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary-container font-black text-sm uppercase tracking-widest rounded-sm flex items-center justify-center gap-3 hover:bg-primary-fixed transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                            Assinar via Mercado Pago
+                        </button>
+</div>
+<div class="w-full md:w-2/3 grid grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container border-l-2 border-primary/20">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="event_available">event_available</span>
+<h4 class="font-bold text-sm mb-2">Check-in Digital</h4>
+<p class="text-xs text-on-surface-variant">Confirmação automática por SMS/Email para evitar No-Show.</p>
+</div>
+<div class="p-6 bg-surface-container border-l-2 border-primary/20">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="sync">sync</span>
+<h4 class="font-bold text-sm mb-2">Sync Universal</h4>
+<p class="text-xs text-on-surface-variant">Sincronia total com Google Calendar e Outlook em tempo real.</p>
+</div>
+<div class="p-6 bg-surface-container border-l-2 border-primary/20">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="history_edu">history_edu</span>
+<h4 class="font-bold text-sm mb-2">Log de Sessões</h4>
+<p class="text-xs text-on-surface-variant">Mantenha notas clínicas ou comerciais para cada cliente.</p>
+</div>
+<div class="p-6 bg-surface-container border-l-2 border-primary/20">
+<span class="material-symbols-outlined text-primary mb-4" data-icon="qr_code_2">qr_code_2</span>
+<h4 class="font-bold text-sm mb-2">Link Bio QR</h4>
+<p class="text-xs text-on-surface-variant">Página de agendamento exclusiva com seu branding.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pulse Monitor (Signature Component) -->
+<section class="mt-20 p-8 bg-surface-container-lowest border border-white/5 rounded-sm overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px] text-primary" data-icon="query_stats">query_stats</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-end gap-8 relative z-10">
+<div class="space-y-2">
+<h3 class="font-headline text-lg font-bold uppercase tracking-widest text-on-surface-variant">Sistema Pulse</h3>
+<div class="flex items-center gap-4">
+<span class="text-4xl font-black font-headline text-primary">Live Data</span>
+<div class="flex gap-1">
+<div class="w-1 h-8 bg-secondary"></div>
+<div class="w-1 h-12 bg-secondary/80"></div>
+<div class="w-1 h-10 bg-secondary/60"></div>
+<div class="w-1 h-14 bg-tertiary"></div>
+<div class="w-1 h-16 bg-tertiary"></div>
+<div class="w-1 h-12 bg-tertiary/70"></div>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant max-w-sm">Acompanhe seu faturamento e churn diretamente do dashboard militar unificado.</p>
+</div>
+<div class="flex gap-12">
+<div class="text-right">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Conversão Global</span>
+<span class="text-2xl font-black font-headline text-tertiary">+24.8%</span>
+</div>
+<div class="text-right">
+<span class="block text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Status Sistema</span>
+<span class="text-2xl font-black font-headline text-primary">OPERATIONAL</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-[#131314]/90 border-t border-white/5 backdrop-blur-md">
+<div class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-400/10 rounded-sm py-1 px-4">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Sales</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="diversity_3">diversity_3</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Relation</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Retail</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-cyan-200 transition-colors">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Calendar</span>
+</div>
+</nav>
+<!-- Background Elements for Atmosphere -->
+<div class="fixed inset-0 pointer-events-none z-[-1]">
+<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary/5 blur-[120px] rounded-full"></div>
+</div>
+</body></html>

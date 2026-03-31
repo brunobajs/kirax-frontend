@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Master Admin - NEURAL CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "surface-container-low": "#131314",
+              "on-primary": "#006165",
+              "secondary-container": "#9900cf",
+              "secondary-dim": "#bb00fc",
+              "primary-container": "#00f4fe",
+              "on-error": "#490006",
+              "on-secondary": "#390050",
+              "error": "#ff716c",
+              "outline-variant": "#484849",
+              "primary-fixed-dim": "#00e5ee",
+              "on-primary-container": "#00575b",
+              "surface-tint": "#a1faff",
+              "tertiary-container": "#cafd00",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface-container-highest": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-tertiary": "#516700",
+              "error-dim": "#d7383b",
+              "on-tertiary-container": "#4a5e00",
+              "inverse-primary": "#006a6e",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed": "#3a4a00",
+              "secondary": "#d674ff",
+              "on-surface": "#ffffff",
+              "on-secondary-fixed": "#580079",
+              "on-tertiary-fixed-variant": "#526900",
+              "surface-container-high": "#201f21",
+              "on-surface-variant": "#adaaab",
+              "inverse-on-surface": "#565556",
+              "on-secondary-fixed-variant": "#8400b3",
+              "secondary-fixed": "#f1c1ff",
+              "tertiary-dim": "#beee00",
+              "primary": "#a1faff",
+              "error-container": "#9f0519",
+              "on-error-container": "#ffa8a3",
+              "surface-dim": "#0e0e0f",
+              "on-background": "#ffffff",
+              "surface-variant": "#262627",
+              "tertiary-fixed-dim": "#beee00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "primary-fixed": "#00f4fe",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "primary-dim": "#00e5ee"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .zebra-striping div:nth-child(even) {
+            background-color: #131314;
+        }
+        .zebra-striping div:nth-child(odd) {
+            background-color: #1a191b;
+        }
+        .engineering-border {
+            background: linear-gradient(90deg, #484849 50%, transparent 50%) repeat-x,
+                        linear-gradient(90deg, #484849 50%, transparent 50%) repeat-x,
+                        linear-gradient(0deg, #484849 50%, transparent 50%) repeat-y,
+                        linear-gradient(0deg, #484849 50%, transparent 50%) repeat-y;
+            background-size: 8px 1px, 8px 1px, 1px 8px, 1px 8px;
+            background-position: 0 0, 0 100%, 0 0, 100% 0;
+        }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-[#131314] backdrop-blur-xl opacity-80 shadow-[40px_0_40px_rgba(161,250,255,0.05)] flex flex-col py-6 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-xl font-bold tracking-tighter text-[#a1faff] drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-headline">NEURAL CRM</h1>
+<p class="font-inter text-[10px] uppercase tracking-widest text-[#8e8e8f] mt-1">v4.0.2-STABLE</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-[#a1faff] font-bold bg-[#262627] border-l-2 border-[#a1faff] transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            Overview
+        </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+            Users
+        </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+            Financials
+        </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+            Varejo POS
+        </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+            AI Config
+        </a>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-on-primary-container text-on-primary-container font-bold py-2 rounded-sm text-xs uppercase tracking-widest active:scale-95 duration-100 neon-glow-primary">
+            New Pipeline
+        </button>
+<div class="pt-4 border-t border-outline-variant/20 space-y-2">
+<a class="flex items-center gap-3 text-[#8e8e8f] hover:text-white transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_center">help_center</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 text-[#8e8e8f] hover:text-error transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0e0e0f]/90 backdrop-blur-lg border-b border-[#a1faff]/10 flex items-center justify-between px-8">
+<div class="flex items-center gap-6">
+<span class="text-on-surface-variant font-headline font-bold text-lg tracking-tight">PAINEL MASTER ADMIN</span>
+<!-- Vertical Selector -->
+<div class="flex items-center bg-surface-container-highest/50 rounded-sm p-1 border border-outline-variant/20">
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 bg-primary text-on-primary-container rounded-sm shadow-sm">CRM Vendas</button>
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 text-on-surface-variant hover:text-primary">CRM Relac.</button>
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 text-on-surface-variant hover:text-primary">Varejo POS</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-highest border-none rounded-sm pl-10 pr-4 py-1.5 text-[10px] font-body tracking-widest focus:ring-1 focus:ring-primary/40 w-64 placeholder:text-outline transition-all" placeholder="BUSCAR ENTIDADE..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors active:opacity-70">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</button>
+<button class="hover:text-primary transition-colors active:opacity-70">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<div class="h-8 w-8 rounded-sm bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/50">
+<img alt="Master Admin" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0o8X7hOUnZMprFL97ccwckESIQLW6Lchf3hCSS-P5SHS_vCtShsJL4vFJTaMVti_-LFb9ovKB1t6U3mnaaPlcrPNDLSOmZQT2KPwpyjoxKA4-r6SqymU_iyhtDdtPOwEh4WrazceTxLblY_bgQpCDkeSCZuQ2St2T5AL_8-Y4aPvKRE9OiZWCqmB01zDuIhxeuLvjeTX-LdiaRbdECy1LLgU_79VW2SB4OSxerTPszIbv1mgggtCTlV5QxKt-OVtkLgOLtTQ8f776"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-12 gap-px bg-outline-variant/10 mb-8 overflow-hidden rounded-sm border border-outline-variant/10 shadow-2xl">
+<!-- MRR Metric with Product Split -->
+<div class="col-span-12 md:col-span-5 bg-surface-container p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-0.5 bg-primary/20"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase">Global Revenue (MRR)</span>
+<span class="text-tertiary text-xs font-mono">+12.4%</span>
+</div>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-primary text-4xl font-headline font-extrabold tracking-tighter">R$ 1.284.000</span>
+<span class="text-on-surface-variant text-xs">/mês</span>
+</div>
+<!-- MRR Distribution Graph -->
+<div class="space-y-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[8px] font-mono tracking-tighter uppercase text-on-surface-variant">
+<span>CRM Vendas (52%)</span>
+<span class="text-primary">R$ 667.6k</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[52%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[8px] font-mono tracking-tighter uppercase text-on-surface-variant">
+<span>CRM Relacionamento (28%)</span>
+<span class="text-secondary">R$ 359.5k</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[28%] shadow-[0_0_4px_rgba(214,116,255,0.4)]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[8px] font-mono tracking-tighter uppercase text-on-surface-variant">
+<span>Varejo POS (20%)</span>
+<span class="text-tertiary">R$ 256.8k</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[20%] shadow-[0_0_4px_rgba(202,253,0,0.4)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Varejo Specific Metric -->
+<div class="col-span-12 md:col-span-3 bg-surface-container p-6 border-l border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase">PDV Varejo Ativos</span>
+<span class="text-tertiary text-xs font-mono">ON_FIRE</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-on-surface text-4xl font-headline font-extrabold tracking-tighter">8.122</span>
+<span class="text-on-surface-variant text-[10px] uppercase font-mono tracking-tight">terminais</span>
+</div>
+<!-- Grid pattern for Varejo -->
+<div class="mt-8 grid grid-cols-6 gap-1 h-12">
+<div class="bg-tertiary/20 rounded-sm"></div>
+<div class="bg-tertiary/40 rounded-sm"></div>
+<div class="bg-tertiary/10 rounded-sm"></div>
+<div class="bg-tertiary rounded-sm"></div>
+<div class="bg-tertiary/30 rounded-sm"></div>
+<div class="bg-tertiary/60 rounded-sm"></div>
+<div class="bg-tertiary/10 rounded-sm"></div>
+<div class="bg-tertiary/20 rounded-sm"></div>
+<div class="bg-tertiary/80 rounded-sm"></div>
+<div class="bg-tertiary/10 rounded-sm"></div>
+<div class="bg-tertiary/40 rounded-sm"></div>
+<div class="bg-tertiary/20 rounded-sm"></div>
+</div>
+<div class="mt-4 text-[9px] font-mono text-tertiary uppercase tracking-widest">+18.5% WoW GROWTH</div>
+</div>
+<!-- Revenue Forecast -->
+<div class="col-span-12 md:col-span-4 bg-surface-container p-6 border-l border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase">Previsão de Receita (Q4)</span>
+<span class="material-symbols-outlined text-primary text-lg" data-icon="trending_up">trending_up</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-on-surface text-4xl font-headline font-extrabold tracking-tighter">R$ 4.2M</span>
+</div>
+<div class="mt-6 flex flex-col gap-2">
+<div class="flex justify-between text-[10px] font-mono text-on-surface-variant uppercase">
+<span>Target_Completion</span>
+<span>84%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[84%] shadow-[0_0_8px_rgba(161,250,255,0.4)]"></div>
+</div>
+</div>
+<div class="mt-6 p-3 bg-background/50 rounded-sm border border-outline-variant/10">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[9px] font-bold text-on-surface uppercase tracking-widest">IA Insight</span>
+</div>
+<p class="text-[9px] text-on-surface-variant leading-relaxed">Vertical 'Varejo' deve superar 'Relacionamento' em volume transacional até Dez/24.</p>
+</div>
+</div>
+</div>
+<!-- Section Title -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-2xl font-headline font-bold tracking-tight">Ecossistema de Assinantes</h2>
+<p class="text-on-surface-variant text-sm mt-1">Monitoramento granular por vertical de produto.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-highest text-on-surface-variant text-xs border border-outline-variant/30 rounded-sm hover:text-white transition-colors">
+                EXPORTAR CSV
+            </button>
+<button class="px-4 py-2 bg-surface-container-highest text-primary text-xs border border-primary/20 rounded-sm hover:bg-primary/10 transition-colors">
+                RELATÓRIO FULL
+            </button>
+</div>
+</div>
+<!-- High-Density Table -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<!-- Table Header -->
+<div class="grid grid-cols-12 bg-surface-container-high px-6 py-3 border-b border-outline-variant/20">
+<div class="col-span-4 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase">Empresa</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-center">Produto / Vertical</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-center">Modelo de IA</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-right">Terminais/Usuários</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-right">Status</div>
+</div>
+<!-- Table Body -->
+<div class="zebra-striping">
+<!-- Row 1 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-primary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">AETHER_FLOW DYNAMICS</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 8829-XQ-22</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-bold tracking-widest rounded-sm">CRM VENDAS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">AI_PRO_V3</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">1,240</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Syncing</span>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-tertiary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">MAXI_LOG RETAIL</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 9901-RT-44</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-tertiary/10 border border-tertiary/20 text-tertiary text-[9px] font-bold tracking-widest rounded-sm">VAREJO POS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">LITE_ML_V1</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">242 PDV</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Active</span>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-secondary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">NEO_CAPITAL VENTURES</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 0091-CV-74</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-secondary/10 border border-secondary/20 text-secondary text-[9px] font-bold tracking-widest rounded-sm uppercase">CRM Relac.</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">AI_PRO_V3</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">5,112</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Active</span>
+</div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-outline-variant/30"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">HYPER_GRAPH LOGISTICS</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 5562-LL-09</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest border border-outline-variant/30 text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm">CRM VENDAS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">LEGACY_V2</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">2,330</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-error shadow-[0_0_8px_rgba(255,113,108,0.5)]"></span>
+<span class="text-[10px] font-bold text-error uppercase">Churn_Alert</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Glassmorphism Engineering Panels -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm engineering-border">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase mb-4">Eficiência de Processamento</h3>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] text-on-surface uppercase tracking-tight">Tokens/Varejo (24h)</span>
+<span class="text-tertiary font-mono text-xs">842.1M</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[45%] shadow-[0_0_4px_rgba(202,253,0,0.5)]"></div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-[10px] text-on-surface-variant font-mono">NODES ATIVOS</span>
+<span class="text-[10px] text-on-surface font-mono">1.024</span>
+</div>
+</div>
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase mb-4">Mix de Produtos Ativos</h3>
+<div class="flex h-4 w-full rounded-full overflow-hidden border border-outline-variant/20 p-0.5">
+<div class="bg-primary w-[52%]"></div>
+<div class="bg-secondary w-[28%]"></div>
+<div class="bg-tertiary w-[20%]"></div>
+</div>
+<div class="mt-4 grid grid-cols-3 gap-2">
+<div>
+<div class="text-[8px] text-primary font-bold uppercase tracking-tighter">Vendas</div>
+<div class="text-lg font-headline font-bold tracking-tighter">52%</div>
+</div>
+<div>
+<div class="text-[8px] text-secondary font-bold uppercase tracking-tighter">Relac.</div>
+<div class="text-lg font-headline font-bold tracking-tighter">28%</div>
+</div>
+<div>
+<div class="text-[8px] text-tertiary font-bold uppercase tracking-tighter">Varejo</div>
+<div class="text-lg font-headline font-bold tracking-tighter">20%</div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#a1faff_0.5px,transparent_0.5px)] [background-size:12px_12px]"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase">Uptime Transacional (POS)</h3>
+<div>
+<div class="flex items-baseline gap-1">
+<div class="text-2xl font-headline font-bold text-tertiary">99.9992%</div>
+<span class="material-symbols-outlined text-tertiary text-sm animate-pulse" data-icon="sensors">sensors</span>
+</div>
+<div class="text-[10px] text-on-surface-variant font-mono uppercase tracking-widest mt-1">Status_Live_Feed</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Actions -->
+<button class="fixed bottom-8 right-8 h-14 w-14 bg-primary text-on-primary-container rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center group active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl font-bold group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+</button>
+</body></html>

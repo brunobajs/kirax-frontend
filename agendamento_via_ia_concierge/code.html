@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_SYNC | Atendimento Automatizado</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-dim": "#00e5ee",
+              "on-tertiary-container": "#4a5e00",
+              "error-dim": "#d7383b",
+              "error": "#ff716c",
+              "primary": "#a1faff",
+              "inverse-on-surface": "#565556",
+              "secondary-fixed": "#f1c1ff",
+              "on-surface": "#ffffff",
+              "tertiary": "#f3ffca",
+              "on-surface-variant": "#adaaab",
+              "secondary": "#d674ff",
+              "primary-fixed-dim": "#00e5ee",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline-variant": "#484849",
+              "tertiary-container": "#cafd00",
+              "primary-fixed": "#00f4fe",
+              "on-tertiary-fixed": "#3a4a00",
+              "error-container": "#9f0519",
+              "background": "#0e0e0f",
+              "secondary-container": "#9900cf",
+              "on-error": "#490006",
+              "on-secondary-container": "#fff5fc",
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "on-secondary-fixed": "#580079",
+              "surface-container-highest": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface": "#0e0e0f",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "surface-variant": "#262627",
+              "outline": "#767576",
+              "surface-dim": "#0e0e0f",
+              "surface-container-lowest": "#000000",
+              "on-tertiary": "#516700",
+              "on-primary-fixed-variant": "#006266",
+              "tertiary-dim": "#beee00",
+              "surface-container-high": "#201f21",
+              "primary-container": "#00f4fe",
+              "surface-bright": "#2c2c2d",
+              "tertiary-fixed-dim": "#beee00",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-primary-fixed": "#004346",
+              "on-secondary": "#390050",
+              "on-background": "#ffffff",
+              "on-primary-container": "#00575b",
+              "surface-container": "#1a191b",
+              "on-primary": "#006165",
+              "surface-container-low": "#131314",
+              "tertiary-fixed": "#cafd00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        font-size: 20px;
+      }
+      .glass-panel {
+        backdrop-filter: blur(12px);
+        background: rgba(26, 25, 27, 0.6);
+      }
+      .neon-glow-primary {
+        box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#131314] backdrop-blur-xl opacity-80 shadow-[0_0_15px_rgba(161,250,255,0.05)] border-b-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-sm overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Professional stylist profile photo with high contrast lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqmLRnRQfZdmbMdbs0reLeeElcYK_3GGEXao31i-rPVZlrh7rFU7_nlesMtBA2AfWEYz6ryJDeaYw2scRC9UqwX8iC1IVCJ7aodbaqVCcVGqhF1TC1VU1dYeLHFIQZageBriYh_vyWp34ArHNobR1bBctBwNspGrwjME-IJIs84GSX7LqGoS2iRfalrMXX0gOPIDGB7tsPP-uUPBjCxPfGmBgOBwD-4EXj7ylPlVDt-mDzlqrasbJsVM_ihy4_bjsrfOvLf_hxJet2"/>
+</div>
+<h1 class="font-['Space_Grotesk'] uppercase tracking-widest text-xl font-bold text-[#a1faff]">KINETIC_SYNC</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#a1faff] scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-24 px-4 md:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-4rem)]">
+<!-- Left Column: Contextual Agenda Stats (Bento Style) -->
+<aside class="hidden lg:flex lg:col-span-4 flex-col gap-4 overflow-y-auto scrollbar-hide">
+<div class="bg-surface-container-low p-5 rounded-sm border-l-2 border-primary">
+<p class="font-headline text-xs uppercase tracking-tighter text-on-surface-variant mb-1">Status da Agenda</p>
+<h2 class="font-headline text-3xl font-bold text-primary">84% Ocupada</h2>
+<div class="mt-4 flex flex-col gap-2">
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[84%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant">Próxima janela disponível: Amanhã, 09:30</p>
+</div>
+</div>
+<div class="bg-surface-container p-5 rounded-sm">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="font-headline text-xs uppercase tracking-tighter text-on-surface-variant mb-1">IA_Sync Engine</p>
+<h3 class="font-headline text-lg font-medium text-secondary">Neural Processing</h3>
+</div>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<!-- Sparkline Mock -->
+<div class="flex items-end gap-1 h-12 w-full">
+<div class="bg-secondary/20 w-full h-[40%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-secondary/60 w-full h-[45%] rounded-t-sm"></div>
+<div class="bg-secondary/80 w-full h-[90%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[55%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[100%] rounded-t-sm"></div>
+</div>
+<p class="mt-3 text-[10px] text-on-surface-variant uppercase tracking-widest">Atendimento Ativo: Marcella Ribeiro</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-sm">
+<h4 class="font-headline text-xs uppercase text-on-surface-variant mb-4">Serviços Identificados</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded-sm border-l border-primary/30">
+<span class="text-sm">Corte de Cabelo</span>
+<span class="text-xs text-primary font-mono">R$ 85.00</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-highest/50 rounded-sm opacity-50">
+<span class="text-sm">Barba Completa</span>
+<span class="text-xs font-mono">R$ 45.00</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center Column: The Kinetic Chat Interface -->
+<section class="lg:col-span-8 flex flex-col bg-surface-container-low rounded-sm relative overflow-hidden border border-outline-variant/10">
+<!-- Chat Header -->
+<div class="p-4 bg-surface-container flex items-center justify-between border-b border-surface-container-highest">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-secondary/30">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-tertiary border-2 border-surface-container rounded-full"></div>
+</div>
+<div>
+<h4 class="font-headline text-sm font-bold">IA_Assistant</h4>
+<p class="text-[10px] text-tertiary uppercase tracking-tighter">Syncing availability...</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-highest transition-colors rounded-sm">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest transition-colors rounded-sm">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+<!-- System Timestamp -->
+<div class="flex justify-center">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">Hoje, 14:22</span>
+</div>
+<!-- AI Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-sm bg-secondary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-lg">smart_toy</span>
+</div>
+<div class="space-y-2">
+<div class="bg-surface-container p-4 rounded-sm rounded-tl-none border border-secondary/10">
+<p class="text-sm leading-relaxed">Olá Marcella! Identifiquei que você deseja um <span class="text-primary font-medium">Corte de Cabelo</span>. Estou verificando a agenda do profissional Ricardo agora mesmo...</p>
+</div>
+<div class="flex items-center gap-2 text-[10px] text-secondary">
+<span class="material-symbols-outlined text-xs">sync</span>
+                            Acessando calendário em tempo real
+                        </div>
+</div>
+</div>
+<!-- User Message (Audio) -->
+<div class="flex flex-row-reverse gap-4 max-w-[85%] ml-auto">
+<div class="w-8 h-8 rounded-sm bg-primary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">person</span>
+</div>
+<div class="space-y-1">
+<div class="bg-primary/5 p-3 rounded-sm rounded-tr-none border border-primary/20 flex items-center gap-4 min-w-[200px]">
+<span class="material-symbols-outlined text-primary">play_arrow</span>
+<div class="flex-1 h-4 flex items-center gap-[2px]">
+<div class="h-1/2 w-1 bg-primary/40"></div>
+<div class="h-full w-1 bg-primary"></div>
+<div class="h-3/4 w-1 bg-primary"></div>
+<div class="h-1/4 w-1 bg-primary/40"></div>
+<div class="h-1/2 w-1 bg-primary/40"></div>
+<div class="h-full w-1 bg-primary"></div>
+<div class="h-2/3 w-1 bg-primary/60"></div>
+</div>
+<span class="text-[10px] font-mono text-primary">0:12</span>
+</div>
+<p class="text-[9px] text-right text-on-surface-variant uppercase">Transcrição: "Isso, às 16h se possível."</p>
+</div>
+</div>
+<!-- AI Response: Availability Selection -->
+<div class="flex gap-4 max-w-[90%]">
+<div class="w-8 h-8 rounded-sm bg-secondary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-lg">smart_toy</span>
+</div>
+<div class="space-y-4 w-full">
+<div class="bg-surface-container p-4 rounded-sm rounded-tl-none border border-secondary/10">
+<p class="text-sm leading-relaxed mb-4">Excelente! Encontrei 3 horários próximos para amanhã. Qual prefere?</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<button class="p-3 bg-surface-container-highest border border-primary/20 hover:border-primary transition-all text-center rounded-sm group">
+<p class="text-[10px] text-on-surface-variant group-hover:text-primary">Terça</p>
+<p class="text-sm font-bold">15:30</p>
+</button>
+<button class="p-3 bg-surface-container-highest border border-primary/50 bg-primary/5 text-center rounded-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1">
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="text-[10px] text-primary">Terça</p>
+<p class="text-sm font-bold text-primary">16:00</p>
+</button>
+<button class="p-3 bg-surface-container-highest border border-primary/20 hover:border-primary transition-all text-center rounded-sm group">
+<p class="text-[10px] text-on-surface-variant group-hover:text-primary">Terça</p>
+<p class="text-sm font-bold">17:15</p>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Final AI Confirmation Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-sm bg-secondary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-lg">smart_toy</span>
+</div>
+<div class="space-y-2">
+<div class="bg-surface-container p-5 rounded-sm rounded-tl-none border-l-4 border-tertiary">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<p class="text-[10px] font-headline uppercase font-bold text-tertiary tracking-tighter">Resumo da Reserva</p>
+</div>
+<h5 class="text-lg font-headline font-bold mb-1">Corte Masculino Premium</h5>
+<p class="text-xs text-on-surface-variant">Amanhã às 16:00 • Profissional Ricardo</p>
+<!-- Location Mini Map -->
+<div class="mt-4 rounded-sm overflow-hidden h-24 relative">
+<img class="w-full h-full object-cover brightness-50 contrast-125" data-alt="Dark stylized aerial map view of a city block with neon cyan street highlights" data-location="São Paulo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTHrRHxyvFAAd_hpU5hiVgJmS-Z8Y9HHsfqSQUIRst-Q3-VmG8EgRzAH4lbNBlhNUJMQ6aOzs2qniYh-SEFU0Avjb_Z3EKuy_IyUAavvom0T8hmCin8-UXEn9vK5MGK6HUJgUDZD6YVVYWpLJwKEl37SuP7ywvsQaQ8jOZ7NIiHxnWJGUTFlKkYIq7aNwbsLMTnYBLlteq8Hwgjf2ferRzQSKqj0qmWlp57gJjTPApApY1756wHHPOUIL2OT0MJUNbrKOikJN_xZap"/>
+<div class="absolute inset-0 bg-primary/10 flex items-center justify-center">
+<div class="bg-surface-container p-2 border border-primary/40 rounded-sm">
+<p class="text-[10px] uppercase font-bold text-primary">Ver Rota</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-surface-container border-t border-outline-variant/10">
+<div class="flex items-center gap-3 bg-surface-container-highest rounded-sm p-1 px-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-3 text-on-surface placeholder:text-on-surface-variant/40" placeholder="Digite uma mensagem ou comando..." type="text"/>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">location_on</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/30"></div>
+<button class="bg-primary text-on-primary-container p-2 rounded-sm shadow-lg shadow-primary/10 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 bg-[#131314]/80 backdrop-blur-lg border-t border-[#262627]/50 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#a1faff] border-t-2 border-[#a1faff] pt-2" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide mt-1">Agenda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 hover:bg-[#1a191b] hover:text-[#d674ff] transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide mt-1">Clientes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 hover:bg-[#1a191b] hover:text-[#d674ff] transition-all" href="#">
+<span class="material-symbols-outlined">content_cut</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide mt-1">Serviços</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 hover:bg-[#1a191b] hover:text-[#d674ff] transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide mt-1">Ajustes</span>
+</a>
+</nav>
+</body></html>

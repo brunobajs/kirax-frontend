@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_OBSIDIAN | Central de Mensagens</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#beee00",
+                        "on-surface-variant": "#adaaab",
+                        "on-primary-fixed": "#004346",
+                        "surface-container": "#1a191b",
+                        "tertiary-container": "#cafd00",
+                        "surface-container-high": "#201f21",
+                        "on-primary-container": "#00575b",
+                        "background": "#0e0e0f",
+                        "primary": "#a1faff",
+                        "on-secondary-fixed": "#580079",
+                        "on-secondary-container": "#fff5fc",
+                        "primary-fixed-dim": "#00e5ee",
+                        "secondary-fixed": "#f1c1ff",
+                        "error-container": "#9f0519",
+                        "surface-tint": "#a1faff",
+                        "surface": "#0e0e0f",
+                        "surface-dim": "#0e0e0f",
+                        "inverse-primary": "#006a6e",
+                        "tertiary-fixed": "#cafd00",
+                        "on-background": "#ffffff",
+                        "surface-container-highest": "#262627",
+                        "primary-fixed": "#00f4fe",
+                        "primary-container": "#00f4fe",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "on-primary-fixed-variant": "#006266",
+                        "inverse-surface": "#fcf8f9",
+                        "tertiary": "#f3ffca",
+                        "surface-variant": "#262627",
+                        "on-secondary": "#390050",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "secondary-dim": "#bb00fc",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "tertiary-dim": "#beee00",
+                        "secondary": "#d674ff",
+                        "on-surface": "#ffffff",
+                        "surface-container-low": "#131314",
+                        "outline-variant": "#484849",
+                        "on-primary": "#006165",
+                        "primary-dim": "#00e5ee",
+                        "on-error-container": "#ffa8a3",
+                        "inverse-on-surface": "#565556",
+                        "surface-bright": "#2c2c2d",
+                        "error": "#ff716c",
+                        "on-error": "#490006",
+                        "secondary-container": "#9900cf",
+                        "on-tertiary": "#516700",
+                        "on-tertiary-container": "#4a5e00",
+                        "outline": "#767576",
+                        "error-dim": "#d7383b"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .glass-panel {
+            background: rgba(19, 19, 20, 0.8);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 selection:text-primary">
+<!-- SideNavBar Rail -->
+<aside class="fixed left-0 top-0 h-full z-50 flex flex-col items-center py-6 bg-[#131314]/80 backdrop-blur-xl h-screen w-20 border-r border-white/5 shadow-[20px_0_40px_rgba(161,250,255,0.05)]">
+<div class="mb-8">
+<span class="text-[#a1faff] font-black tracking-widest text-lg font-['Space_Grotesk']">N</span>
+</div>
+<nav class="flex flex-col gap-4 flex-1">
+<button class="flex flex-col items-center justify-center p-3 text-[#a1faff] bg-[#a1faff]/10 border-l-2 border-[#a1faff] transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="group">group</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Leads</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="Account_tree">account_tree</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Pipeline</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="monitoring">monitoring</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
+<span class="font-['Space_Grotesk'] tracking-tighter uppercase text-[8px] font-bold mt-1">Intelligence</span>
+</button>
+</nav>
+<div class="flex flex-col gap-4 mt-auto">
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-20 z-40 flex items-center justify-between px-8 bg-[#0e0e0f]/90 backdrop-blur-md h-16 border-b-2 border-primary/10">
+<div class="flex items-center gap-6">
+<h1 class="font-['Space_Grotesk'] font-bold text-[#a1faff] italic tracking-tight text-xl">KINETIC_OBSIDIAN</h1>
+<div class="h-4 w-px bg-white/10"></div>
+<div class="flex gap-4">
+<span class="text-[#f3ffca] border-b border-[#f3ffca] font-['Inter'] text-xs font-medium tracking-tight px-1 cursor-pointer">Network_Status</span>
+<span class="text-[#a1faff]/60 hover:text-[#a1faff] transition-colors font-['Inter'] text-xs font-medium tracking-tight cursor-pointer">AI_Engine_Active</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-primary/40">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="bg-surface-container-highest border-none rounded-sm pl-10 pr-4 py-1.5 text-xs text-on-surface focus:ring-1 focus:ring-primary/40 w-64 font-mono" placeholder="GLOBAL_SCAN..." type="text"/>
+</div>
+<button class="bg-gradient-to-br from-primary to-on-primary-container text-on-primary px-4 py-1.5 rounded-sm text-[10px] font-bold tracking-widest uppercase hover:shadow-[0_0_15px_rgba(161,250,255,0.3)] transition-all">
+                SYNC_DATA
+            </button>
+<div class="flex gap-3 text-primary/60">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer transition-colors" data-icon="security">security</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a professional male software engineer with short hair in a high-tech dimly lit office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmsNudk2W5d4BZkiQUWyNwOgjKqpbn52XD4SAQp7BNhx1CdiYFiYPOnF_qu4jw0If_29IEYz8h7Rbs2FXFKclamKqJ8fvrCVqrRTX8hyVOS2wS_3Ge0I2_0Empw3J-x12ubEHul0tHl28zgFIXLnN7c625O3tx4e39Lacwg98GT3-AqrXfdFzCk1vzf68If8Ux1rTNrGr0OBoJot2ajiI2nfn8T662yROxZc3OmKeT7HxizcI5s9fK_9JeI-5AycEHhkOyT3fnw5-q"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area: Three Columns -->
+<main class="pl-20 pt-16 h-screen flex overflow-hidden">
+<!-- Column 1: Conversations List -->
+<section class="w-80 flex flex-col border-r border-white/5 bg-surface-container-low overflow-hidden">
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-primary-fixed uppercase tracking-widest text-xs font-bold">Conversas</h2>
+<span class="material-symbols-outlined text-primary/60 cursor-pointer text-sm">filter_list</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 text-[10px] font-bold py-1 bg-surface-container-highest text-primary rounded-sm border-b border-primary">TUDO</button>
+<button class="flex-1 text-[10px] font-bold py-1 text-on-surface-variant hover:bg-white/5 rounded-sm">ABERTOS</button>
+<button class="flex-1 text-[10px] font-bold py-1 text-on-surface-variant hover:bg-white/5 rounded-sm">IA_PENDENTE</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto scrollbar-hide">
+<!-- Chat Item Active -->
+<div class="p-4 bg-surface-container border-l-2 border-primary-fixed-dim relative group cursor-pointer">
+<div class="flex gap-3">
+<div class="relative">
+<img class="w-10 h-10 rounded-sm grayscale group-hover:grayscale-0 transition-all" data-alt="portrait of a young business woman with long brown hair smiling confidently against a soft neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6j_FPhCfVD3IRswJtBYZ113WKBSiSts_770Gb3CBHRHEE3EcISH8maqf808ZFts7iWt3CY7rSVclEUuhe92gDO-2j7mxfBDDr_gKGxALeJDl8Ot5FZN9WoRxbDl9nJFGmqKOdSPS_f-sopt5WzBJXkDK5jFIttldS4jH0gptBaAB1dufY2AzNwaMbXHKg5OpitgzBkX1JYTZAzGxHqVXYakFMwtIDbPZ0lm8s0l3hT0jJWaNMbUrqHEO_46vWiQgMKhxGs6XPG6jr"/>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 bg-tertiary-fixed rounded-full border-2 border-surface"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-headline text-xs font-bold text-on-surface truncate">Luciana Mendes</span>
+<span class="text-[9px] text-primary/40 font-mono">14:22</span>
+</div>
+<p class="text-[11px] text-on-surface-variant truncate">O pedido #8829 ainda não chegou...</p>
+<div class="flex gap-1 mt-1">
+<span class="bg-primary/10 text-primary text-[8px] px-1.5 py-0.5 font-bold uppercase">Urgente</span>
+<span class="bg-secondary/10 text-secondary text-[8px] px-1.5 py-0.5 font-bold uppercase">WhatsApp</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Item -->
+<div class="p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-transparent">
+<div class="flex gap-3">
+<img class="w-10 h-10 rounded-sm grayscale group-hover:grayscale-0 transition-all" data-alt="headshot of a man with spectacles and a beard in casual attire looking at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCfMCVuE1EGL3z9PuwdSjk0x0XH05bS92I3PhK8NKXBNv8dB4vGyIW-WMkelY18XemJgv6-aBmtDGCNy6o4kWNIIhKQ_Ne7BA6iSHKboBFC_VMXBWINpiVcGcRcqReF_GfLKLTRC0Q_irqfN8wBHM0l0sGAMvPsWOxmoFsl9EQrHcem3kA8ogQjm8rKevbHs-df8fcEYkXvmxBnpT4TXIJ-YyK9t2SdyoLgl91Y1yojVfBbigiTySw-1T1sBEaAzpuoJbPG0HdSR-X"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-headline text-xs font-bold text-on-surface truncate">Ricardo Oliveira</span>
+<span class="text-[9px] text-primary/40 font-mono">12:15</span>
+</div>
+<p class="text-[11px] text-on-surface-variant truncate">Gostaria de saber o valor do plano premium</p>
+</div>
+</div>
+</div>
+<!-- Chat Item with Audio Indication -->
+<div class="p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-transparent">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary/60">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-headline text-xs font-bold text-on-surface truncate">Marcos Senna</span>
+<span class="text-[9px] text-primary/40 font-mono">Ontem</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-xs">mic</span>
+<span class="truncate">Áudio enviado (0:45)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Repeat Items -->
+<div class="p-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-transparent">
+<div class="flex gap-3">
+<img class="w-10 h-10 rounded-sm grayscale group-hover:grayscale-0 transition-all" data-alt="professional woman in corporate attire sitting in an office looking thoughtfully to the side" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQjsuT9kzzf-2HAscXaP7zXPg0QeCQrwcgGL1Bewcni0P7s9BuRMyKwA7nuIJO1vHxLF3mwVxf0KKcduvgndocsLj-meSpz3gyP3uTnWpWRc5H_vjYYtUmd2lf2m1agygzzyTl4YVHUq6yY9SfZyLwobX3tVFX3WHv9zKbFnx7fUZjae4jYvNgcPkL33k54G-0pNZLIqD5d51nyjwxKMJkCKN58BlftKblNsBiVK14Xi3Bd2jsUS6gZPYNQ8RXiB6a-CRWMH17zsJQ"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-0.5">
+<span class="font-headline text-xs font-bold text-on-surface truncate">Ana Paula Rocha</span>
+<span class="text-[9px] text-primary/40 font-mono">Ontem</span>
+</div>
+<p class="text-[11px] text-on-surface-variant truncate">Confirmado para amanhã às 15h.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Column 2: Active Chat Interface -->
+<section class="flex-1 flex flex-col bg-surface overflow-hidden">
+<!-- Chat Header -->
+<div class="h-16 px-6 flex items-center justify-between border-b border-white/5 bg-surface-container/30">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-sm bg-primary/10 border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h3 class="font-headline text-sm font-bold tracking-tight">Luciana Mendes</h3>
+<span class="text-[10px] text-tertiary-fixed-dim uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim inline-block animate-pulse"></span>
+                            Atendimento Prioritário
+                        </span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="p-2 hover:bg-white/5 rounded-sm text-on-surface-variant"><span class="material-symbols-outlined">call</span></button>
+<button class="p-2 hover:bg-white/5 rounded-sm text-on-surface-variant"><span class="material-symbols-outlined">videocam</span></button>
+<button class="p-2 hover:bg-white/5 rounded-sm text-on-surface-variant"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+<!-- Messages Stream -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+<div class="flex justify-center">
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">Início do Histórico - 14 de Março</span>
+</div>
+<!-- Received Message -->
+<div class="flex flex-col items-start max-w-[80%]">
+<div class="bg-surface-container p-4 rounded-sm border-l-2 border-on-surface-variant/20">
+<p class="text-sm text-on-surface leading-relaxed">Olá, boa tarde. Fiz um pedido ontem e ainda consta como 'processando'. Gostaria de saber se há algum problema com o pagamento.</p>
+</div>
+<span class="text-[9px] mt-1 font-mono text-on-surface-variant">14:15 • CLIENTE</span>
+</div>
+<!-- Sent Message (IA Generated Suggestion) -->
+<div class="flex flex-col items-end ml-auto max-w-[80%]">
+<div class="bg-primary/5 p-4 rounded-sm border-r-2 border-primary-fixed relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1 opacity-20">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<p class="text-sm text-on-surface leading-relaxed relative z-10">Olá Luciana! Verifiquei aqui no sistema. Seu pedido #8829 está com o pagamento aprovado, porém aguardando a emissão da nota fiscal eletrônica. Deve ser enviado ainda hoje.</p>
+<div class="mt-3 pt-3 border-t border-primary/10 flex items-center justify-between">
+<span class="text-[10px] text-primary flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">auto_awesome</span> RESPOSTA_IA_APLICADA
+                            </span>
+</div>
+</div>
+<span class="text-[9px] mt-1 font-mono text-primary/60">14:18 • OPERADOR + KINETIC_AI</span>
+</div>
+<!-- Received Audio with Transcription -->
+<div class="flex flex-col items-start max-w-[80%]">
+<div class="bg-surface-container p-4 rounded-sm border-l-2 border-secondary/40 w-full">
+<div class="flex items-center gap-3 mb-3 bg-surface-container-highest p-2 rounded-sm">
+<span class="material-symbols-outlined text-secondary">play_arrow</span>
+<div class="flex-1 h-1 bg-white/10 relative overflow-hidden">
+<div class="absolute inset-y-0 left-0 w-1/3 bg-secondary"></div>
+</div>
+<span class="text-[10px] font-mono text-secondary">0:12</span>
+</div>
+<div class="bg-secondary/5 p-3 rounded-sm border border-secondary/10">
+<div class="flex items-center gap-1 text-[8px] font-bold text-secondary uppercase mb-1">
+<span class="material-symbols-outlined text-[10px]">translate</span> Transcrição_IA
+                            </div>
+<p class="text-xs italic text-on-surface-variant">"Ah, entendi. Fico no aguardo então. Se puder me mandar o rastreio por aqui assim que sair, eu agradeço muito. Obrigada."</p>
+</div>
+</div>
+<span class="text-[9px] mt-1 font-mono text-on-surface-variant">14:22 • CLIENTE</span>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-6 bg-surface-container-low border-t border-white/5">
+<div class="bg-surface-container p-3 flex flex-col rounded-sm focus-within:ring-1 ring-primary/30 transition-all">
+<textarea class="bg-transparent border-none focus:ring-0 text-sm text-on-surface resize-none scrollbar-hide min-h-[60px]" placeholder="Escreva sua mensagem ou use '/' para comandos de IA..." rows="2"></textarea>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-white/5 text-on-surface-variant rounded-sm transition-colors"><span class="material-symbols-outlined text-lg">attach_file</span></button>
+<button class="p-1.5 hover:bg-white/5 text-on-surface-variant rounded-sm transition-colors"><span class="material-symbols-outlined text-lg">sentiment_satisfied</span></button>
+<button class="p-1.5 hover:bg-white/5 text-secondary rounded-sm transition-colors"><span class="material-symbols-outlined text-lg">mic</span></button>
+<div class="w-px h-6 bg-white/5 mx-1"></div>
+<button class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest text-primary text-[10px] font-bold tracking-widest uppercase rounded-sm border border-primary/20 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> SUGERIR_RESPOSTA
+                            </button>
+</div>
+<button class="bg-primary text-on-primary p-2 rounded-sm flex items-center justify-center hover:shadow-[0_0_10px_rgba(161,250,255,0.4)] transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Column 3: Customer Detail Profile -->
+<section class="w-96 bg-surface-container-low border-l border-white/5 flex flex-col overflow-y-auto scrollbar-hide">
+<!-- Profile Header -->
+<div class="p-8 flex flex-col items-center text-center">
+<div class="relative mb-4">
+<div class="w-24 h-24 rounded-sm border-2 border-primary/20 p-1">
+<img class="w-full h-full object-cover rounded-sm grayscale" data-alt="high quality portrait of a business woman with soft studio lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7wcEeeJ8xjYov0an2tQPkol8a2p6oa5mZOkPPSMN0sUvwwacC4vkAXvpPmnOqP57xTORWpqjpAUBXXAPcOOWCdyzo7-9vWz24JcI_sf7NtVP_daxbaovORIH5Yh5indLGi6-IMjdQJUaXluM3v0qOM64YgP8WyVfHtTEa_k4qzYUe9DYysSIS7hygOgRz83TLSRPVVCG3nctGw5s1CTywsO0Sedaq1utEBGXlG-150B7reUOYW7NguK0VRMBZWgxtCHJ2c46ofTyT"/>
+</div>
+<span class="absolute -top-2 -right-2 bg-tertiary text-on-tertiary text-[9px] font-bold px-2 py-0.5 rounded-sm">PLATINUM</span>
+</div>
+<h4 class="font-headline text-lg font-bold tracking-tight">Luciana Mendes</h4>
+<p class="text-xs text-on-surface-variant font-mono">ID_CLIENT: 00982-LM</p>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 bg-surface-container px-3 py-2 rounded-sm border border-white/5 hover:border-primary/40 transition-colors flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-sm group-hover:text-primary">edit</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Editar</span>
+</button>
+<button class="flex-1 bg-surface-container px-3 py-2 rounded-sm border border-white/5 hover:border-primary/40 transition-colors flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined text-sm group-hover:text-primary">person_add</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Vincular</span>
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="px-6 grid grid-cols-2 gap-px bg-white/5">
+<div class="bg-surface-container-low p-4">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Total_Gasto</span>
+<span class="text-xl font-headline font-bold text-tertiary">R$ 4.290</span>
+</div>
+<div class="bg-surface-container-low p-4">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Pedidos</span>
+<span class="text-xl font-headline font-bold text-primary">12</span>
+</div>
+<div class="bg-surface-container-low p-4">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Lealdade</span>
+<span class="text-xl font-headline font-bold text-secondary">A+</span>
+</div>
+<div class="bg-surface-container-low p-4">
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest block mb-1">Score_IA</span>
+<span class="text-xl font-headline font-bold text-primary-fixed">92%</span>
+</div>
+</div>
+<!-- Order History -->
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<h5 class="font-headline text-xs font-bold uppercase tracking-widest text-primary/60">Histórico de Pedidos</h5>
+<span class="material-symbols-outlined text-sm text-on-surface-variant cursor-pointer">open_in_new</span>
+</div>
+<div class="space-y-3">
+<div class="bg-surface-container p-3 rounded-sm border-l-2 border-tertiary-fixed-dim">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-on-surface">#8829 - Monitor 4K</span>
+<span class="text-[9px] font-mono text-tertiary-fixed-dim bg-tertiary-fixed-dim/10 px-1.5 py-0.5">PROCESSANDO</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">R$ 2.499,00 • Pago via PIX</p>
+</div>
+<div class="bg-surface-container p-3 rounded-sm border-l-2 border-white/10 opacity-60">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-on-surface">#8541 - Teclado Mecânico</span>
+<span class="text-[9px] font-mono text-on-surface-variant bg-white/5 px-1.5 py-0.5">ENTREGUE</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">R$ 549,00 • 12/02/2024</p>
+</div>
+</div>
+</div>
+<!-- Notes Section -->
+<div class="p-6 mt-auto">
+<div class="flex items-center justify-between mb-4">
+<h5 class="font-headline text-xs font-bold uppercase tracking-widest text-primary/60">Notas Internas</h5>
+<button class="text-primary text-[10px] font-bold flex items-center gap-1"><span class="material-symbols-outlined text-xs">add</span> ADICIONAR</button>
+</div>
+<div class="bg-surface-container-highest p-4 rounded-sm border border-white/5">
+<p class="text-[11px] text-on-surface leading-relaxed">Cliente prefere contato via WhatsApp. Costuma realizar compras de alto ticket no início do mês. Atendimento técnico especializado sugerido.</p>
+<div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center">
+<span class="text-[8px] font-mono text-on-surface-variant">MODIFICADO EM 01/03/24</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-xs text-on-surface-variant hover:text-primary cursor-pointer">edit</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant hover:text-error cursor-pointer">delete</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Contextual FAB (Only for main chat action) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>

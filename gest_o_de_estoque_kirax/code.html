@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "primary-fixed": "#00f4fe",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "primary-dim": "#00e5ee",
+              "primary": "#a1faff",
+              "error-container": "#9f0519",
+              "on-error-container": "#ffa8a3",
+              "on-background": "#ffffff",
+              "surface-dim": "#0e0e0f",
+              "tertiary-fixed-dim": "#beee00",
+              "surface-variant": "#262627",
+              "secondary-fixed": "#f1c1ff",
+              "tertiary-dim": "#beee00",
+              "surface-container-high": "#201f21",
+              "inverse-on-surface": "#565556",
+              "on-surface-variant": "#adaaab",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-container-lowest": "#000000",
+              "secondary": "#d674ff",
+              "on-tertiary-fixed": "#3a4a00",
+              "on-tertiary-fixed-variant": "#526900",
+              "on-surface": "#ffffff",
+              "on-secondary-fixed": "#580079",
+              "on-secondary-container": "#fff5fc",
+              "on-tertiary": "#516700",
+              "background": "#0e0e0f",
+              "on-tertiary-container": "#4a5e00",
+              "inverse-primary": "#006a6e",
+              "error-dim": "#d7383b",
+              "surface-tint": "#a1faff",
+              "tertiary-container": "#cafd00",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface-container-highest": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "tertiary-fixed": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "surface-container-low": "#131314",
+              "on-primary": "#006165",
+              "primary-container": "#00f4fe",
+              "on-error": "#490006",
+              "on-secondary": "#390050",
+              "secondary-container": "#9900cf",
+              "secondary-dim": "#bb00fc",
+              "primary-fixed-dim": "#00e5ee",
+              "on-primary-container": "#00575b",
+              "error": "#ff716c",
+              "outline-variant": "#484849"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(26, 25, 27, 0.6);
+        backdrop-filter: blur(12px);
+      }
+      .neon-glow-error {
+        box-shadow: 0 0 10px rgba(255, 113, 108, 0.3);
+      }
+      .neon-glow-primary {
+        box-shadow: 0 0 15px rgba(161, 250, 255, 0.2);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] dark:bg-[#0e0e0f] border-b border-white/5 bg-opacity-80 backdrop-blur-xl shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-xl font-black text-cyan-400 uppercase tracking-widest">KIRAX CRM</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:text-cyan-300 transition-colors active:scale-95 duration-200">notifications</button>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User Profile" data-alt="close-up portrait of a professional system administrator in a high-tech dark environment with cyan rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_AMNOtqvqzSJr9ydMY8IJIN9yGNovpTveAt1mMt2TjUzuX6E8eIKrRSP4QHdxfpxQ_suYiFLXNixIUJ2XBE8gqOGJvWep9Y2O0sk221-yU4qbDSU-LvogDNXONA3_SIgnHFMZHSslg03vPbwh68uHFD16266y2kBGZhMNnkulS7xHRbNP9GzfeawRmLwm-p_GdSe_GwiAmSM0_EFT-Cp_N7lLoXsvRfFJF0b-7Q15LrGj4zajO0pq4-txDyEd5iWkuDN6MMZlh-zP"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 space-y-6 max-w-md mx-auto">
+<!-- Summary Dashboard (Bento Style) -->
+<section class="grid grid-cols-2 gap-3">
+<div class="col-span-2 p-4 rounded-sm bg-surface-container border-l-2 border-primary shadow-sm">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">Valor Total em Estoque</p>
+<h2 class="font-headline text-3xl font-bold text-primary-fixed mt-1">R$ 142.850,00</h2>
+<div class="flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-tertiary text-sm">trending_up</span>
+<p class="text-[10px] text-tertiary uppercase">+12% este mês</p>
+</div>
+</div>
+<div class="p-4 rounded-sm bg-surface-container-low border border-white/5">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">Total de Itens</p>
+<p class="font-headline text-2xl font-bold mt-1">1,284</p>
+</div>
+<div class="p-4 rounded-sm bg-surface-container-low border border-error/20 neon-glow-error">
+<p class="text-[10px] uppercase tracking-widest text-error font-medium">Alertas de Baixo</p>
+<div class="flex items-baseline gap-2 mt-1">
+<p class="font-headline text-2xl font-bold text-error">14</p>
+<span class="material-symbols-outlined text-error text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+</section>
+<!-- AI Prediction Button -->
+<button class="w-full py-4 px-6 rounded-sm bg-gradient-to-r from-secondary/20 to-secondary-container/10 border border-secondary/30 flex items-center justify-between group active:scale-[0.98] transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div class="text-left">
+<p class="font-headline font-bold text-sm text-secondary uppercase tracking-tight">Previsão de Reposição</p>
+<p class="text-[10px] text-on-surface-variant">IA analisando velocidade de vendas...</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<!-- Product Search & List -->
+<section class="space-y-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-sm py-3 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary/40 placeholder:text-outline-variant transition-all" placeholder="Buscar produtos ou SKUs..." type="text"/>
+</div>
+<div class="space-y-2">
+<!-- Product Card: Low Stock -->
+<div class="p-4 bg-surface-container border-l-2 border-error neon-glow-error flex items-center justify-between">
+<div class="space-y-1">
+<h3 class="font-medium text-sm">Processador Ryzen 9 7950X</h3>
+<p class="text-[10px] text-on-surface-variant font-mono uppercase">SKU: CPU-AMD-001</p>
+<div class="flex items-center gap-2 pt-1">
+<span class="px-1.5 py-0.5 rounded-full bg-error-container text-[9px] text-on-error-container font-bold uppercase">Crítico</span>
+<p class="text-[11px] text-on-surface">R$ 3.450,00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Qtd.</p>
+<p class="font-headline text-xl font-bold text-error">02</p>
+</div>
+</div>
+<!-- Product Card: Normal -->
+<div class="p-4 bg-surface-container flex items-center justify-between">
+<div class="space-y-1">
+<h3 class="font-medium text-sm">SSD NVMe 2TB Kingston</h3>
+<p class="text-[10px] text-on-surface-variant font-mono uppercase">SKU: STR-KNG-002</p>
+<p class="text-[11px] text-on-surface pt-1">R$ 890,00</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Qtd.</p>
+<p class="font-headline text-xl font-bold text-on-surface">45</p>
+</div>
+</div>
+<!-- Product Card: Low Stock warning -->
+<div class="p-4 bg-surface-container border-l-2 border-orange-500/50 flex items-center justify-between">
+<div class="space-y-1">
+<h3 class="font-medium text-sm">Memória RAM 32GB DDR5</h3>
+<p class="text-[10px] text-on-surface-variant font-mono uppercase">SKU: MEM-COR-005</p>
+<div class="flex items-center gap-2 pt-1">
+<span class="px-1.5 py-0.5 rounded-full bg-surface-variant text-[9px] text-orange-400 font-bold uppercase">Repor Breve</span>
+<p class="text-[11px] text-on-surface">R$ 1.120,00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs text-on-surface-variant">Qtd.</p>
+<p class="font-headline text-xl font-bold text-orange-400">08</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Log de Movimentação -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-xs font-bold uppercase tracking-widest text-on-surface-variant">Log de Movimentação</h2>
+<button class="text-[10px] text-primary uppercase font-bold tracking-tighter">Ver Todos</button>
+</div>
+<div class="rounded-sm bg-surface-container-low overflow-hidden">
+<!-- Log Entry 1 -->
+<div class="p-3 flex items-center gap-4 border-b border-white/5">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">shopping_cart</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-medium">Venda #1284-A</p>
+<p class="text-[10px] text-on-surface-variant">SSD NVMe 2TB Kingston</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-tertiary">- 1 un.</p>
+<p class="text-[9px] text-on-surface-variant">Há 5m</p>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="p-3 flex items-center gap-4 border-b border-white/5">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-sm">edit_square</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-medium">Ajuste Manual</p>
+<p class="text-[10px] text-on-surface-variant">Processador Ryzen 9</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-secondary">+ 2 un.</p>
+<p class="text-[9px] text-on-surface-variant">Há 2h</p>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="p-3 flex items-center gap-4">
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-sm">shopping_cart</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-medium">Venda #1283-A</p>
+<p class="text-[10px] text-on-surface-variant">Placa Mãe X670E</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-tertiary">- 3 un.</p>
+<p class="text-[9px] text-on-surface-variant">Há 4h</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-br from-primary to-primary-container rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-on-primary-fixed text-3xl font-bold">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#131314]/80 dark:bg-[#131314]/80 border-t border-white/5 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-cyan-400 drop-shadow-[0_0_8px_rgba(161,250,255,0.5)]">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-tighter mt-1">Inventory</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-xl">payments</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-tighter mt-1">Sales</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-xl">monitoring</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-tighter mt-1">Analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-60 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-tighter mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

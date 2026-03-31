@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEON_FLUX_CRM | ROI Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary-fixed": "#00f4fe",
+                "tertiary-container": "#cafd00",
+                "surface": "#0e0e0f",
+                "on-tertiary": "#516700",
+                "on-tertiary-fixed-variant": "#526900",
+                "primary": "#a1faff",
+                "surface-container-highest": "#262627",
+                "on-primary": "#006165",
+                "inverse-on-surface": "#565556",
+                "primary-fixed-dim": "#00e5ee",
+                "tertiary-fixed": "#cafd00",
+                "surface-container-low": "#131314",
+                "on-secondary-fixed": "#580079",
+                "tertiary": "#f3ffca",
+                "inverse-surface": "#fcf8f9",
+                "outline-variant": "#484849",
+                "primary-container": "#00f4fe",
+                "outline": "#767576",
+                "on-secondary": "#390050",
+                "inverse-primary": "#006a6e",
+                "on-surface": "#ffffff",
+                "surface-tint": "#a1faff",
+                "surface-container-lowest": "#000000",
+                "error": "#ff716c",
+                "surface-variant": "#262627",
+                "surface-container-high": "#201f21",
+                "secondary-dim": "#bb00fc",
+                "on-surface-variant": "#adaaab",
+                "tertiary-dim": "#beee00",
+                "surface-dim": "#0e0e0f",
+                "secondary-fixed-dim": "#eaaeff",
+                "on-error-container": "#ffa8a3",
+                "secondary-container": "#9900cf",
+                "error-container": "#9f0519",
+                "error-dim": "#d7383b",
+                "surface-bright": "#2c2c2d",
+                "surface-container": "#1a191b",
+                "on-primary-container": "#00575b",
+                "secondary": "#d674ff",
+                "on-background": "#ffffff",
+                "on-primary-fixed-variant": "#006266",
+                "on-primary-fixed": "#004346",
+                "tertiary-fixed-dim": "#beee00",
+                "secondary-fixed": "#f1c1ff",
+                "primary-dim": "#00e5ee",
+                "on-secondary-fixed-variant": "#8400b3",
+                "on-tertiary-fixed": "#3a4a00",
+                "on-tertiary-container": "#4a5e00",
+                "on-error": "#490006",
+                "background": "#0e0e0f",
+                "on-secondary-container": "#fff5fc"
+              },
+              fontFamily: {
+                "headline": ["Space Grotesk"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            background: #262627;
+            height: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            background: #a1faff;
+            margin-top: -6px;
+            border-radius: 2px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(161, 250, 255, 0.5);
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 25, 27, 0.6);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0f] dark:bg-[#0e0e0f] docked full-width top-0 sticky z-50 shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex justify-between items-center px-6 py-4 w-full backdrop-blur-xl bg-opacity-80">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400 dark:text-cyan-300" data-icon="analytics">analytics</span>
+<h1 class="font-space-grotesk font-bold uppercase tracking-tighter text-2xl font-black text-cyan-400 dark:text-cyan-300 tracking-widest">NEON_FLUX_CRM</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<nav class="flex gap-6">
+<a class="text-cyan-400 dark:text-cyan-300 border-b-2 border-cyan-400 font-space-grotesk font-bold uppercase tracking-tighter py-1 transition-all" href="#">ROI Engine</a>
+<a class="text-slate-500 dark:text-slate-400 font-space-grotesk font-bold uppercase tracking-tighter py-1 hover:bg-white/5 transition-colors duration-300" href="#">Token Meter</a>
+<a class="text-slate-500 dark:text-slate-400 font-space-grotesk font-bold uppercase tracking-tighter py-1 hover:bg-white/5 transition-colors duration-300" href="#">Verticals</a>
+</nav>
+<div class="w-10 h-10 rounded-full border border-primary/20 bg-surface-container overflow-hidden active:scale-95 transition-transform cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="High-contrast stylized digital avatar silhouette with cyan neon glow highlights against a dark technical background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkRrwdK7LZaaRUFSU6U7e861IufJPLnfV5FYlie6B4PFksFAZyqjKBSozJEvW88Mqm2ZMK_aP2RuYMqbCumqNYrrmDNumwTVwwyfDMEVLMrQJ6-ZFqmt9lpJABe3oTbc4DHBW2qDnt2escL_LAM08G4W_I-5YzYb0nXy1NDBwoVLXfoP15sTfJs9ajdAE-fDrnpzOHpHKFhObTVHcbPIseFsQAX-gAZoLGHo2kDPBMaRY2fWqnH5ADsChyibpZvuf2NxiLcQ2BZNHf"/>
+</div>
+</div>
+</div>
+<div class="bg-[#131314] h-[1px] w-full"></div>
+</header>
+<div class="flex min-h-screen">
+<!-- NavigationDrawer (SideNav for Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-white/5 bg-[#131314] dark:bg-[#131314] z-40 pt-20">
+<div class="px-6 py-6 border-b border-white/5 flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-highest rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+</div>
+<div>
+<h3 class="text-on-surface font-space-grotesk font-bold text-sm leading-tight">Lead Architect</h3>
+<p class="text-on-surface-variant text-xs font-medium uppercase tracking-widest">Enterprise Tier</p>
+</div>
+</div>
+<nav class="flex flex-col space-y-1 py-4">
+<a class="bg-cyan-500/10 text-cyan-400 border-l-2 border-cyan-400 px-4 py-3 font-inter text-sm font-medium hover:translate-x-1 transition-all duration-200 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span> ROI Engine
+                </a>
+<a class="text-slate-500 px-4 py-3 font-inter text-sm font-medium hover:bg-white/5 hover:text-cyan-200 hover:translate-x-1 transition-all duration-200 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="memory">memory</span> Token Meter
+                </a>
+<a class="text-slate-500 px-4 py-3 font-inter text-sm font-medium hover:bg-white/5 hover:text-cyan-200 hover:translate-x-1 transition-all duration-200 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span> Verticals
+                </a>
+<a class="text-slate-500 px-4 py-3 font-inter text-sm font-medium hover:bg-white/5 hover:text-cyan-200 hover:translate-x-1 transition-all duration-200 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span> Strategy
+                </a>
+<div class="mt-auto px-4 py-3">
+<a class="text-slate-500 font-inter text-sm font-medium hover:bg-white/5 hover:text-cyan-200 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span> Settings
+                    </a>
+</div>
+</nav>
+<div class="p-6 text-[10px] text-outline uppercase tracking-[0.2em] font-bold">V2.0.4 - SYSTEM_STABLE</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-4 md:p-8 mb-20 md:mb-0">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Hero Section / Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-4xl md:text-5xl font-headline font-black tracking-tighter text-on-surface uppercase italic">
+                            ROI Engine <span class="text-primary-fixed">Simulator</span>
+</h2>
+<p class="text-on-surface-variant max-w-xl mt-2 font-body font-medium">
+                            Configure os parâmetros de processamento de IA para cada vertical e ajuste a lucratividade da infraestrutura baseada no Gemini Flash.
+                        </p>
+</div>
+<div class="flex gap-2">
+<div class="px-4 py-2 bg-surface-container-low border border-outline-variant flex items-center gap-3 rounded-sm">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#f3ffca]"></div>
+<span class="text-xs font-mono uppercase tracking-widest text-on-surface-variant leading-none">Status: Live</span>
+</div>
+</div>
+</div>
+<!-- Simulation Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Inputs & Sliders (Verticals) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Sales Funnel -->
+<div class="surface-container p-5 rounded-sm border-l-2 border-primary group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="trending_up">trending_up</span>
+<h3 class="font-headline font-bold text-sm tracking-wide uppercase">Funil de Vendas</h3>
+</div>
+<span class="text-[10px] font-mono text-outline uppercase">Input/Output</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-mono mb-2">
+<label class="text-on-surface-variant">VOLUME DE LEADS</label>
+<span class="text-primary">12,500</span>
+</div>
+<input class="w-full cursor-pointer" max="50000" min="0" step="500" type="range" value="12500"/>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-white/5">
+<span class="text-[10px] text-outline font-bold uppercase">Tokens / Msg</span>
+<span class="text-xs font-mono">≈ 450 tkn</span>
+</div>
+</div>
+</div>
+<!-- Relation -->
+<div class="surface-container p-5 rounded-sm border-l-2 border-secondary group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="groups">groups</span>
+<h3 class="font-headline font-bold text-sm tracking-wide uppercase">Relacionamento</h3>
+</div>
+<span class="text-[10px] font-mono text-outline uppercase">Active CRM</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-mono mb-2">
+<label class="text-on-surface-variant">CLIENTES ATIVOS</label>
+<span class="text-secondary">4,200</span>
+</div>
+<input class="w-full cursor-pointer" max="20000" min="0" step="100" type="range" value="4200"/>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-white/5">
+<span class="text-[10px] text-outline font-bold uppercase">Análise Sentimento</span>
+<span class="text-xs font-mono">Daily Sweep</span>
+</div>
+</div>
+</div>
+<!-- Retail -->
+<div class="surface-container p-5 rounded-sm border-l-2 border-tertiary group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="shopping_cart">shopping_cart</span>
+<h3 class="font-headline font-bold text-sm tracking-wide uppercase">Varejo</h3>
+</div>
+<span class="text-[10px] font-mono text-outline uppercase">Inventory AI</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-mono mb-2">
+<label class="text-on-surface-variant">PEDIDOS PROCESSADOS</label>
+<span class="text-tertiary">3,800</span>
+</div>
+<input class="w-full cursor-pointer" max="15000" min="0" step="100" type="range" value="3800"/>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-white/5">
+<span class="text-[10px] text-outline font-bold uppercase">Tokens / Order</span>
+<span class="text-xs font-mono">≈ 1,200 tkn</span>
+</div>
+</div>
+</div>
+<!-- Calendar -->
+<div class="surface-container p-5 rounded-sm border-l-2 border-on-surface-variant group hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-xl" data-icon="calendar_today">calendar_today</span>
+<h3 class="font-headline font-bold text-sm tracking-wide uppercase">Calendário</h3>
+</div>
+<span class="text-[10px] font-mono text-outline uppercase">Scheduling</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-mono mb-2">
+<label class="text-on-surface-variant">AGENDAMENTOS</label>
+<span class="text-on-surface">850</span>
+</div>
+<input class="w-full cursor-pointer" max="5000" min="0" step="50" type="range" value="850"/>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-white/5">
+<span class="text-[10px] text-outline font-bold uppercase">Conflict Res</span>
+<span class="text-xs font-mono">High Latency</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Token Meter Visualization -->
+<div class="surface-container-low border border-white/5 p-6 rounded-sm space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="font-headline font-bold uppercase text-xs text-primary mb-1">CONSUMO MENSAL ESTIMADO</h4>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-headline font-black text-on-surface tracking-tighter">42.8M</span>
+<span class="text-sm font-mono text-outline uppercase">Tokens / Mês</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[10px] font-mono text-outline-variant uppercase block">Capacidade Sistema</span>
+<span class="text-xs font-mono text-on-surface-variant">65% UTILIZADO</span>
+</div>
+</div>
+<div class="h-8 bg-surface-container-highest rounded-sm flex overflow-hidden border border-white/5">
+<div class="h-full bg-primary w-[35%] shadow-[0_0_15px_rgba(161,250,255,0.3)] border-r border-surface-container-highest" title="Sales"></div>
+<div class="h-full bg-secondary w-[20%] border-r border-surface-container-highest" title="Relation"></div>
+<div class="h-full bg-tertiary w-[10%]" title="Retail"></div>
+<div class="h-full bg-white/10 flex-1"></div>
+</div>
+<div class="grid grid-cols-4 gap-2 text-[9px] font-mono text-outline uppercase tracking-tighter">
+<div class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-primary"></span> Sales: 14.9M</div>
+<div class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-secondary"></span> Relation: 8.5M</div>
+<div class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-tertiary"></span> Retail: 4.2M</div>
+<div class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-white/20"></span> Idle: 15.2M</div>
+</div>
+</div>
+</div>
+<!-- Financial & Suggestions (Side Bar) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Pricing Card -->
+<div class="bg-gradient-to-br from-primary/10 to-primary/0 border border-primary/20 p-6 rounded-sm relative overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity"></div>
+<h4 class="font-headline font-black text-primary text-xs uppercase tracking-[0.2em] mb-4 italic">Preço Sugerido</h4>
+<div class="space-y-1 mb-6">
+<span class="text-on-surface-variant text-[10px] font-mono uppercase">Plano Master Enterprise</span>
+<div class="flex items-baseline gap-1">
+<span class="text-5xl font-headline font-black text-on-surface tracking-tighter">R$ 2.490</span>
+<span class="text-sm font-headline font-bold text-outline">/mês</span>
+</div>
+</div>
+<div class="space-y-3 pt-6 border-t border-primary/20">
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-on-surface-variant">Margem Estimada</span>
+<span class="text-tertiary">+340%</span>
+</div>
+<div class="flex justify-between items-center text-xs font-mono">
+<span class="text-on-surface-variant">CAC Payback</span>
+<span class="text-on-surface">1.2 Meses</span>
+</div>
+<button class="w-full mt-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-black text-xs uppercase tracking-widest py-3 rounded-sm active:scale-95 transition-transform shadow-[0_4px_15px_rgba(161,250,255,0.2)]">
+                                    Salvar Plano
+                                </button>
+</div>
+</div>
+<!-- AI COGS Card (Pulse Monitor) -->
+<div class="surface-container p-6 rounded-sm border border-white/5 space-y-6">
+<div>
+<h4 class="font-headline font-bold text-xs uppercase tracking-widest text-secondary-dim mb-4">Custo de IA (COGS)</h4>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-mono text-outline uppercase">API Gemini Flash</span>
+<span class="text-error font-mono text-xs">US$ 32.10</span>
+</div>
+<div class="text-2xl font-headline font-black text-on-surface">R$ 164,80 <span class="text-[10px] text-outline-variant font-medium">ESTIMADO</span></div>
+</div>
+<!-- Comparativo de Lucro (Sparkline visual representation) -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-mono uppercase tracking-tighter">
+<span class="text-outline">Comparativo Receita vs Custo</span>
+<span class="text-tertiary">Lucro: R$ 2.325,20</span>
+</div>
+<div class="h-16 bg-surface-container-lowest rounded-sm relative p-2 overflow-hidden flex items-end gap-1">
+<div class="flex-1 bg-tertiary/20 h-[20%]"></div>
+<div class="flex-1 bg-tertiary/20 h-[25%]"></div>
+<div class="flex-1 bg-tertiary/20 h-[35%]"></div>
+<div class="flex-1 bg-tertiary/20 h-[45%]"></div>
+<div class="flex-1 bg-tertiary/20 h-[40%]"></div>
+<div class="flex-1 bg-tertiary/30 h-[55%]"></div>
+<div class="flex-1 bg-tertiary/40 h-[65%]"></div>
+<div class="flex-1 bg-tertiary/50 h-[85%]"></div>
+<div class="flex-1 bg-primary h-[100%]"></div>
+<!-- Cost line -->
+<div class="absolute bottom-1/4 left-0 w-full h-px bg-error/50 border-t border-dashed border-error/30 z-10"></div>
+</div>
+<p class="text-[10px] text-outline-variant leading-tight">
+                                    *Cálculo baseado em jan/2024. O lucro não deduz infraestrutura de servidor, apenas tokens de IA.
+                                </p>
+</div>
+</div>
+<!-- System Specs (Mini Bento) -->
+<div class="grid grid-cols-2 gap-3">
+<div class="surface-container p-3 rounded-sm border border-white/5">
+<span class="text-[9px] font-mono text-outline uppercase block mb-1">Model Arch</span>
+<span class="text-xs font-bold text-on-surface">1.5 Flash</span>
+</div>
+<div class="surface-container p-3 rounded-sm border border-white/5">
+<span class="text-[9px] font-mono text-outline uppercase block mb-1">Context</span>
+<span class="text-xs font-bold text-on-surface">1M Tokens</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Support Action -->
+<div class="bg-surface-container-low p-6 rounded-sm border border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-white/5 rounded-sm">
+<span class="material-symbols-outlined text-outline" data-icon="help">help</span>
+</div>
+<div>
+<h5 class="text-sm font-headline font-bold uppercase tracking-tight">Dúvidas sobre o ROI?</h5>
+<p class="text-xs text-on-surface-variant">Consulte nossa documentação técnica sobre precificação de vetores.</p>
+</div>
+</div>
+<button class="px-6 py-2 border border-outline hover:bg-white/5 text-xs font-headline font-bold uppercase tracking-widest transition-all">
+                        Consultar Arquiteto
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<footer class="md:hidden fixed bottom-0 left-0 w-full z-50 backdrop-blur-lg bg-[#131314]/80 dark:bg-[#131314]/80 border-t border-white/5 flex justify-around items-center px-4 pb-2 pt-2 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-inter text-[10px] uppercase tracking-widest">Sales</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-inter text-[10px] uppercase tracking-widest">Relation</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-400/5 rounded-sm py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+<span class="font-inter text-[10px] uppercase tracking-widest">ROI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-inter text-[10px] uppercase tracking-widest">Retail</span>
+</a>
+</footer>
+</body></html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_OBSIDIAN | Performance Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#beee00",
+                        "on-surface-variant": "#adaaab",
+                        "on-primary-fixed": "#004346",
+                        "surface-container": "#1a191b",
+                        "tertiary-container": "#cafd00",
+                        "surface-container-high": "#201f21",
+                        "on-primary-container": "#00575b",
+                        "background": "#0e0e0f",
+                        "primary": "#a1faff",
+                        "on-secondary-fixed": "#580079",
+                        "on-secondary-container": "#fff5fc",
+                        "primary-fixed-dim": "#00e5ee",
+                        "secondary-fixed": "#f1c1ff",
+                        "error-container": "#9f0519",
+                        "surface-tint": "#a1faff",
+                        "surface": "#0e0e0f",
+                        "surface-dim": "#0e0e0f",
+                        "inverse-primary": "#006a6e",
+                        "tertiary-fixed": "#cafd00",
+                        "on-background": "#ffffff",
+                        "surface-container-highest": "#262627",
+                        "primary-fixed": "#00f4fe",
+                        "primary-container": "#00f4fe",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "on-primary-fixed-variant": "#006266",
+                        "inverse-surface": "#fcf8f9",
+                        "tertiary": "#f3ffca",
+                        "surface-variant": "#262627",
+                        "on-secondary": "#390050",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "secondary-dim": "#bb00fc",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "tertiary-dim": "#beee00",
+                        "secondary": "#d674ff",
+                        "on-surface": "#ffffff",
+                        "surface-container-low": "#131314",
+                        "outline-variant": "#484849",
+                        "on-primary": "#006165",
+                        "primary-dim": "#00e5ee",
+                        "on-error-container": "#ffa8a3",
+                        "inverse-on-surface": "#565556",
+                        "surface-bright": "#2c2c2d",
+                        "error": "#ff716c",
+                        "on-error": "#490006",
+                        "secondary-container": "#9900cf",
+                        "on-tertiary": "#516700",
+                        "on-tertiary-container": "#4a5e00",
+                        "outline": "#767576",
+                        "error-dim": "#d7383b"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0e0e0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border-left: 1px solid rgba(161, 250, 255, 0.1);
+        }
+        .data-grid-zebra div:nth-child(even) {
+            background-color: #131314;
+        }
+        .data-grid-zebra div:nth-child(odd) {
+            background-color: #1a191b;
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(161, 250, 255, 0.05);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262627;
+        }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full z-50 flex flex-col items-center py-6 bg-[#131314]/80 backdrop-blur-xl w-20 border-r border-white/5 shadow-[20px_0_40px_rgba(161,250,255,0.05)]">
+<div class="mb-10">
+<span class="text-[#a1faff] font-black tracking-widest text-lg font-['Space_Grotesk'] italic">N_C</span>
+</div>
+<nav class="flex flex-col gap-6 flex-1">
+<button class="p-3 rounded-sm transition-all duration-200 text-[#a1faff] bg-[#a1faff]/10 border-l-2 border-[#a1faff] scale-95 active:scale-90" title="Dashboard">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-3 rounded-sm transition-all duration-200 text-gray-500 hover:text-gray-300 hover:bg-white/5 scale-95 active:scale-90" title="Leads">
+<span class="material-symbols-outlined">group</span>
+</button>
+<button class="p-3 rounded-sm transition-all duration-200 text-gray-500 hover:text-gray-300 hover:bg-white/5 scale-95 active:scale-90" title="Pipeline">
+<span class="material-symbols-outlined">account_tree</span>
+</button>
+<button class="p-3 rounded-sm transition-all duration-200 text-gray-500 hover:text-gray-300 hover:bg-white/5 scale-95 active:scale-90" title="Analytics">
+<span class="material-symbols-outlined">monitoring</span>
+</button>
+<button class="p-3 rounded-sm transition-all duration-200 text-gray-500 hover:text-gray-300 hover:bg-white/5 scale-95 active:scale-90" title="Intelligence">
+<span class="material-symbols-outlined">psychology</span>
+</button>
+<button class="p-3 rounded-sm transition-all duration-200 text-gray-500 hover:text-gray-300 hover:bg-white/5 scale-95 active:scale-90" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</nav>
+<div class="flex flex-col gap-6 mt-auto">
+<button class="p-3 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="p-3 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-20 z-40 flex items-center justify-between px-8 h-16 bg-[#0e0e0f]/90 backdrop-blur-md border-b-2 border-primary/10">
+<div class="flex items-center gap-8">
+<h1 class="font-['Space_Grotesk'] font-bold text-[#a1faff] italic tracking-tighter text-xl">KINETIC_OBSIDIAN</h1>
+<div class="h-8 w-[1px] bg-white/10"></div>
+<div class="flex gap-6">
+<span class="text-[#f3ffca] border-b border-[#f3ffca] font-['Inter'] text-sm font-medium tracking-tight px-1">Network_Status</span>
+<span class="text-[#a1faff]/60 hover:text-[#a1faff] font-['Inter'] text-sm font-medium tracking-tight cursor-pointer transition-all duration-300">AI_Engine_Active</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-highest border-none rounded-sm text-xs font-['Inter'] w-64 focus:ring-1 focus:ring-primary/40 transition-all" placeholder="BUSCAR_SISTEMA..." type="text"/>
+<span class="material-symbols-outlined absolute right-2 top-1.5 text-on-surface-variant text-sm">search</span>
+</div>
+<button class="bg-gradient-to-br from-primary to-on-primary-container text-on-primary font-bold px-4 py-1.5 rounded-sm text-xs tracking-widest hover:brightness-110 transition-all">
+                SYNC_DATA
+            </button>
+<div class="flex gap-4 text-[#a1faff]/60">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">security</span>
+<img alt="Chief Engineer Profile" class="w-8 h-8 rounded-full border border-primary/20" data-alt="close-up portrait of a professional engineer in a tech environment with subtle blue ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoxduf5_IRnAJlyezLMsT_KmvaK7BndhlfyOR9qUkKrkNel_heIHl3dk-o4B331a1SS69JMamjVP3k_1C12v7WBv8bc_PAtERdb7uzmpteTs_ejk6-jNTIibfC1-BxcOdAJCJ90N5OkpJum8mZGb2PQ2bPYaB2ZQThdTsS3Of3UKvhEgV3uH_zs7WT817P4ZO2z_6hx5BQ_732wZ20-xXOJfYVDt8U0auoqIC_9xI9E5wGbmWmVe_igcZ5oGaqTwpdyHiiSfFawloO"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pl-20 pt-16 min-h-screen bg-surface">
+<div class="p-8 max-w-[1600px] mx-auto grid grid-cols-12 gap-6">
+<!-- Headline Row -->
+<div class="col-span-12 flex justify-between items-end mb-4">
+<div>
+<h2 class="font-headline text-4xl font-bold tracking-tighter text-on-background uppercase">Visão Panorâmica</h2>
+<p class="font-body text-on-surface-variant text-sm mt-1">Métricas de performance em tempo real • Cluster 04-Alpha</p>
+</div>
+<div class="flex gap-3">
+<div class="bg-surface-container px-4 py-2 rounded-sm border-l-2 border-secondary flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Pipeline Global</span>
+<span class="font-headline text-xl text-secondary">R$ 4.28M</span>
+</div>
+<div class="bg-surface-container px-4 py-2 rounded-sm border-l-2 border-tertiary flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Conversão</span>
+<span class="font-headline text-xl text-tertiary">+12.4%</span>
+</div>
+</div>
+</div>
+<!-- Retention Graph Area (Bento Large) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container p-6 rounded-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="font-headline text-sm font-bold text-primary tracking-widest uppercase mb-1">Retenção de Usuários</h3>
+<p class="text-xs text-on-surface-variant">Jan 2024 - Ago 2024 • Atividade Agregada</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-highest px-3 py-1 text-[10px] font-bold border border-white/5">DIÁRIO</button>
+<button class="bg-primary text-on-primary px-3 py-1 text-[10px] font-bold">MENSAL</button>
+</div>
+</div>
+<!-- Mock SVG Line Chart -->
+<div class="h-64 w-full relative">
+<svg class="w-full h-full" viewbox="0 0 800 200">
+<defs>
+<lineargradient id="lineGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#a1faff" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#a1faff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,150 Q100,120 200,160 T400,100 T600,80 T800,120 V200 H0 Z" fill="url(#lineGrad)"></path>
+<path d="M0,150 Q100,120 200,160 T400,100 T600,80 T800,120" fill="none" stroke="#a1faff" stroke-width="2"></path>
+<!-- Data Points -->
+<circle class="animate-pulse" cx="200" cy="160" fill="#a1faff" r="4"></circle>
+<circle cx="400" cy="100" fill="#a1faff" r="4"></circle>
+<circle cx="600" cy="80" fill="#a1faff" r="4"></circle>
+</svg>
+<!-- Pulse Monitor Overlay -->
+<div class="absolute bottom-4 right-4 bg-surface-container-lowest/80 p-3 rounded-sm border border-white/5 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase">Estabilidade</span>
+<span class="text-tertiary font-headline font-bold italic">98.2%</span>
+</div>
+<div class="h-8 w-24 bg-surface-container">
+<!-- Sparkline -->
+<svg class="w-full h-full" viewbox="0 0 100 30">
+<path d="M0,25 L10,20 L20,28 L30,15 L40,18 L50,10 L60,22 L70,5 L80,15 L90,12 L100,20" fill="none" stroke="#f3ffca" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Churn Alerts (Asymmetric Grid Side) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container p-5 rounded-sm flex-1 border-r-2 border-error/30">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline text-sm font-bold text-error tracking-widest uppercase">Alertas de Churn</h3>
+<span class="bg-error-container text-on-error-container text-[10px] px-2 py-0.5 font-bold">ALTA PRIORIDADE</span>
+</div>
+<div class="space-y-4">
+<!-- Alert Item -->
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-sm group hover:bg-surface-container-highest transition-all">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error/10 flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Logistics Corp.</p>
+<p class="text-[10px] text-on-surface-variant">Inatividade: 14 dias</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer group-hover:text-primary">arrow_forward_ios</span>
+</div>
+<!-- Alert Item -->
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-sm group hover:bg-surface-container-highest transition-all">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-error/10 flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-error text-sm">trending_down</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">TechSolutions SA</p>
+<p class="text-[10px] text-on-surface-variant">Queda de volume: 45%</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer group-hover:text-primary">arrow_forward_ios</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-outline-variant text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-colors">Ver Todos os Alertas</button>
+</div>
+</div>
+<!-- Recent Orders Table (High Density) -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container p-6 rounded-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline text-sm font-bold text-on-surface tracking-widest uppercase">Pedidos Recentes</h3>
+<div class="flex gap-4">
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span> Concluído</span>
+<span class="text-[10px] text-on-surface-variant flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span> Processando</span>
+</div>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left text-xs border-separate border-spacing-y-2">
+<thead>
+<tr class="text-on-surface-variant font-bold uppercase tracking-tighter">
+<th class="pb-2 px-2">ID_ORDEM</th>
+<th class="pb-2 px-2">CLIENTE</th>
+<th class="pb-2 px-2">VALOR</th>
+<th class="pb-2 px-2">STATUS</th>
+<th class="pb-2 px-2 text-right">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="data-grid-zebra">
+<tr class="hover:brightness-125 transition-all">
+<td class="py-3 px-2 font-mono text-primary">#ORD-9921</td>
+<td class="py-3 px-2 font-medium">CyberDyne Systems</td>
+<td class="py-3 px-2">R$ 45.200,00</td>
+<td class="py-3 px-2"><span class="bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-sm text-[10px] font-bold">CONCLUÍDO</span></td>
+<td class="py-3 px-2 text-right"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span></td>
+</tr>
+<tr class="hover:brightness-125 transition-all">
+<td class="py-3 px-2 font-mono text-primary">#ORD-9918</td>
+<td class="py-3 px-2 font-medium">Weyland-Yutani</td>
+<td class="py-3 px-2">R$ 128.000,00</td>
+<td class="py-3 px-2"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded-sm text-[10px] font-bold">PROCESSANDO</span></td>
+<td class="py-3 px-2 text-right"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span></td>
+</tr>
+<tr class="hover:brightness-125 transition-all">
+<td class="py-3 px-2 font-mono text-primary">#ORD-9915</td>
+<td class="py-3 px-2 font-medium">Stark Industries</td>
+<td class="py-3 px-2">R$ 12.400,00</td>
+<td class="py-3 px-2"><span class="bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-sm text-[10px] font-bold">CONCLUÍDO</span></td>
+<td class="py-3 px-2 text-right"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span></td>
+</tr>
+<tr class="hover:brightness-125 transition-all">
+<td class="py-3 px-2 font-mono text-primary">#ORD-9912</td>
+<td class="py-3 px-2 font-medium">Tyrell Corp</td>
+<td class="py-3 px-2">R$ 89.900,00</td>
+<td class="py-3 px-2"><span class="bg-error/10 text-error px-2 py-0.5 rounded-sm text-[10px] font-bold">PENDENTE</span></td>
+<td class="py-3 px-2 text-right"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- AI Intelligence Stats (The 'Pulse Monitor') -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
+<!-- Training Progress Card -->
+<div class="bg-surface-container p-6 rounded-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h3 class="font-headline text-sm font-bold text-secondary tracking-widest uppercase mb-6">Treinamento IA: Engine v2.4</h3>
+<div class="space-y-6 relative z-10">
+<div>
+<div class="flex justify-between text-[10px] font-bold mb-2 uppercase tracking-widest text-on-surface-variant">
+<span>Dataset Processado</span>
+<span class="text-secondary">88.4%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full">
+<div class="h-full bg-secondary shadow-[0_0_10px_rgba(214,116,255,0.5)]" style="width: 88.4%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 border-l border-secondary/20">
+<span class="text-[9px] text-on-surface-variant uppercase font-bold">Loss Ratio</span>
+<p class="text-xl font-headline text-on-surface">0.0214</p>
+<div class="h-1 w-12 bg-secondary/30 mt-2"></div>
+</div>
+<div class="bg-surface-container-low p-4 border-l border-primary/20">
+<span class="text-[9px] text-on-surface-variant uppercase font-bold">Neural Load</span>
+<p class="text-xl font-headline text-on-surface">62%</p>
+<div class="h-1 w-12 bg-primary/30 mt-2"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-secondary/5 border border-secondary/10 rounded-sm">
+<span class="material-symbols-outlined text-secondary text-sm">auto_awesome</span>
+<p class="text-[10px] text-on-surface italic">"Otimização de rotas de lead concluída com 94% de precisão sugerida."</p>
+</div>
+</div>
+</div>
+<!-- Secondary Metric Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-sm flex flex-col justify-between">
+<span class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">Active API Hooks</span>
+<div class="flex items-end justify-between mt-4">
+<span class="text-2xl font-headline text-primary">1,240</span>
+<span class="text-[10px] text-tertiary font-bold">+5.2%</span>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded-sm flex flex-col justify-between">
+<span class="text-[9px] text-on-surface-variant font-bold uppercase tracking-widest">System Latency</span>
+<div class="flex items-end justify-between mt-4">
+<span class="text-2xl font-headline text-on-surface">14ms</span>
+<span class="text-[10px] text-primary font-bold">ESTÁVEL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB - Restricted to Dashboard -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-on-primary-container text-on-primary rounded-full shadow-[0_0_30px_rgba(161,250,255,0.3)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Subtle Grain Overlay for Aerospace Feel -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] z-[60]"></div>
+</body></html>

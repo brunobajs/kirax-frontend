@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRAX OS - Módulo Financeiro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "error": "#ff716c",
+              "surface-variant": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "outline-variant": "#484849",
+              "primary-container": "#00f4fe",
+              "outline": "#767576",
+              "on-secondary": "#390050",
+              "tertiary-fixed": "#cafd00",
+              "primary-fixed-dim": "#00e5ee",
+              "surface-container-low": "#131314",
+              "on-secondary-fixed": "#580079",
+              "tertiary": "#f3ffca",
+              "primary-fixed": "#00f4fe",
+              "tertiary-container": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary": "#516700",
+              "on-tertiary-fixed-variant": "#526900",
+              "primary": "#a1faff",
+              "surface-container-highest": "#262627",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "on-tertiary-container": "#4a5e00",
+              "on-error": "#490006",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-primary-fixed": "#004346",
+              "tertiary-fixed-dim": "#beee00",
+              "secondary-fixed": "#f1c1ff",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-tertiary-fixed": "#3a4a00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-background": "#ffffff",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-high": "#201f21",
+              "tertiary-dim": "#beee00",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "on-surface-variant": "#adaaab",
+              "secondary-container": "#9900cf",
+              "error-dim": "#d7383b",
+              "error-container": "#9f0519"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(161, 250, 255, 0.05);
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(161, 250, 255, 0.1);
+        }
+        .text-glow-primary {
+            text-shadow: 0 0 8px rgba(161, 250, 255, 0.4);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0f; }
+        ::-webkit-scrollbar-thumb { background: #262627; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1faff; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between px-6 bg-[#131314] bg-opacity-80 backdrop-blur-xl border-b border-[#262627] shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-widest text-[#a1faff] uppercase font-['Space_Grotesk']">KIRAX</span>
+<div class="hidden md:flex items-center bg-surface-container-highest px-3 py-1.5 rounded-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-on-surface" placeholder="Pesquisar transações..." type="text"/>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6 h-full">
+<a class="text-[#8e8e8f] hover:text-[#f3ffca] transition-colors font-medium text-sm" href="#">Dashboard</a>
+<a class="text-[#8e8e8f] hover:text-[#f3ffca] transition-colors font-medium text-sm" href="#">Vendas</a>
+<a class="text-[#a1faff] border-b-2 border-[#a1faff] h-full flex items-center px-2 font-bold tracking-tighter font-['Space_Grotesk']" href="#">Financeiro</a>
+<a class="text-[#8e8e8f] hover:text-[#f3ffca] transition-colors font-medium text-sm" href="#">Relatórios</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#8e8e8f] hover:text-[#a1faff] transition-colors">notifications</button>
+<button class="material-symbols-outlined text-[#8e8e8f] hover:text-[#a1faff] transition-colors">settings</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold px-4 py-2 rounded-sm text-xs uppercase tracking-wider active:scale-95 transition-all">Add Lead</button>
+<div class="w-8 h-8 rounded-full border border-primary/30 overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional man in high-tech environment with blue neon ambient lighting on his face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClZVy8cRZUCH1D_tfp9tZ3sMxdsRzXWVAQ9M9olRkxveGiLrRAE0pi6GLCXe7h1lZKg6GNaofM8iz6HDH-9VPGcYc5qsqBRmckHvzEncmIHYS6my0N0Hkf2LJi-VCYDC9iV501HcqVBY3-n3PcdYrWka5RbAGMO3IXlNXJHz5DLVVf95z6abmKxROSw8c1PZWyW6D5raRLAq1yE24o46hDewSg01dtsmeLIHae3w_difHVfQK56p59Vvskh-sfkj29A1eeH7yufo4_"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen z-40 flex flex-col pt-20 pb-6 bg-[#0e0e0f] bg-opacity-90 backdrop-blur-2xl border-r border-[#262627] w-20 hover:w-64 transition-all duration-300 group overflow-hidden">
+<div class="flex flex-col gap-2 px-4 flex-grow">
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">filter_alt</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Sales</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">groups</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Relations</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Retail</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Calendar</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Inventory</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">campaign</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Marketing</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm bg-[#1a191b] text-[#a1faff] border-l-2 border-[#a1faff] transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Finance</span>
+</div>
+</div>
+<div class="mt-auto px-4 flex flex-col gap-2">
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Support</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-sm text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">terminal</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-medium text-xs uppercase tracking-widest">Logs</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-20 pt-16 min-h-screen bg-surface selection:bg-primary/30">
+<div class="max-w-[1600px] mx-auto p-8 space-y-8">
+<!-- Page Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-surface-container-highest pb-6">
+<div>
+<h1 class="font-headline text-4xl font-bold tracking-tight text-on-surface">Gestão Financeira</h1>
+<p class="text-on-surface-variant font-body mt-1">Visão analítica de fluxo de caixa e performance operacional.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant/30 hover:bg-surface-container-high transition-all text-sm font-medium">
+<span class="material-symbols-outlined text-sm">download</span> Exportar Relatórios
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-bold text-sm glow-primary">
+<span class="material-symbols-outlined text-sm">add</span> Novo Lançamento
+                    </button>
+</div>
+</header>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-6">
+<!-- Summary Cards -->
+<div class="lg:col-span-3 bg-surface-container p-6 border-l-2 border-tertiary">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Receita Total</span>
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+</div>
+<div class="font-headline text-3xl font-bold text-on-surface">R$ 1.240.500,00</div>
+<div class="mt-2 flex items-center gap-2 text-xs">
+<span class="text-tertiary-fixed">+12.4%</span>
+<span class="text-on-surface-variant italic">vs. mês anterior</span>
+</div>
+</div>
+<div class="lg:col-span-3 bg-surface-container p-6 border-l-2 border-error">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Despesas Fixas</span>
+<span class="material-symbols-outlined text-error">payments</span>
+</div>
+<div class="font-headline text-3xl font-bold text-on-surface">R$ 412.300,50</div>
+<div class="mt-2 flex items-center gap-2 text-xs">
+<span class="text-error-dim">+2.1%</span>
+<span class="text-on-surface-variant italic">vs. projeção</span>
+</div>
+</div>
+<div class="lg:col-span-3 bg-surface-container p-6 border-l-2 border-secondary">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Fluxo de Caixa</span>
+<span class="material-symbols-outlined text-secondary">account_balance_wallet</span>
+</div>
+<div class="font-headline text-3xl font-bold text-on-surface">R$ 828.199,50</div>
+<div class="mt-2 flex items-center gap-2 text-xs">
+<span class="text-secondary-fixed">Saudável</span>
+<span class="text-on-surface-variant italic">Margem de 66.7%</span>
+</div>
+</div>
+<div class="lg:col-span-3 glass-panel p-6 border-l-2 border-primary overflow-hidden relative">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Kirax Voice Entry</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<div class="text-sm text-on-surface font-medium mb-4 relative z-10">"Lançar pagamento de R$ 4.500 para Aluguel vence dia 10..."</div>
+<button class="w-full py-2 bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest hover:bg-primary/20 transition-all uppercase">Ouvindo...</button>
+<!-- Pulse effect decoration -->
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/5 rounded-full animate-pulse"></div>
+</div>
+<!-- Bento Row 2: Charts & Vertical Analysis -->
+<div class="lg:col-span-8 bg-surface-container p-6">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-xl font-bold text-on-surface">Projeção de Fluxo de Caixa</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter text-on-surface">6 Meses</span>
+<span class="px-3 py-1 text-[10px] font-bold uppercase tracking-tighter text-on-surface-variant">12 Meses</span>
+</div>
+</div>
+<div class="h-64 w-full flex items-end gap-2 px-2">
+<!-- Simulated Chart -->
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[40%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[10%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[55%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[15%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[75%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[25%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[60%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[20%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[85%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[40%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group">
+<div class="absolute bottom-0 w-full bg-primary/20 h-[95%] group-hover:bg-primary/40 transition-all"></div>
+<div class="absolute bottom-0 w-full bg-primary h-[60%] shadow-[0_0_10px_rgba(161,250,255,0.3)]"></div>
+</div>
+<div class="flex-1 bg-surface-container-low relative group border-x border-primary/20 border-dashed">
+<div class="absolute top-[-30px] left-1/2 -translate-x-1/2 text-[10px] text-primary font-bold">PROJETADO</div>
+<div class="absolute bottom-0 w-full bg-primary/10 h-[70%] border-t border-primary/50"></div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-surface-container p-6">
+<h3 class="font-headline text-xl font-bold text-on-surface mb-6">Receita por Vertical</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-on-surface-variant uppercase tracking-widest font-bold">Saas Enterprise</span>
+<span class="text-on-surface font-mono">45%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-on-surface-variant uppercase tracking-widest font-bold">Consultoria Tech</span>
+<span class="text-on-surface font-mono">30%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest">
+<div class="h-full bg-secondary w-[30%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-on-surface-variant uppercase tracking-widest font-bold">Marketplace</span>
+<span class="text-on-surface font-mono">15%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest">
+<div class="h-full bg-tertiary w-[15%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-2">
+<span class="text-on-surface-variant uppercase tracking-widest font-bold">Treinamentos</span>
+<span class="text-on-surface font-mono">10%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest">
+<div class="h-full bg-on-surface-variant w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Table: Cost Management -->
+<div class="lg:col-span-12">
+<div class="bg-surface-container rounded-sm overflow-hidden">
+<div class="p-6 border-b border-surface-container-highest flex justify-between items-center">
+<h3 class="font-headline text-xl font-bold text-on-surface">Gestão de Custos e Lançamentos</h3>
+<div class="flex gap-4">
+<select class="bg-surface-container-highest border-none text-xs font-bold text-on-surface-variant uppercase tracking-widest focus:ring-1 focus:ring-primary py-1 px-4">
+<option>Todos os Tipos</option>
+<option>Fixos</option>
+<option>Variáveis</option>
+</select>
+</div>
+</div>
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">
+<tr>
+<th class="px-6 py-4">Descrição</th>
+<th class="px-6 py-4">Categoria</th>
+<th class="px-6 py-4">Tipo</th>
+<th class="px-6 py-4">Vencimento</th>
+<th class="px-6 py-4 text-right">Valor (R$)</th>
+<th class="px-6 py-4 text-center">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm border-t border-surface-container-highest">
+<tr class="border-b border-surface-container-highest/30 hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Aluguel Sede SP</td>
+<td class="px-6 py-4 text-on-surface-variant">Infraestrutura</td>
+<td class="px-6 py-4"><span class="text-[10px] px-2 py-0.5 border border-primary/20 text-primary uppercase font-bold">Fixo</span></td>
+<td class="px-6 py-4 font-mono text-on-surface-variant">10/10/2023</td>
+<td class="px-6 py-4 text-right font-mono font-bold">35.000,00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.5)]"></span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest/30 hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Imposto Simples Nacional</td>
+<td class="px-6 py-4 text-on-surface-variant">Tributos</td>
+<td class="px-6 py-4"><span class="text-[10px] px-2 py-0.5 border border-secondary/20 text-secondary uppercase font-bold">Variável</span></td>
+<td class="px-6 py-4 font-mono text-on-surface-variant">20/10/2023</td>
+<td class="px-6 py-4 text-right font-mono font-bold">112.450,22</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block w-2 h-2 rounded-full bg-error shadow-[0_0_8px_rgba(255,113,108,0.5)]"></span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest/30 hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">AWS Cloud Services</td>
+<td class="px-6 py-4 text-on-surface-variant">Tecnologia</td>
+<td class="px-6 py-4"><span class="text-[10px] px-2 py-0.5 border border-secondary/20 text-secondary uppercase font-bold">Variável</span></td>
+<td class="px-6 py-4 font-mono text-on-surface-variant">15/10/2023</td>
+<td class="px-6 py-4 text-right font-mono font-bold">12.330,00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.5)]"></span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest/30 hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Folha de Pagamento</td>
+<td class="px-6 py-4 text-on-surface-variant">RH</td>
+<td class="px-6 py-4"><span class="text-[10px] px-2 py-0.5 border border-primary/20 text-primary uppercase font-bold">Fixo</span></td>
+<td class="px-6 py-4 font-mono text-on-surface-variant">05/10/2023</td>
+<td class="px-6 py-4 text-right font-mono font-bold">280.000,00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.5)]"></span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest/30 hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-4 font-medium text-on-surface">Energia Elétrica Enel</td>
+<td class="px-6 py-4 text-on-surface-variant">Utilidades</td>
+<td class="px-6 py-4"><span class="text-[10px] px-2 py-0.5 border border-secondary/20 text-secondary uppercase font-bold">Variável</span></td>
+<td class="px-6 py-4 font-mono text-on-surface-variant">12/10/2023</td>
+<td class="px-6 py-4 text-right font-mono font-bold">4.210,15</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-block w-2 h-2 rounded-full bg-surface-variant"></span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 bg-surface-container-low flex justify-center">
+<button class="text-xs font-bold text-primary uppercase tracking-[0.2em] hover:text-primary-container transition-all">Ver todos os lançamentos</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Overlay Contextual - Pulse Monitor simulation on bottom -->
+<div class="fixed bottom-0 left-20 right-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-primary w-[75%] glow-primary"></div>
+</div>
+</body></html>

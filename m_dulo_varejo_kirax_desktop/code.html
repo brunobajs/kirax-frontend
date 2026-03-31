@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "error": "#ff716c",
+              "surface-variant": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "outline-variant": "#484849",
+              "primary-container": "#00f4fe",
+              "outline": "#767576",
+              "on-secondary": "#390050",
+              "tertiary-fixed": "#cafd00",
+              "primary-fixed-dim": "#00e5ee",
+              "surface-container-low": "#131314",
+              "on-secondary-fixed": "#580079",
+              "tertiary": "#f3ffca",
+              "primary-fixed": "#00f4fe",
+              "tertiary-container": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary": "#516700",
+              "on-tertiary-fixed-variant": "#526900",
+              "primary": "#a1faff",
+              "surface-container-highest": "#262627",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "on-tertiary-container": "#4a5e00",
+              "on-error": "#490006",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-primary-fixed": "#004346",
+              "tertiary-fixed-dim": "#beee00",
+              "secondary-fixed": "#f1c1ff",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-tertiary-fixed": "#3a4a00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-background": "#ffffff",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-high": "#201f21",
+              "tertiary-dim": "#beee00",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "on-surface-variant": "#adaaab",
+              "secondary-container": "#9900cf",
+              "error-dim": "#d7383b",
+              "error-container": "#9f0519"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(161, 250, 255, 0.05);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .gradient-text-primary {
+            background: linear-gradient(135deg, #a1faff 0%, #00f4fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between px-6 bg-[#131314] dark:bg-[#131314] bg-opacity-80 backdrop-blur-xl border-b border-[#262627] shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-widest text-[#a1faff] uppercase font-['Space_Grotesk']">KIRAX</span>
+<div class="hidden md:flex items-center bg-surface-container-highest px-4 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-outline mr-2 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-on-surface placeholder:text-outline" placeholder="Buscar pedidos ou produtos..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary-container px-4 py-1.5 rounded-sm font-['Space_Grotesk'] font-bold text-sm tracking-tight active:scale-95 transition-all">
+                Add Lead
+            </button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#8e8e8f] hover:text-[#f3ffca] transition-colors cursor-pointer p-2 hover:bg-[#1a191b] rounded-sm">notifications</span>
+<span class="material-symbols-outlined text-[#8e8e8f] hover:text-[#f3ffca] transition-colors cursor-pointer p-2 hover:bg-[#1a191b] rounded-sm">settings</span>
+<div class="w-8 h-8 rounded-sm bg-surface-container-highest flex items-center justify-center border border-outline-variant overflow-hidden">
+<img alt="User Avatar" data-alt="professional portrait of a system administrator in a futuristic dark office environment with cyan lighting accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWCSnqRpIwkMN9w0Q9Su2NeZXAKLT8zGiDldrqV3U4k6IEaaZsf7khAq45xzobBiPJxMfwukwuMUD-na4UJ014o8VFtm-rLNPkyXWBh7gN2If7IdisSRIUZCg0jMx3C7zMLAJadjYuspvP9j2Tc415n-Fm8EZQkdBV7YqTRpuGI7Q_6pLdgd1_fe6kPuPXedWAjiSJAb65Mlr02QrKOIM5EYPHl8tJdMtFU_D-3w2T55NqcuUeTZ9J0-14AvnaJoYnF1qVkpm3qCGE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen z-40 flex flex-col pt-20 pb-6 bg-[#0e0e0f] dark:bg-[#0e0e0f] bg-opacity-90 backdrop-blur-2xl border-r border-[#262627] docked left-0 h-full w-20 hover:w-64 transition-all duration-300 group overflow-hidden">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+<h2 class="text-xl font-bold text-[#a1faff] font-['Space_Grotesk']">KIRAX OS</h2>
+<p class="text-[10px] text-outline uppercase tracking-[0.2em]">Terminal v4.0.2</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-3">
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="flex items-center gap-4 px-3 py-3 bg-[#1a191b] text-[#a1faff] border-l-2 border-[#a1faff] transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Retail</span>
+</div>
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">filter_alt</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Sales</span>
+</div>
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Inventory</span>
+</div>
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">campaign</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Marketing</span>
+</div>
+</nav>
+<div class="mt-auto px-3 flex flex-col gap-1">
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm border-t border-outline-variant/20 pt-4">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Support</span>
+</div>
+<div class="flex items-center gap-4 px-3 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer group/item rounded-sm">
+<span class="material-symbols-outlined">terminal</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest">Logs</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 pt-20 p-8 min-h-screen transition-all">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
+<div>
+<h1 class="text-4xl font-black font-headline tracking-tighter gradient-text-primary mb-2">GESTÃO DE VAREJO</h1>
+<p class="text-on-surface-variant font-body text-sm max-w-md">Fluxo de caixa em tempo real e monitoramento de demanda preditiva para Pizzarias e Padarias.</p>
+</div>
+<div class="flex gap-4">
+<div class="glass-panel p-4 rounded-sm min-w-[200px]">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Status do Terminal</p>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#f3ffca]"></div>
+<span class="text-lg font-headline font-bold text-on-surface tracking-tight">OPERACIONAL</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-sm min-w-[200px]">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Receita Hoje</p>
+<div class="flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-tertiary tracking-tight">R$ 12.480,00</span>
+<span class="text-[10px] text-tertiary font-bold">+12%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Real-time Orders (Large Column) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Monitor de Pedidos -->
+<section class="glass-panel rounded-sm overflow-hidden flex flex-col h-[600px]">
+<div class="p-6 border-b border-outline-variant/20 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">pending_actions</span>
+<h3 class="font-headline font-bold text-lg tracking-tight uppercase">Monitor de Pedidos em Tempo Real</h3>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-highest text-[10px] font-bold text-primary rounded-sm uppercase tracking-tighter">12 Pendentes</span>
+<span class="px-3 py-1 bg-surface-container-highest text-[10px] font-bold text-secondary rounded-sm uppercase tracking-tighter">4 Em Preparo</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-6 scrollbar-hide space-y-4">
+<!-- Order Item -->
+<div class="bg-surface-container-low p-5 rounded-sm flex items-center justify-between border-l-2 border-primary group hover:bg-surface-container transition-all">
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Pedido</p>
+<p class="font-headline font-black text-xl text-primary">#9021</p>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Pizza G - Calabresa Especial (x2)</h4>
+<p class="text-xs text-on-surface-variant">Cliente: Marcos Oliveira • Mesa 04</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Tempo</p>
+<p class="font-bold text-sm text-error">14:20 min</p>
+</div>
+<button class="p-3 bg-surface-container-highest hover:bg-primary hover:text-on-primary transition-all rounded-sm">
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-sm flex items-center justify-between border-l-2 border-secondary group hover:bg-surface-container transition-all">
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Pedido</p>
+<p class="font-headline font-black text-xl text-secondary">#9022</p>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Combo Padaria Familiar - Café + Pães</h4>
+<p class="text-xs text-on-surface-variant">Cliente: Ana Clara • Delivery App</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Tempo</p>
+<p class="font-bold text-sm text-tertiary">08:45 min</p>
+</div>
+<button class="p-3 bg-surface-container-highest hover:bg-secondary hover:text-on-primary transition-all rounded-sm">
+<span class="material-symbols-outlined">local_shipping</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-sm flex items-center justify-between border-l-2 border-outline group hover:bg-surface-container transition-all">
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Pedido</p>
+<p class="font-headline font-black text-xl text-on-surface">#9023</p>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Pizza M - Quatro Queijos</h4>
+<p class="text-xs text-on-surface-variant">Cliente: Roberto S. • Balcão</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Tempo</p>
+<p class="font-bold text-sm text-on-surface-variant">02:10 min</p>
+</div>
+<button class="p-3 bg-surface-container-highest hover:bg-on-surface hover:text-surface transition-all rounded-sm">
+<span class="material-symbols-outlined">restaurant</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Gestão de Cardápio Quick Edit -->
+<section class="grid grid-cols-2 gap-6">
+<div class="glass-panel p-6 rounded-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline font-bold text-md uppercase tracking-tight">Mais Vendidos</h3>
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest overflow-hidden">
+<img alt="Pizza Icon" data-alt="close-up of a rustic italian pizza with melted mozzarella and fresh basil leaves on a dark stone background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEU2ktQLikKJZWOThGsb749gUOG8xibL7M-xqwvmxHtQ1f9UnzMmdzXqJG3mWEhKViXGWvVvadgl85RHN-ZtX_GZ9FmZZ9ew0WSb3PnUd-SvdKZfU5Lb3sZrCzH3dt6uaS42uyE_CGt-V5o7QTfwyN4fZcZvnBTrUv9wexsFzT2pm6zGs-YPOLmRR1l7rTxNxu6fof_Womk_Oo23KJHQg1VSPS3fUjIB3d6rya4B4q41pchUKFWF0u0a175W2tZvhGrv2bNVLF820T"/>
+</div>
+<span class="text-xs font-medium">Pizza Calabresa</span>
+</div>
+<span class="text-xs font-bold text-primary">R$ 59,90</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest overflow-hidden">
+<img alt="Bread Icon" data-alt="freshly baked artisanal sourdough baguette on a dark wooden surface with flour dusting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo2Ki3i3AjauhHESZCwuX_b5G0krwFE2ziEiw7hq3EN4umg8kEHobwUti4gGvXX224iu-BfFCLhCnA4sH5Lrv-HNnKrmyz43Dwk9rpZgvX6J34LNRdG-1QmqHNOOhhj2lQAhInYV8Qb7D1KA0sTHx7HiV07Q6Y1IG5H-ssO8O0zp7KX9gQp4UUXJMgzlZ-KnMj63d0Lzj6bMTU--5Ftg3CYrmOkv1d0NN9ytKOBsP2nC2_T0Upek0UaNmatBS5Lv6ZWgPatxmYinL6"/>
+</div>
+<span class="text-xs font-medium">Pão Italiano</span>
+</div>
+<span class="text-xs font-bold text-primary">R$ 18,50</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-sm border-l-2 border-secondary">
+<h3 class="font-headline font-bold text-md uppercase tracking-tight mb-4 text-secondary">Ajuste Dinâmico</h3>
+<p class="text-xs text-on-surface-variant mb-6">Sugestão de reajuste baseada no custo de insumos atualizado hoje.</p>
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded-sm">
+<span class="text-[10px] font-bold uppercase">Pizza Pepperoni</span>
+<div class="flex items-center gap-2">
+<span class="text-xs line-through text-outline">R$ 62</span>
+<span class="text-sm font-black text-secondary">R$ 68,90</span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-secondary/30 text-secondary text-[10px] font-bold uppercase hover:bg-secondary/10 transition-all">Aplicar Todos os Reajustes</button>
+</div>
+</section>
+</div>
+<!-- AI Sidebar & Trends (Smaller Column) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- KIRAX AI Assistant -->
+<section class="bg-surface-container-highest p-6 rounded-sm relative overflow-hidden flex-1 border border-primary/10">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl text-primary">psychology</span>
+</div>
+<div class="relative z-10 h-full flex flex-col">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center neon-glow-primary">
+<span class="material-symbols-outlined text-on-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h3 class="font-headline font-bold text-lg tracking-tight">KIRAX AI ANALYTICS</h3>
+</div>
+<div class="space-y-6 mb-10">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">Previsão de Demanda (Próximas 4h)</p>
+<div class="h-24 w-full bg-surface-container-low rounded-sm relative flex items-end px-2 gap-1 overflow-hidden">
+<div class="w-full h-[30%] bg-primary/20 rounded-t-sm"></div>
+<div class="w-full h-[45%] bg-primary/30 rounded-t-sm"></div>
+<div class="w-full h-[85%] bg-primary rounded-t-sm shadow-[0_0_10px_rgba(161,250,255,0.4)]"></div>
+<div class="w-full h-[60%] bg-primary/40 rounded-t-sm"></div>
+<div class="w-full h-[40%] bg-primary/20 rounded-t-sm"></div>
+</div>
+<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">info</span>
+                                    Pico esperado às 20:30 (Média de 45 pedidos/h)
+                                </p>
+</div>
+<div class="glass-panel p-4 border-l-2 border-tertiary">
+<h4 class="text-xs font-bold text-tertiary mb-1 tracking-tight">INSIGHT DE CONSUMO</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Observamos um aumento de 24% na busca por <span class="text-on-surface font-bold">opções sem glúten</span> nas sextas-feiras. Recomendamos destacar a massa de couve-flor no topo do cardápio digital.</p>
+</div>
+<div class="glass-panel p-4 border-l-2 border-secondary">
+<h4 class="text-xs font-bold text-secondary mb-1 tracking-tight">OTIMIZAÇÃO DE ESTOQUE</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">O estoque de <span class="text-on-surface font-bold">Queijo Brie</span> está 15% abaixo da média de consumo para o fim de semana. Sugestão: Pedido automático para fornecedor habitual.</p>
+</div>
+</div>
+<div class="mt-auto">
+<div class="bg-surface-container-low p-3 rounded-sm flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm">chat_bubble</span>
+<input class="bg-transparent border-none text-xs w-full focus:ring-0 text-on-surface" placeholder="Pergunte à IA..." type="text"/>
+</div>
+<button class="w-full py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-black text-xs uppercase tracking-widest rounded-sm active:scale-95 transition-all">
+                                Gerar Relatório Estratégico
+                            </button>
+</div>
+</div>
+</section>
+<!-- Activity Log -->
+<section class="glass-panel p-6 rounded-sm h-[200px] overflow-hidden">
+<h3 class="font-headline font-bold text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Logs do Sistema</h3>
+<div class="space-y-3 font-mono text-[9px]">
+<div class="flex gap-3 text-tertiary">
+<span>[19:42:01]</span>
+<span>PEDIDO #9022 DESPACHADO PARA ENTREGA</span>
+</div>
+<div class="flex gap-3 text-outline">
+<span>[19:40:15]</span>
+<span>BACKUP DE DADOS CONCLUÍDO - CLOUD KIRAX</span>
+</div>
+<div class="flex gap-3 text-secondary">
+<span>[19:38:55]</span>
+<span>INTEGRAÇÃO IFOOD: NOVO PEDIDO #9023</span>
+</div>
+<div class="flex gap-3 text-primary">
+<span>[19:35:10]</span>
+<span>SISTEMA DE PAGAMENTO NFC ATUALIZADO</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Supressed for Dashboard as per rules, but shown here for functionality demonstration if it was allowed, however I will suppress it to follow the prompt's instruction strictly) -->
+</body></html>

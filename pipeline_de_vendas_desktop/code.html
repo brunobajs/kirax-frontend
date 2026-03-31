@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_OBSIDIAN | Pipeline de Vendas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#beee00",
+              "on-surface-variant": "#adaaab",
+              "on-primary-fixed": "#004346",
+              "surface-container": "#1a191b",
+              "tertiary-container": "#cafd00",
+              "surface-container-high": "#201f21",
+              "on-primary-container": "#00575b",
+              "background": "#0e0e0f",
+              "primary": "#a1faff",
+              "on-secondary-fixed": "#580079",
+              "on-secondary-container": "#fff5fc",
+              "primary-fixed-dim": "#00e5ee",
+              "secondary-fixed": "#f1c1ff",
+              "error-container": "#9f0519",
+              "surface-tint": "#a1faff",
+              "surface": "#0e0e0f",
+              "surface-dim": "#0e0e0f",
+              "inverse-primary": "#006a6e",
+              "tertiary-fixed": "#cafd00",
+              "on-background": "#ffffff",
+              "surface-container-highest": "#262627",
+              "primary-fixed": "#00f4fe",
+              "primary-container": "#00f4fe",
+              "on-tertiary-fixed": "#3a4a00",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-primary-fixed-variant": "#006266",
+              "inverse-surface": "#fcf8f9",
+              "tertiary": "#f3ffca",
+              "surface-variant": "#262627",
+              "on-secondary": "#390050",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed-variant": "#526900",
+              "secondary-dim": "#bb00fc",
+              "secondary-fixed-dim": "#eaaeff",
+              "tertiary-dim": "#beee00",
+              "secondary": "#d674ff",
+              "on-surface": "#ffffff",
+              "surface-container-low": "#131314",
+              "outline-variant": "#484849",
+              "on-primary": "#006165",
+              "primary-dim": "#00e5ee",
+              "on-error-container": "#ffa8a3",
+              "inverse-on-surface": "#565556",
+              "surface-bright": "#2c2c2d",
+              "error": "#ff716c",
+              "on-error": "#490006",
+              "secondary-container": "#9900cf",
+              "on-tertiary": "#516700",
+              "on-tertiary-container": "#4a5e00",
+              "outline": "#767576",
+              "error-dim": "#d7383b"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e0f; color: #ffffff; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(12px); background-color: rgba(19, 19, 20, 0.8); }
+        .glow-primary { box-shadow: 0 0 20px rgba(161, 250, 255, 0.1); }
+        .kanban-column { min-width: 320px; width: 100%; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background overflow-hidden h-screen flex">
+<!-- Predicted SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full z-50 flex flex-col items-center py-6 bg-[#131314]/80 backdrop-blur-xl h-screen w-20 border-r border-white/5 shadow-[20px_0_40px_rgba(161,250,255,0.05)]">
+<div class="mb-8">
+<span class="text-[#a1faff] font-black tracking-widest text-lg font-space italic">N_C</span>
+</div>
+<nav class="flex flex-col gap-6 items-center flex-1">
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors hover:bg-white/5 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</button>
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors hover:bg-white/5 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</button>
+<button class="p-3 rounded-sm text-[#a1faff] bg-[#a1faff]/10 border-l-2 border-[#a1faff] transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="Account_tree" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</button>
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors hover:bg-white/5 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+</button>
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors hover:bg-white/5 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</button>
+</nav>
+<div class="flex flex-col gap-6 items-center border-t border-white/5 pt-6">
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-3 rounded-sm text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="ml-20 flex-1 flex flex-col min-w-0">
+<!-- Predicted TopNavBar Component -->
+<header class="fixed top-0 right-0 left-20 z-40 flex items-center justify-between px-8 bg-[#0e0e0f]/90 backdrop-blur-md h-16 border-b-2 border-primary/10 transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-8">
+<h1 class="font-space font-bold text-[#a1faff] italic tracking-tight">KINETIC_OBSIDIAN</h1>
+<div class="flex items-center gap-4 ml-4">
+<span class="text-[#f3ffca] border-b border-[#f3ffca] font-medium text-sm py-1 px-2 font-['Inter']">PIPELINE_VIEW</span>
+<span class="text-[#a1faff]/60 font-medium text-sm hover:text-[#a1faff] hover:bg-white/5 transition-all duration-300 cursor-pointer py-1 px-2 font-['Inter']">ANALYTICS_DASH</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 bg-surface-container-low px-3 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-primary/40 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs text-on-surface-variant placeholder:text-outline/40 font-space tracking-wider" placeholder="BUSCAR LEADS..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#a1faff]/60 hover:text-[#a1faff]"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-[#a1faff]/60 hover:text-[#a1faff]"><span class="material-symbols-outlined">security</span></button>
+<div class="h-8 w-8 rounded-sm bg-gradient-to-br from-primary to-secondary p-[1px]">
+<div class="h-full w-full bg-surface-container-low rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-primary">account_circle</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Pipeline Canvas -->
+<div class="mt-16 p-8 flex-1 overflow-x-auto no-scrollbar bg-background">
+<!-- Summary Bar -->
+<div class="flex items-end justify-between mb-10">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-space text-xs tracking-[0.2em] font-bold uppercase mb-1">Pipeline Ativo</span>
+<h2 class="text-4xl font-space font-black tracking-tighter text-on-surface">VENDAS_Q3_24</h2>
+</div>
+<div class="flex gap-12 items-end">
+<div class="flex flex-col items-end">
+<span class="text-on-surface-variant font-space text-[10px] tracking-widest uppercase mb-1">Valor Total em Proposta</span>
+<span class="text-3xl font-space font-bold text-tertiary-fixed-dim tracking-tight">R$ 1.482.000,00</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-on-surface-variant font-space text-[10px] tracking-widest uppercase mb-1">Leads Ativos</span>
+<span class="text-3xl font-space font-bold text-primary tracking-tight">24</span>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-container px-6 py-2.5 rounded-sm text-on-primary font-space font-bold text-xs tracking-widest flex items-center gap-2 hover:brightness-110 transition-all shadow-[0_0_20px_rgba(161,250,255,0.2)]">
+<span class="material-symbols-outlined text-sm">add</span>
+                        NOVO_LEAD
+                    </button>
+</div>
+</div>
+<!-- Kanban Board -->
+<div class="flex gap-6 min-h-[calc(100vh-280px)]">
+<!-- Coluna: Prospecção -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between border-l-2 border-primary/30 pl-3 py-1">
+<h3 class="font-space font-bold text-sm tracking-widest text-on-surface/80">PROSPECÇÃO</h3>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-sm text-[10px] text-primary/60 font-bold">08</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container p-5 rounded-sm border-l-2 border-primary-dim hover:bg-surface-container-high transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-primary/40">ID_772</span>
+<span class="bg-primary/10 text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-sm">HOT_LEAD</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">Logística Express S.A.</h4>
+<p class="text-on-surface-variant text-xs mb-4">Sistemas de Rastreamento AI</p>
+<div class="flex justify-between items-center pt-4 border-t border-white/5">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Valor</span>
+<span class="text-sm font-space font-bold text-on-surface">R$ 145k</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Último Contato</span>
+<span class="text-xs text-on-surface/60 italic">há 2h</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container p-5 rounded-sm border-l-2 border-outline-variant hover:bg-surface-container-high transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-primary/40">ID_778</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">BioTech Solutions</h4>
+<p class="text-on-surface-variant text-xs mb-4">Mapeamento Genômico</p>
+<div class="flex justify-between items-center pt-4 border-t border-white/5">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Valor</span>
+<span class="text-sm font-space font-bold text-on-surface">R$ 82k</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Último Contato</span>
+<span class="text-xs text-on-surface/60 italic text-error">há 5 dias</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coluna: Qualificação -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between border-l-2 border-secondary/30 pl-3 py-1">
+<h3 class="font-space font-bold text-sm tracking-widest text-on-surface/80">QUALIFICAÇÃO</h3>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-sm text-[10px] text-secondary/60 font-bold">04</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Card 3 -->
+<div class="bg-surface-container p-5 rounded-sm border-l-2 border-secondary-dim hover:bg-surface-container-high transition-all group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 blur-2xl rounded-full"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-secondary/40">ID_692</span>
+<span class="bg-error/20 text-error text-[9px] font-bold px-1.5 py-0.5 rounded-sm">CRITICAL_FOLLOWUP</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">AeroSpace Dynamics</h4>
+<p class="text-on-surface-variant text-xs mb-4">Automação Industrial G3</p>
+<div class="flex justify-between items-center pt-4 border-t border-white/5">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Valor Est.</span>
+<span class="text-sm font-space font-bold text-on-surface">R$ 320k</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span>
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span>
+<span class="h-1.5 w-1.5 rounded-full bg-white/10"></span>
+</div>
+<span class="text-[9px] text-on-surface-variant uppercase mt-1">Status: Warm</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coluna: Proposta -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between border-l-2 border-tertiary-fixed-dim/30 pl-3 py-1">
+<h3 class="font-space font-bold text-sm tracking-widest text-on-surface/80">PROPOSTA</h3>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-sm text-[10px] text-tertiary-fixed-dim/60 font-bold">06</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Card 4 -->
+<div class="bg-surface-container p-5 rounded-sm border-l-2 border-tertiary-dim hover:bg-surface-container-high transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-tertiary-fixed-dim/40">ID_801</span>
+<span class="bg-tertiary-dim/20 text-tertiary-fixed-dim text-[9px] font-bold px-1.5 py-0.5 rounded-sm">PENDING_REVIEW</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">CyberShield Network</h4>
+<p class="text-on-surface-variant text-xs mb-4">Segurança Perimetral</p>
+<div class="flex justify-between items-center pt-4 border-t border-white/5">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Valor Final</span>
+<span class="text-sm font-space font-bold text-tertiary-fixed-dim">R$ 510k</span>
+</div>
+<div class="h-8 w-8 bg-surface-container-highest rounded-sm flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-sm">description</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container p-5 rounded-sm border-l-2 border-tertiary-dim hover:bg-surface-container-high transition-all group cursor-pointer opacity-70">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-tertiary-fixed-dim/40">ID_792</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface mb-1">Global Trade Corp</h4>
+<p class="text-on-surface-variant text-xs mb-4">ERP Customizado</p>
+<div class="flex justify-between items-center pt-4 border-t border-white/5">
+<div class="flex flex-col">
+<span class="text-[9px] text-on-surface-variant uppercase tracking-tighter">Valor Final</span>
+<span class="text-sm font-space font-bold text-tertiary-fixed-dim">R$ 225k</span>
+</div>
+<span class="text-[10px] text-on-surface-variant italic">Enviado ontem</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Coluna: Fechamento -->
+<div class="kanban-column flex flex-col gap-4">
+<div class="flex items-center justify-between border-l-2 border-primary/60 pl-3 py-1">
+<h3 class="font-space font-bold text-sm tracking-widest text-on-surface/80">FECHAMENTO</h3>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-sm text-[10px] text-primary/80 font-bold">02</span>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Card 6 -->
+<div class="bg-surface-container-highest p-5 rounded-sm border border-primary/20 shadow-[0_0_20px_rgba(161,250,255,0.05)] hover:border-primary/40 transition-all group cursor-pointer relative">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-space font-black tracking-widest text-primary">ID_550</span>
+<div class="flex items-center gap-1">
+<span class="animate-pulse h-2 w-2 rounded-full bg-primary"></span>
+<span class="text-[9px] font-bold text-primary">FINAL_LEGAL</span>
+</div>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-lg mb-1">OmniRetail Group</h4>
+<p class="text-on-surface-variant text-xs mb-4">Ecossistema Cloud Nativo</p>
+<div class="bg-surface-container-low p-3 rounded-sm mb-4 border border-white/5">
+<div class="flex justify-between text-[10px] font-bold font-space text-on-surface-variant mb-1">
+<span>CONTRATO_STATUS</span>
+<span>95%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[95%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xl font-space font-bold text-on-surface">R$ 1.2M</span>
+<button class="text-primary hover:bg-primary/10 p-1.5 rounded-sm transition-colors">
+<span class="material-symbols-outlined text-lg">call_made</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Adicionar Coluna (Visual Feedback) -->
+<div class="kanban-column flex flex-col gap-4 opacity-30 border border-dashed border-outline-variant/30 rounded-sm items-center justify-center min-h-full cursor-pointer hover:opacity-50 transition-all">
+<span class="material-symbols-outlined text-4xl mb-2">add_circle</span>
+<span class="font-space text-xs font-bold tracking-[0.2em]">NOVA_ESTEIRA</span>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB: Floating Action Button (Limited to Task Flow) -->
+<button class="fixed bottom-8 right-8 h-14 w-14 rounded-sm bg-secondary text-on-secondary shadow-[0_10px_30px_rgba(214,116,255,0.3)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined font-bold">bolt</span>
+</button>
+<!-- Background Pattern/Texture -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] z-[-1]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3qteGiosMAqHTb-DjicMZKtgaIR2usX0QLdxVdXRKZfsBEoIu8xwcyVZO6iFfQLlCbPBs2Cd4fV4nTgY97dsUrOUpvmsYEVzg0xfTKDZhSXMOsSdJCShFdYoahwuohk1Ltc-F1qDjckbS41IiiLgrwiHoCJZlrcpiDI1m0NWOCBxFxB0PspQ5DJH9U0NOTrLNWrTpGxDxoGLJIv7s1EhM3w6FBip27xFH995-msFeKBZLoy-ygTDWjt1lBWR2rq4ZrWEC1mkEFD5E');">
+</div>
+<!-- Ambient Glows -->
+<div class="fixed top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 blur-[120px] pointer-events-none"></div>
+</body></html>

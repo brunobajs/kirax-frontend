@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "error": "#ff716c",
+              "surface-variant": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "outline-variant": "#484849",
+              "primary-container": "#00f4fe",
+              "outline": "#767576",
+              "on-secondary": "#390050",
+              "tertiary-fixed": "#cafd00",
+              "primary-fixed-dim": "#00e5ee",
+              "surface-container-low": "#131314",
+              "on-secondary-fixed": "#580079",
+              "tertiary": "#f3ffca",
+              "primary-fixed": "#00f4fe",
+              "tertiary-container": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary": "#516700",
+              "on-tertiary-fixed-variant": "#526900",
+              "primary": "#a1faff",
+              "surface-container-highest": "#262627",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "on-tertiary-container": "#4a5e00",
+              "on-error": "#490006",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-primary-fixed": "#004346",
+              "tertiary-fixed-dim": "#beee00",
+              "secondary-fixed": "#f1c1ff",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-tertiary-fixed": "#3a4a00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-background": "#ffffff",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-high": "#201f21",
+              "tertiary-dim": "#beee00",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "on-surface-variant": "#adaaab",
+              "secondary-container": "#9900cf",
+              "error-dim": "#d7383b",
+              "error-container": "#9f0519"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0f; }
+        ::-webkit-scrollbar-thumb { background: #262627; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1faff; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar Execution -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between px-6 bg-opacity-80 backdrop-blur-xl bg-[#131314] border-b border-[#262627] shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] text-2xl font-black tracking-widest text-[#a1faff] uppercase">KIRAX</span>
+<div class="hidden md:flex items-center bg-surface-container-highest px-4 py-1.5 rounded-sm">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 text-on-surface placeholder:text-outline" placeholder="Pesquisar Inventário..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary-container px-4 py-2 font-headline font-bold text-xs uppercase tracking-tighter rounded-sm active:scale-95 transition-all">
+                Add Lead
+            </button>
+<div class="flex gap-2">
+<span class="material-symbols-outlined p-2 text-[#8e8e8f] hover:text-[#f3ffca] transition-colors cursor-pointer">notifications</span>
+<span class="material-symbols-outlined p-2 text-[#8e8e8f] hover:text-[#f3ffca] transition-colors cursor-pointer">settings</span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a high-tech corporate executive with neon rim lighting in a dark office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR4dr2idtk02EA78hoSots6QMIJoPsoyae2HWhW_rFg4_31WiqWMBFFZtbsWaP5z1iuWKkrvLarws9yi9TBN3pRRGaLzLOptoWu-pnzHUv2VVOSn92S61ShyBDEZRWHkmmVEWgNjniuvj1kTk_LQ-8UNHLo3TuQewVavf4m-N7UeVeMCjpQDyJo1JjAVCddGs2d4T_iDiI4QWTSIGxi_H07attiHyr5Gy1nEbgbQ1Zje5W6RFV-BuNpfP9OnWg_3v4XmdnGu-S_aZW"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar Execution -->
+<nav class="fixed left-0 top-0 h-screen z-40 flex flex-col pt-20 pb-6 bg-opacity-90 backdrop-blur-2xl bg-[#0e0e0f] border-r border-[#262627] w-20 hover:w-64 transition-all duration-300 group overflow-hidden">
+<div class="px-6 mb-8 flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">terminal</span>
+</div>
+<div>
+<p class="font-headline font-bold text-primary leading-none text-xl">KIRAX OS</p>
+<p class="text-[10px] text-outline uppercase tracking-widest">Terminal v4.0.2</p>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">dashboard</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Dashboard</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">filter_alt</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Sales</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">groups</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Relations</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">point_of_sale</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Retail</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">calendar_today</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Calendar</span>
+</a>
+<!-- Inventory Active -->
+<a class="flex items-center h-12 px-6 bg-[#1a191b] text-[#a1faff] border-l-2 border-[#a1faff] transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">inventory_2</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Inventory</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">campaign</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Marketing</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all group/item" href="#">
+<span class="material-symbols-outlined mr-6">payments</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Finance</span>
+</a>
+</div>
+<div class="mt-auto pt-6 border-t border-[#262627]">
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mr-6">help_outline</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Support</span>
+</a>
+<a class="flex items-center h-12 px-6 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mr-6">terminal</span>
+<span class="text-xs font-medium uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Logs</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pl-20 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="font-headline text-4xl font-bold text-on-surface tracking-tight mb-2 uppercase">Controle de Inventário</h1>
+<p class="text-on-surface-variant max-w-xl">Monitoramento em tempo real com análise preditiva de demanda baseada em IA.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container border border-outline-variant/20 px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+<div>
+<p class="text-[10px] text-outline uppercase tracking-widest leading-none">Status da IA</p>
+<p class="text-sm font-bold text-tertiary">PREVISÃO ATIVA</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-0.5 bg-outline-variant/10 p-0.5 mb-12 overflow-hidden rounded-sm">
+<!-- Total SKU -->
+<div class="bg-surface-container p-6 flex flex-col justify-between h-40 group hover:bg-surface-container-high transition-colors">
+<span class="text-[10px] font-bold text-outline uppercase tracking-[0.2em]">Total de SKUs</span>
+<div>
+<p class="font-headline text-5xl font-light text-primary tracking-tighter">1,284</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-tertiary text-xs">trending_up</span>
+<span class="text-[10px] text-tertiary font-bold">+12 este mês</span>
+</div>
+</div>
+</div>
+<!-- Low Stock Alert -->
+<div class="bg-surface-container p-6 flex flex-col justify-between h-40 group hover:bg-surface-container-high transition-colors border-l border-outline-variant/10">
+<span class="text-[10px] font-bold text-outline uppercase tracking-[0.2em]">Alertas de Estoque</span>
+<div>
+<p class="font-headline text-5xl font-light text-error tracking-tighter">28</p>
+<p class="text-[10px] text-error font-bold uppercase mt-1">Crítico / Reposição Imediata</p>
+</div>
+</div>
+<!-- Inventory Value -->
+<div class="bg-surface-container p-6 flex flex-col justify-between h-40 group hover:bg-surface-container-high transition-colors border-l border-outline-variant/10">
+<span class="text-[10px] font-bold text-outline uppercase tracking-[0.2em]">Valor em Inventário</span>
+<div>
+<p class="font-headline text-4xl font-light text-on-surface tracking-tighter">R$ 2.4M</p>
+<p class="text-[10px] text-outline font-medium uppercase mt-2">Giro: 4.2x / ano</p>
+</div>
+</div>
+<!-- AI Forecast -->
+<div class="bg-surface-container p-6 flex flex-col justify-between h-40 group hover:bg-surface-container-high transition-colors border-l border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 blur-3xl rounded-full"></div>
+<span class="text-[10px] font-bold text-outline uppercase tracking-[0.2em]">Saída Prevista (7 dias)</span>
+<div>
+<p class="font-headline text-5xl font-light text-secondary tracking-tighter">452</p>
+<p class="text-[10px] text-secondary font-bold uppercase mt-1">Estimativa Neural Kirax</p>
+</div>
+</div>
+</div>
+<!-- Intelligent Inventory List -->
+<section class="glass-panel border border-outline-variant/10 p-1">
+<div class="bg-surface p-4 flex justify-between items-center border-b border-outline-variant/10">
+<div class="flex gap-6">
+<button class="text-primary text-xs font-bold uppercase tracking-widest border-b-2 border-primary pb-1">Todos Itens</button>
+<button class="text-outline text-xs font-bold uppercase tracking-widest hover:text-on-surface transition-colors pb-1">Em Falta</button>
+<button class="text-outline text-xs font-bold uppercase tracking-widest hover:text-on-surface transition-colors pb-1">Excesso</button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-xs text-outline">tune</span>
+<span class="text-[10px] font-bold text-on-surface uppercase tracking-tighter">Filtros Avançados</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] text-outline uppercase tracking-[0.2em] bg-surface-container-low">
+<th class="px-6 py-4 font-medium">Produto &amp; SKU</th>
+<th class="px-6 py-4 font-medium">Categoria</th>
+<th class="px-6 py-4 font-medium">Qtd Atual</th>
+<th class="px-6 py-4 font-medium">Status / Saúde</th>
+<th class="px-6 py-4 font-medium">Previsão IA</th>
+<th class="px-6 py-4 font-medium text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-error rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-on-surface uppercase font-headline tracking-tight">Processador Quantum Core v9</p>
+<p class="text-[10px] text-outline font-mono">SKU-992-QX-2024</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-[10px] px-2 py-0.5 border border-outline-variant/30 text-outline uppercase font-bold">HARDWARE</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-baseline gap-1">
+<span class="text-lg font-headline font-bold text-error">12</span>
+<span class="text-[10px] text-outline">/ 150</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden max-w-[80px]">
+<div class="h-full bg-error w-[8%]"></div>
+</div>
+<span class="text-[10px] font-bold text-error uppercase">Crítico</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<p class="text-xs text-on-surface">Repor <span class="text-secondary font-bold">+85</span> em 48h</p>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="bg-error/10 text-error text-[10px] font-bold px-3 py-1.5 uppercase hover:bg-error hover:text-on-error transition-all">Comprar</button>
+</td>
+</tr>
+<!-- Row 2: Healthy -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-primary rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-on-surface uppercase font-headline tracking-tight">Módulo de Memória Neural 128GB</p>
+<p class="text-[10px] text-outline font-mono">SKU-441-MN-99</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-[10px] px-2 py-0.5 border border-outline-variant/30 text-outline uppercase font-bold">COMPONENTES</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-baseline gap-1">
+<span class="text-lg font-headline font-bold text-on-surface">412</span>
+<span class="text-[10px] text-outline">/ 500</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden max-w-[80px]">
+<div class="h-full bg-primary w-[82%]"></div>
+</div>
+<span class="text-[10px] font-bold text-primary uppercase">Estável</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">psychology</span>
+<p class="text-xs text-on-surface">Repor em <span class="text-on-surface-variant">14 dias</span></p>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="bg-surface-container-highest text-outline text-[10px] font-bold px-3 py-1.5 uppercase hover:text-on-surface transition-all">Detalhes</button>
+</td>
+</tr>
+<!-- Row 3: Growth Warning -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-2 h-10 bg-tertiary rounded-full"></div>
+<div>
+<p class="text-sm font-bold text-on-surface uppercase font-headline tracking-tight">Cabos Ópticos Obsidian Flux</p>
+<p class="text-[10px] text-outline font-mono">SKU-102-CO-01</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-[10px] px-2 py-0.5 border border-outline-variant/30 text-outline uppercase font-bold">CONECTIVIDADE</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-baseline gap-1">
+<span class="text-lg font-headline font-bold text-tertiary">2.4k</span>
+<span class="text-[10px] text-outline">/ 5k</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="flex-1 h-1 bg-surface-container-highest rounded-full overflow-hidden max-w-[80px]">
+<div class="h-full bg-tertiary w-[48%]"></div>
+</div>
+<span class="text-[10px] font-bold text-tertiary uppercase">Monitorar</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<p class="text-xs text-on-surface">Demanda <span class="text-tertiary font-bold">+240%</span> sazonal</p>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="bg-surface-container-highest text-outline text-[10px] font-bold px-3 py-1.5 uppercase hover:text-on-surface transition-all">Ajustar</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Bottom Action & Legend -->
+<footer class="mt-8 flex justify-between items-center text-[10px] text-outline uppercase tracking-widest border-t border-outline-variant/10 pt-6">
+<div class="flex gap-8">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Estoque Crítico (&lt; 10%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Monitoramento Necessário</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Operação Normal</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Última atualização: hoje às 14:42:01</span>
+</div>
+</footer>
+</div>
+</main>
+<!-- Floating AI Assistant Button (Suppressed on details, shown here for Dashboard context) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 rounded-full bg-gradient-to-br from-secondary to-secondary-container shadow-[0_0_30px_rgba(214,116,255,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</button>
+</div>
+</body></html>

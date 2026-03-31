@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Master Admin - NEURAL CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "surface-container-low": "#131314",
+              "on-primary": "#006165",
+              "secondary-container": "#9900cf",
+              "secondary-dim": "#bb00fc",
+              "primary-container": "#00f4fe",
+              "on-error": "#490006",
+              "on-secondary": "#390050",
+              "error": "#ff716c",
+              "outline-variant": "#484849",
+              "primary-fixed-dim": "#00e5ee",
+              "on-primary-container": "#00575b",
+              "surface-tint": "#a1faff",
+              "tertiary-container": "#cafd00",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface-container-highest": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-tertiary": "#516700",
+              "error-dim": "#d7383b",
+              "on-tertiary-container": "#4a5e00",
+              "inverse-primary": "#006a6e",
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed": "#3a4a00",
+              "secondary": "#d674ff",
+              "on-surface": "#ffffff",
+              "on-secondary-fixed": "#580079",
+              "on-tertiary-fixed-variant": "#526900",
+              "surface-container-high": "#201f21",
+              "on-surface-variant": "#adaaab",
+              "inverse-on-surface": "#565556",
+              "on-secondary-fixed-variant": "#8400b3",
+              "secondary-fixed": "#f1c1ff",
+              "tertiary-dim": "#beee00",
+              "primary": "#a1faff",
+              "error-container": "#9f0519",
+              "on-error-container": "#ffa8a3",
+              "surface-dim": "#0e0e0f",
+              "on-background": "#ffffff",
+              "surface-variant": "#262627",
+              "tertiary-fixed-dim": "#beee00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "primary-fixed": "#00f4fe",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "primary-dim": "#00e5ee",
+              "service-accent": "#ff9e22"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .zebra-striping div:nth-child(even) {
+            background-color: #131314;
+        }
+        .zebra-striping div:nth-child(odd) {
+            background-color: #1a191b;
+        }
+        .engineering-border {
+            background: linear-gradient(90deg, #484849 50%, transparent 50%) repeat-x,
+                        linear-gradient(90deg, #484849 50%, transparent 50%) repeat-x,
+                        linear-gradient(0deg, #484849 50%, transparent 50%) repeat-y,
+                        linear-gradient(0deg, #484849 50%, transparent 50%) repeat-y;
+            background-size: 8px 1px, 8px 1px, 1px 8px, 1px 8px;
+            background-position: 0 0, 0 100%, 0 0, 100% 0;
+        }
+        /* Custom Toggle Switch for IA Engine */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 20px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #262627;
+            transition: .4s;
+            border: 1px solid #484849;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px; width: 12px;
+            left: 3px; bottom: 3px;
+            background-color: #adaaab;
+            transition: .4s;
+        }
+        input:checked + .slider { background-color: #006a6e; border-color: #a1faff; }
+        input:checked + .slider:before { transform: translateX(24px); background-color: #a1faff; box-shadow: 0 0 8px #a1faff; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-[#131314] backdrop-blur-xl opacity-80 shadow-[40px_0_40px_rgba(161,250,255,0.05)] flex flex-col py-6 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-xl font-bold tracking-tighter text-[#a1faff] drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-headline">NEURAL CRM</h1>
+<p class="font-inter text-[10px] uppercase tracking-widest text-[#8e8e8f] mt-1">v4.0.2-STABLE</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 text-[#a1faff] font-bold bg-[#262627] border-l-2 border-[#a1faff] transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Assinantes
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="finance_chip">finance_chip</span>
+                Previsão Financeira
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#8e8e8f] hover:text-[#a1faff] hover:bg-[#1a191b] hover:translate-x-1 transition-all duration-200 font-headline tracking-tight text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+                Ecossistema
+            </a>
+<div class="pt-4 pb-2 px-3">
+<p class="text-[9px] font-bold text-outline uppercase tracking-[0.2em] mb-4">Motor de IA Global</p>
+<div class="flex items-center justify-between p-2 rounded-sm bg-surface-container-highest/30 border border-outline-variant/10">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase">Neural_Core</span>
+<label class="toggle-switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+</nav>
+<div class="mt-auto px-6 space-y-4">
+<button class="w-full bg-gradient-to-br from-primary to-on-primary-container text-on-primary-container font-bold py-2 rounded-sm text-xs uppercase tracking-widest active:scale-95 duration-100 neon-glow-primary">
+                NOVA INSTÂNCIA
+            </button>
+<div class="pt-4 border-t border-outline-variant/20 space-y-2">
+<a class="flex items-center gap-3 text-[#8e8e8f] hover:text-white transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_center">help_center</span>
+                    Suporte Técnico
+                </a>
+<a class="flex items-center gap-3 text-[#8e8e8f] hover:text-error transition-colors text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+                    Sair do Painel
+                </a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0e0e0f]/90 backdrop-blur-lg border-b border-[#a1faff]/10 flex items-center justify-between px-8">
+<div class="flex items-center gap-6">
+<span class="text-on-surface-variant font-headline font-bold text-lg tracking-tight">PAINEL MASTER ADMIN</span>
+<!-- Business Units Selector -->
+<div class="flex items-center bg-surface-container-highest/50 rounded-sm p-1 border border-outline-variant/20 overflow-x-auto max-w-md">
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 bg-primary text-on-primary-container rounded-sm shadow-sm whitespace-nowrap">Vendas</button>
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 text-on-surface-variant hover:text-primary whitespace-nowrap">Relac.</button>
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 text-on-surface-variant hover:text-primary whitespace-nowrap">Varejo</button>
+<button class="px-3 py-1 text-[9px] font-bold tracking-widest uppercase transition-all duration-200 text-on-surface-variant hover:text-primary whitespace-nowrap">Calendário</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-highest border-none rounded-sm pl-10 pr-4 py-1.5 text-[10px] font-body tracking-widest focus:ring-1 focus:ring-primary/40 w-64 placeholder:text-outline transition-all" placeholder="BUSCAR CONTRATOS..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors active:opacity-70">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</button>
+<div class="h-8 w-8 rounded-sm bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/50">
+<img alt="Master Admin" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0o8X7hOUnZMprFL97ccwckESIQLW6Lchf3hCSS-P5SHS_vCtShsJL4vFJTaMVti_-LFb9ovKB1t6U3mnaaPlcrPNDLSOmZQT2KPwpyjoxKA4-r6SqymU_iyhtDdtPOwEh4WrazceTxLblY_bgQpCDkeSCZuQ2St2T5AL_8-Y4aPvKRE9OiZWCqmB01zDuIhxeuLvjeTX-LdiaRbdECy1LLgU_79VW2SB4OSxerTPszIbv1mgggtCTlV5QxKt-OVtkLgOLtTQ8f776"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Previsão Financeira Consolidada -->
+<div class="mb-10">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="text-2xl font-headline font-bold tracking-tight">Previsão Financeira Consolidada</h2>
+<p class="text-on-surface-variant text-sm mt-1">Análise preditiva de MRR e Usuários por vertical.</p>
+</div>
+<div class="flex gap-4 p-3 bg-surface-container rounded-sm border border-outline-variant/10">
+<div class="flex flex-col items-end">
+<span class="text-[8px] font-bold text-outline uppercase tracking-widest">Motor IA Global</span>
+<span class="text-[10px] text-primary font-mono font-bold">OPERACIONAL</span>
+</div>
+<div class="w-px h-8 bg-outline-variant/20"></div>
+<div class="flex items-center gap-2">
+<label class="toggle-switch">
+<input checked="" type="checkbox"/>
+<span class="slider"></span>
+</label>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Vendas -->
+<div class="bg-surface-container p-5 border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Funil de Vendas</span>
+<span class="material-symbols-outlined text-sm text-primary" data-icon="trending_up">trending_up</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-headline font-bold tracking-tight">R$ 647.9k</span>
+<p class="text-[9px] font-mono text-on-surface-variant uppercase">MRR Consolidado</p>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="text-sm font-bold text-on-surface">12.4k</span>
+<p class="text-[8px] font-mono text-outline uppercase">Usuários Ativos</p>
+</div>
+<div class="text-[10px] font-mono text-tertiary">+4.2%</div>
+</div>
+</div>
+<!-- Relacionamento -->
+<div class="bg-surface-container p-5 border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Relacionamento</span>
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="diversity_3">diversity_3</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-headline font-bold tracking-tight">R$ 339.4k</span>
+<p class="text-[9px] font-mono text-on-surface-variant uppercase">MRR Consolidado</p>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="text-sm font-bold text-on-surface">8.1k</span>
+<p class="text-[8px] font-mono text-outline uppercase">Usuários Ativos</p>
+</div>
+<div class="text-[10px] font-mono text-tertiary">+2.8%</div>
+</div>
+</div>
+<!-- Varejo -->
+<div class="bg-surface-container p-5 border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary-dim"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-tertiary-dim uppercase tracking-widest">Varejo / POS</span>
+<span class="material-symbols-outlined text-sm text-tertiary-dim" data-icon="storefront">storefront</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-headline font-bold tracking-tight">R$ 277.7k</span>
+<p class="text-[9px] font-mono text-on-surface-variant uppercase">MRR Consolidado</p>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="text-sm font-bold text-on-surface">5.2k</span>
+<p class="text-[8px] font-mono text-outline uppercase">PDV Ativos</p>
+</div>
+<div class="text-[10px] font-mono text-error-dim">-0.4%</div>
+</div>
+</div>
+<!-- Calendário -->
+<div class="bg-surface-container p-5 border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-service-accent"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold text-service-accent uppercase tracking-widest">Calendário / IA</span>
+<span class="material-symbols-outlined text-sm text-service-accent" data-icon="calendar_today">calendar_today</span>
+</div>
+<div class="mb-4">
+<span class="text-2xl font-headline font-bold tracking-tight">R$ 277.7k</span>
+<p class="text-[9px] font-mono text-on-surface-variant uppercase">MRR Consolidado</p>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="text-sm font-bold text-on-surface">2.9k</span>
+<p class="text-[8px] font-mono text-outline uppercase">Agendas Synced</p>
+</div>
+<div class="text-[10px] font-mono text-tertiary">+12.1%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Ecosystem Monitor -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-2xl font-headline font-bold tracking-tight text-on-surface">Monitor de Ecossistema</h2>
+<p class="text-on-surface-variant text-sm mt-1">Status de instâncias em tempo real por modelo de negócio.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-highest text-on-surface-variant text-xs border border-outline-variant/30 rounded-sm hover:text-white transition-colors uppercase tracking-widest font-bold">
+                    EXPORTAR CSV
+                </button>
+<button class="px-4 py-2 bg-surface-container-highest text-primary text-xs border border-primary/20 rounded-sm hover:bg-primary/10 transition-colors uppercase tracking-widest font-bold">
+                    SISTEMA COMPLETO
+                </button>
+</div>
+</div>
+<!-- High-Density Table -->
+<div class="bg-surface-container-lowest rounded-sm overflow-hidden border border-outline-variant/10">
+<!-- Table Header -->
+<div class="grid grid-cols-12 bg-surface-container-high px-6 py-3 border-b border-outline-variant/20">
+<div class="col-span-4 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase">Empresa / Tenant</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-center">Modelo Ativo</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-center">IA Engine</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-right">Volumetria</div>
+<div class="col-span-2 text-[10px] font-headline font-bold tracking-widest text-on-surface-variant uppercase text-right">Status</div>
+</div>
+<!-- Table Body -->
+<div class="zebra-striping">
+<!-- Row 1: Vendas -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-primary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">AETHER_FLOW DYNAMICS</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 8829-XQ-22</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-bold tracking-widest rounded-sm">VENDAS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">AI_CORE_V4</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">1,240 LEADS</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Operacional</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Calendário -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-service-accent"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">CLINIC_NODE HEALTH</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 7741-HS-12</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-service-accent/10 border border-service-accent/20 text-service-accent text-[9px] font-bold tracking-widest rounded-sm">CALENDÁRIO</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">AGENT_SYNC</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">45 SLOTS</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Sincronizado</span>
+</div>
+</div>
+</div>
+<!-- Row 3: Varejo -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-tertiary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">MAXI_LOG RETAIL</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 9901-RT-44</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-tertiary/10 border border-tertiary/20 text-tertiary text-[9px] font-bold tracking-widest rounded-sm">VAREJO POS</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">LITE_ML</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">242 PDVs</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Ativo</span>
+</div>
+</div>
+</div>
+<!-- Row 4: Relacionamento -->
+<div class="grid grid-cols-12 px-6 py-4 items-center group transition-all duration-200">
+<div class="col-span-4 flex items-center gap-4">
+<div class="w-1 h-8 bg-secondary"></div>
+<div>
+<div class="text-sm font-bold text-on-surface font-headline uppercase tracking-tight">NEO_CAPITAL VENTURES</div>
+<div class="text-[10px] font-mono text-on-surface-variant">UID: 0091-CV-74</div>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-secondary/10 border border-secondary/20 text-secondary text-[9px] font-bold tracking-widest rounded-sm uppercase">RELAC.</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[9px] font-bold tracking-widest rounded-sm border border-outline-variant/30">AI_CORE_V4</span>
+</div>
+<div class="col-span-2 text-right font-mono text-sm text-on-surface">5,112 CONTATOS</div>
+<div class="col-span-2 flex justify-end">
+<div class="flex items-center gap-2">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary shadow-[0_0_8px_rgba(202,253,0,0.8)]"></span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Ativo</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Glassmorphism Engineering Panels -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm engineering-border">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase mb-4">Métricas Globais de IA</h3>
+<div class="space-y-4">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[9px] text-on-surface uppercase tracking-tighter">Ocupação de Agentes</span>
+<span class="text-service-accent font-mono text-xs">82.4%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-service-accent h-full w-[82.4%] shadow-[0_0_4px_rgba(255,158,34,0.5)]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/10">
+<span class="text-[10px] text-on-surface-variant font-mono uppercase tracking-widest">Processamento Total</span>
+<span class="text-[10px] text-on-surface font-mono">1.4M REQ/DIA</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase mb-4">Market Share Interno</h3>
+<div class="flex h-4 w-full rounded-full overflow-hidden border border-outline-variant/20 p-0.5 mb-4">
+<div class="bg-primary w-[42%]"></div>
+<div class="bg-secondary w-[22%]"></div>
+<div class="bg-tertiary w-[18%]"></div>
+<div class="bg-service-accent w-[18%]"></div>
+</div>
+<div class="grid grid-cols-4 gap-1 text-center">
+<div><div class="text-[7px] text-primary font-bold uppercase">Vendas</div><div class="text-xs font-headline font-bold">42%</div></div>
+<div><div class="text-[7px] text-secondary font-bold uppercase">Relac.</div><div class="text-xs font-headline font-bold">22%</div></div>
+<div><div class="text-[7px] text-tertiary font-bold uppercase">Varejo</div><div class="text-xs font-headline font-bold">18%</div></div>
+<div><div class="text-[7px] text-service-accent font-bold uppercase">Calend.</div><div class="text-xs font-headline font-bold">18%</div></div>
+</div>
+</div>
+<div class="glass-panel p-6 border border-outline-variant/10 rounded-sm relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ff9e22_0.5px,transparent_0.5px)] [background-size:12px_12px]"></div>
+<div class="relative z-10 h-full flex flex-col justify-between">
+<h3 class="text-on-surface-variant text-[10px] font-headline font-bold tracking-widest uppercase">Uptime Crítico</h3>
+<div>
+<div class="flex items-baseline gap-1">
+<div class="text-2xl font-headline font-bold text-service-accent">99.999%</div>
+<span class="material-symbols-outlined text-service-accent text-sm animate-pulse" data-icon="sync_saved_locally">sync_saved_locally</span>
+</div>
+<div class="text-[10px] text-on-surface-variant font-mono uppercase tracking-widest mt-1">Serviços_OK</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Actions -->
+<button class="fixed bottom-8 right-8 h-14 w-14 bg-primary text-on-primary-container rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center group active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl font-bold group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+</button>
+</body></html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRAX_HUB | Prospecting Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-sm {
+            text-shadow: 0 0 10px rgba(161, 250, 255, 0.5);
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(161, 250, 255, 0.15);
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 25, 27, 0.6);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262627;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#2c2c2d",
+                        "surface": "#0e0e0f",
+                        "surface-container": "#1a191b",
+                        "primary-fixed": "#00f4fe",
+                        "outline": "#767576",
+                        "on-primary-fixed-variant": "#006266",
+                        "primary-dim": "#00e5ee",
+                        "tertiary": "#f3ffca",
+                        "on-error-container": "#ffa8a3",
+                        "primary": "#a1faff",
+                        "error-container": "#9f0519",
+                        "on-background": "#ffffff",
+                        "surface-dim": "#0e0e0f",
+                        "tertiary-fixed-dim": "#beee00",
+                        "surface-variant": "#262627",
+                        "secondary-fixed": "#f1c1ff",
+                        "tertiary-dim": "#beee00",
+                        "surface-container-high": "#201f21",
+                        "inverse-on-surface": "#565556",
+                        "on-surface-variant": "#adaaab",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "surface-container-lowest": "#000000",
+                        "secondary": "#d674ff",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "on-surface": "#ffffff",
+                        "on-secondary-fixed": "#580079",
+                        "on-tertiary": "#516700",
+                        "on-secondary-container": "#fff5fc",
+                        "background": "#0e0e0f",
+                        "inverse-primary": "#006a6e",
+                        "on-tertiary-container": "#4a5e00",
+                        "error-dim": "#d7383b",
+                        "surface-tint": "#a1faff",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "tertiary-container": "#cafd00",
+                        "inverse-surface": "#fcf8f9",
+                        "surface-container-highest": "#262627",
+                        "tertiary-fixed": "#cafd00",
+                        "on-primary-fixed": "#004346",
+                        "on-primary": "#006165",
+                        "surface-container-low": "#131314",
+                        "on-secondary": "#390050",
+                        "primary-container": "#00f4fe",
+                        "on-error": "#490006",
+                        "secondary-dim": "#bb00fc",
+                        "secondary-container": "#9900cf",
+                        "on-primary-container": "#00575b",
+                        "primary-fixed-dim": "#00e5ee",
+                        "outline-variant": "#484849",
+                        "error": "#ff716c"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] shadow-[0_0_20px_rgba(161,250,255,0.05)] border-b border-[#131314]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#a1faff] text-2xl" data-icon="terminal">terminal</span>
+<h1 class="font-['Space_Grotesk'] font-black text-2xl tracking-widest uppercase text-[#a1faff]">KIRAX_HUB</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-[#a1faff] glow-sm font-['Space_Grotesk'] font-bold tracking-tighter uppercase text-sm" href="#">Prospecting</a>
+<a class="text-slate-500 hover:text-[#a1faff] transition-colors duration-300 font-['Space_Grotesk'] font-bold tracking-tighter uppercase text-sm" href="#">Campaigns</a>
+<a class="text-slate-500 hover:text-[#a1faff] transition-colors duration-300 font-['Space_Grotesk'] font-bold tracking-tighter uppercase text-sm" href="#">Analytics</a>
+</nav>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden active:scale-95 duration-150 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Cyberpunk style professional male avatar with neon rim lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzI2ACZDyQsEfNLmf8_iwRrqrtdcMYs152THI-96HUDzP0crEfNwy6BVfCv_uCoLsVbPpAK7XxBuqu6EbbfAtyfWOsqZSCFZl5Du6ZNHwkMelJBIIDuPY5cAXf2gnjPbpXz2Eo1sp2e6OfC7vidRaJbo9hPbJLomki3khDPB8LKtkMb3gPSMAcZW0ccxFJ1FGq4Nt337V2tYvO3ZfWY0ELsAcz5edAujyhJI0KIDkqjrtzh7FmXkIa8D7wsBqXb_Hxc_qEgtwhXtpc"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] z-40 bg-[#131314]/80 backdrop-blur-xl border-r border-[#262627] w-64 hidden md:block">
+<div class="p-6">
+<p class="font-['Inter'] text-xs font-medium uppercase tracking-widest text-[#a1faff] mb-8">CORE_ENGINE</p>
+<nav class="space-y-2">
+<div class="flex items-center gap-4 p-3 text-[#a1faff] bg-[#1a191b] border-l-2 border-[#a1faff] cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="radar">radar</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Prospecting</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-slate-400 hover:bg-[#1a191b]/50 hover:translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Campaigns</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-slate-400 hover:bg-[#1a191b]/50 hover:translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="monitoring">monitoring</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Analytics</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-slate-400 hover:bg-[#1a191b]/50 hover:translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="database">database</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">Lead_Vault</span>
+</div>
+<div class="flex items-center gap-4 p-3 text-slate-400 hover:bg-[#1a191b]/50 hover:translate-x-1 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-['Inter'] text-xs font-medium uppercase tracking-widest">System_Logs</span>
+</div>
+</nav>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="pt-24 pb-20 md:pl-72 md:pr-8 px-4 min-h-screen max-w-[1600px] mx-auto">
+<!-- Search Header Section -->
+<section class="mb-10">
+<header class="mb-8">
+<h2 class="text-4xl font-headline font-black tracking-tight text-on-surface mb-2">PROSPECT_COMMAND</h2>
+<p class="text-on-surface-variant font-body text-sm max-w-2xl">Bypass manual sourcing. Deploy the AI crawler to aggregate high-intent leads across specified sectors and geographical clusters.</p>
+</header>
+<!-- Search Console -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-px bg-outline-variant/20 rounded overflow-hidden p-px shadow-2xl">
+<div class="lg:col-span-5 bg-surface-container-low p-4">
+<label class="block text-[10px] uppercase tracking-widest text-primary mb-2 font-bold">Target_Niche</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="category">category</span>
+<input class="w-full bg-surface-container-highest border-none rounded-sm py-3 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary/40 placeholder:text-outline/60 text-on-surface" placeholder="Ex: Dentistas, Lojas de Roupas..." type="text"/>
+</div>
+</div>
+<div class="lg:col-span-4 bg-surface-container-low p-4">
+<label class="block text-[10px] uppercase tracking-widest text-primary mb-2 font-bold">Geo_Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg" data-icon="location_on">location_on</span>
+<input class="w-full bg-surface-container-highest border-none rounded-sm py-3 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary/40 placeholder:text-outline/60 text-on-surface" placeholder="Cidade ou Estado..." type="text"/>
+</div>
+</div>
+<div class="lg:col-span-3 bg-surface-container-low p-4 flex items-end">
+<button class="w-full h-[46px] bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-bold uppercase tracking-wider text-xs rounded-sm hover:glow-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="psychology" data-weight="fill">psychology</span>
+                        Gerar Lista via IA
+                    </button>
+</div>
+</div>
+</section>
+<!-- Insights Summary (AI Resume) -->
+<div class="mb-8 p-4 bg-surface-container-high border-l-2 border-tertiary flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="text-tertiary font-headline font-bold text-lg leading-tight">RESUMO_IA: <span class="text-on-surface">142 leads encontrados</span></h4>
+<p class="text-on-surface-variant text-xs">Nicho: <span class="text-on-surface">Odontologia</span> • Localização: <span class="text-on-surface">São Paulo, SP</span> • Potencial: <span class="text-tertiary">Alto (88%)</span></p>
+</div>
+</div>
+<div class="hidden md:block">
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container-highest text-[10px] text-on-surface-variant rounded border border-outline-variant/30">H-DENSITY</span>
+<span class="px-2 py-1 bg-surface-container-highest text-[10px] text-on-surface-variant rounded border border-outline-variant/30">REAL-TIME</span>
+</div>
+</div>
+</div>
+<!-- Leads Results Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+<!-- Lead Card 1 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors p-5 border-l-2 border-primary-dim">
+<div class="flex flex-col md:flex-row justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-headline font-bold text-lg text-on-surface">Smile Design Institute</h3>
+<div class="flex items-center text-tertiary text-xs gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono">4.9</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="map">map</span>
+                            Av. Paulista, 1500 - Bela Vista, SP
+                        </p>
+<div class="flex flex-wrap gap-4 mt-2">
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="call">call</span>
+                                (11) 98765-4321
+                            </div>
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="chat">chat</span>
+                                WhatsApp_Active
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col gap-2 justify-end min-w-[180px]">
+<button class="flex-1 md:flex-none py-2 px-4 bg-surface-container-highest hover:bg-surface-container-high border border-outline-variant text-[10px] font-bold uppercase tracking-widest text-on-surface transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Importar Funil
+                        </button>
+<button class="flex-1 md:flex-none py-2 px-4 bg-secondary-container/20 hover:bg-secondary-container/40 border border-secondary/30 text-[10px] font-bold uppercase tracking-widest text-secondary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Campanha
+                        </button>
+</div>
+</div>
+</div>
+<!-- Lead Card 2 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors p-5 border-l-2 border-primary-dim">
+<div class="flex flex-col md:flex-row justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-headline font-bold text-lg text-on-surface">Oral Tech Medicina</h3>
+<div class="flex items-center text-tertiary text-xs gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono">4.7</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="map">map</span>
+                            Rua Augusta, 900 - Consolação, SP
+                        </p>
+<div class="flex flex-wrap gap-4 mt-2">
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="call">call</span>
+                                (11) 91234-5678
+                            </div>
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+                                SMS_Only
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col gap-2 justify-end min-w-[180px]">
+<button class="flex-1 md:flex-none py-2 px-4 bg-surface-container-highest hover:bg-surface-container-high border border-outline-variant text-[10px] font-bold uppercase tracking-widest text-on-surface transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Importar Funil
+                        </button>
+<button class="flex-1 md:flex-none py-2 px-4 bg-secondary-container/20 hover:bg-secondary-container/40 border border-secondary/30 text-[10px] font-bold uppercase tracking-widest text-secondary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Campanha
+                        </button>
+</div>
+</div>
+</div>
+<!-- Lead Card 3 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors p-5 border-l-2 border-primary-dim">
+<div class="flex flex-col md:flex-row justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-headline font-bold text-lg text-on-surface">Odonto Premium Sul</h3>
+<div class="flex items-center text-tertiary text-xs gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono">5.0</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="map">map</span>
+                            Moema, SP
+                        </p>
+<div class="flex flex-wrap gap-4 mt-2">
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="call">call</span>
+                                (11) 94444-5555
+                            </div>
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="chat">chat</span>
+                                WhatsApp_Active
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col gap-2 justify-end min-w-[180px]">
+<button class="flex-1 md:flex-none py-2 px-4 bg-surface-container-highest hover:bg-surface-container-high border border-outline-variant text-[10px] font-bold uppercase tracking-widest text-on-surface transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Importar Funil
+                        </button>
+<button class="flex-1 md:flex-none py-2 px-4 bg-secondary-container/20 hover:bg-secondary-container/40 border border-secondary/30 text-[10px] font-bold uppercase tracking-widest text-secondary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Campanha
+                        </button>
+</div>
+</div>
+</div>
+<!-- Lead Card 4 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors p-5 border-l-2 border-primary-dim">
+<div class="flex flex-col md:flex-row justify-between gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-1">
+<h3 class="font-headline font-bold text-lg text-on-surface">Clínica Sorriso Real</h3>
+<div class="flex items-center text-tertiary text-xs gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-mono">4.5</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="map">map</span>
+                            Vila Mariana, SP
+                        </p>
+<div class="flex flex-wrap gap-4 mt-2">
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="call">call</span>
+                                (11) 98888-7777
+                            </div>
+<div class="flex items-center gap-2 text-on-surface font-mono text-sm bg-surface-container-highest px-3 py-1 rounded-sm">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="chat">chat</span>
+                                WhatsApp_Active
+                            </div>
+</div>
+</div>
+<div class="flex md:flex-col gap-2 justify-end min-w-[180px]">
+<button class="flex-1 md:flex-none py-2 px-4 bg-surface-container-highest hover:bg-surface-container-high border border-outline-variant text-[10px] font-bold uppercase tracking-widest text-on-surface transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Importar Funil
+                        </button>
+<button class="flex-1 md:flex-none py-2 px-4 bg-secondary-container/20 hover:bg-secondary-container/40 border border-secondary/30 text-[10px] font-bold uppercase tracking-widest text-secondary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                            Campanha
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="px-8 py-3 border border-outline-variant text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant hover:text-primary hover:border-primary/50 transition-all active:scale-95">
+                Load_More_Entries
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 md:hidden bg-[#0e0e0f]/90 backdrop-blur-md border-t border-[#262627] shadow-[0_-4px_24px_rgba(0,0,0,0.8)]">
+<div class="text-slate-600 p-2 flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-['Inter'] text-[10px] uppercase">Search</span>
+</div>
+<div class="text-[#a1faff] bg-[#a1faff]/10 rounded-sm p-2 shadow-[0_0_10px_rgba(161,250,255,0.2)] flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-['Inter'] text-[10px] uppercase">Prospect</span>
+</div>
+<div class="text-slate-600 p-2 flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Inter'] text-[10px] uppercase">Leads</span>
+</div>
+<div class="text-slate-600 p-2 flex flex-col items-center">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="font-['Inter'] text-[10px] uppercase">Engine</span>
+</div>
+</nav>
+<!-- Floating Background Decorative Elements -->
+<div class="fixed top-1/4 -right-20 w-96 h-96 bg-primary/5 blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-1/4 -left-20 w-96 h-96 bg-secondary/5 blur-[120px] pointer-events-none -z-10"></div>
+</body></html>

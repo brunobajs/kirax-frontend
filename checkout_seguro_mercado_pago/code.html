@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-primary": "#006165",
+              "surface-variant": "#262627",
+              "secondary": "#d674ff",
+              "primary-container": "#00f4fe",
+              "on-surface": "#ffffff",
+              "on-error": "#490006",
+              "tertiary-fixed": "#cafd00",
+              "on-tertiary": "#516700",
+              "on-surface-variant": "#adaaab",
+              "surface-container-highest": "#262627",
+              "on-secondary-fixed": "#580079",
+              "surface-tint": "#a1faff",
+              "on-secondary-container": "#fff5fc",
+              "error-dim": "#d7383b",
+              "inverse-on-surface": "#565556",
+              "error-container": "#9f0519",
+              "surface-bright": "#2c2c2d",
+              "surface-container-high": "#201f21",
+              "error": "#ff716c",
+              "on-background": "#ffffff",
+              "on-tertiary-container": "#4a5e00",
+              "on-primary-container": "#00575b",
+              "primary-fixed-dim": "#00e5ee",
+              "background": "#0e0e0f",
+              "tertiary": "#f3ffca",
+              "on-tertiary-fixed": "#3a4a00",
+              "inverse-primary": "#006a6e",
+              "surface": "#0e0e0f",
+              "inverse-surface": "#fcf8f9",
+              "secondary-fixed": "#f1c1ff",
+              "primary": "#a1faff",
+              "primary-fixed": "#00f4fe",
+              "secondary-dim": "#bb00fc",
+              "surface-container": "#1a191b",
+              "secondary-container": "#9900cf",
+              "on-error-container": "#ffa8a3",
+              "outline-variant": "#484849",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline": "#767576",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-low": "#131314",
+              "secondary-fixed-dim": "#eaaeff",
+              "primary-dim": "#00e5ee",
+              "tertiary-container": "#cafd00",
+              "on-primary-fixed": "#004346",
+              "on-secondary": "#390050",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-dim": "#0e0e0f",
+              "tertiary-fixed-dim": "#beee00",
+              "tertiary-dim": "#beee00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        backdrop-filter: blur(12px);
+        background: rgba(26, 25, 27, 0.6);
+      }
+      .neon-glow-primary {
+        box-shadow: 0 0 15px rgba(161, 250, 255, 0.1);
+      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: #0e0e0f; }
+      ::-webkit-scrollbar-thumb { background: #262627; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0e0e0f] border-b border-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400" data-icon="terminal">terminal</span>
+<h1 class="font-['Space_Grotesk'] font-black tracking-widest text-cyan-400 uppercase text-xl">KIRAX</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-cyan-300 transition-colors duration-200" href="#">Modules</a>
+<a class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors duration-200" href="#">Checkout</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors duration-200" href="#">History</a>
+</nav>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest border border-white/10 flex items-center justify-center overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up profile of a professional tech operator in a dimly lit high-tech environment with blue ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-2Umy7X_-mLphdiPIXEP3oxzhrfUNeVzM3VNLlajGEFznPPOH4ALrBpHLlIA1P0rNx03urnfbkX3T7EQC7tAua6f0tw94ILtibm9n-3vdxSgNwstdXceHmBx2FHf8rJbHr0iQ2J1BsEga611bGS2Amck09uVgM9FXkn1DlzTOasWGeZfoNfP-8llS3RooiZhQrZuGUbSWeV_qQAZ2lW9d69StXqVV9bXjRyIri9gs9kvLKUeMju4VrEHQ8esYvzcN5biAC9eccpn-"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Checkout Options -->
+<div class="lg:col-span-7 space-y-6">
+<section>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-xs font-bold tracking-[0.2em] text-primary uppercase">Passo 01</span>
+<h2 class="font-headline text-2xl font-bold tracking-tight">Método de Pagamento</h2>
+</div>
+<!-- Payment Methods Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Pix Option (Active/Selected) -->
+<div class="group relative cursor-pointer p-6 rounded-sm bg-surface-container-highest border-l-2 border-primary shadow-[0_0_20px_rgba(161,250,255,0.05)] transition-all active:scale-[0.98]">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-primary/10 p-2 rounded-sm">
+<span class="material-symbols-outlined text-primary" data-icon="qr_code_2">qr_code_2</span>
+</div>
+<span class="text-[10px] font-bold bg-tertiary/10 text-tertiary px-2 py-1 rounded-full uppercase tracking-widest">Processamento Instantâneo</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg mb-1">Pix</h3>
+<p class="text-on-surface-variant text-sm">Aprovação imediata. QR Code gerado após finalizar.</p>
+<div class="mt-4 flex items-center gap-2 text-xs font-bold text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                SELECIONADO
+                            </div>
+</div>
+<!-- Credit Card Option -->
+<div class="group cursor-pointer p-6 rounded-sm bg-surface-container-low border border-white/5 hover:bg-surface-container transition-all active:scale-[0.98]">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-white/5 p-2 rounded-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="credit_card">credit_card</span>
+</div>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg mb-1">Cartão de Crédito</h3>
+<p class="text-on-surface-variant text-sm">Até 12x no cartão via Mercado Pago.</p>
+</div>
+</div>
+</section>
+<!-- Form Details -->
+<section class="glass-panel p-8 rounded-sm border border-white/5 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Nome Completo</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-1 focus:ring-primary/40 rounded-sm text-sm p-3 transition-all" placeholder="Nome impresso ou social" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">E-mail para Acesso</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-1 focus:ring-primary/40 rounded-sm text-sm p-3 transition-all" placeholder="seu@email.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">CPF/CNPJ</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-1 focus:ring-primary/40 rounded-sm text-sm p-3 transition-all" placeholder="000.000.000-00" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Telefone</label>
+<input class="w-full bg-surface-container-highest border-none focus:ring-1 focus:ring-primary/40 rounded-sm text-sm p-3 transition-all" placeholder="(11) 99999-9999" type="text"/>
+</div>
+</div>
+</section>
+<!-- Security Assurance -->
+<div class="flex flex-wrap items-center gap-6 p-4 border-t border-white/5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="verified_user">verified_user</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Checkout Seguro</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="encrypted">encrypted</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">SSL 256-bit AES</span>
+</div>
+<div class="ml-auto opacity-50 grayscale hover:grayscale-0 transition-all flex items-center gap-2">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Powered by</span>
+<div class="h-6 flex items-center px-2 bg-blue-500 rounded-sm">
+<span class="text-white font-bold text-xs italic">mercado pago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary Card -->
+<div class="lg:col-span-5 lg:sticky lg:top-24">
+<div class="bg-surface-container border border-white/10 rounded-sm overflow-hidden shadow-2xl">
+<!-- Premium Header -->
+<div class="relative h-32 bg-gradient-to-br from-surface-container-highest to-surface">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary blur-3xl rounded-full -mr-16 -mt-16"></div>
+</div>
+<div class="relative p-6 h-full flex flex-col justify-end">
+<h3 class="font-headline font-bold text-xl text-on-surface">Resumo da Assinatura</h3>
+<p class="text-on-surface-variant text-xs font-medium">Terminal Kirax v2.4.0 • Enterprise Tier</p>
+</div>
+</div>
+<!-- Details -->
+<div class="p-6 space-y-6">
+<div class="flex items-start justify-between">
+<div class="flex gap-4">
+<div class="w-12 h-12 bg-surface-container-highest flex items-center justify-center rounded-sm border border-white/5">
+<span class="material-symbols-outlined text-secondary" data-icon="storefront">storefront</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Kirax Varejo</h4>
+<p class="text-xs text-on-surface-variant">Licença Mensal</p>
+</div>
+</div>
+<span class="font-headline font-bold text-primary">R$ 197,00</span>
+</div>
+<div class="space-y-3 py-4 border-y border-white/5">
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="text-on-surface">R$ 197,00</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">Taxas de Ativação</span>
+<span class="text-tertiary">R$ 0,00 (Grátis)</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-on-surface-variant">Desconto</span>
+<span class="text-secondary">- R$ 0,00</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-headline font-bold text-lg">Total</span>
+<div class="text-right">
+<span class="block font-headline font-black text-3xl text-primary tracking-tighter">R$ 197,00</span>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Cobrança Mensal</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary-container font-headline font-bold py-4 rounded-sm transition-transform active:scale-95 shadow-[0_0_30px_rgba(161,250,255,0.2)] flex items-center justify-center gap-2">
+                            FINALIZAR PAGAMENTO
+                            <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="text-center">
+<p class="text-[10px] text-on-surface-variant leading-relaxed">
+                                Ao clicar em finalizar, você concorda com nossos <a class="underline text-primary" href="#">Termos de Serviço</a> e as políticas de privacidade do Kirax e Mercado Pago.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Mini Support Card -->
+<div class="mt-6 p-4 bg-surface-container-low border border-white/5 rounded-sm flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<p class="text-xs font-bold">Precisa de ajuda?</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Suporte 24/7 via WhatsApp</p>
+</div>
+<button class="ml-auto p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-[#131314]/90 border-t border-white/5 backdrop-blur-md">
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="point_of_sale">point_of_sale</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Sales</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-400/10 rounded-sm py-1 px-4" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Checkout</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Support</span>
+</a>
+</nav>
+</body></html>

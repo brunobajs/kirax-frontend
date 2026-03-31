@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRAX | Dashboard de Performance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a1faff",
+                        "on-secondary": "#390050",
+                        "on-error-container": "#ffa8a3",
+                        "primary-container": "#00f4fe",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "surface-tint": "#a1faff",
+                        "surface-container": "#1a191b",
+                        "secondary-fixed": "#f1c1ff",
+                        "surface-dim": "#0e0e0f",
+                        "secondary-dim": "#bb00fc",
+                        "error": "#ff716c",
+                        "outline": "#767576",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-surface": "#ffffff",
+                        "surface-bright": "#2c2c2d",
+                        "background": "#0e0e0f",
+                        "on-background": "#ffffff",
+                        "surface-variant": "#262627",
+                        "tertiary-dim": "#beee00",
+                        "surface-container-high": "#201f21",
+                        "error-container": "#9f0519",
+                        "on-primary-fixed": "#004346",
+                        "secondary": "#d674ff",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "on-primary": "#006165",
+                        "tertiary": "#f3ffca",
+                        "inverse-primary": "#006a6e",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-container": "#4a5e00",
+                        "on-surface-variant": "#adaaab",
+                        "inverse-on-surface": "#565556",
+                        "on-primary-container": "#00575b",
+                        "inverse-surface": "#fcf8f9",
+                        "primary-fixed-dim": "#00e5ee",
+                        "error-dim": "#d7383b",
+                        "on-secondary-container": "#fff5fc",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "secondary-container": "#9900cf",
+                        "surface-container-highest": "#262627",
+                        "surface-container-low": "#131314",
+                        "on-primary-fixed-variant": "#006266",
+                        "primary-fixed": "#00f4fe",
+                        "primary-dim": "#00e5ee",
+                        "tertiary-fixed-dim": "#beee00",
+                        "on-error": "#490006",
+                        "tertiary-fixed": "#cafd00",
+                        "tertiary-container": "#cafd00",
+                        "surface": "#0e0e0f",
+                        "on-tertiary": "#516700",
+                        "outline-variant": "#484849",
+                        "on-secondary-fixed": "#580079"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 scrollbar-hide">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0f] border-b border-[#1a191b] flex justify-between items-center w-full px-4 md:px-6 h-16 sticky top-0 z-[60]">
+<div class="flex items-center gap-3 md:gap-4">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20 flex-shrink-0">
+<img alt="Perfil do usuário" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC33-aHE6iS9iUjGYXhDoutpUhUy2MhWDXVO_YNngH9XOrybFn7dcmUzxe72LFARTBKWhyUAdONGvuYFpLX7BRVOubnqjJDbqKPRof7PRRPPzX8VphmkfYYzc2xJn73-4Mx8v4wjj7OGpyjHJZF3d71RgNsO9MU66pHyRqCYy9FsI5Csa5BHqENcJUkUPeh-wBsHpQYFAUtOESLFE-QNgG27J_FmhVbB5yrD4GWtiDSN3cLOf3whhT0CaQczDGeAbSBlo2bmYEabs_7"/>
+</div>
+<h1 class="text-lg md:text-xl font-bold tracking-tighter text-[#a1faff] uppercase font-headline">KIRAX</h1>
+</div>
+<div class="flex items-center gap-2 md:gap-6">
+<nav class="hidden md:flex items-center gap-8 font-label text-[10px] uppercase tracking-widest">
+<a class="text-[#a1faff] transition-colors" href="#">Início</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Funil</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Pedidos</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Chat</a>
+</nav>
+<button class="text-[#a1faff] hover:bg-[#1a191b] transition-colors p-2 rounded-sm active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="min-h-screen p-4 md:p-8 max-w-[1600px] mx-auto pb-24">
+<!-- Hero Section: Macro Metrics (KPIs) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0.5 bg-surface-container-lowest rounded-sm overflow-hidden mb-8 border border-outline-variant/10">
+<div class="bg-surface-container p-6">
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold mb-2">Taxa de Retenção</p>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-tertiary">94.2%</h2>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-sm">+2.4% Δ</span>
+<div class="h-1 flex-1 bg-surface-container-highest">
+<div class="h-full bg-tertiary w-[94%]"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-6">
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold mb-2">Risco de Churn</p>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-error">12</h2>
+<p class="text-[10px] text-error-dim mt-4 uppercase tracking-wider">Alarmes Críticos Ativos</p>
+</div>
+<div class="bg-surface-container p-6">
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold mb-2">ROI Projetado</p>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-primary">4.8x</h2>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-sm">Acima da Meta</span>
+</div>
+</div>
+<div class="bg-surface-container p-6">
+<p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold mb-2">Valor Vitalício (LTV)</p>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">R$ 2.4M</h2>
+<p class="text-[10px] text-on-surface-variant mt-4 uppercase tracking-wider">Estimado Q4</p>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Churn Alarms (Critical Column) -->
+<div class="lg:col-span-4 space-y-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-headline font-bold text-lg uppercase tracking-tight flex items-center gap-2">
+<span class="w-2 h-2 bg-error rounded-full animate-pulse"></span>
+                        Alarmes de Churn
+                    </h3>
+<span class="text-[10px] text-error font-mono font-bold">FEED EM TEMPO REAL</span>
+</div>
+<div class="space-y-4">
+<!-- Alarm Card 1 -->
+<div class="bg-surface-container-high p-4 border-l-2 border-error">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-headline font-bold text-on-surface">VORTEX_LOGISTICS</h4>
+<p class="text-[11px] text-on-surface-variant">ID da Conta: #VL-9021</p>
+</div>
+<span class="text-[10px] font-mono text-error bg-error/10 px-2 py-1">20d INATIVO</span>
+</div>
+<p class="text-sm text-on-surface/80 leading-relaxed mb-4">O cliente não realiza um pedido de rotina há 20 dias. Média histórica: 4,5 dias.</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-[10px] font-bold uppercase tracking-widest bg-error text-on-error rounded-sm hover:opacity-90 transition-opacity">Iniciar Recuperação</button>
+<button class="px-3 py-2 bg-surface-container-highest text-on-surface-variant rounded-sm hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Alarm Card 2 -->
+<div class="bg-surface-container-high p-4 border-l-2 border-secondary">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-headline font-bold text-on-surface">NEO_CONSTRUCT</h4>
+<p class="text-[11px] text-on-surface-variant">ID da Conta: #NC-4410</p>
+</div>
+<span class="text-[10px] font-mono text-secondary bg-secondary/10 px-2 py-1">QUEDA VOL -40%</span>
+</div>
+<p class="text-sm text-on-surface/80 leading-relaxed mb-4">Diminuição significativa na frequência de pedidos observada no último ciclo de 14 dias.</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-[10px] font-bold uppercase tracking-widest bg-secondary text-on-secondary rounded-sm hover:opacity-90 transition-opacity">Analisar Saúde</button>
+</div>
+</div>
+<!-- Alarm Card 3 -->
+<div class="bg-surface-container p-4 opacity-60">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-headline font-bold text-on-surface">PHOENIX_LABS</h4>
+<p class="text-[11px] text-on-surface-variant">ID da Conta: #PL-0012</p>
+</div>
+<span class="text-[10px] font-mono text-on-surface-variant bg-surface-container-highest px-2 py-1">RESOLVIDO</span>
+</div>
+<p class="text-sm text-on-surface/80 leading-relaxed">Pico de engajamento detectado após o encerramento do ticket de suporte #881.</p>
+</div>
+</div>
+</div>
+<!-- Retention Pulse & Order Volume -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Pulse Monitor Chart -->
+<div class="bg-surface-container-low p-6 rounded-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 md:p-6 flex flex-wrap justify-end gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Toque Humano</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Conversão</span>
+</div>
+</div>
+<h3 class="font-headline font-bold uppercase tracking-[0.2em] text-on-surface-variant text-[10px] mb-12 lg:mb-8">Monitor de Pulso / Velocidade 30D</h3>
+<div class="h-[200px] md:h-[240px] flex items-end justify-between gap-1 relative border-b border-outline-variant/20">
+<!-- Abstract Sparkline Visualization -->
+<div class="flex-1 bg-secondary/20 h-[40%] hover:h-[45%] transition-all duration-500 rounded-t-sm relative group/bar">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] opacity-0 group-hover/bar:opacity-100 transition-opacity text-secondary font-mono">2.4k</div>
+</div>
+<div class="flex-1 bg-secondary/20 h-[60%] hover:h-[65%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/20 h-[85%] hover:h-[90%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/20 h-[55%] hover:h-[60%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/20 h-[70%] hover:h-[75%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/20 h-[95%] hover:h-[100%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/20 h-[40%] hover:h-[45%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/20 h-[65%] hover:h-[70%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/20 h-[30%] hover:h-[35%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/20 h-[80%] hover:h-[85%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-tertiary/20 h-[50%] hover:h-[55%] transition-all duration-500 rounded-t-sm"></div>
+<div class="flex-1 bg-secondary/20 h-[60%] hover:h-[65%] transition-all duration-500 rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-4 text-[9px] font-mono text-on-surface-variant uppercase">
+<span>Dia 01</span>
+<span>Dia 15</span>
+<span>Hoje</span>
+</div>
+</div>
+<!-- High-Density Data Table -->
+<div class="bg-surface-container overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant/10 flex items-center justify-between">
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest">Pedidos de Rotina Ativos</h3>
+<button class="text-[10px] font-bold text-primary flex items-center gap-1">
+                            VER LOG COMPLETO
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="bg-surface-container-lowest text-[10px] uppercase tracking-widest text-on-surface-variant">
+<th class="px-6 py-3 font-bold">Conta</th>
+<th class="px-6 py-3 font-bold">Frequência</th>
+<th class="px-6 py-3 font-bold">Status</th>
+<th class="px-6 py-3 font-bold">Próximo Ciclo</th>
+<th class="px-6 py-3 font-bold text-right">Valor</th>
+</tr>
+</thead>
+<tbody class="text-xs font-mono">
+<tr class="bg-surface-container-low hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4 font-headline font-bold text-on-surface">SYNTH_WORKS</td>
+<td class="px-6 py-4 text-on-surface-variant">RECOR. 7 DIAS</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                            Ativo
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">24 OUT</td>
+<td class="px-6 py-4 text-right text-primary">R$ 12.440,00</td>
+</tr>
+<tr class="bg-surface-container hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4 font-headline font-bold text-on-surface border-l-2 border-primary-dim">CYBER_DYNE</td>
+<td class="px-6 py-4 text-on-surface-variant">RECOR. 3 DIAS</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                            Processando
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">22 OUT</td>
+<td class="px-6 py-4 text-right text-primary">R$ 45.000,00</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4 font-headline font-bold text-on-surface">GRID_LOCK</td>
+<td class="px-6 py-4 text-on-surface-variant">RECOR. 14 DIAS</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+                                            Pausado
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">MANUAL</td>
+<td class="px-6 py-4 text-right text-primary">R$ 8.200,00</td>
+</tr>
+<tr class="bg-surface-container hover:bg-surface-container-highest transition-colors group">
+<td class="px-6 py-4 font-headline font-bold text-on-surface">NOVA_CORE</td>
+<td class="px-6 py-4 text-on-surface-variant">DIÁRIO</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                            Ativo
+                                        </span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">21 OUT</td>
+<td class="px-6 py-4 text-right text-primary">R$ 1.200,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Action Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-gradient-to-br from-primary/20 to-primary-container/5 p-6 rounded-sm flex items-center justify-between group cursor-pointer border border-primary/10">
+<div>
+<h4 class="font-headline font-bold text-primary uppercase tracking-wider">Lançar Campanha de Retenção</h4>
+<p class="text-[11px] text-on-surface-variant mt-1">Segmentando top 5% contas com risco de churn</p>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform">bolt</span>
+</div>
+<div class="bg-surface-container-highest p-6 rounded-sm flex items-center justify-between group cursor-pointer border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+<div>
+<h4 class="font-headline font-bold text-secondary uppercase tracking-wider">Gerar Relatório de Volume</h4>
+<p class="text-[11px] text-on-surface-variant mt-1">Exportar PDF com análise do Q3 de pedidos de rotina</p>
+</div>
+<span class="material-symbols-outlined text-secondary">analytics</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-4 pt-2 bg-[#131314]/90 backdrop-blur-xl border-t border-[#1a191b] shadow-[0_-4px_20px_rgba(161,250,255,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-[#a1faff] bg-[#a1faff]/10 rounded-sm px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Funil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">speed</span>
+<span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[9px] font-medium uppercase tracking-widest mt-1">Ajustes</span>
+</a>
+</nav>
+</body></html>

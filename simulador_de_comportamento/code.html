@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEURAL_OS_v4.2 | SIMULADOR_DE_RESPOSTA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#767576",
+              "surface-container-lowest": "#000000",
+              "surface-container": "#1a191b",
+              "primary-container": "#00f4fe",
+              "primary-fixed": "#00f4fe",
+              "inverse-primary": "#006a6e",
+              "tertiary-fixed": "#cafd00",
+              "background": "#0e0e0f",
+              "secondary-fixed": "#f1c1ff",
+              "on-primary-fixed-variant": "#006266",
+              "on-secondary": "#390050",
+              "outline-variant": "#484849",
+              "on-primary-container": "#00575b",
+              "surface-container-highest": "#262627",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface": "#0e0e0f",
+              "on-surface": "#ffffff",
+              "tertiary-dim": "#beee00",
+              "on-primary-fixed": "#004346",
+              "on-tertiary-fixed": "#3a4a00",
+              "error": "#ff716c",
+              "on-surface-variant": "#adaaab",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-variant": "#262627",
+              "on-tertiary": "#516700",
+              "error-dim": "#d7383b",
+              "on-background": "#ffffff",
+              "tertiary-fixed-dim": "#beee00",
+              "on-error": "#490006",
+              "on-error-container": "#ffa8a3",
+              "primary-dim": "#00e5ee",
+              "secondary-dim": "#bb00fc",
+              "on-tertiary-container": "#4a5e00",
+              "secondary-container": "#9900cf",
+              "surface-tint": "#a1faff",
+              "primary-fixed-dim": "#00e5ee",
+              "tertiary": "#f3ffca",
+              "tertiary-container": "#cafd00",
+              "on-secondary-fixed": "#580079",
+              "secondary": "#d674ff",
+              "surface-dim": "#0e0e0f",
+              "surface-container-high": "#201f21",
+              "on-tertiary-fixed-variant": "#526900",
+              "error-container": "#9f0519",
+              "primary": "#a1faff",
+              "inverse-surface": "#fcf8f9",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "surface-container-low": "#131314",
+              "on-secondary-container": "#fff5fc",
+              "surface-bright": "#2c2c2d"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #484849; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopAppBar Component -->
+<header class="bg-[#0e0e0f]/80 backdrop-blur-xl border-b border-cyan-500/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex justify-between items-center w-full px-6 py-4 docked full-width top-0 sticky z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400" data-icon="memory">memory</span>
+<h1 class="text-2xl font-black text-cyan-400 drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-['Space_Grotesk'] tracking-tighter uppercase">NEURAL_OS_v4.2</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 text-sm">
+<span class="text-slate-500 hover:text-cyan-200 transition-colors cursor-pointer font-bold tracking-widest uppercase text-xs">DIAGNOSTICS</span>
+<span class="text-cyan-400 shadow-[0_2px_0_0_rgba(161,250,255,1)] font-bold tracking-widest uppercase text-xs">SIMULADOR_DE_RESPOSTA</span>
+</div>
+<div class="h-8 w-8 rounded-full border border-cyan-500/30 flex items-center justify-center bg-cyan-500/10">
+<span class="material-symbols-outlined text-xs text-cyan-400" data-icon="person">person</span>
+</div>
+</div>
+</header>
+<!-- Sidebar (NavigationDrawer) -->
+<aside class="hidden md:flex flex-col h-screen w-72 fixed left-0 top-0 z-40 bg-[#131314]/90 backdrop-blur-2xl border-r border-cyan-500/5 shadow-[10px_0_30px_rgba(0,0,0,0.8)] pt-24">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-3 bg-white/5 rounded-sm">
+<div class="w-10 h-10 bg-gradient-to-br from-primary to-primary-container rounded-sm flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<div>
+<div class="text-cyan-400 font-bold text-sm tracking-widest uppercase">CORE_ADMIN</div>
+<div class="text-slate-500 text-[10px] font-bold uppercase">Level 7 Access</div>
+</div>
+</div>
+</div>
+<nav class="flex flex-col flex-1">
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 group transition-all font-['Inter'] text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined group-hover:text-cyan-400" data-icon="analytics">analytics</span>
+<span>Neural Monitor</span>
+</a>
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 group transition-all font-['Inter'] text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined group-hover:text-cyan-400" data-icon="database">database</span>
+<span>Knowledge Core</span>
+</a>
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 flex items-center gap-4 group transition-all font-['Inter'] text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined group-hover:text-cyan-400" data-icon="rss_feed">rss_feed</span>
+<span>Live Sources</span>
+</a>
+<a class="bg-gradient-to-r from-cyan-500/20 to-transparent text-cyan-400 border-l-2 border-cyan-400 py-4 px-6 flex items-center gap-4 font-['Inter'] text-xs font-bold tracking-widest uppercase" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>Behavior Sim</span>
+</a>
+</nav>
+<div class="p-6">
+<div class="bg-surface-container-highest p-4 rounded-sm border-l-2 border-tertiary">
+<div class="text-[10px] text-on-surface-variant font-bold uppercase mb-1">SYSTEM_STABLE</div>
+<div class="h-1 w-full bg-surface-container overflow-hidden">
+<div class="h-full bg-tertiary w-3/4"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:pl-72 pt-4 pb-20 md:pb-4 min-h-screen flex flex-col">
+<div class="px-6 flex flex-col flex-1 gap-6 max-w-[1600px] mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 py-4">
+<div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tighter text-on-surface uppercase leading-none">SIMULADOR_DE_RESPOSTA</h2>
+<p class="text-on-surface-variant text-sm mt-2 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                        Ambiente de Depuração de Redes Neurais v8.0
+                    </p>
+</div>
+<!-- Control Sliders -->
+<div class="glass-panel p-4 rounded-sm border border-outline-variant/20 flex flex-col sm:flex-row gap-6">
+<div class="space-y-2 min-w-[180px]">
+<div class="flex justify-between text-[10px] font-bold uppercase text-on-surface-variant">
+<span>Temperatura</span>
+<span class="text-primary">0.7</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+<div class="space-y-2 min-w-[180px]">
+<div class="flex justify-between text-[10px] font-bold uppercase text-on-surface-variant">
+<span>Criatividade</span>
+<span class="text-secondary">High</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" type="range"/>
+</div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 mb-8">
+<!-- LEFT: Chat Interface (High Density) -->
+<div class="lg:col-span-7 flex flex-col h-[700px] bg-surface-container-low rounded-sm overflow-hidden border border-outline-variant/10 shadow-2xl">
+<div class="bg-surface-container-high px-4 py-3 flex items-center justify-between border-b border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="forum">forum</span>
+<span class="text-xs font-bold tracking-widest uppercase">CONVERSA_DE_TESTE</span>
+</div>
+<span class="text-[10px] font-mono text-primary/60 tracking-tighter">SESSION_ID: X-902</span>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- User Message -->
+<div class="flex flex-col items-end">
+<div class="max-w-[85%] bg-surface-container-highest p-4 rounded-sm border-r-2 border-secondary shadow-lg">
+<p class="text-sm leading-relaxed">Explique o processo de fusão nuclear em estrelas de sequência principal e como isso gera elementos pesados.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold mt-2 uppercase">Operador • 14:02:11</span>
+</div>
+<!-- AI Response -->
+<div class="flex flex-col items-start">
+<div class="max-w-[90%] bg-surface-container p-5 rounded-sm border-l-2 border-primary shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/5 to-transparent pointer-events-none"></div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="smart_toy">smart_toy</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">NEURAL_OS_CORE</span>
+</div>
+<p class="text-sm leading-relaxed text-on-surface mb-4">
+                                    A fusão nuclear em estrelas de sequência principal ocorre primariamente através da cadeia próton-próton. O hidrogênio é convertido em hélio sob pressões e temperaturas extremas. No entanto, elementos mais pesados que o ferro são gerados via processos de captura de nêutrons em eventos catastróficos...
+                                </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-highest px-2 py-1 text-[9px] font-bold text-primary-container border border-primary-container/20 rounded-sm cursor-help hover:bg-primary/10 transition-colors uppercase">[REF: CORE-01]</span>
+<span class="bg-surface-container-highest px-2 py-1 text-[9px] font-bold text-primary-container border border-primary-container/20 rounded-sm cursor-help hover:bg-primary/10 transition-colors uppercase">[REF: ASTRO-88]</span>
+</div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-bold mt-2 uppercase">SISTEMA • 14:02:14 • LATENCY: 24ms</span>
+</div>
+<!-- Active Typing State -->
+<div class="flex items-center gap-3 text-primary-dim/40 italic text-xs">
+<span class="material-symbols-outlined animate-spin" data-icon="settings">settings</span>
+<span>Analisando vetores de contexto...</span>
+</div>
+</div>
+<!-- Input Box -->
+<div class="p-4 bg-surface-container-high border-t border-outline-variant/20">
+<div class="relative group">
+<textarea class="w-full bg-surface-container-highest border-none rounded-sm py-3 px-4 text-sm focus:ring-1 focus:ring-primary/40 placeholder:text-on-surface-variant/40 min-h-[50px] resize-none" placeholder="ENVIAR COMANDO DE DEPURAÇÃO..."></textarea>
+<button class="absolute right-3 bottom-3 text-primary hover:text-primary-container transition-transform active:scale-90">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RIGHT: Raciocínio & Fontes -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Panel: Raciocínio da IA -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-sm flex-1 flex flex-col shadow-xl overflow-hidden">
+<div class="bg-surface-container-high px-4 py-3 border-b border-outline-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="psychology_alt">psychology_alt</span>
+<span class="text-xs font-bold tracking-widest uppercase">CADEIA_DE_RACIOCÍNIO</span>
+</div>
+<div class="p-5 flex-1 space-y-4">
+<!-- Process Step -->
+<div class="relative pl-6 border-l border-outline-variant/30 py-1">
+<div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-secondary"></div>
+<div class="text-[10px] font-bold text-secondary uppercase mb-1">Passo 1: Extração Semântica</div>
+<p class="text-[11px] text-on-surface-variant leading-tight">Identificação de entidades 'Fusão Nuclear', 'Estrelas' e 'Elementos Pesados'.</p>
+</div>
+<!-- Process Step -->
+<div class="relative pl-6 border-l border-outline-variant/30 py-1">
+<div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-secondary"></div>
+<div class="text-[10px] font-bold text-secondary uppercase mb-1">Passo 2: Busca Vetorial (RAG)</div>
+<p class="text-[11px] text-on-surface-variant leading-tight">Consultando 'Knowledge Core' para documentos com similaridade &gt; 0.89.</p>
+</div>
+<!-- Pulse Monitor Mockup -->
+<div class="bg-surface-container-lowest p-3 rounded-sm border border-secondary/10 mt-6 h-24 relative overflow-hidden">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[9px] font-bold uppercase text-secondary/70">Fluxo de Tokens</span>
+<span class="text-[9px] font-mono text-tertiary">STABLE_LATENCY</span>
+</div>
+<div class="flex items-end gap-[2px] h-10 w-full">
+<div class="flex-1 bg-secondary/20 h-4"></div>
+<div class="flex-1 bg-secondary/40 h-8"></div>
+<div class="flex-1 bg-secondary/30 h-6"></div>
+<div class="flex-1 bg-secondary/80 h-10"></div>
+<div class="flex-1 bg-tertiary/60 h-7"></div>
+<div class="flex-1 bg-secondary/40 h-5"></div>
+<div class="flex-1 bg-secondary/20 h-4"></div>
+<div class="flex-1 bg-secondary/10 h-2"></div>
+<div class="flex-1 bg-secondary/40 h-6"></div>
+<div class="flex-1 bg-tertiary/40 h-8"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Panel: Citações de Fontes -->
+<div class="bg-surface-container-low border border-outline-variant/10 rounded-sm h-[300px] flex flex-col shadow-xl overflow-hidden">
+<div class="bg-surface-container-high px-4 py-3 border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="menu_book">menu_book</span>
+<span class="text-xs font-bold tracking-widest uppercase">CITAÇÕES_DE_FONTES</span>
+</div>
+<span class="bg-tertiary-container/10 text-tertiary text-[9px] px-2 py-0.5 rounded-full font-bold">2 FONTES ATIVAS</span>
+</div>
+<div class="p-4 overflow-y-auto space-y-3">
+<!-- Source Card -->
+<div class="group bg-surface-container-high hover:bg-surface-container-highest p-3 rounded-sm transition-colors border-l-2 border-tertiary/30 hover:border-tertiary cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-bold text-tertiary uppercase">[CORE-01] MANUAL_ASTROFISICA</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-tertiary transition-colors" data-icon="open_in_new">open_in_new</span>
+</div>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 italic">"...a pressão degenerativa de elétrons interrompe o colapso gravitacional em anãs brancas..."</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="text-[9px] font-bold uppercase text-on-surface-variant">Confiança:</span>
+<span class="text-[9px] font-bold text-tertiary">98.2%</span>
+</div>
+</div>
+<!-- Source Card -->
+<div class="group bg-surface-container-high hover:bg-surface-container-highest p-3 rounded-sm transition-colors border-l-2 border-tertiary/30 hover:border-tertiary cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="text-[10px] font-bold text-tertiary uppercase">[ASTRO-88] NASA_DATA_ARCHIVE</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-tertiary transition-colors" data-icon="open_in_new">open_in_new</span>
+</div>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 italic">"Observações espectroscópicas de supernovas tipo Ia revelam assinaturas de nucleossíntese..."</p>
+<div class="mt-2 flex items-center gap-2">
+<span class="text-[9px] font-bold uppercase text-on-surface-variant">Confiança:</span>
+<span class="text-[9px] font-bold text-tertiary">94.5%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-2 pt-1 bg-[#0e0e0f]/90 backdrop-blur-md border-t border-cyan-900/30 shadow-[0_-4px_20px_rgba(0,245,255,0.05)] z-50 rounded-t-sm">
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Monitor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Curation</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="lan">lan</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sources</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-500/10 py-2 rounded-sm active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="model_training">model_training</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sim</span>
+</a>
+</nav>
+<!-- Floating Action Button (Only on main dashboard) -->
+<button class="fixed bottom-24 md:bottom-8 right-8 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-[0_0_20px_rgba(161,250,255,0.4)] flex items-center justify-center active:scale-95 transition-all duration-300 z-40 group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+</button>
+</body></html>

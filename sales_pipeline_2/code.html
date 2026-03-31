@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC_CRM | Sales Funnel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a1faff",
+                        "on-secondary": "#390050",
+                        "on-error-container": "#ffa8a3",
+                        "primary-container": "#00f4fe",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "surface-tint": "#a1faff",
+                        "surface-container": "#1a191b",
+                        "secondary-fixed": "#f1c1ff",
+                        "surface-dim": "#0e0e0f",
+                        "secondary-dim": "#bb00fc",
+                        "error": "#ff716c",
+                        "outline": "#767576",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-surface": "#ffffff",
+                        "surface-bright": "#2c2c2d",
+                        "background": "#0e0e0f",
+                        "on-background": "#ffffff",
+                        "surface-variant": "#262627",
+                        "tertiary-dim": "#beee00",
+                        "surface-container-high": "#201f21",
+                        "error-container": "#9f0519",
+                        "on-primary-fixed": "#004346",
+                        "secondary": "#d674ff",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "on-primary": "#006165",
+                        "tertiary": "#f3ffca",
+                        "inverse-primary": "#006a6e",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-container": "#4a5e00",
+                        "on-surface-variant": "#adaaab",
+                        "inverse-on-surface": "#565556",
+                        "on-primary-container": "#00575b",
+                        "inverse-surface": "#fcf8f9",
+                        "primary-fixed-dim": "#00e5ee",
+                        "error-dim": "#d7383b",
+                        "on-secondary-container": "#fff5fc",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "secondary-container": "#9900cf",
+                        "surface-container-highest": "#262627",
+                        "surface-container-low": "#131314",
+                        "on-primary-fixed-variant": "#006266",
+                        "primary-fixed": "#00f4fe",
+                        "primary-dim": "#00e5ee",
+                        "tertiary-fixed-dim": "#beee00",
+                        "on-error": "#490006",
+                        "tertiary-fixed": "#cafd00",
+                        "tertiary-container": "#cafd00",
+                        "surface": "#0e0e0f",
+                        "on-tertiary": "#516700",
+                        "outline-variant": "#484849",
+                        "on-secondary-fixed": "#580079"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 25, 27, 0.6);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-background font-body select-none">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0f] dark:bg-[#0e0e0f] border-b border-[#1a191b] dark:border-[#1a191b] fixed top-0 left-0 z-50 flex justify-between items-center w-full px-6 h-16">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young professional man with short dark hair and a confident expression in a tech office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKa3b5s48yy1QchUO251Be1VB50Z1Pt6fhVCjm_n9M84lxGGvID2oahemRugo5L2DuO1kueEvlNjhdfOHxB2ySdu2WfNApaHHfzozAXVVccVrUNu4D28ZzJwtXuCHONKGo5CU970O4UpC8GHhzS6_jcI5DVsj7bBOYaiLqlIHD1fKW-wWqXGjZCfGQV5GcGvlcAD7kKbwWQYZ0xRaX0UtFopR77t4rvoG3QiXb6_UYFVtQh98ggvwt_h9pU0TpFjJDeX2_g4gNS6EP"/>
+</div>
+<h1 class="text-xl font-bold tracking-tighter text-[#a1faff] uppercase font-headline">KINETIC_CRM</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6 text-sm font-medium uppercase tracking-widest font-label">
+<a class="text-[#262627] hover:bg-[#1a191b] transition-colors px-2 py-1" href="#">Home</a>
+<a class="text-[#a1faff] hover:bg-[#1a191b] transition-colors px-2 py-1" href="#">Funnel</a>
+<a class="text-[#262627] hover:bg-[#1a191b] transition-colors px-2 py-1" href="#">Orders</a>
+<a class="text-[#262627] hover:bg-[#1a191b] transition-colors px-2 py-1" href="#">Chat</a>
+<a class="text-[#262627] hover:bg-[#1a191b] transition-colors px-2 py-1" href="#">Setup</a>
+</nav>
+</div>
+<button class="text-[#a1faff] hover:bg-[#1a191b] transition-colors p-2 rounded-sm active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-24 min-h-screen px-4 md:px-8">
+<!-- Dashboard Header -->
+<section class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="text-tertiary font-label text-xs uppercase tracking-[0.2em] mb-1">Revenue Pipeline</p>
+<h2 class="text-4xl font-headline font-bold text-on-surface">$2.4M <span class="text-lg font-light text-on-surface-variant">Potential</span></h2>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-highest px-4 py-2 text-xs font-bold uppercase tracking-widest border border-outline-variant hover:bg-surface-bright transition-all">
+                    Filter View
+                </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-6 py-2 text-xs uppercase tracking-widest rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.2)] hover:scale-105 transition-transform">
+                    New Lead
+                </button>
+</div>
+</section>
+<!-- Kanban Funnel -->
+<div class="flex flex-col md:flex-row gap-4 overflow-x-auto scrollbar-hide pb-4">
+<!-- Stage: Prospecting -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-primary-dim py-1">
+<span class="font-headline font-bold text-primary uppercase tracking-tighter">Prospecting</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm">12</span>
+</div>
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-4 border-l-2 border-primary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">CyberDyne Systems</h3>
+<span class="text-primary-fixed font-mono text-xs">$45,000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Sarah Connor</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container-highest flex items-center justify-center text-[10px] text-on-surface-variant">MK</div>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">3 Days Cold</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-4 border-l-2 border-primary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Spectre Corp</h3>
+<span class="text-primary-fixed font-mono text-xs">$120,000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Franz Oberhauser</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-xs" data-icon="warning">warning</span>
+<span class="text-[10px] font-label text-error uppercase tracking-widest">Urgent</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">12h Left</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Qualification -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-secondary-dim py-1">
+<span class="font-headline font-bold text-secondary uppercase tracking-tighter">Qualification</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm">8</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-secondary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Tyrell Nexus</h3>
+<span class="text-secondary-fixed font-mono text-xs">$890,000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Eldon Tyrell</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full mb-3 overflow-hidden">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-label text-secondary uppercase tracking-widest">Verified Budget</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="attachment">attachment</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Proposal -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-tertiary-dim py-1">
+<span class="font-headline font-bold text-tertiary uppercase tracking-tighter">Proposal</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm">5</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-tertiary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Wayne Ent.</h3>
+<span class="text-tertiary-fixed font-mono text-xs">$2.1M</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Lucius Fox</span>
+</div>
+<div class="p-3 bg-surface-container-highest/50 rounded-sm mb-4">
+<p class="text-[10px] text-on-surface-variant italic">"Awaiting final signature on procurement clause v2.1..."</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[16px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] font-label text-tertiary uppercase tracking-widest">Reviewing</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">Ver 4.0</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 border-l-2 border-tertiary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Oscorp Ind.</h3>
+<span class="text-tertiary-fixed font-mono text-xs">$340,000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Norman Osborn</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]" data-icon="history">history</span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">Sent 2h ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Closing -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-on-secondary-fixed-variant py-1">
+<span class="font-headline font-bold text-secondary-dim uppercase tracking-tighter">Closing</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm">2</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-secondary-dim border-dashed opacity-80 group hover:opacity-100 hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Stark Industries</h3>
+<span class="text-secondary-fixed font-mono text-xs">$5.4M</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Pepper Potts</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-dim text-[16px]" data-icon="contract">contract</span>
+<span class="text-[10px] font-label text-secondary-dim uppercase tracking-widest">Legal Review</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<section class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container rounded-sm p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full -mr-32 -mt-32"></div>
+<h4 class="font-headline font-bold text-xl mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="monitoring">monitoring</span>
+                    Funnel Velocity
+                </h4>
+<div class="h-48 flex items-end justify-between gap-1">
+<div class="w-full bg-surface-container-highest h-[20%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">12%</div>
+</div>
+<div class="w-full bg-surface-container-highest h-[45%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">28%</div>
+</div>
+<div class="w-full bg-primary h-[85%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">64%</div>
+</div>
+<div class="w-full bg-surface-container-highest h-[30%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">18%</div>
+</div>
+<div class="w-full bg-surface-container-highest h-[15%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">9%</div>
+</div>
+<div class="w-full bg-surface-container-highest h-[40%] relative group">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">24%</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-label text-on-surface-variant uppercase tracking-widest">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6 flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest mb-4">Pipeline Health</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Win Probability</span>
+<span class="text-xs font-bold text-tertiary">74.2%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Avg Deal Cycle</span>
+<span class="text-xs font-bold text-on-surface">18 Days</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Stagnant Deals</span>
+<span class="text-xs font-bold text-error">4</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full border border-primary/20 py-3 text-[10px] font-bold uppercase tracking-[0.3em] text-primary hover:bg-primary/5 transition-colors">
+                    Download Report
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#131314]/80 backdrop-blur-xl border-t border-[#1a191b] shadow-[0_-4px_20px_rgba(161,250,255,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-[#262627] opacity-60 hover:text-[#a1faff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#a1faff] bg-[#a1faff]/10 rounded-sm px-3 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Funnel</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#262627] opacity-60 hover:text-[#a1faff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#262627] opacity-60 hover:text-[#a1faff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#262627] opacity-60 hover:text-[#a1faff] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Setup</span>
+</a>
+</nav>
+</body></html>

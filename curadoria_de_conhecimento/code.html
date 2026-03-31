@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEURAL_OS v4.2 - Núcleo de Conhecimento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#767576",
+              "surface-container-lowest": "#000000",
+              "surface-container": "#1a191b",
+              "primary-container": "#00f4fe",
+              "primary-fixed": "#00f4fe",
+              "inverse-primary": "#006a6e",
+              "tertiary-fixed": "#cafd00",
+              "background": "#0e0e0f",
+              "secondary-fixed": "#f1c1ff",
+              "on-primary-fixed-variant": "#006266",
+              "on-secondary": "#390050",
+              "outline-variant": "#484849",
+              "on-primary-container": "#00575b",
+              "surface-container-highest": "#262627",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface": "#0e0e0f",
+              "on-surface": "#ffffff",
+              "tertiary-dim": "#beee00",
+              "on-primary-fixed": "#004346",
+              "on-tertiary-fixed": "#3a4a00",
+              "error": "#ff716c",
+              "on-surface-variant": "#adaaab",
+              "on-secondary-fixed-variant": "#8400b3",
+              "surface-variant": "#262627",
+              "on-tertiary": "#516700",
+              "error-dim": "#d7383b",
+              "on-background": "#ffffff",
+              "tertiary-fixed-dim": "#beee00",
+              "on-error": "#490006",
+              "on-error-container": "#ffa8a3",
+              "primary-dim": "#00e5ee",
+              "secondary-dim": "#bb00fc",
+              "on-tertiary-container": "#4a5e00",
+              "secondary-container": "#9900cf",
+              "surface-tint": "#a1faff",
+              "primary-fixed-dim": "#00e5ee",
+              "tertiary": "#f3ffca",
+              "tertiary-container": "#cafd00",
+              "on-secondary-fixed": "#580079",
+              "secondary": "#d674ff",
+              "surface-dim": "#0e0e0f",
+              "surface-container-high": "#201f21",
+              "on-tertiary-fixed-variant": "#526900",
+              "error-container": "#9f0519",
+              "primary": "#a1faff",
+              "inverse-surface": "#fcf8f9",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "surface-container-low": "#131314",
+              "on-secondary-container": "#fff5fc",
+              "surface-bright": "#2c2c2d"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 25, 27, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0f; }
+        ::-webkit-scrollbar-thumb { background: #484849; border-radius: 2px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#0e0e0f]/80 backdrop-blur-xl border-b border-cyan-500/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)] docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400" data-icon="memory">memory</span>
+<h1 class="text-2xl font-black text-cyan-400 drop-shadow-[0_0_8px_rgba(161,250,255,0.4)] font-['Space_Grotesk'] tracking-tighter uppercase">NEURAL_OS_v4.2</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-slate-500 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tighter uppercase" href="#">Neural Monitor</a>
+<a class="text-cyan-400 shadow-[0_2px_0_0_rgba(161,250,255,1)] font-['Space_Grotesk'] tracking-tighter uppercase" href="#">Knowledge Core</a>
+<a class="text-slate-500 hover:text-cyan-200 transition-colors font-['Space_Grotesk'] tracking-tighter uppercase" href="#">Live Sources</a>
+</nav>
+<div class="flex items-center gap-3">
+<span class="text-xs font-mono text-cyan-400/60 hidden sm:block">OP_ID: 992-B</span>
+<div class="w-8 h-8 rounded-sm bg-gradient-to-br from-primary to-primary-container p-px">
+<div class="w-full h-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden lg:flex flex-col h-screen w-72 fixed left-0 top-0 z-40 bg-[#131314]/90 backdrop-blur-2xl border-r border-cyan-500/5 shadow-[10px_0_30px_rgba(0,0,0,0.8)] pt-24">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="psychology">psychology</span>
+</div>
+<div>
+<p class="font-['Inter'] text-xs font-bold tracking-widest uppercase text-primary">CORE_ADMIN</p>
+<p class="text-[10px] text-on-surface-variant">Level 7 Access</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col">
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 font-['Inter'] text-xs font-bold tracking-widest uppercase group transition-all" href="#">
+<div class="flex items-center gap-3 group-hover:translate-x-1 duration-200">
+<span class="material-symbols-outlined text-lg" data-icon="analytics">analytics</span>
+                        Neural Monitor
+                    </div>
+</a>
+<a class="bg-gradient-to-r from-cyan-500/20 to-transparent text-cyan-400 border-l-2 border-cyan-400 py-4 px-6 font-['Inter'] text-xs font-bold tracking-widest uppercase group transition-all" href="#">
+<div class="flex items-center gap-3 group-hover:translate-x-1 duration-200">
+<span class="material-symbols-outlined text-lg" data-icon="database">database</span>
+                        Knowledge Core
+                    </div>
+</a>
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 font-['Inter'] text-xs font-bold tracking-widest uppercase group transition-all" href="#">
+<div class="flex items-center gap-3 group-hover:translate-x-1 duration-200">
+<span class="material-symbols-outlined text-lg" data-icon="rss_feed">rss_feed</span>
+                        Live Sources
+                    </div>
+</a>
+<a class="text-slate-500 py-4 px-6 hover:bg-white/5 font-['Inter'] text-xs font-bold tracking-widest uppercase group transition-all" href="#">
+<div class="flex items-center gap-3 group-hover:translate-x-1 duration-200">
+<span class="material-symbols-outlined text-lg" data-icon="psychology">psychology</span>
+                        Behavior Sim
+                    </div>
+</a>
+</nav>
+<div class="mt-auto p-6 border-t border-white/5">
+<div class="bg-surface-container-low p-4 rounded-sm border border-primary/10">
+<p class="text-[10px] text-on-surface-variant mb-1 uppercase font-bold">System Load</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[42%]"></div>
+</div>
+<p class="text-[10px] text-primary mt-2">SYSTEM_STABLE</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-72 min-h-screen p-4 md:p-8 pb-24 lg:pb-8">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline text-4xl font-black tracking-tighter uppercase text-on-surface mb-2">NÚCLEO_DE_CONHECIMENTO</h2>
+<p class="text-on-surface-variant font-mono text-sm max-w-2xl">REVISÃO DE ENTIDADES EXTRAÍDAS: VALIDE OS FATOS PARA REFORÇAR A REDE NEURAL.</p>
+</div>
+<div class="flex gap-2 p-1 bg-surface-container-low rounded-sm">
+<button class="px-4 py-2 text-[10px] font-bold uppercase bg-surface-container-highest text-primary">Tudo</button>
+<button class="px-4 py-2 text-[10px] font-bold uppercase text-on-surface-variant hover:text-on-surface transition-colors">Vendas</button>
+<button class="px-4 py-2 text-[10px] font-bold uppercase text-on-surface-variant hover:text-on-surface transition-colors">Leads</button>
+<button class="px-4 py-2 text-[10px] font-bold uppercase text-on-surface-variant hover:text-on-surface transition-colors">Sistema</button>
+</div>
+</header>
+<!-- Knowledge Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1: Vendas -->
+<article class="bg-surface-container-low border-l-2 border-primary_dim p-6 flex flex-col gap-4 group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5">VENDAS // SKU_TRACKER</span>
+<span class="text-[10px] text-on-surface-variant font-mono">08:42:11</span>
+</div>
+<div class="py-2">
+<h3 class="text-on-surface-variant text-xs uppercase font-bold mb-1 tracking-widest">Fato Extraído</h3>
+<p class="text-xl font-headline font-bold text-on-surface leading-tight">Preço do SKU-99: R$450,00</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="analytics">analytics</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Confiança IA: 98.4%</span>
+</div>
+<div class="w-full bg-surface-container h-1">
+<div class="bg-secondary h-full w-[98%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary/20 text-tertiary hover:bg-tertiary hover:text-black transition-all group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[8px] font-black uppercase">Validar</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary-fixed/20 text-tertiary-fixed hover:bg-tertiary-fixed hover:text-black transition-all group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+<span class="text-[8px] font-black uppercase">Corrigir</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-error/20 text-error hover:bg-error hover:text-black transition-all group/btn">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span class="text-[8px] font-black uppercase">Rejeitar</span>
+</button>
+</div>
+</article>
+<!-- Card 2: CRM/Leads -->
+<article class="bg-surface-container-low border-l-2 border-secondary p-6 flex flex-col gap-4 group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-mono text-secondary bg-secondary/10 px-2 py-0.5">CRM // LEAD_INTEL</span>
+<span class="text-[10px] text-on-surface-variant font-mono">08:45:02</span>
+</div>
+<div class="py-2">
+<h3 class="text-on-surface-variant text-xs uppercase font-bold mb-1 tracking-widest">Fato Extraído</h3>
+<p class="text-xl font-headline font-bold text-on-surface leading-tight">Lead: Xander Vance, Status: Alta Prioridade</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="person_search">person_search</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Confiança IA: 72.1%</span>
+</div>
+<div class="w-full bg-surface-container h-1">
+<div class="bg-primary h-full w-[72%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary/20 text-tertiary hover:bg-tertiary hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[8px] font-black uppercase">Validar</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary-fixed/20 text-tertiary-fixed hover:bg-tertiary-fixed hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+<span class="text-[8px] font-black uppercase">Corrigir</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-error/20 text-error hover:bg-error hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span class="text-[8px] font-black uppercase">Rejeitar</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Financeiro -->
+<article class="bg-surface-container-low border-l-2 border-tertiary p-6 flex flex-col gap-4 group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-mono text-tertiary bg-tertiary/10 px-2 py-0.5">FINANCE // LEDGER_BOT</span>
+<span class="text-[10px] text-on-surface-variant font-mono">09:12:44</span>
+</div>
+<div class="py-2">
+<h3 class="text-on-surface-variant text-xs uppercase font-bold mb-1 tracking-widest">Fato Extraído</h3>
+<p class="text-xl font-headline font-bold text-on-surface leading-tight">Projeção de Q3: +12.4% Crescimento Orgânico</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-tertiary-fixed text-sm" data-icon="trending_up">trending_up</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Confiança IA: 89.9%</span>
+</div>
+<div class="w-full bg-surface-container h-1">
+<div class="bg-tertiary-fixed h-full w-[89%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary/20 text-tertiary hover:bg-tertiary hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[8px] font-black uppercase">Validar</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary-fixed/20 text-tertiary-fixed hover:bg-tertiary-fixed hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+<span class="text-[8px] font-black uppercase">Corrigir</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-error/20 text-error hover:bg-error hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span class="text-[8px] font-black uppercase">Rejeitar</span>
+</button>
+</div>
+</article>
+<!-- Card 4: Logística -->
+<article class="bg-surface-container-low border-l-2 border-primary-container p-6 flex flex-col gap-4 group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-mono text-primary-container bg-primary-container/10 px-2 py-0.5">LOGS // SHIP_NODE</span>
+<span class="text-[10px] text-on-surface-variant font-mono">09:15:30</span>
+</div>
+<div class="py-2">
+<h3 class="text-on-surface-variant text-xs uppercase font-bold mb-1 tracking-widest">Fato Extraído</h3>
+<p class="text-xl font-headline font-bold text-on-surface leading-tight">Atraso na Rota 04: Obstrução em Porto Seco</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="warning">warning</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Confiança IA: 61.2%</span>
+</div>
+<div class="w-full bg-surface-container h-1">
+<div class="bg-error h-full w-[61%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary/20 text-tertiary hover:bg-tertiary hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[8px] font-black uppercase">Validar</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary-fixed/20 text-tertiary-fixed hover:bg-tertiary-fixed hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+<span class="text-[8px] font-black uppercase">Corrigir</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-error/20 text-error hover:bg-error hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span class="text-[8px] font-black uppercase">Rejeitar</span>
+</button>
+</div>
+</article>
+<!-- Card 5: Suporte -->
+<article class="bg-surface-container-low border-l-2 border-secondary-dim p-6 flex flex-col gap-4 group hover:bg-surface-container transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="text-[10px] font-mono text-secondary-dim bg-secondary-dim/10 px-2 py-0.5">SUPPORT // SENTIMENT_AI</span>
+<span class="text-[10px] text-on-surface-variant font-mono">09:18:12</span>
+</div>
+<div class="py-2">
+<h3 class="text-on-surface-variant text-xs uppercase font-bold mb-1 tracking-widest">Fato Extraído</h3>
+<p class="text-xl font-headline font-bold text-on-surface leading-tight">Cliente TechNexus: Inclinado a Churn (Insatisfação)</p>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary-dim text-sm" data-icon="mood_bad">mood_bad</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase">Confiança IA: 94.5%</span>
+</div>
+<div class="w-full bg-surface-container h-1">
+<div class="bg-secondary-dim h-full w-[94%]"></div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary/20 text-tertiary hover:bg-tertiary hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[8px] font-black uppercase">Validar</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-tertiary-fixed/20 text-tertiary-fixed hover:bg-tertiary-fixed hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit_note">edit_note</span>
+<span class="text-[8px] font-black uppercase">Corrigir</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 py-3 rounded-sm bg-surface-container-highest border border-error/20 text-error hover:bg-error hover:text-black transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span class="text-[8px] font-black uppercase">Rejeitar</span>
+</button>
+</div>
+</article>
+<!-- Knowledge Growth Visualizer (Signature CRM Component) -->
+<article class="bg-surface-container-lowest p-6 flex flex-col gap-4 border border-white/5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+<div class="relative z-10">
+<h3 class="font-headline text-lg font-bold text-on-surface uppercase mb-4">Métrica de Maturação</h3>
+<div class="flex items-end gap-1 h-32 mb-4">
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/20 transition-colors h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/20 transition-colors h-[60%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/20 transition-colors h-[55%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/20 transition-colors h-[80%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-container-highest hover:bg-primary/20 transition-colors h-[75%] rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-[95%] rounded-t-sm animate-pulse"></div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-[10px] font-mono">
+<span class="text-on-surface-variant uppercase">Conhecimento Validado</span>
+<span class="text-tertiary">78.2%</span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-mono">
+<span class="text-on-surface-variant uppercase">Novas Entidades</span>
+<span class="text-secondary">+124</span>
+</div>
+<button class="w-full mt-4 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary-container text-[10px] font-black uppercase tracking-widest rounded-sm hover:brightness-110 active:scale-[0.98] transition-all">
+                                Executar Retreino Local
+                            </button>
+</div>
+</div>
+</article>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-2 pt-1 bg-[#0e0e0f]/90 backdrop-blur-md border-t border-cyan-900/30 shadow-[0_-4px_20px_rgba(0,245,255,0.05)] z-50">
+<a class="flex flex-col items-center justify-center text-slate-600 py-2 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Monitor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-cyan-400 bg-cyan-500/10 py-2 px-4 rounded-sm active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Curation</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="lan">lan</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sources</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-600 py-2 active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="model_training">model_training</span>
+<span class="font-['Inter'] text-[10px] uppercase font-bold">Sim</span>
+</a>
+</nav>
+</body></html>

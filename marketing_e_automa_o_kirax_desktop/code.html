@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRAX | Central de Automação e Marketing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#ffffff",
+              "error": "#ff716c",
+              "surface-variant": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "outline-variant": "#484849",
+              "primary-container": "#00f4fe",
+              "outline": "#767576",
+              "on-secondary": "#390050",
+              "tertiary-fixed": "#cafd00",
+              "primary-fixed-dim": "#00e5ee",
+              "surface-container-low": "#131314",
+              "on-secondary-fixed": "#580079",
+              "tertiary": "#f3ffca",
+              "primary-fixed": "#00f4fe",
+              "tertiary-container": "#cafd00",
+              "surface": "#0e0e0f",
+              "on-tertiary": "#516700",
+              "on-tertiary-fixed-variant": "#526900",
+              "primary": "#a1faff",
+              "surface-container-highest": "#262627",
+              "on-primary": "#006165",
+              "inverse-on-surface": "#565556",
+              "on-tertiary-container": "#4a5e00",
+              "on-error": "#490006",
+              "background": "#0e0e0f",
+              "on-secondary-container": "#fff5fc",
+              "on-primary-fixed": "#004346",
+              "tertiary-fixed-dim": "#beee00",
+              "secondary-fixed": "#f1c1ff",
+              "primary-dim": "#00e5ee",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-tertiary-fixed": "#3a4a00",
+              "surface-bright": "#2c2c2d",
+              "surface-container": "#1a191b",
+              "secondary": "#d674ff",
+              "on-primary-container": "#00575b",
+              "on-background": "#ffffff",
+              "on-primary-fixed-variant": "#006266",
+              "surface-container-high": "#201f21",
+              "tertiary-dim": "#beee00",
+              "surface-dim": "#0e0e0f",
+              "secondary-fixed-dim": "#eaaeff",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "on-surface-variant": "#adaaab",
+              "secondary-container": "#9900cf",
+              "error-dim": "#d7383b",
+              "error-container": "#9f0519"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(26, 25, 27, 0.6);
+        }
+        .primary-glow {
+            box-shadow: 0 0 20px rgba(161, 250, 255, 0.1);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #a1faff 0%, #00f4fe 100%);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0f; }
+        ::-webkit-scrollbar-thumb { background: #262627; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1faff; }
+    </style>
+<script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar Execution -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex items-center justify-between px-6 bg-opacity-80 backdrop-blur-xl bg-[#131314] dark:bg-[#131314] border-b border-[#262627] shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-widest text-[#a1faff] uppercase font-['Space_Grotesk']">KIRAX</span>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="text-[#8e8e8f] hover:text-[#f3ffca] transition-colors font-['Space_Grotesk'] font-bold tracking-tighter" href="#">CAMPANHAS</a>
+<a class="text-[#a1faff] border-b-2 border-[#a1faff] font-['Space_Grotesk'] font-bold tracking-tighter" href="#">MARKETING</a>
+<a class="text-[#8e8e8f] hover:text-[#f3ffca] transition-colors font-['Space_Grotesk'] font-bold tracking-tighter" href="#">AUTOMATION</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-sm pl-10 pr-4 py-1.5 text-xs focus:ring-1 focus:ring-primary w-64 transition-all" placeholder="Buscar ativos..." type="text"/>
+</div>
+<button class="accent-gradient text-on-primary-container px-4 py-1.5 rounded-sm font-bold text-xs uppercase tracking-wider active:scale-95 transition-all">
+                Add Lead
+            </button>
+<div class="flex gap-3 text-outline">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a professional man in a tech environment with subtle blue neon rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4l0U0jhRfB168HMoYuZWcgMjTqxmDs_LIhOD9mq-ZDK0uN3O_wZgKA1hZWUw3XynxsA70fm1KNCfGsuMXgP6OPHiju1UyVmSUZy3Lic_lx7PIBtHsiK8a7RjrvmtikUqgfAIPVherFKSvuGEblJbem8h-w7DGJAGVgUjYo71TRRSQQKLn9TNLLlX6e53ZcUcJuiBxQRCTUaUJTDjkrd3yV4VUA65XGBrje0BfgJ5LbleaK9Le3hC3DCi1eucaFCG9QZls36KLE_8u"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar Execution -->
+<aside class="fixed left-0 top-0 h-screen z-40 flex flex-col pt-20 pb-6 bg-opacity-90 backdrop-blur-2xl bg-[#0e0e0f] dark:bg-[#0e0e0f] border-r border-[#262627] w-20 hover:w-64 transition-all duration-300 group">
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Navigation Items -->
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Dashboard</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">filter_alt</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Sales</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">groups</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Relations</span>
+</div>
+<div class="flex items-center px-6 py-3 bg-[#1a191b] text-[#a1faff] border-l-2 border-[#a1faff] transition-all cursor-pointer">
+<span class="material-symbols-outlined">campaign</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Marketing</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Inventory</span>
+</div>
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Finance</span>
+</div>
+</div>
+<div class="mt-auto flex flex-col gap-2">
+<div class="flex items-center px-6 py-3 text-[#8e8e8f] hover:bg-[#131314] hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">terminal</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity font-['Inter'] text-xs font-medium uppercase tracking-widest whitespace-nowrap">Logs</span>
+</div>
+<div class="px-4 group-hover:px-6 transition-all">
+<div class="w-full h-10 accent-gradient rounded-sm flex items-center justify-center cursor-pointer active:scale-95 transition-all">
+<span class="material-symbols-outlined text-on-primary">add</span>
+<span class="ml-2 opacity-0 group-hover:opacity-100 transition-opacity font-bold text-[10px] uppercase tracking-tighter whitespace-nowrap text-on-primary">New Entry</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-20 pt-20 p-8 min-h-screen">
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-headline font-extrabold tracking-tighter text-on-surface">Marketing <span class="text-primary">OS</span></h1>
+<p class="text-on-surface-variant font-body text-sm mt-1 uppercase tracking-[0.2em]">Central de Automação e Criativos Inteligentes</p>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-outline uppercase tracking-widest">Pipeline de Conversão</span>
+<span class="text-2xl font-headline font-bold text-tertiary">R$ 142.850,00</span>
+</div>
+<div class="w-px h-10 bg-surface-container-highest"></div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-outline uppercase tracking-widest">ROI Mensal</span>
+<span class="text-2xl font-headline font-bold text-secondary">4.2x</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- WhatsApp Automation Flow -->
+<div class="col-span-12 lg:col-span-8 glass-panel border-l-2 border-primary primary-glow p-6 rounded-sm">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h2 class="font-headline text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">dynamic_feed</span>
+                            FLUXOS DE AUTOMAÇÃO WHATSAPP
+                        </h2>
+<p class="text-xs text-on-surface-variant mt-1 uppercase tracking-wider">Mapeamento de jornada em tempo real</p>
+</div>
+<button class="text-[10px] font-bold border border-primary/30 text-primary px-3 py-1 rounded-sm hover:bg-primary/10 transition-colors uppercase">Novo Fluxo</button>
+</div>
+<div class="flex flex-col gap-4 relative">
+<!-- Workflow Node 1 -->
+<div class="flex items-center gap-4">
+<div class="w-48 bg-surface-container p-4 rounded-sm border-l-2 border-tertiary">
+<span class="text-[9px] text-tertiary font-bold uppercase tracking-widest block mb-1">Gatilho</span>
+<p class="text-xs font-bold text-on-surface">Nova Lead Recebida</p>
+</div>
+<div class="h-px flex-grow bg-gradient-to-r from-tertiary to-primary opacity-30"></div>
+<div class="w-48 bg-surface-container p-4 rounded-sm border-l-2 border-primary">
+<span class="text-[9px] text-primary font-bold uppercase tracking-widest block mb-1">Ação IA</span>
+<p class="text-xs font-bold text-on-surface">Qualificação por Voz</p>
+</div>
+<div class="h-px flex-grow bg-gradient-to-r from-primary to-secondary opacity-30"></div>
+<div class="w-48 bg-surface-container p-4 rounded-sm border-l-2 border-secondary">
+<span class="text-[9px] text-secondary font-bold uppercase tracking-widest block mb-1">Encaminhar</span>
+<p class="text-xs font-bold text-on-surface">Vendedor Disponível</p>
+</div>
+</div>
+<!-- Analytics Overlay -->
+<div class="mt-8 grid grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-3">
+<span class="text-[10px] text-outline block mb-1">Taxa de Abertura</span>
+<span class="text-lg font-headline font-bold text-on-surface">94.2%</span>
+</div>
+<div class="bg-surface-container-low p-3">
+<span class="text-[10px] text-outline block mb-1">Resposta IA</span>
+<span class="text-lg font-headline font-bold text-on-surface">0.8s</span>
+</div>
+<div class="bg-surface-container-low p-3">
+<span class="text-[10px] text-outline block mb-1">Conversão</span>
+<span class="text-lg font-headline font-bold text-tertiary">12.4%</span>
+</div>
+<div class="bg-surface-container-low p-3">
+<span class="text-[10px] text-outline block mb-1">Status</span>
+<span class="flex items-center gap-2 text-xs text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                ATIVO
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Creative Generator -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container p-6 rounded-sm relative overflow-hidden group">
+<div class="relative z-10">
+<h2 class="font-headline text-xl font-bold flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary">auto_awesome</span>
+                        GERADOR IA
+                    </h2>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider mb-6">Ads &amp; Social Media</p>
+<div class="space-y-4">
+<div class="bg-surface-container-highest p-4 rounded-sm">
+<div class="flex justify-between mb-2">
+<span class="text-[10px] text-secondary font-bold uppercase">Prompt Ativo</span>
+<span class="material-symbols-outlined text-sm text-outline">edit</span>
+</div>
+<p class="text-xs text-on-surface-variant italic">"Crie um anúncio noir minimalista para CRM focado em alta performance e velocidade..."</p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="aspect-square bg-surface-container-low rounded-sm overflow-hidden border border-outline-variant/30 hover:border-secondary transition-all cursor-pointer">
+<img alt="Creative AI 1" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="abstract tech art with deep purple and cyan neon lines flowing through a dark obsidian liquid surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjM3Qkz3dza9rzva1cocrtlXI1NR3WPrey0snUSUNAJK0HW0KzQMPymMAEMc0UjuN3mjUrtc9IoiAlauV2dcJGPm1CIiBtJ5cVDNUQum-tBbO63dwqXylTol05Ui3xKh7WQs7qo27_Or-gGLBlCXsWBzVhMWZtXK1kK17qRO0xm0dspuSI7df5W_Tfb29GFmqKM5tlPqdGwVb9IPOJzXrM2yN_OJfChplNe4SOkQJpBtY1gDiI8v-cinVqsMgC91GAvmHIvLK8j0wl"/>
+</div>
+<div class="aspect-square bg-surface-container-low rounded-sm overflow-hidden border border-outline-variant/30 hover:border-secondary transition-all cursor-pointer">
+<img alt="Creative AI 2" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity" data-alt="futuristic architectural minimal visualization in dark mode with a single lime green light focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVdb7b_9AsfFn3KKC79FmyeAEjRe9K1z5CFmZ7hjbLESGKRzkH6s1kGldT4iGMWFmIkygI2xXKTWP3E38_bquPy9WQZFagh49SflppO146j-9otBfLlca1sfiRW3-9AKKO3WFaXh0goK6aoATNyWenqYc84_BmDXJ07KkTUsrUHbCf4q_NznK87x7wmPucQWsSr5609nQFPlhNIMofB52652JQwwN1JzcQj84_Z3fbCfxNv1Lx4rFlGIPhszal53sIDpykyPOEt0o4"/>
+</div>
+</div>
+<button class="w-full border-2 border-secondary/50 text-secondary py-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-secondary hover:text-on-secondary transition-all rounded-sm">
+                            GERAR NOVAS VARIANTES
+                        </button>
+</div>
+</div>
+<!-- Ambient Glow Background -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[80px]"></div>
+</div>
+<!-- Performance Analytics Table -->
+<div class="col-span-12 bg-surface-container-low p-6 rounded-sm">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline text-xl font-bold flex items-center gap-2 uppercase tracking-tight">
+<span class="material-symbols-outlined text-tertiary">analytics</span>
+                        Performance de Campanhas
+                    </h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-highest text-[10px] text-outline font-bold rounded-sm cursor-pointer hover:text-on-surface transition-colors">7 DIAS</span>
+<span class="px-3 py-1 bg-primary/20 text-[10px] text-primary font-bold rounded-sm border border-primary/30">30 DIAS</span>
+<span class="px-3 py-1 bg-surface-container-highest text-[10px] text-outline font-bold rounded-sm cursor-pointer hover:text-on-surface transition-colors">90 DIAS</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] text-outline uppercase tracking-widest border-b border-surface-container-highest">
+<th class="pb-4 font-medium">Nome da Campanha</th>
+<th class="pb-4 font-medium">Canal</th>
+<th class="pb-4 font-medium text-center">Impressões</th>
+<th class="pb-4 font-medium text-center">CTR</th>
+<th class="pb-4 font-medium text-center">CPL (R$)</th>
+<th class="pb-4 font-medium text-right">ROI</th>
+<th class="pb-4 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-xs">
+<tr class="group hover:bg-surface-container transition-colors">
+<td class="py-4 font-bold border-l-2 border-primary pl-4">Black Friday Preview</td>
+<td class="py-4">Meta Ads</td>
+<td class="py-4 text-center font-mono">245.890</td>
+<td class="py-4 text-center text-primary">3.24%</td>
+<td class="py-4 text-center text-tertiary">4.12</td>
+<td class="py-4 text-right font-headline font-bold">5.8x</td>
+<td class="py-4 text-right">
+<span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-sm font-bold">SCALING</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container transition-colors bg-surface-container/30">
+<td class="py-4 font-bold border-l-2 border-secondary pl-4">Lead Magnet v2</td>
+<td class="py-4">Google Search</td>
+<td class="py-4 text-center font-mono">12.445</td>
+<td class="py-4 text-center text-primary">0.85%</td>
+<td class="py-4 text-center text-error">18.50</td>
+<td class="py-4 text-right font-headline font-bold">1.2x</td>
+<td class="py-4 text-right">
+<span class="text-[10px] bg-error/10 text-error px-2 py-0.5 rounded-sm font-bold">PAUSADO</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container transition-colors">
+<td class="py-4 font-bold border-l-2 border-tertiary pl-4">Remarketing Checkout</td>
+<td class="py-4">Instagram Direct</td>
+<td class="py-4 text-center font-mono">8.201</td>
+<td class="py-4 text-center text-primary">12.1%</td>
+<td class="py-4 text-center text-tertiary">2.05</td>
+<td class="py-4 text-right font-headline font-bold">14.2x</td>
+<td class="py-4 text-right">
+<span class="text-[10px] bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-sm font-bold">EXCELENTE</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Lead Pulse Monitor -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container p-6 rounded-sm">
+<h3 class="text-[10px] text-outline font-bold uppercase tracking-widest mb-4">Volume de Leads (24h)</h3>
+<div class="h-32 flex items-end gap-1 mb-4">
+<div class="flex-grow bg-surface-container-highest rounded-t-sm h-[20%]"></div>
+<div class="flex-grow bg-surface-container-highest rounded-t-sm h-[35%]"></div>
+<div class="flex-grow bg-primary/40 rounded-t-sm h-[60%] border-t-2 border-primary"></div>
+<div class="flex-grow bg-surface-container-highest rounded-t-sm h-[45%]"></div>
+<div class="flex-grow bg-primary rounded-t-sm h-[90%] shadow-[0_0_10px_#a1faff]"></div>
+<div class="flex-grow bg-surface-container-highest rounded-t-sm h-[30%]"></div>
+<div class="flex-grow bg-surface-container-highest rounded-t-sm h-[25%]"></div>
+<div class="flex-grow bg-secondary/40 rounded-t-sm h-[75%] border-t-2 border-secondary"></div>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-[10px] text-on-surface-variant font-bold">Orgânico</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[10px] text-on-surface-variant font-bold">Pago</span>
+</div>
+</div>
+</div>
+<!-- Recent AI Creations Carousel (Asymmetric) -->
+<div class="col-span-12 lg:col-span-8 flex gap-6 overflow-hidden">
+<div class="flex-none w-1/3 bg-surface-container p-4 rounded-sm border border-outline-variant/20 relative group overflow-hidden">
+<img alt="Creative 1" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" data-alt="retro-futuristic desk setup with multiple monitors and intense cyan lighting in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCIZcvpAqI5tOrSd4HUO5U7Kx-el8nRk-Kse4PllhelGAzPmVKSrAoZcV8rNENPfHRelzlBx-MPhTPOZdrfYFJ10b6G092Jk9nGL6GDdVw5nI76SJKjCZqdjXznYPvNE8gL51jMrzVa7VyMexlKDEqk5GPxcxk6Ar8-z-5QDGmzKCSuJnBu0390k7Da7WqNOwymCNYnSia5lYGNStxCoHBYNFJYTGWWVUYsjVs9LLdGXk5Y-xUzed85giEcAecxb5sNEdJgypwNlpV"/>
+<div class="relative z-10 h-full flex flex-col justify-end">
+<span class="text-[9px] font-bold text-primary uppercase mb-1">Facebook Post</span>
+<h4 class="text-xs font-bold leading-tight">A Revolução dos Dados no seu WhatsApp</h4>
+</div>
+</div>
+<div class="flex-none w-1/3 bg-surface-container p-4 rounded-sm border border-outline-variant/20 relative group overflow-hidden">
+<img alt="Creative 2" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" data-alt="global digital network connection lines over a dark planet earth visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjONSmMy85aioCIhAqI9aPfyEWv6hJE2cCcUyTsBLMlH-wLu_DofUDtU5GLCB57JrH7iovSCSNb5SQmZN5RQ0vi6jHYMlOMItJbOoBbRk-G08K-bmvF9QcA-EmPtXOXxF38GcjrxwgceU0TM9LyVgv9lmXXbWr2GHMGN3G_150SJYYVhFIQYdDKOCdgmF0j7k6gFxssMBS9aIoSggqsq16UECDvCXoaTDJKfCfm8p_1UScxeGExStd7_MVjgSHojEN3SZXBVmMonMF"/>
+<div class="relative z-10 h-full flex flex-col justify-end">
+<span class="text-[9px] font-bold text-secondary uppercase mb-1">LinkedIn Ad</span>
+<h4 class="text-xs font-bold leading-tight">Escale sua Equipe Comercial com IA</h4>
+</div>
+</div>
+<div class="flex-none w-1/2 bg-surface-container-low p-8 rounded-sm border-2 border-dashed border-surface-container-highest flex flex-col items-center justify-center group cursor-pointer hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-4xl text-outline mb-2 group-hover:text-primary transition-colors">add_circle</span>
+<p class="text-[10px] font-bold text-outline uppercase tracking-widest group-hover:text-on-surface">Explorar Biblioteca de Ativos</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual System Status Bar (Fixed Bottom) -->
+<footer class="fixed bottom-0 left-20 right-0 h-6 bg-surface-container-lowest border-t border-surface-container-highest flex items-center justify-between px-6 z-30">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-[9px] text-outline font-medium uppercase tracking-tighter">API WhatsApp: Conectada</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-[9px] text-outline font-medium uppercase tracking-tighter">AI Generator: Online</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[9px] text-outline font-mono uppercase">Sync v.4.0.2 // Kirax Marketing OS</span>
+<span class="text-[9px] text-primary font-mono font-bold tracking-widest">0.02ms LATENCY</span>
+</div>
+</footer>
+</body></html>

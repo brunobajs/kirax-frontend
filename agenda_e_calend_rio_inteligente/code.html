@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-dim": "#00e5ee",
+              "on-tertiary-container": "#4a5e00",
+              "error-dim": "#d7383b",
+              "error": "#ff716c",
+              "primary": "#a1faff",
+              "inverse-on-surface": "#565556",
+              "secondary-fixed": "#f1c1ff",
+              "on-surface": "#ffffff",
+              "tertiary": "#f3ffca",
+              "on-surface-variant": "#adaaab",
+              "secondary": "#d674ff",
+              "primary-fixed-dim": "#00e5ee",
+              "on-tertiary-fixed-variant": "#526900",
+              "outline-variant": "#484849",
+              "tertiary-container": "#cafd00",
+              "primary-fixed": "#00f4fe",
+              "on-tertiary-fixed": "#3a4a00",
+              "error-container": "#9f0519",
+              "background": "#0e0e0f",
+              "secondary-container": "#9900cf",
+              "on-error": "#490006",
+              "on-secondary-container": "#fff5fc",
+              "inverse-primary": "#006a6e",
+              "surface-tint": "#a1faff",
+              "on-secondary-fixed": "#580079",
+              "surface-container-highest": "#262627",
+              "inverse-surface": "#fcf8f9",
+              "secondary-fixed-dim": "#eaaeff",
+              "surface": "#0e0e0f",
+              "on-error-container": "#ffa8a3",
+              "secondary-dim": "#bb00fc",
+              "surface-variant": "#262627",
+              "outline": "#767576",
+              "surface-dim": "#0e0e0f",
+              "surface-container-lowest": "#000000",
+              "on-tertiary": "#516700",
+              "on-primary-fixed-variant": "#006266",
+              "tertiary-dim": "#beee00",
+              "surface-container-high": "#201f21",
+              "primary-container": "#00f4fe",
+              "surface-bright": "#2c2c2d",
+              "tertiary-fixed-dim": "#beee00",
+              "on-secondary-fixed-variant": "#8400b3",
+              "on-primary-fixed": "#004346",
+              "on-secondary": "#390050",
+              "on-background": "#ffffff",
+              "on-primary-container": "#00575b",
+              "surface-container": "#1a191b",
+              "on-primary": "#006165",
+              "surface-container-low": "#131314",
+              "tertiary-fixed": "#cafd00"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        backdrop-filter: blur(12px);
+        background: rgba(26, 25, 27, 0.6);
+      }
+      .glow-primary {
+        box-shadow: 0 0 15px rgba(161, 250, 255, 0.15);
+      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: #0e0e0f; }
+      ::-webkit-scrollbar-thumb { background: #262627; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <script src='../config.js'></script></head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#131314] backdrop-blur-xl opacity-80 shadow-[0_0_15px_rgba(161,250,255,0.05)]">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Professional stylist profile photo with dramatic noir lighting and cyan accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmvxBpn0kM22WKuDwgn0x5mOWh6OR_hzA1Cfvr0YyqT1MNG98I_IhYOJ_FMfguIQt0F0dkDHv-1Zr0dXHg7SJrrp6l_9TDyH4S7XLA9BGR9Hy2BSpiHDrQcrm3wfZ-4tNpHb0UTvsJR_zvexktEdzbrHZqo_4jCdtOVE7KTIxJ52b1i9IOTEKFf4ByWUs1fqssbmDf4yk5inX8iMQTTdm6oVNjXYUHtQzjMvvHLdNMS-BvQIe01KEAOVXVbLqQymU5zRCcKBo0f5P8"/>
+</div>
+<h1 class="font-headline uppercase tracking-widest text-xl font-bold text-primary">KINETIC_SYNC</h1>
+</div>
+<button class="text-primary hover:text-primary transition-colors duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-24 px-4 max-w-5xl mx-auto space-y-6">
+<!-- Weekly Horizontal Calendar -->
+<section class="space-y-4">
+<div class="flex justify-between items-end px-2">
+<div>
+<h2 class="font-headline text-2xl font-bold text-primary tracking-tight">AGENDA</h2>
+<p class="text-on-surface-variant text-xs uppercase tracking-widest">Outubro 2023</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-highest rounded-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-2 bg-surface-container-highest rounded-sm hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex justify-between overflow-x-auto gap-2 pb-2 scrollbar-hide">
+<!-- Day Items -->
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm border border-outline-variant/10 text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Seg</span>
+<span class="font-headline text-lg font-bold">23</span>
+</div>
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm border border-outline-variant/10 text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Ter</span>
+<span class="font-headline text-lg font-bold">24</span>
+</div>
+<!-- Active Day -->
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm bg-primary/10 border border-primary/40 text-primary glow-primary">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Qua</span>
+<span class="font-headline text-lg font-bold">25</span>
+</div>
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm border border-outline-variant/10 text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Qui</span>
+<span class="font-headline text-lg font-bold">26</span>
+</div>
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm border border-outline-variant/10 text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Sex</span>
+<span class="font-headline text-lg font-bold">27</span>
+</div>
+<div class="flex-shrink-0 w-14 py-4 flex flex-col items-center gap-1 rounded-sm border border-outline-variant/10 text-on-surface-variant">
+<span class="text-[10px] font-medium uppercase tracking-tighter">Sáb</span>
+<span class="font-headline text-lg font-bold">28</span>
+</div>
+</div>
+</section>
+<!-- AI Insights Bento -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="md:col-span-2 glass-panel p-4 rounded-sm border border-primary/10 flex items-center gap-4 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
+<div class="p-3 rounded-sm bg-primary/10 text-primary">
+<span class="material-symbols-outlined" data-weight="fill">psychology</span>
+</div>
+<div>
+<h3 class="font-headline text-xs font-bold text-primary tracking-widest uppercase">IA Suggestion</h3>
+<p class="text-on-surface text-sm">Três clientes frequentes não agendaram este mês. <span class="text-primary font-medium">Enviar lembretes?</span></p>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-sm border border-tertiary/20 flex flex-col justify-between">
+<span class="text-[10px] text-tertiary uppercase tracking-widest font-bold">Horários Livres</span>
+<div class="flex items-end justify-between">
+<span class="font-headline text-2xl text-on-surface">04</span>
+<span class="text-[10px] text-on-surface-variant">Hoje</span>
+</div>
+</div>
+</section>
+<!-- Timeline / Appointments -->
+<section class="space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant/10 pb-2">
+<h3 class="text-xs font-bold tracking-[0.2em] text-on-surface-variant uppercase">Cronograma Diário</h3>
+<span class="text-[10px] text-primary/60">09:00 - 20:00</span>
+</div>
+<!-- Appointment List -->
+<div class="space-y-3">
+<!-- Item 1: Confirmado -->
+<div class="group flex gap-4 items-start">
+<div class="w-12 pt-2 text-right">
+<span class="font-headline text-xs font-medium text-on-surface-variant">09:00</span>
+</div>
+<div class="flex-1 bg-surface-container hover:bg-surface-container-highest transition-colors p-4 rounded-sm border-l-2 border-primary glow-primary flex justify-between items-center">
+<div class="space-y-1">
+<h4 class="text-on-surface font-semibold text-sm">Marcus Valério</h4>
+<div class="flex items-center gap-2 text-[10px] text-on-surface-variant uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs">content_cut</span>
+                                Corte de Cabelo + Barba
+                            </div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[9px] font-bold uppercase border border-primary/20">Confirmado</span>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm text-on-surface-variant cursor-pointer hover:text-primary">edit</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant cursor-pointer hover:text-error">cancel</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Slot Vago IA -->
+<div class="group flex gap-4 items-start opacity-60">
+<div class="w-12 pt-2 text-right">
+<span class="font-headline text-xs font-medium text-on-surface-variant">10:30</span>
+</div>
+<div class="flex-1 border border-dashed border-outline-variant/30 p-3 rounded-sm flex items-center justify-between">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-widest italic">IA: Sugerido para Retoque (Ricardo S.)</span>
+<button class="text-[10px] text-primary hover:underline uppercase font-bold">Convidar</button>
+</div>
+</div>
+<!-- Item 2: Pendente -->
+<div class="group flex gap-4 items-start">
+<div class="w-12 pt-2 text-right">
+<span class="font-headline text-xs font-medium text-on-surface-variant">11:00</span>
+</div>
+<div class="flex-1 bg-surface-container hover:bg-surface-container-highest transition-colors p-4 rounded-sm border-l-2 border-secondary flex justify-between items-center">
+<div class="space-y-1">
+<h4 class="text-on-surface font-semibold text-sm">Elena Rodriguez</h4>
+<div class="flex items-center gap-2 text-[10px] text-on-surface-variant uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs">face_3</span>
+                                Design de Sobrancelha
+                            </div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-[9px] font-bold uppercase border border-secondary/20">Pendente</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm text-secondary cursor-pointer hover:scale-110">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: Concluído -->
+<div class="group flex gap-4 items-start opacity-50">
+<div class="w-12 pt-2 text-right">
+<span class="font-headline text-xs font-medium text-on-surface-variant">14:00</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-4 rounded-sm border-l-2 border-outline-variant flex justify-between items-center">
+<div class="space-y-1">
+<h4 class="text-on-surface font-semibold text-sm">Gustavo Lima</h4>
+<div class="flex items-center gap-2 text-[10px] text-on-surface-variant uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs">content_cut</span>
+                                Degrade Social
+                            </div>
+</div>
+<span class="material-symbols-outlined text-tertiary">task_alt</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 w-14 h-14 rounded-sm bg-gradient-to-br from-primary to-primary-container text-on-primary-container shadow-[0_0_25px_rgba(0,244,254,0.4)] flex items-center justify-center active:scale-90 transition-transform z-40 group overflow-hidden">
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+<span class="material-symbols-outlined relative z-10 text-3xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 bg-[#131314]/80 backdrop-blur-lg border-t border-[#262627]/50 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#a1faff] border-t-2 border-[#a1faff] pt-2 transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide">Agenda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 transition-all duration-200 active:scale-95 hover:text-[#d674ff]" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide">Clientes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 transition-all duration-200 active:scale-95 hover:text-[#d674ff]" href="#">
+<span class="material-symbols-outlined">content_cut</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide">Serviços</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 pt-2 transition-all duration-200 active:scale-95 hover:text-[#d674ff]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide">Ajustes</span>
+</a>
+</nav>
+</body></html>
