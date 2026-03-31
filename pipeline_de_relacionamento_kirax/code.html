@@ -164,7 +164,34 @@
 <p class="text-xl font-headline font-bold text-tertiary">92.4%</p>
 </div>
 </div>
+</div>
 </header>
+
+<!-- Monitor de Logística e Cargas (NOVO) -->
+<section class="mb-10 bg-surface-container-high/50 p-6 rounded-sm border border-primary/20 neon-glow-primary">
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">local_shipping</span>
+            <h3 class="text-xl font-headline font-bold uppercase tracking-tight">Monitor de Logística e Cargas</h3>
+        </div>
+        <button onclick="fetchCargas()" class="text-[10px] uppercase font-bold text-primary hover:underline">Atualizar Dados</button>
+    </div>
+    
+    <div id="lista-cargas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Exemplo de card de carga -->
+        <div class="bg-surface-container p-4 border border-outline-variant/10 rounded-sm">
+            <div class="flex justify-between items-start mb-3">
+                <span class="text-xs font-bold text-on-surface uppercase">Aguardando Dados...</span>
+                <span class="text-[10px] font-mono text-outline">CARGA-000</span>
+            </div>
+            <div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden mb-2">
+                <div class="bg-primary/20 h-full w-[0%]"></div>
+            </div>
+            <p class="text-[10px] text-on-surface-variant font-mono">Status: Sistema Pronto</p>
+        </div>
+    </div>
+</section>
+
 <!-- Pipeline Kanban: Bento Inspired Asymmetry -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
 <!-- Column: Healthy Clients -->
@@ -371,6 +398,87 @@
 <span class="material-symbols-outlined font-bold text-2xl group-hover:rotate-180 transition-transform duration-500">add</span>
 </button>
 </div>
+
+<script>
+    async function fetchCargas() {
+        console.log("KIRAX LOGISTICS: Buscando status de cargas...");
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+
+        if (!empresaId || !window.kiraxSupabase) {
+            console.warn("Sem empresa_id ou Supabase não carregado.");
+            return;
+        }
+
+        try {
+            const { data, error } = await window.kiraxSupabase
+                .from('cargas')
+                .select('*')
+                .eq('empresa_id', empresaId);
+
+            if (error) throw error;
+
+            const container = document.getElementById('lista-cargas');
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full p-8 text-center border border-dashed border-outline-variant/30 text-on-surface-variant text-sm">
+                        Nenhuma carga ativa encontrada. Cadastre produtos e pedidos para monitorar.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = data.map(c => {
+                const percent = (c.paletes_atuais / c.paletes_maximos) * 100;
+                const isFull = percent >= 100;
+                const color = isFull ? 'text-tertiary shadow-[0_0_10px_#beee00]' : 'text-primary';
+                const bgColor = isFull ? 'bg-tertiary' : 'bg-primary';
+
+                // Alerta se estiver cheio
+                if (isFull && c.status === 'aberta') {
+                    triggerAlert(c.cidade);
+                }
+
+                return `
+                    <div class="bg-surface-container p-5 border border-outline-variant/10 rounded-sm relative overflow-hidden group">
+                        ${isFull ? '<div class="absolute top-0 right-0 p-2 bg-tertiary text-black text-[8px] font-black uppercase tracking-widest z-10">CARGA FECHADA</div>' : ''}
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-sm font-bold text-on-surface uppercase tracking-tight">${c.cidade}</h4>
+                                <p class="text-[9px] font-mono text-on-surface-variant">Max: ${c.paletes_maximos} Paletes</p>
+                            </div>
+                            <span class="material-symbols-outlined text-xl ${color}">local_shipping</span>
+                        </div>
+                        <div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden mb-3">
+                            <div class="${bgColor} h-full transition-all duration-1000" style="width: ${Math.min(percent, 100)}%"></div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-lg font-headline font-bold ${color}">${c.paletes_atuais} Paletes</span>
+                            <span class="text-[9px] font-mono text-outline uppercase">${c.status}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+        } catch (err) {
+            console.error("Erro ao carregar cargas:", err.message);
+        }
+    }
+
+    function triggerAlert(cidade) {
+        // Alerta Visual de IA
+        const alertDiv = document.createElement('div');
+        alertDiv.className = "fixed top-20 right-6 z-[60] bg-tertiary text-black p-4 rounded-sm shadow-2xl animate-bounce border-2 border-black font-bold uppercase text-xs flex items-center gap-3";
+        alertDiv.innerHTML = `
+            <span class="material-symbols-outlined">notifications_active</span>
+            <div>AVISO IA: CARGA PARA ${cidade} CONCLUÍDA!</div>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        // Remover após 10 segundos
+        setTimeout(() => alertDiv.remove(), 10000);
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchCargas);
+</script>
 </body></html>
-
-
