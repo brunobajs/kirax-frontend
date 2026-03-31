@@ -20,3 +20,4 @@ const KIRAX_CONFIG = {
 if (typeof window !== 'undefined') {
     window.KIRAX_CONFIG = KIRAX_CONFIG;
 }
+
