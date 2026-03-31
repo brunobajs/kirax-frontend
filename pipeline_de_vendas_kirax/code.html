@@ -97,7 +97,9 @@
           min-height: max(884px, 100dvh);
         }
     </style>
-<script src='../config.js'></script></head>
+<script src='../config.js'></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+</head>
 <body class="bg-background text-on-background font-body select-none">
 <!-- TopAppBar -->
 <header class="bg-[#0e0e0f] border-b border-[#1a191b] fixed top-0 left-0 z-50 flex justify-between items-center w-full px-4 md:px-6 h-16">
@@ -153,7 +155,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="flex justify-between items-center">
 <div class="flex -space-x-2">
@@ -170,7 +172,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="flex justify-between items-center">
 <div class="flex items-center gap-1">
@@ -196,7 +198,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="h-1 bg-surface-container-highest w-full mb-3 overflow-hidden">
 <div class="h-full bg-secondary w-2/3"></div>
@@ -222,7 +224,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="p-3 bg-surface-container-highest/50 rounded-sm mb-4">
 <p class="text-[10px] text-on-surface-variant italic">"Aguardando assinatura final na clÃ¡usula de aquisiÃ§Ã£o v2.1..."</p>
@@ -242,7 +244,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="flex justify-between items-center">
 <div class="flex items-center gap-2">
@@ -267,7 +269,7 @@
 </div>
 <div class="flex items-center gap-2 mb-4">
 <span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
-<span class="text-xs text-on-surface-variant">Responsável</span>
+<span class="text-xs text-on-surface-variant">Responsï¿½vel</span>
 </div>
 <div class="flex justify-between items-center">
 <div class="flex items-center gap-2">
@@ -358,6 +360,61 @@
 <span class="font-body text-[10px] font-medium uppercase tracking-widest mt-1">Ajustes</span>
 </a>
 </nav>
+
+<script>
+    async function fetchPipeline() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        if (!empresaId || !window.kiraxSupabase) return;
+
+        try {
+            const { data: deals, error } = await window.kiraxSupabase
+                .from('deals')
+                .select('*, leads(nome, empresa)')
+                .eq('empresa_id', empresaId);
+
+            if (error) throw error;
+            renderKanban(deals);
+        } catch (err) {
+            console.error("Erro no Pipeline:", err);
+        }
+    }
+
+    function renderKanban(deals) {
+        // Mapear seÃ§Ãµes
+        const sections = document.querySelectorAll('main > div > div.flex-shrink-0');
+        const columns = {
+            'lead': sections[0]?.querySelector('.space-y-4'),
+            'qualificacao': sections[1]?.querySelector('.space-y-4'),
+            'proposta': sections[2]?.querySelector('.space-y-4'),
+            'negociacao': sections[3]?.querySelector('.space-y-4'),
+            'fechamento': sections[4]?.querySelector('.space-y-4')
+        };
+
+        Object.values(columns).forEach(col => { if(col) col.innerHTML = ''; });
+
+        deals.forEach(deal => {
+            const col = columns[deal.estagio];
+            if (col) {
+                const card = document.createElement('article');
+                card.className = "p-4 bg-surface-container border border-outline-variant/10 rounded-sm hover:border-primary/30 transition-all cursor-pointer group";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="font-headline font-bold text-sm tracking-tight text-primary">${deal.leads?.empresa || 'Cliente'}</h3>
+                        <span class="text-primary font-mono text-xs">R$ ${parseFloat(deal.valor).toLocaleString('pt-BR')}</span>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>
+                        <span class="text-xs text-on-surface-variant">${deal.leads?.nome || 'ResponsÃ¡vel'}</span>
+                    </div>
+                    <h4 class="text-xs font-bold text-on-surface mb-2">${deal.titulo}</h4>
+                `;
+                col.appendChild(card);
+            }
+        });
+    }
+    window.addEventListener('DOMContentLoaded', fetchPipeline);
+</script>
 </body></html>
 
 
