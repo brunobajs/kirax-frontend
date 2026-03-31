@@ -415,6 +415,40 @@
     }
     window.addEventListener('DOMContentLoaded', fetchPipeline);
 </script>
+
+<script>
+    async function checkNeuralAlerts() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const empresaId = urlParams.get('empresa_id');
+        if (!empresaId || !window.kiraxSupabase) return;
+
+        const { data: alerts } = await window.kiraxSupabase
+            .from('notificacoes_ia')
+            .select('*')
+            .eq('empresa_id', empresaId)
+            .eq('lida', false)
+            .limit(3);
+
+        if (alerts && alerts.length > 0) {
+            const container = document.getElementById('neural-alerts');
+            const list = document.getElementById('alert-list');
+            container.classList.remove('hidden');
+            list.innerHTML = alerts.map(a => `
+                <div class="p-3 bg-primary/5 border border-primary/20 rounded-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-primary">${a.titulo}</p>
+                        <p class="text-[10px] text-on-surface-variant">${a.mensagem}</p>
+                    </div>
+                    <button class="text-primary hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                </div>
+            `).join('');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', checkNeuralAlerts);
+</script>
 </body></html>
 
 
