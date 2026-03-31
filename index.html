@@ -147,7 +147,7 @@
 <!-- Vertical Selector Grid -->
 <div class="asymmetric-grid">
 <!-- VENDAS Card -->
-<div onclick="window.location.href=KIRAX_CONFIG.MODULES.VENDAS" class="glass-card neon-glow-primary border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+<a href="pipeline_de_vendas_kirax/code.html" class="glass-card neon-glow-primary border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
 <div class="flex justify-between items-start">
 <div class="p-4 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
 <span class="material-symbols-outlined text-4xl text-primary" data-icon="payments">payments</span>
@@ -160,9 +160,9 @@
                         Gestão de pipeline de alta velocidade, conversão assistida e métricas financeiras em tempo real.
                     </p>
 </div>
-</div>
+</a>
 <!-- RELACIONAMENTO Card -->
-<div onclick="window.location.href=KIRAX_CONFIG.MODULES.RELACIONAMENTO" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-secondary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+<a href="pipeline_de_relacionamento_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-secondary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
 <div class="flex justify-between items-start">
 <div class="p-4 bg-secondary/10 rounded-lg group-hover:bg-secondary/20 transition-colors">
 <span class="material-symbols-outlined text-4xl text-secondary" data-icon="hub">hub</span>
@@ -175,9 +175,9 @@
                         Ecossistema CRM para fidelização profunda e análise de comportamento de rede.
                     </p>
 </div>
-</div>
+</a>
 <!-- VAREJO Card -->
-<div onclick="window.location.href=KIRAX_CONFIG.MODULES.VAREJO" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-tertiary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+<a href="m_dulo_varejo_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-tertiary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
 <div class="flex justify-between items-start">
 <div class="p-4 bg-tertiary/10 rounded-lg group-hover:bg-tertiary/20 transition-colors">
 <span class="material-symbols-outlined text-4xl text-tertiary" data-icon="storefront">storefront</span>
@@ -190,9 +190,9 @@
                         Otimização de PDV, controle de estoque inteligente e fluxos de caixa operacionais.
                     </p>
 </div>
-</div>
+</a>
 <!-- CALENDÁRIO Card -->
-<div onclick="window.location.href=KIRAX_CONFIG.MODULES.CALENDARIO" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary-fixed-dim/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+<a href="calend_rio_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary-fixed-dim/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
 <div class="flex justify-between items-start">
 <div class="p-4 bg-primary-fixed-dim/10 rounded-lg group-hover:bg-primary-fixed-dim/20 transition-colors">
 <span class="material-symbols-outlined text-4xl text-primary-fixed-dim" data-icon="calendar_today">calendar_today</span>
@@ -205,7 +205,7 @@
                         Sincronização estratégica de tarefas, agendamentos e marcos críticos do projeto.
                     </p>
 </div>
-</div>
+</a>
 </div>
 <!-- Master Admin Link -->
 <div class="mt-20 flex flex-col items-center">
@@ -295,4 +295,12 @@
 <div class="absolute top-2/3 -left-20 w-[600px] h-px bg-gradient-to-r from-secondary to-transparent rotate-[10deg]"></div>
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(161,250,255,0.02)_0%,_transparent_70%)]"></div>
 </div>
+<script>
+    console.log("KIRAX HUB: Iniciando diagnóstico...");
+    if (typeof KIRAX_CONFIG !== 'undefined') {
+        console.log("✅ Configuração carregada:", KIRAX_CONFIG);
+    } else {
+        console.error("❌ Erro: KIRAX_CONFIG não encontrado. Verifique se o config.js está na raiz.");
+    }
+</script>
 </body></html>
