@@ -30,29 +30,29 @@
             <span class="w-2 h-2 bg-tertiary rounded-full"></span>
             Sincronização Ativa
         </div>
-        <button onclick="window.location.href='index.html'+window.location.search" class="material-symbols-outlined text-[#a1faff] hover:scale-110 transition-transform">grid_view</button>
+        <button onclick="window.location.href='index.html'+window.location.search" class="material-symbols-outlined text-[#a1faff] hover:scale-110 transition-transform relative z-[60]" style="touch-action: manipulation;">grid_view</button>
     </header>
 
     <!-- Sidebar Navigation -->
     <aside class="hidden md:flex fixed left-0 top-0 w-64 h-full z-40 flex-col pt-24 bg-[#131314] border-r border-outline-variant/10">
         <nav class="flex flex-col gap-1 px-4">
-            <button onclick="switchTab('kanban')" class="tab-btn active-tab group flex items-center gap-4 py-3 px-4 rounded-sm transition-all text-xs font-bold uppercase tracking-tight">
+            <button onclick="switchTab('kanban')" class="tab-btn active-tab group flex items-center gap-4 py-3 px-4 rounded-sm transition-all text-xs font-bold uppercase tracking-tight" style="touch-action: manipulation;">
                 <span class="material-symbols-outlined text-xl">view_kanban</span>
                 Funil de Vendas
             </button>
-            <button onclick="switchTab('clientes')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+            <button onclick="switchTab('clientes')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline" style="touch-action: manipulation;">
                 <span class="material-symbols-outlined text-xl">group</span>
                 Relacionamento
             </button>
-            <button onclick="switchTab('logistica')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+            <button onclick="switchTab('logistica')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline" style="touch-action: manipulation;">
                 <span class="material-symbols-outlined text-xl">local_shipping</span>
                 Gestão de Cargas
             </button>
-            <button onclick="switchTab('campanhas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline">
+            <button onclick="switchTab('campanhas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline" style="touch-action: manipulation;">
                 <span class="material-symbols-outlined text-xl">campaign</span>
                 Campanhas IA
             </button>
-            <button onclick="switchTab('despesas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline border-t border-outline-variant/10 mt-4">
+            <button onclick="switchTab('despesas')" class="tab-btn group flex items-center gap-4 py-3 px-4 rounded-sm hover:bg-[#1a191b] transition-all text-xs font-bold uppercase tracking-tight text-outline border-t border-outline-variant/10 mt-4" style="touch-action: manipulation;">
                 <span class="material-symbols-outlined text-xl">receipt_long</span>
                 Despesas Vendedor
             </button>
@@ -68,7 +68,7 @@
                     <p class="text-[9px] text-tertiary uppercase tracking-widest mt-1">Modo Automático</p>
                 </div>
             </div>
-            <button id="btn-novo-universal" class="w-full bg-primary text-black font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-sm neon-glow-primary">
+            <button id="btn-novo-universal" class="w-full bg-primary text-black font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-sm neon-glow-primary relative z-10" style="touch-action: manipulation;">
                 NOVA AÇÃO
             </button>
         </div>
@@ -149,8 +149,8 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <input id="seller-ai-input" type="text" placeholder="Mensagem / Audio / Imagem..." class="flex-1 bg-surface-container border-none text-xs p-3">
-                        <button onclick="simulateExpenseProcess()" class="bg-tertiary text-black px-4"><span class="material-symbols-outlined">mic</span></button>
+                        <input id="seller-ai-input" type="text" placeholder="Mensagem / Audio / Imagem..." class="flex-1 bg-surface-container border-none text-xs p-3" style="touch-action: manipulation;">
+                        <button onclick="simulateExpenseProcess()" class="bg-tertiary text-black px-4" style="touch-action: manipulation;"><span class="material-symbols-outlined">mic</span></button>
                     </div>
                 </div>
             </div>

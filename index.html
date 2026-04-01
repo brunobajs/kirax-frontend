@@ -172,7 +172,7 @@
     </div>
 </a>
 <!-- VAREJO Card -->
-<a href="m_dulo_varejo_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-tertiary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+<a href="m_dulo_varejo_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-tertiary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]" style="touch-action: manipulation;">
 <div class="flex justify-between items-start">
 <div class="p-4 bg-tertiary/10 rounded-lg group-hover:bg-tertiary/20 transition-colors">
 <span class="material-symbols-outlined text-4xl text-tertiary" data-icon="storefront">storefront</span>
@@ -180,88 +180,62 @@
 <span class="font-headline text-tertiary/40 font-bold text-4xl">03</span>
 </div>
 <div>
-<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-tertiary transition-colors">VAREJO</h2>
+<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-tertiary transition-colors uppercase">Varejo</h2>
 <p class="text-on-surface-variant text-sm font-medium leading-relaxed">
-                        Otimização de PDV, controle de estoque inteligente e fluxos de caixa operacionais.
-                    </p>
+    Otimização de PDV, controle de estoque inteligente e fluxos de caixa operacionais.
+</p>
 </div>
 </a>
-<!-- CALENDÁRIO Card -->
-<a href="calend_rio_kirax/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary-fixed-dim/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]">
+
+<!-- CAMPANHAS Card -->
+<a href="crm.html?tab=campanhas" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-secondary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]" style="touch-action: manipulation;">
 <div class="flex justify-between items-start">
-<div class="p-4 bg-primary-fixed-dim/10 rounded-lg group-hover:bg-primary-fixed-dim/20 transition-colors">
-<span class="material-symbols-outlined text-4xl text-primary-fixed-dim" data-icon="calendar_today">calendar_today</span>
+<div class="p-4 bg-secondary/10 rounded-lg group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="campaign">campaign</span>
 </div>
-<span class="font-headline text-primary-fixed-dim/40 font-bold text-4xl">04</span>
+<span class="font-headline text-secondary/40 font-bold text-4xl">04</span>
 </div>
 <div>
-<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-primary-fixed-dim transition-colors">CALENDÁRIO</h2>
+<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-secondary transition-colors uppercase">Campanhas IA</h2>
 <p class="text-on-surface-variant text-sm font-medium leading-relaxed">
-                        Sincronização estratégica de tarefas, agendamentos e marcos críticos do projeto.
-                    </p>
+    Descoberta de leads qualificados e disparos em massa via IA nas redes.
+</p>
+</div>
+</a>
+
+<!-- DESPESAS Card -->
+<a href="crm.html?tab=despesas" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-tertiary-fixed/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]" style="touch-action: manipulation;">
+<div class="flex justify-between items-start">
+<div class="p-4 bg-tertiary-fixed/10 rounded-lg group-hover:bg-tertiary-fixed/20 transition-colors">
+<span class="material-symbols-outlined text-4xl text-tertiary-fixed" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="font-headline text-tertiary-fixed/40 font-bold text-4xl">05</span>
+</div>
+<div>
+<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-tertiary-fixed transition-colors uppercase">Relatório Despesas</h2>
+<p class="text-on-surface-variant text-sm font-medium leading-relaxed">
+    Controle financeiro de campo com auditoria e processamento via voz/imagem.
+</p>
+</div>
+</a>
+
+<!-- WHATSAPP IA Card -->
+<a href="central_de_chats_desktop/code.html" class="glass-card border border-outline-variant/20 p-8 rounded-lg group cursor-pointer hover:border-primary/40 transition-all duration-500 flex flex-col justify-between min-h-[320px]" style="touch-action: manipulation;">
+<div class="flex justify-between items-start">
+<div class="p-4 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<span class="font-headline text-primary/40 font-bold text-4xl">06</span>
+</div>
+<div>
+<h2 class="font-headline font-bold text-3xl mb-2 group-hover:text-primary transition-colors uppercase">WhatsApp IA</h2>
+<p class="text-on-surface-variant text-sm font-medium leading-relaxed">
+    Coração neural de atendimento e automação de Kanban via intenção.
+</p>
 </div>
 </a>
 </div>
 
-<script>
-    async function loadUserModules() {
-        console.log("KIRAX HUB: Carregando módulos dinâmicos...");
-        const urlParams = new URLSearchParams(window.location.search);
-        let empresaId = urlParams.get('empresa_id');
-        
-        if (!empresaId) {
-            console.log("Aviso: Nenhum empresa_id fornecido. Mostrando todos os módulos.");
-            return;
-        }
-
-        try {
-            const { data, error } = await window.kiraxSupabase
-                .from('empresas')
-                .select('modulos_config')
-                .eq('id', empresaId)
-                .single();
-
-            if (error) throw error;
-            const config = data.modulos_config;
-
-            const cards = {
-                crm: document.querySelector('a[href="crm.html"]'),
-                varejo: document.querySelector('a[href*="m_dulo_varejo"]'),
-                calendario: document.querySelector('a[href*="calend_rio"]')
-            };
-
-            const configRemap = {
-                crm: config.vendas || config.relacionamento,
-                varejo: config.varejo,
-                calendario: config.calendario
-            };
-
-            Object.keys(cards).forEach(key => {
-                if (cards[key]) {
-                    // Garantir que o link preserve o empresa_id
-                    const baseUrl = cards[key].getAttribute('href').split('?')[0];
-                    cards[key].setAttribute('href', `${baseUrl}?empresa_id=${empresaId}`);
-                    
-                    if (configRemap[key] === false) {
-                        cards[key].classList.add('hidden');
-                    } else {
-                        cards[key].classList.remove('hidden');
-                    }
-                }
-            });
-
-        } catch (err) {
-            console.error("❌ Erro ao carregar módulos:", err.message);
-        }
-    }
-
-    // Executar após carregar a página
-    window.addEventListener('DOMContentLoaded', () => {
-        if (window.kiraxSupabase) {
-            loadUserModules();
-        }
-    });
-</script>
 
 <!-- Master Admin Link -->
 <div class="mt-20 flex flex-col items-center">
@@ -349,11 +323,73 @@
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,_rgba(161,250,255,0.02)_0%,_transparent_70%)]"></div>
 </div>
 <script>
-    console.log("KIRAX HUB: Iniciando diagnóstico...");
-    if (typeof KIRAX_CONFIG !== 'undefined') {
-        console.log("✅ Configuração carregada:", KIRAX_CONFIG);
-    } else {
-        console.error("❌ Erro: KIRAX_CONFIG não encontrado. Verifique se o config.js está na raiz.");
+    async function loadUserModules() {
+        console.log("KIRAX HUB: Carregando módulos dinâmicos...");
+        const urlParams = new URLSearchParams(window.location.search);
+        let empresaId = urlParams.get('empresa_id');
+        
+        if (!empresaId) {
+            console.log("Aviso: Nenhum empresa_id fornecido. Mostrando todos os módulos.");
+            return;
+        }
+
+        try {
+            const { data, error } = await window.kiraxSupabase
+                .from('empresas')
+                .select('modulos_config')
+                .eq('id', empresaId)
+                .single();
+
+            if (error) throw error;
+            const config = data.modulos_config || {};
+
+            // Problema 3: Mapeamento estendido de módulos
+            const cards = {
+                crm: document.querySelector('a[href="crm.html"]'),
+                varejo: document.querySelector('a[href*="m_dulo_varejo"]'),
+                campanhas: document.querySelector('a[href*="tab=campanhas"]'),
+                despesas: document.querySelector('a[href*="tab=despesas"]'),
+                whatsapp: document.querySelector('a[href*="central_de_chats"]')
+            };
+
+            const configRemap = {
+                crm: config.vendas || config.relacionamento,
+                varejo: config.varejo,
+                campanhas: config.campanhas,
+                despesas: config.despesas,
+                whatsapp: config.whatsapp_ia
+            };
+
+            Object.keys(cards).forEach(key => {
+                if (cards[key]) {
+                    // Problema 4: Garantir interatividade preservando empresa_id e ajustando pointer-events
+                    cards[key].classList.remove('pointer-events-none');
+                    const baseUrl = cards[key].getAttribute('href');
+                    const separator = baseUrl.includes('?') ? '&' : '?';
+                    if (!baseUrl.includes('empresa_id')) {
+                        cards[key].setAttribute('href', `${baseUrl}${separator}empresa_id=${empresaId}`);
+                    }
+                    
+                    if (configRemap[key] === false) {
+                        cards[key].style.display = 'none';
+                    } else {
+                        cards[key].style.display = 'flex';
+                    }
+                }
+            });
+
+        } catch (err) {
+            console.error("❌ Erro ao carregar módulos:", err.message);
+        }
     }
+
+    // Executar após carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.kiraxSupabase) {
+            loadUserModules();
+        }
+    });
+
+    console.log("KIRAX HUB: Diagnóstico completo.");
 </script>
 </body></html>

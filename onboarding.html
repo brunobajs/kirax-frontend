@@ -38,10 +38,10 @@
         </div>
 
         <!-- Input Area -->
-        <div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background via-background to-transparent">
-            <div class="max-w-4xl mx-auto flex gap-3 bg-surface-container p-2 rounded-sm border border-outline-variant/20 neon-glow">
-                <input id="user-input" type="text" placeholder="Ex: Sou uma loja de roupas e vendo pelo Instagram..." class="flex-grow bg-transparent border-none text-on-surface text-sm focus:ring-0 px-4" onkeypress="if(event.key === 'Enter') sendMessage()"/>
-                <button onclick="sendMessage()" class="bg-primary text-on-primary px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">
+        <div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background via-background to-transparent z-50">
+            <div class="max-w-4xl mx-auto flex gap-3 bg-surface-container p-2 rounded-sm border border-outline-variant/20 neon-glow relative">
+                <input id="user-input" type="text" placeholder="Ex: Sou uma loja de roupas e vendo pelo Instagram..." class="flex-grow bg-transparent border-none text-on-surface text-sm focus:ring-0 px-4" onkeypress="if(event.key === 'Enter') sendMessage()" style="touch-action: manipulation;"/>
+                <button onclick="sendMessage()" class="bg-primary text-on-primary px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all relative z-10" style="touch-action: manipulation;">
                     Enviar
                 </button>
             </div>
@@ -72,6 +72,35 @@
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
+        let jwtToken = localStorage.getItem('kirax_auth_token');
+
+        async function ensureAuth() {
+            if (jwtToken) return true;
+            
+            console.log("Onboarding: Autenticando técnico temporário...");
+            try {
+                // Tenta login padrão para onboarding ou usa o ID da URL para identificar
+                const urlParams = new URLSearchParams(window.location.search);
+                const empresaId = urlParams.get('empresa_id');
+
+                const response = await fetch(KIRAX_CONFIG.API_URL + '/auth/onboarding-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ empresa_id: empresaId })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    jwtToken = data.token;
+                    localStorage.setItem('kirax_auth_token', jwtToken);
+                    return true;
+                }
+            } catch (err) {
+                console.error("Erro na autenticação de onboarding:", err);
+            }
+            return false;
+        }
+
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
@@ -79,10 +108,21 @@
             appendMessage('user', text);
             userInput.value = '';
 
+            // Problema 2: Garantir autenticação antes de chamar a IA
+            const authed = await ensureAuth();
+            if (!authed) {
+                appendMessage('ai', "Não consegui validar sua sessão. Por favor, recarregue a página.");
+                return;
+            }
+
             try {
-                const response = await fetch(KIRAX_CONFIG.API_URL + '/chat', {
+                // Problema 1: Corrigindo endpoint para /ai/chat
+                const response = await fetch(KIRAX_CONFIG.API_URL + '/ai/chat', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
                     body: JSON.stringify({ 
                         prompt: `Você é um consultor de implantação do Kirax CRM. O usuário disse: "${text}". 
                         Seu objetivo é identificar se ele precisa de:
@@ -90,19 +130,19 @@
                         - relacionamento (fidelização, pós-venda)
                         - varejo (estoque, PDV)
                         - calendario (agendamentos)
+                        - campanhas (marketing ativo)
+                        - despesas (gestão financeira de campo)
 
                         Responda de forma curta e amigável. Caso já tenha identificado, diga: "Entendido! Pelo que você me disse, vou configurar os módulos de [MÓDULOS] para você. Podemos prosseguir?"`
                     })
                 });
 
                 const data = await response.json();
-                appendMessage('ai', data.response);
+                appendMessage('ai', data.response || data.text || "Entendido. Como posso ajudar mais?");
 
-                // Lógica de auto-ativação (Simulação por enquanto)
-                if (data.response.toLowerCase().includes('podemos prosseguir')) {
+                if (data.response && data.response.toLowerCase().includes('podemos prosseguir')) {
                     setupModules(text);
                 }
-
             } catch (err) {
                 console.error("Erro na IA:", err);
                 appendMessage('ai', "Desculpe, tive um problema de conexão. Tente novamente.");
