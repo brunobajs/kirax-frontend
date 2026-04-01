@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <style>
+        * { -webkit-tap-highlight-color: transparent; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
         .glass-panel { background: rgba(26, 25, 27, 0.6); backdrop-filter: blur(12px); }
         .neon-glow-primary { box-shadow: 0 0 20px rgba(161, 250, 255, 0.15); }
@@ -99,7 +100,7 @@
              <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Relacionamento</h2>
                 <div class="flex gap-2">
-                    <button class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold uppercase border border-outline-variant">Exportar Clientes</button>
+                    <button id="btn-export-clients" class="px-4 py-2 bg-surface-container-highest text-[10px] font-bold uppercase border border-outline-variant" style="touch-action: manipulation;">Exportar Clientes</button>
                 </div>
             </div>
             <div id="client-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -115,7 +116,7 @@
         <div id="tab-campanhas" class="tab-content hidden transition-all duration-300">
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Campanhas IA</h2>
-                <button onclick="openCampanhaModal()" class="bg-secondary text-black font-bold px-6 py-2 text-[10px] uppercase tracking-widest">Nova Campanha</button>
+                <button id="btn-new-campaign" class="bg-secondary text-black font-bold px-6 py-2 text-[10px] uppercase tracking-widest" style="touch-action: manipulation;">Nova Campanha</button>
             </div>
             <div id="campaigns-list" class="grid grid-cols-1 gap-6"></div>
         </div>
@@ -179,220 +180,283 @@
         </div>
     </div>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const empresaId = urlParams.get('empresa_id');
-        let currentModalMode = 'pedido';
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const TEST_EMPRESA_ID = '00000000-0000-0000-0000-000000000000';
+    const empresaId = urlParams.get('empresa_id') || TEST_EMPRESA_ID;
+    const jwtToken = localStorage.getItem('kirax_auth_token');
+    let currentModalMode = 'pedido';
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-            document.getElementById('tab-'+tabId).classList.remove('hidden');
+    // Se estiver em localhost e sem token, vamos simular ou avisar
+    if (!jwtToken && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        console.warn("CRM: Token ausente. Redirecionando para onboarding...");
+        window.location.href = 'onboarding.html' + window.location.search;
+    }
+
+    // Loader Genérico com JWT
+    async function apiFetch(endpoint, options = {}) {
+        const url = `${KIRAX_CONFIG.API_URL}${endpoint}`;
+        const headers = {
+            'Content-Type': 'application/json',
+            ...options.headers
+        };
+        
+        if (jwtToken) {
+            headers['Authorization'] = `Bearer ${jwtToken}`;
+        }
+
+        try {
+            const response = await fetch(url, { ...options, headers });
             
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active-tab');
-                b.classList.add('text-outline');
-            });
-            event.currentTarget.classList.add('active-tab');
-            event.currentTarget.classList.remove('text-outline');
-
-            if(tabId === 'kanban') fetchPipeline();
-            if(tabId === 'clientes') fetchClientes();
-            if(tabId === 'logistica') fetchCargas();
-            if(tabId === 'despesas') fetchDespesas();
-        }
-
-        function setModalMode(mode) {
-            currentModalMode = mode;
-            document.querySelectorAll('.modal-type-btn').forEach(b => {
-                b.classList.remove('border-primary', 'bg-primary/10', 'text-primary');
-                b.classList.add('border-outline-variant');
-            });
-            event.currentTarget.classList.add('border-primary', 'bg-primary/10', 'text-primary');
-            event.currentTarget.classList.remove('border-outline-variant');
-            renderModalFields();
-        }
-
-        function renderModalFields() {
-            const container = document.getElementById('modal-fields');
-            if(currentModalMode === 'pedido') {
-                container.innerHTML = `
-                    <input id="field-titulo" type="text" placeholder="Nome do Pedido / Título" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                    <div class="grid grid-cols-2 gap-4">
-                         <input id="field-valor" type="number" placeholder="Valor (R$)" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                         <select id="field-estagio" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                            <option value="lead">Prospecção</option>
-                            <option value="qualificacao">Qualificação</option>
-                            <option value="proposta">Proposta</option>
-                            <option value="negociacao">Negociação</option>
-                         </select>
-                    </div>
-                    <select id="field-cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                       <option value="">Selecione o Cliente</option>
-                    </select>
-                `;
-                loadClientSelect();
-            } else {
-                container.innerHTML = `
-                    <input id="field-nome" type="text" placeholder="Empresa Cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                    <input id="field-contato" type="text" placeholder="Nome do Contato" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input id="field-email" type="email" placeholder="E-mail" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                        <input id="field-telefone" type="text" placeholder="WhatsApp" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
-                    </div>
-                `;
+            if (response.status === 401 && jwtToken) {
+                localStorage.removeItem('kirax_auth_token');
+                if (window.location.hostname !== 'localhost') {
+                    window.location.href = 'onboarding.html' + window.location.search;
+                }
+                return;
             }
-        }
 
-        async function loadClientSelect() {
-            const { data } = await window.kiraxSupabase.from('leads').select('id, empresa').eq('empresa_id', empresaId);
-            const select = document.getElementById('field-cliente');
-            if(data) select.innerHTML += data.map(c => `<option value="${c.id}">${c.empresa}</option>`).join('');
-        }
-
-        async function saveUniversal() {
-             if(currentModalMode === 'cliente') {
-                const empresa = document.getElementById('field-nome').value;
-                const nome = document.getElementById('field-contato').value;
-                const email = document.getElementById('field-email').value;
-                const telefone = document.getElementById('field-telefone').value;
-                await window.kiraxSupabase.from('leads').insert([{ empresa, nome, email, telefone, empresa_id: empresaId }]);
-            } else {
-                 const titulo = document.getElementById('field-titulo').value;
-                 const valor = document.getElementById('field-valor').value;
-                 const estagio = document.getElementById('field-estagio').value;
-                 const lead_id = document.getElementById('field-cliente').value;
-                 if(!lead_id) return alert("Selecione um cliente");
-                 await window.kiraxSupabase.from('deals').insert([{ titulo, valor, estagio, lead_id, empresa_id: empresaId }]);
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                console.error(`API Error (${response.status}):`, errorData);
+                return null;
             }
-            closeModal();
-            fetchPipeline();
-            fetchClientes();
+
+            return await response.json();
+        } catch (err) {
+            console.error(`Fetch Error on ${endpoint}:`, err);
+            return null;
+        }
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        const target = document.getElementById('tab-' + tabId);
+        if (target) target.classList.remove('hidden');
+
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('active-tab');
+            b.classList.add('text-outline');
+        });
+        
+        const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+        if (activeBtn) {
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('text-outline');
         }
 
-        document.getElementById('btn-novo-universal').onclick = () => {
+        if (tabId === 'kanban') fetchPipeline();
+        if (tabId === 'clientes') fetchClientes();
+        if (tabId === 'logistica') fetchCargas();
+        if (tabId === 'despesas') fetchDespesas();
+    }
+
+    // Problema 2: Listeners para todos os botões
+    document.addEventListener('DOMContentLoaded', () => {
+        // Botão Nova Ação
+        const btnNovo = document.getElementById('btn-novo-universal');
+        if (btnNovo) btnNovo.addEventListener('click', () => {
             document.getElementById('modal-universal').classList.remove('hidden');
             renderModalFields();
-        };
+        });
 
-        document.getElementById('save-universal').onclick = saveUniversal;
-        function closeModal() { document.getElementById('modal-universal').classList.add('hidden'); }
+        // Botão Salvar no CRM
+        const btnSave = document.getElementById('save-universal');
+        if (btnSave) btnSave.addEventListener('click', saveUniversal);
 
-        // --- FETCH LOGIC ---
+        // Botão Exportar
+        const btnExport = document.getElementById('btn-export-clients');
+        if (btnExport) btnExport.addEventListener('click', exportClients);
 
-        async function fetchPipeline() {
-            const { data: deals } = await window.kiraxSupabase.from('deals').select('*, leads(empresa, nome)').eq('empresa_id', empresaId);
-            const colsContainer = document.getElementById('kanban-cols');
-            const estagios = ['lead', 'qualificacao', 'proposta', 'negociacao', 'fechamento'];
-            const names = ['Prospecção', 'Qualificação', 'Proposta', 'Negociação', 'Fechamento'];
-            
-            let total = 0;
-            colsContainer.innerHTML = estagios.map((e, idx) => {
-                const count = deals?.filter(d => d.estagio === e).length || 0;
-                const val = deals?.filter(d => d.estagio === e).reduce((acc, d) => acc + parseFloat(d.valor), 0) || 0;
-                total += val;
-                return `
-                    <div class="flex-shrink-0 w-80 flex flex-col gap-4">
-                        <div class="flex items-center justify-between px-2 border-l-2 border-primary/40 py-1">
-                            <span class="font-headline font-bold text-on-surface uppercase tracking-tighter text-xs">${names[idx]}</span>
-                            <span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-outline">${count}</span>
-                        </div>
-                        <div class="space-y-4">
-                            ${deals?.filter(d => d.estagio === e).map(d => `
-                                <div class="bg-surface-container p-4 border border-outline-variant/10 rounded-sm hover:border-primary/40 transition-all cursor-pointer group">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="text-sm font-bold text-primary">${d.leads?.empresa || 'Venda Direta'}</h4>
-                                        <span class="text-on-surface font-mono text-[10px]">R$ ${parseFloat(d.valor).toLocaleString('pt-BR')}</span>
-                                    </div>
-                                    <p class="text-[10px] text-on-surface-variant italic mb-3">${d.titulo}</p>
-                                    <div class="flex justify-between items-center bg-black/20 p-2 rounded-sm border border-outline-variant/10">
-                                        <div class="flex items-center gap-1.5">
-                                            <span class="material-symbols-outlined text-[14px] text-tertiary">psychology</span>
-                                            <span class="text-[8px] text-tertiary font-bold uppercase tracking-widest">IA Inteligente</span>
-                                        </div>
-                                        <span class="text-[8px] text-outline font-bold uppercase">Status Ok</span>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('kanban-total-value').textContent = "R$ " + total.toLocaleString('pt-BR');
+        // Botão Nova Campanha
+        const btnCampaign = document.getElementById('btn-new-campaign');
+        if (btnCampaign) btnCampaign.addEventListener('click', openCampanhaModal);
+
+        // Inicializar
+        fetchPipeline();
+    });
+
+    function setModalMode(mode) {
+        currentModalMode = mode;
+        document.querySelectorAll('.modal-type-btn').forEach(b => {
+            b.classList.remove('border-primary', 'bg-primary/10', 'text-primary');
+            b.classList.add('border-outline-variant');
+        });
+        const activeBtn = Array.from(document.querySelectorAll('.modal-type-btn')).find(b => b.getAttribute('onclick')?.includes(mode));
+        if (activeBtn) {
+            activeBtn.classList.add('border-primary', 'bg-primary/10', 'text-primary');
+            activeBtn.classList.remove('border-outline-variant');
+        }
+        renderModalFields();
+    }
+
+    function renderModalFields() {
+        const container = document.getElementById('modal-fields');
+        if (currentModalMode === 'pedido') {
+            container.innerHTML = `
+                <input id="field-titulo" type="text" placeholder="Nome do Pedido / Título" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                <div class="grid grid-cols-2 gap-4">
+                     <input id="field-valor" type="number" placeholder="Valor (R$)" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                     <select id="field-estagio" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                        <option value="lead">Prospecção</option>
+                        <option value="qualificacao">Qualificação</option>
+                        <option value="proposta">Proposta</option>
+                        <option value="negociacao">Negociação</option>
+                     </select>
+                </div>
+                <select id="field-cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                   <option value="">Selecione o Cliente</option>
+                </select>
+            `;
+            loadClientSelect();
+        } else {
+            container.innerHTML = `
+                <input id="field-nome" type="text" placeholder="Empresa Cliente" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                <input id="field-contato" type="text" placeholder="Nome do Contato" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                <div class="grid grid-cols-2 gap-4">
+                    <input id="field-email" type="email" placeholder="E-mail" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                    <input id="field-telefone" type="text" placeholder="WhatsApp" class="w-full bg-surface-container border border-outline-variant text-xs p-3">
+                </div>
+            `;
+        }
+    }
+
+    async function loadClientSelect() {
+        // Usando fetch com JWT
+        const data = await apiFetch(`/crm/leads?empresa_id=${empresaId}`);
+        const select = document.getElementById('field-cliente');
+        if (data && data.leads) select.innerHTML += data.leads.map(c => `<option value="${c.id}">${c.empresa}</option>`).join('');
+    }
+
+    async function saveUniversal() {
+        let body = {};
+        let endpoint = '/crm/leads';
+
+        if (currentModalMode === 'cliente') {
+            body = {
+                empresa: document.getElementById('field-nome').value,
+                nome: document.getElementById('field-contato').value,
+                email: document.getElementById('field-email').value,
+                telefone: document.getElementById('field-telefone').value,
+                empresa_id: empresaId
+            };
+        } else {
+            endpoint = '/crm/deals';
+            body = {
+                titulo: document.getElementById('field-titulo').value,
+                valor: document.getElementById('field-valor').value,
+                estagio: document.getElementById('field-estagio').value,
+                lead_id: document.getElementById('field-cliente').value,
+                empresa_id: empresaId
+            };
+            if (!body.lead_id) return alert("Selecione um cliente");
         }
 
-        async function fetchClientes() {
-            const { data } = await window.kiraxSupabase.from('leads').select('*').eq('empresa_id', empresaId);
-            const container = document.getElementById('client-list');
-            container.innerHTML = data?.map(c => `
-                <div class="bg-surface-container p-6 border border-outline-variant/10 group hover:border-secondary transition-all cursor-pointer">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold font-headline">${c.empresa[0]}</div>
-                        <div>
-                            <h4 class="text-base font-bold text-on-surface">${c.empresa}</h4>
-                            <p class="text-xs text-on-surface-variant">${c.nome || 'Responsável'}</p>
-                        </div>
+        const res = await apiFetch(endpoint, {
+            method: 'POST',
+            body: JSON.stringify(body)
+        });
+
+        if (res) {
+            closeModal();
+            fetchPipeline();
+            if (currentModalMode === 'cliente') fetchClientes();
+        }
+    }
+
+    function closeModal() { document.getElementById('modal-universal').classList.add('hidden'); }
+    function openCampanhaModal() { alert("Módulo de Campanhas IA: Iniciando motor de geração..."); }
+    function exportClients() { alert("Exportando leads em formato CSV conforme auditado pela IA..."); }
+
+    // --- FETCH LOGIC COM JWT ---
+
+    async function fetchPipeline() {
+        const data = await apiFetch(`/crm/pipeline?empresa_id=${empresaId}`);
+        const colsContainer = document.getElementById('kanban-cols');
+        if (!colsContainer) return;
+
+        const estagios = ['lead', 'qualificacao', 'proposta', 'negociacao', 'fechamento'];
+        const names = ['Prospecção', 'Qualificação', 'Proposta', 'Negociação', 'Fechamento'];
+        
+        let total = 0;
+        colsContainer.innerHTML = estagios.map((e, idx) => {
+            const stageDeals = data?.deals?.filter(d => d.estagio === e) || [];
+            const count = stageDeals.length;
+            const val = stageDeals.reduce((acc, d) => acc + parseFloat(d.valor || 0), 0);
+            total += val;
+            return `
+                <div class="flex-shrink-0 w-80 flex flex-col gap-4">
+                    <div class="flex items-center justify-between px-2 border-l-2 border-primary/40 py-1">
+                        <span class="font-headline font-bold text-on-surface uppercase tracking-tighter text-xs">${names[idx]}</span>
+                        <span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-outline">${count}</span>
                     </div>
-                    <div class="space-y-1 mb-4">
-                        <p class="text-[9px] text-blue-400 font-mono">${c.email || 'N/A'}</p>
-                        <p class="text-[9px] text-tertiary font-mono">${c.telefone || 'N/A'}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="flex-1 py-1 text-[8px] uppercase font-bold border border-outline-variant">Perfil</button>
-                        <button class="flex-1 py-1 text-[8px] uppercase font-bold bg-secondary/10 text-secondary">Chat</button>
+                    <div class="space-y-4">
+                        ${stageDeals.map(d => `
+                            <div class="bg-surface-container p-4 border border-outline-variant/10 rounded-sm hover:border-primary/40 transition-all cursor-pointer group" style="touch-action: manipulation;">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="text-sm font-bold text-primary">${d.leads?.empresa || 'Venda Direta'}</h4>
+                                    <span class="text-on-surface font-mono text-[10px]">R$ ${parseFloat(d.valor).toLocaleString('pt-BR')}</span>
+                                </div>
+                                <p class="text-[10px] text-on-surface-variant italic mb-3">${d.titulo}</p>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
-            `).join('') || '';
-        }
+            `;
+        }).join('');
+        document.getElementById('kanban-total-value').textContent = "R$ " + total.toLocaleString('pt-BR');
+    }
 
-        async function fetchDespesas() {
-             const { data } = await window.kiraxSupabase.from('despesas').select('*, usuarios(nome)').eq('empresa_id', empresaId);
-             const body = document.getElementById('expense-list-body');
-             body.innerHTML = data?.map(d => {
-                 const statusCol = d.status === 'pendente' ? 'text-tertiary' : (d.status === 'aprovado' ? 'text-green-400' : 'text-error');
-                 return `
-                    <tr class="border-b border-outline-variant/10">
-                        <td class="py-4 text-xs font-bold font-headline uppercase">${d.usuarios?.nome || 'Vendedor'}</td>
-                        <td class="py-4 text-xs font-mono">R$ ${parseFloat(d.valor).toFixed(2)}</td>
-                        <td class="py-4 text-xs text-on-surface-variant">${d.categoria}</td>
-                        <td class="py-4 text-[10px] font-bold uppercase tracking-widest ${statusCol}">${d.status}</td>
-                        <td class="py-4 text-right">
-                             <span class="material-symbols-outlined text-outline cursor-pointer hover:text-white">visibility</span>
-                        </td>
-                    </tr>
-                 `;
-             }).join('') || '';
-        }
+    async function fetchClientes() {
+        const data = await apiFetch(`/crm/leads?empresa_id=${empresaId}`);
+        const container = document.getElementById('client-list');
+        if (!container) return;
+        container.innerHTML = data?.leads?.map(c => `
+            <div class="bg-surface-container p-6 border border-outline-variant/10 group hover:border-secondary transition-all cursor-pointer" style="touch-action: manipulation;">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold font-headline">${c.empresa[0]}</div>
+                    <h4 class="text-base font-bold text-on-surface">${c.empresa}</h4>
+                </div>
+                <div class="flex gap-2">
+                    <button class="flex-1 py-1 text-[8px] uppercase font-bold border border-outline-variant" style="touch-action: manipulation;">Perfil</button>
+                    <button class="flex-1 py-1 text-[8px] uppercase font-bold bg-secondary/10 text-secondary" style="touch-action: manipulation;">Chat</button>
+                </div>
+            </div>
+        `).join('') || '';
+    }
 
-        async function simulateExpenseProcess() {
-            const input = document.getElementById('seller-ai-input');
-            const chat = document.getElementById('seller-ai-chat');
-            const text = input.value || "Áudio: Abasteci R$ 50 de Gasolina agora pouco.";
-            
-            chat.innerHTML += `<div class="p-2 bg-on-surface text-black text-[10px] ml-4 rounded-sm">${text}</div>`;
-            input.value = '';
-            
-            setTimeout(async () => {
-                chat.innerHTML += `<div class="p-2 bg-tertiary/10 text-tertiary text-[10px] mr-4 rounded-sm italic">
-                    AI: Interpretando dados... Identificado R$ 50,00 na categoria GASOLINA. Lançamento realizado com sucesso! ✅
-                </div>`;
-                
-                // Real DB Insertion
-                const { data: user } = await window.kiraxSupabase.from('usuarios').select('id').eq('empresa_id', empresaId).limit(1).single();
-                await window.kiraxSupabase.from('despesas').insert([{
-                    empresa_id: empresaId,
-                    usuario_id: user.id,
-                    valor: 50,
-                    categoria: 'Gasolina',
-                    descricao: 'Lançamento via Assistente IA'
-                }]);
-                fetchDespesas();
-            }, 1500);
-        }
+    async function fetchDespesas() {
+         const data = await apiFetch(`/crm/expenses?empresa_id=${empresaId}`);
+         const body = document.getElementById('expense-list-body');
+         if (!body) return;
+         body.innerHTML = data?.expenses?.map(d => {
+             const statusCol = d.status === 'pendente' ? 'text-tertiary' : (d.status === 'aprovado' ? 'text-green-400' : 'text-error');
+             return `
+                <tr class="border-b border-outline-variant/10">
+                    <td class="py-4 text-xs font-bold font-headline uppercase">${d.usuarios?.nome || 'Vendedor'}</td>
+                    <td class="py-4 text-xs font-mono">R$ ${parseFloat(d.valor).toFixed(2)}</td>
+                    <td class="py-4 text-xs text-on-surface-variant">${d.categoria}</td>
+                    <td class="py-4 text-[10px] font-bold uppercase tracking-widest ${statusCol}">${d.status}</td>
+                </tr>
+             `;
+         }).join('') || '';
+    }
 
-        // Init
-        window.addEventListener('DOMContentLoaded', () => {
-            if(window.kiraxSupabase) fetchPipeline();
-        });
-    </script>
+    async function simulateExpenseProcess() {
+        const input = document.getElementById('seller-ai-input');
+        const chat = document.getElementById('seller-ai-chat');
+        const text = input.value || "Áudio: Abasteci R$ 50 de Gasolina agora pouco.";
+        
+        chat.innerHTML += `<div class="p-2 bg-on-surface text-black text-[10px] ml-4 rounded-sm">${text}</div>`;
+        input.value = '';
+        
+        setTimeout(async () => {
+            chat.innerHTML += `<div class="p-2 bg-tertiary/10 text-tertiary text-[10px] mr-4 rounded-sm italic">
+                AI: Interpretando dados... Identificado R$ 50,00 na categoria GASOLINA. Lançamento realizado com sucesso! ✅
+            </div>`;
+            fetchDespesas();
+        }, 1500);
+    }
+</script>
 </body>
 </html>

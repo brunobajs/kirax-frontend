@@ -1,7 +1,9 @@
 // Configuração Global Kirax CRM
 const KIRAX_CONFIG = {
     // Backend API (Vercel)
-    API_URL: 'https://kirax-backend-v2.vercel.app/api',
+    API_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === ''
+        ? 'http://localhost:3000/api' 
+        : 'https://kirax-backend-v2.vercel.app/api',
     
     // Supabase Configuration
     SUPABASE_URL: 'https://qkllvzcmvnouhztdjkwq.supabase.co',
