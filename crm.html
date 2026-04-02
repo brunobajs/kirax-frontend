@@ -18,6 +18,74 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .active-tab { border-color: #a1faff; color: #a1faff; background: rgba(161, 250, 255, 0.05); }
     </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary": "#390050",
+                        "inverse-surface": "#fcf8f9",
+                        "error-dim": "#d7383b",
+                        "on-surface": "#ffffff",
+                        "surface-container-low": "#131314",
+                        "outline": "#767576",
+                        "on-secondary-fixed-variant": "#8400b3",
+                        "secondary-container": "#9900cf",
+                        "surface-container-highest": "#262627",
+                        "primary-container": "#00f4fe",
+                        "tertiary": "#f3ffca",
+                        "surface-bright": "#2c2c2d",
+                        "tertiary-fixed": "#cafd00",
+                        "surface": "#0e0e0f",
+                        "on-tertiary-fixed": "#3a4a00",
+                        "on-primary": "#006165",
+                        "error": "#ff716c",
+                        "on-primary-fixed": "#004346",
+                        "on-secondary-container": "#fff5fc",
+                        "surface-variant": "#262627",
+                        "primary-fixed-dim": "#00e5ee",
+                        "surface-tint": "#a1faff",
+                        "on-error-container": "#ffa8a3",
+                        "on-surface-variant": "#adaaab",
+                        "surface-container-high": "#201f21",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary": "#516700",
+                        "on-tertiary-container": "#4a5e00",
+                        "surface-container": "#1a191b",
+                        "primary-fixed": "#00f4fe",
+                        "tertiary-fixed-dim": "#beee00",
+                        "inverse-primary": "#006a6e",
+                        "tertiary-dim": "#beee00",
+                        "secondary-fixed-dim": "#eaaeff",
+                        "on-background": "#ffffff",
+                        "secondary-dim": "#bb00fc",
+                        "background": "#0e0e0f",
+                        "surface-dim": "#0e0e0f",
+                        "secondary-fixed": "#f1c1ff",
+                        "on-tertiary-fixed-variant": "#526900",
+                        "outline-variant": "#484849",
+                        "on-primary-fixed-variant": "#006266",
+                        "on-primary-container": "#00575b",
+                        "primary-dim": "#00e5ee",
+                        "on-secondary-fixed": "#580079",
+                        "on-error": "#490006",
+                        "primary": "#a1faff",
+                        "tertiary-container": "#cafd00",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565556",
+                        "secondary": "#d674ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
 </head>
 <body class="bg-[#0e0e0f] text-on-surface font-body selection:bg-primary/20">
 
@@ -365,8 +433,36 @@
     }
 
     function closeModal() { document.getElementById('modal-universal').classList.add('hidden'); }
-    function openCampanhaModal() { alert("Módulo de Campanhas IA: Iniciando motor de geração..."); }
-    function exportClients() { alert("Exportando leads em formato CSV conforme auditado pela IA..."); }
+
+    function openCampanhaModal() {
+        const nome = prompt('Nome da Campanha (ex: Promoção Maio):');
+        if (!nome) return;
+        const mensagem = prompt('Mensagem da campanha:');
+        if (!mensagem) return;
+        const container = document.getElementById('campaigns-list');
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container p-6 border border-secondary/20 rounded-sm';
+        card.innerHTML = `<div class="flex justify-between"><h4 class="font-bold text-secondary text-sm">${nome}</h4><span class="text-[10px] text-outline">Criando...</span></div><p class="text-[11px] text-on-surface-variant mt-2">${mensagem}</p>`;
+        if (container) container.prepend(card);
+        apiFetch('/crm/campaigns', {
+            method: 'POST',
+            body: JSON.stringify({ nome, mensagem, canal: 'whatsapp', empresa_id: empresaId })
+        }).then(res => { if (res) card.querySelector('span').textContent = '✅ Ativa'; });
+    }
+
+    function exportClients() {
+        apiFetch(`/crm/leads?empresa_id=${empresaId}`).then(data => {
+            if (!data?.leads?.length) { alert('Nenhum cliente para exportar.'); return; }
+            const headers = ['Empresa','Nome','Email','Telefone','Score IA'];
+            const rows = data.leads.map(c => [c.empresa, c.nome, c.email, c.telefone, c.score_ia || 0].join(','));
+            const csv = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'clientes_kirax.csv';
+            a.click();
+        });
+    }
 
     // --- FETCH LOGIC COM JWT ---
 
@@ -457,6 +553,50 @@
             fetchDespesas();
         }, 1500);
     }
+
+    // --- FUNÇÕES QUE FALTAVAM (chamadas mas não definidas) ---
+
+    async function fetchCargas() {
+        const data = await apiFetch(`/crm/cargas?empresa_id=${empresaId}`);
+        const container = document.getElementById('cargo-list');
+        if (!container) return;
+        if (!data?.cargas?.length) {
+            container.innerHTML = '<p class="text-outline text-sm">Nenhuma carga cadastrada.</p>';
+            return;
+        }
+        const statusColor = { aberta: 'text-tertiary', fechada: 'text-outline', em_transito: 'text-primary' };
+        container.innerHTML = data.cargas.map(c => `
+            <div class="bg-surface-container p-6 border border-outline-variant/10 rounded-sm hover:border-primary/40 transition-all">
+                <div class="flex justify-between items-start mb-3">
+                    <h4 class="font-bold text-sm text-on-surface">${c.origem || '?'} → ${c.destino || '?'}</h4>
+                    <span class="text-[10px] font-bold uppercase ${statusColor[c.status] || 'text-outline'}">${c.status || 'N/A'}</span>
+                </div>
+                <p class="text-[10px] text-outline">Motorista: ${c.motorista || 'Não atribuído'}</p>
+                <p class="text-[10px] text-outline mt-1">Frete: R$ ${parseFloat(c.valor_frete||0).toLocaleString('pt-BR')}</p>
+            </div>`).join('');
+    }
+
+    async function fetchCampanhas() {
+        const container = document.getElementById('campaigns-list');
+        if (!container) return;
+        container.innerHTML = '<p class="text-outline text-sm">Clique em <strong class="text-secondary">Nova Campanha</strong> para criar e disparar sua primeira campanha.</p>';
+    }
+
+    // Upgrade da tab de relacionamento: inicializar campanhas ao trocar
+    const origSwitchTab = window.switchTab;
+    window.switchTab = function(tabId) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        const target = document.getElementById('tab-' + tabId);
+        if (target) target.classList.remove('hidden');
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active-tab'); b.classList.add('text-outline'); });
+        const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+        if (activeBtn) { activeBtn.classList.add('active-tab'); activeBtn.classList.remove('text-outline'); }
+        if (tabId === 'kanban') fetchPipeline();
+        if (tabId === 'clientes') fetchClientes();
+        if (tabId === 'logistica') fetchCargas();
+        if (tabId === 'despesas') fetchDespesas();
+        if (tabId === 'campanhas') fetchCampanhas();
+    };
 </script>
 </body>
 </html>
