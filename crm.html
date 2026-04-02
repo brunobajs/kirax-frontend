@@ -148,21 +148,222 @@
         
         <!-- Tabs Views -->
         <div id="tab-kanban" class="tab-content transition-all duration-300">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="text-3xl font-black font-headline uppercase tracking-tighter">Funil de Vendas</h2>
-                <div class="flex gap-4">
-                    <div class="bg-[#1a191b] px-4 py-2 border-l-2 border-primary">
-                        <p class="text-[8px] text-outline uppercase font-bold">Volume Total</p>
-                        <p id="kanban-total-value" class="text-lg font-headline font-bold text-primary">R$ 0,00</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flex gap-6 overflow-x-auto scrollbar-hide pb-8">
-                <!-- Columns dynamically rendered -->
-                <div id="kanban-cols" class="flex gap-6 min-w-full"></div>
-            </div>
-        </div>
+
+<!-- Dashboard Header -->
+<section class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<p class="text-tertiary font-label text-xs uppercase tracking-[0.2em] mb-1">Pipeline de Receita</p>
+<h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface">$2.4M <span class="text-base md:text-lg font-light text-on-surface-variant">Potencial</span></h2>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 md:flex-none bg-surface-container-highest px-6 py-3 md:py-2 text-[10px] font-bold uppercase tracking-widest border border-outline-variant hover:bg-surface-bright transition-all">
+                    Filtrar
+                </button>
+<button class="flex-1 md:flex-none bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-6 py-3 md:py-2 text-[10px] uppercase tracking-widest rounded-sm shadow-[0_0_20px_rgba(161,250,255,0.2)] hover:scale-105 transition-transform">
+                    Novo Lead
+                </button>
+</div>
+</section>
+<!-- Kanban Funnel -->
+<div class="flex flex-col md:flex-row gap-6 overflow-x-auto scrollbar-hide pb-4">
+<!-- Stage: Prospecting -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-primary-dim py-1">
+<span class="font-headline font-bold text-primary uppercase tracking-tighter">Prospecção</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-on-surface">12</span>
+</div>
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low p-4 border-l-2 border-primary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">CyberDyne Systems</h3>
+<span class="text-primary-fixed font-mono text-xs">$45.000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Sarah Connor</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-container-highest flex items-center justify-center text-[10px] text-on-surface-variant">MK</div>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">3 Dias Frio</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low p-4 border-l-2 border-primary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Spectre Corp</h3>
+<span class="text-primary-fixed font-mono text-xs">$120.000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Franz Oberhauser</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-xs" data-icon="warning">warning</span>
+<span class="text-[10px] font-label text-error uppercase tracking-widest">Urgente</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">12h Restantes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Qualification -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-secondary-dim py-1">
+<span class="font-headline font-bold text-secondary uppercase tracking-tighter">Qualificação</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-on-surface">8</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-secondary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Tyrell Nexus</h3>
+<span class="text-secondary-fixed font-mono text-xs">$890.000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Eldon Tyrell</span>
+</div>
+<div class="h-1 bg-surface-container-highest w-full mb-3 overflow-hidden">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[10px] font-label text-secondary uppercase tracking-widest">Orçamento Verificado</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="attachment">attachment</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Proposal -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-tertiary-dim py-1">
+<span class="font-headline font-bold text-tertiary uppercase tracking-tighter">Proposta</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-on-surface">5</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-tertiary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Wayne Ent.</h3>
+<span class="text-tertiary-fixed font-mono text-xs">$2.1M</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Lucius Fox</span>
+</div>
+<div class="p-3 bg-surface-container-highest/50 rounded-sm mb-4">
+<p class="text-[10px] text-on-surface-variant italic">"Aguardando assinatura final na cláusula de aquisição v2.1..."</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[16px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] font-label text-tertiary uppercase tracking-widest">Revisando</span>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">Ver 4.0</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 border-l-2 border-tertiary group hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Oscorp Ind.</h3>
+<span class="text-tertiary-fixed font-mono text-xs">$340.000</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Norman Osborn</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]" data-icon="history">history</span>
+<span class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest">Enviado há 2h</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Closing -->
+<div class="flex-shrink-0 w-full md:w-80 flex flex-col gap-4">
+<div class="flex items-center justify-between px-2 border-l-2 border-on-secondary-fixed-variant py-1">
+<span class="font-headline font-bold text-secondary-dim uppercase tracking-tighter">Fechamento</span>
+<span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-on-surface">2</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 border-l-2 border-secondary-dim border-dashed opacity-80 group hover:opacity-100 hover:bg-surface-container transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline font-bold text-sm tracking-tight">Stark Industries</h3>
+<span class="text-secondary-fixed font-mono text-xs">$5.4M</span>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="person">person</span>
+<span class="text-xs text-on-surface-variant">Pepper Potts</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-dim text-[16px]" data-icon="contract">contract</span>
+<span class="text-[10px] font-label text-secondary-dim uppercase tracking-widest">Revisão Jurídica</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<section class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-surface-container rounded-sm p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full -mr-32 -mt-32"></div>
+<h4 class="font-headline font-bold text-xl mb-8 md:mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="monitoring">monitoring</span>
+                    Velocidade do Funil
+                </h4>
+<div class="h-48 flex items-end justify-between gap-2 md:gap-4">
+<div class="flex-1 bg-surface-container-highest h-[20%] relative group transition-all hover:bg-primary/20">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">12%</div>
+</div>
+<div class="flex-1 bg-surface-container-highest h-[45%] relative group transition-all hover:bg-primary/20">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">28%</div>
+</div>
+<div class="flex-1 bg-primary h-[85%] relative group transition-all hover:brightness-110">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">64%</div>
+</div>
+<div class="flex-1 bg-surface-container-highest h-[30%] relative group transition-all hover:bg-primary/20">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">18%</div>
+</div>
+<div class="flex-1 bg-surface-container-highest h-[15%] relative group transition-all hover:bg-primary/20">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">9%</div>
+</div>
+<div class="flex-1 bg-surface-container-highest h-[40%] relative group transition-all hover:bg-primary/20">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-on-primary-fixed text-[10px] font-bold px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">24%</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-label text-on-surface-variant uppercase tracking-widest">
+<span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6 flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm uppercase tracking-widest mb-6">Saúde do Pipeline</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-center border-b border-outline-variant pb-2">
+<span class="text-xs text-on-surface-variant">Probabilidade de Ganho</span>
+<span class="text-xs font-bold text-tertiary">74.2%</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-2">
+<span class="text-xs text-on-surface-variant">Ciclo Médio</span>
+<span class="text-xs font-bold text-on-surface">18 Dias</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Negócios Estagnados</span>
+<span class="text-xs font-bold text-error">4</span>
+</div>
+</div>
+</div>
+<button class="mt-10 w-full border border-primary/20 py-4 md:py-3 text-[10px] font-bold uppercase tracking-[0.3em] text-primary hover:bg-primary/5 transition-colors">
+                    Baixar Relatório
+                </button>
+</div>
+</section>
+
+</div>
 
         <div id="tab-clientes" class="tab-content hidden transition-all duration-300">
              <div class="flex items-center justify-between mb-8">
@@ -468,39 +669,45 @@
 
     async function fetchPipeline() {
         const data = await apiFetch(`/crm/pipeline?empresa_id=${empresaId}`);
-        const colsContainer = document.getElementById('kanban-cols');
-        if (!colsContainer) return;
+        // target the columns holding the deal cards
+        const cols = document.querySelectorAll('#tab-kanban .flex-shrink-0 .space-y-4');
+        if (!cols || cols.length === 0) return;
 
         const estagios = ['lead', 'qualificacao', 'proposta', 'negociacao', 'fechamento'];
-        const names = ['Prospecção', 'Qualificação', 'Proposta', 'Negociação', 'Fechamento'];
         
         let total = 0;
-        colsContainer.innerHTML = estagios.map((e, idx) => {
-            const stageDeals = data?.deals?.filter(d => d.estagio === e) || [];
-            const count = stageDeals.length;
-            const val = stageDeals.reduce((acc, d) => acc + parseFloat(d.valor || 0), 0);
-            total += val;
-            return `
-                <div class="flex-shrink-0 w-80 flex flex-col gap-4">
-                    <div class="flex items-center justify-between px-2 border-l-2 border-primary/40 py-1">
-                        <span class="font-headline font-bold text-on-surface uppercase tracking-tighter text-xs">${names[idx]}</span>
-                        <span class="bg-surface-container-highest text-[10px] px-2 py-0.5 font-bold rounded-sm text-outline">${count}</span>
-                    </div>
-                    <div class="space-y-4">
-                        ${stageDeals.map(d => `
-                            <div class="bg-surface-container p-4 border border-outline-variant/10 rounded-sm hover:border-primary/40 transition-all cursor-pointer group" style="touch-action: manipulation;">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-sm font-bold text-primary">${d.leads?.empresa || 'Venda Direta'}</h4>
-                                    <span class="text-on-surface font-mono text-[10px]">R$ ${parseFloat(d.valor).toLocaleString('pt-BR')}</span>
-                                </div>
-                                <p class="text-[10px] text-on-surface-variant italic mb-3">${d.titulo}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }).join('');
-        document.getElementById('kanban-total-value').textContent = "R$ " + total.toLocaleString('pt-BR');
+        cols.forEach(col => col.innerHTML = '');
+
+        if (data && data.deals) {
+            data.deals.forEach(d => {
+                const idx = estagios.indexOf(d.estagio);
+                if (idx !== -1 && cols[idx]) {
+                    total += parseFloat(d.valor || 0);
+                    const card = document.createElement('div');
+                    // Base classes with neon colors dynamically
+                    const borderColors = ['border-primary', 'border-secondary', 'border-tertiary', 'border-secondary-dim', 'border-on-secondary-fixed-variant'];
+                    card.className = `bg-surface-container-low p-4 border-l-2 ${borderColors[idx] || 'border-outline'} group hover:bg-surface-container transition-all cursor-pointer`;
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-headline font-bold text-sm tracking-tight text-on-surface">${d.leads?.empresa || 'Venda Direta'}</h3>
+                            <span class="font-mono text-xs text-primary">R$ ${parseFloat(d.valor || 0).toLocaleString('pt-BR')}</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>
+                            <span class="text-xs text-on-surface-variant">${d.leads?.nome || 'Contato'}</span>
+                        </div>
+                        <p class="text-[10px] text-on-surface-variant mt-1 italic opacity-80">${d.titulo}</p>
+                    `;
+                    cols[idx].appendChild(card);
+                }
+            });
+        }
+        
+        // Update total pipeline value in the hero section 
+        const heroTotal = document.querySelector('#tab-kanban h2.text-3xl');
+        if (heroTotal) {
+            heroTotal.innerHTML = `$${(total/1000).toFixed(1)}k <span class="text-base md:text-lg font-light text-on-surface-variant">Pipeline</span>`;
+        }
     }
 
     async function fetchClientes() {
