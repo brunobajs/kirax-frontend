@@ -142,15 +142,15 @@
         }
 
         let jwtToken = localStorage.getItem('kirax_auth_token');
+        const TEST_EMPRESA_ID = '00000000-0000-0000-0000-000000000000';
 
         async function ensureAuth() {
             if (jwtToken) return true;
             
             console.log("Onboarding: Autenticando técnico temporário...");
             try {
-                // Tenta login padrão para onboarding ou usa o ID da URL para identificar
                 const urlParams = new URLSearchParams(window.location.search);
-                const empresaId = urlParams.get('empresa_id');
+                const empresaId = urlParams.get('empresa_id') || TEST_EMPRESA_ID;
 
                 const response = await fetch(KIRAX_CONFIG.API_URL + '/auth/onboarding-session', {
                     method: 'POST',
@@ -177,7 +177,6 @@
             appendMessage('user', text);
             userInput.value = '';
 
-            // Problema 2: Garantir autenticação antes de chamar a IA
             const authed = await ensureAuth();
             if (!authed) {
                 appendMessage('ai', "Não consegui validar sua sessão. Por favor, recarregue a página.");
@@ -185,7 +184,6 @@
             }
 
             try {
-                // Problema 1: Corrigindo endpoint para /ai/chat
                 const response = await fetch(KIRAX_CONFIG.API_URL + '/ai/chat', {
                     method: 'POST',
                     headers: { 
@@ -219,16 +217,17 @@
         }
 
         async function setupModules(text) {
-            // Lógica para detectar palavras chave e atualizar o banco
             const config = {
                 vendas: text.includes('venda') || text.includes('lead'),
                 relacionamento: text.includes('cliente') || text.includes('fidel'),
                 varejo: text.includes('loja') || text.includes('estoque'),
-                calendario: text.includes('agenda') || text.includes('horário')
+                calendario: text.includes('agenda') || text.includes('horário'),
+                campanhas: true,
+                despesas: true
             };
 
             const urlParams = new URLSearchParams(window.location.search);
-            const empresaId = urlParams.get('empresa_id');
+            const empresaId = urlParams.get('empresa_id') || TEST_EMPRESA_ID;
 
             if (empresaId && window.kiraxSupabase) {
                 const { error } = await window.kiraxSupabase
@@ -238,8 +237,15 @@
 
                 if (!error) {
                     appendMessage('ai', "✨ Configuração concluída! Redirecionando você para o seu novo painel...");
-                    setTimeout(() => { window.location.href = `index.html?empresa_id=${empresaId}`; }, 3000);
+                    setTimeout(() => { window.location.href = `crm.html?empresa_id=${empresaId}`; }, 3000);
+                } else {
+                    console.error('Update Module Config Error:', error);
+                    appendMessage('ai', "Houve um problema salvando sua configuração de negócio. Modos de teste ativados!");
+                    setTimeout(() => { window.location.href = `crm.html?empresa_id=${empresaId}`; }, 3000);
                 }
+            } else {
+                 appendMessage('ai', "✨ Redirecionando para o demonstrativo (Sem Banco)...");
+                 setTimeout(() => { window.location.href = `crm.html?empresa_id=${empresaId}`; }, 3000);
             }
         }
     </script>
